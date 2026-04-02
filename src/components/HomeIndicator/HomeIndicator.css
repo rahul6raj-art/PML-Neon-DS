@@ -1,0 +1,32 @@
+/* ══════════════════════════════════════════════════
+   HOME INDICATOR — Pixel-exact (99:6188)
+   iOS drag handle bar, centered at bottom
+   Properties: Inverse (True / False)
+   ══════════════════════════════════════════════════ */
+
+.home-indicator {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 376px;
+  height: 34px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.home-indicator__bar {
+  width: 134px;
+  height: 5px;
+  border-radius: var(--radius-full);
+}
+
+/* Inverse=True → dark bar (light backgrounds) */
+.home-indicator__bar--dark {
+  background-color: var(--background-neutral-strong);
+}
+
+/* Inverse=False → light bar (dark backgrounds) */
+.home-indicator__bar--light {
+  background-color: var(--surface-level-1);
+}

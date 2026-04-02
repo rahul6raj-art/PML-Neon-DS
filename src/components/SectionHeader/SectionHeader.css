@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════
+   Section Header
+   ═══════════════════════════════════════════════════ */
+
+.sh {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* ── Main wrapper (icons trailing) ──────────────── */
+.sh__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* ── Title row ──────────────────────────────────── */
+.sh__title-row {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sh__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.sh__left--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* ── Title line (text + chevron) ────────────────── */
+.sh__title-line {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.sh__title {
+  white-space: nowrap;
+  color: var(--text-neutral-strong);
+}
+
+.sh__chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--text-neutral-strong);
+}
+
+/* ── Subtext ────────────────────────────────────── */
+.sh__subtext-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.sh__subtext {
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Size: Extra Large ──────────────────────────── */
+.sh--extra-large .sh__title {
+  font-size: 22px;
+  font-weight: var(--font-weight-medium);
+  line-height: 28px;
+}
+
+.sh--extra-large .sh__subtext {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sh--extra-large .sh__left {
+  min-height: var(--spacing-32);
+}
+
+/* ── Size: Large ────────────────────────────────── */
+.sh--large .sh__title {
+  font-size: 18px;
+  font-weight: var(--font-weight-regular);
+  line-height: 24px;
+}
+
+.sh--large .sh__subtext {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ── Size: Medium ───────────────────────────────── */
+.sh--medium .sh__title {
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 22px;
+}
+
+.sh--medium .sh__subtext {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ── Size: Small ────────────────────────────────── */
+.sh--small .sh__title {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 20px;
+}
+
+.sh--small .sh__subtext {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ── Trailing: Text ─────────────────────────────── */
+.sh__trailing-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  line-height: 16px;
+  color: var(--text-neutral-strong);
+  white-space: nowrap;
+}
+
+.sh--extra-large .sh__trailing-text {
+  height: 28px;
+}
+
+.sh--large .sh__trailing-text {
+  height: 24px;
+}
+
+.sh--medium .sh__trailing-text,
+.sh--small .sh__trailing-text {
+  height: 20px;
+}
+
+/* ── Trailing: Link ─────────────────────────────── */
+.sh__trailing-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  line-height: 16px;
+  color: var(--text-positive-strong);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.sh--extra-large .sh__trailing-link {
+  height: 28px;
+}
+
+.sh--large .sh__trailing-link {
+  height: 24px;
+}
+
+.sh--medium .sh__trailing-link,
+.sh--small .sh__trailing-link {
+  height: 20px;
+}
+
+.sh__trailing-link:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}
+
+/* ── Trailing: Icons ────────────────────────────── */
+.sh__icon-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex-shrink: 0;
+}
+
+.sh__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--spacing-6) var(--spacing-8);
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--radius-full);
+  background: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: var(--text-neutral-strong);
+}
+
+.sh__icon-btn:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Chips row ──────────────────────────────────── */
+.sh__chips {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sh__chips::-webkit-scrollbar {
+  display: none;
+}

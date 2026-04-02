@@ -1,0 +1,225 @@
+/* ══════════════════════════════════════════════════
+   SEARCH — Pixel-exact (99:6295)
+   Properties: Size (Large/Medium), State (Normal/Focus/
+               Focus Filled/Filled), Stroke (Yes/No),
+               Leading Icon, Trailing Icon
+   ══════════════════════════════════════════════════ */
+
+/* ── Outer wrapper ─────────────────────────────── */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 344px;
+  font-family: var(--font-family);
+}
+
+/* ── Text field (pill container) ───────────────── */
+.search__field {
+  flex: 1 0 0;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-neutral-weak);
+  background: var(--surface-level-1);
+  padding: 0 16px;
+  gap: 9px;
+  border-radius: var(--radius-full);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* ── Input area (icon + input + trailing icon) ── */
+.search__input-area {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+/* ── Icons ─────────────────────────────────────── */
+.search__leading-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--icon-neutral-medium);
+}
+
+.search__trailing-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--icon-neutral-medium);
+}
+
+.search__trailing-icon:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Native input ──────────────────────────────── */
+.search__input {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+  caret-color: var(--text-positive-strong);
+}
+
+.search__input::placeholder {
+  color: var(--text-neutral-medium);
+  font-weight: 400;
+}
+
+.search__input:not(:placeholder-shown) {
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.search__input:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* ── Close button ──────────────────────────────── */
+.search__close {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 1px solid var(--border-neutral-weak);
+  background: var(--surface-level-1);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.search__close:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.search__close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  color: var(--icon-neutral-medium);
+}
+
+/* ══════════════════════════════════════════════════
+   LARGE SIZE — fixed 52px height
+   ══════════════════════════════════════════════════ */
+.search--large .search__field {
+  height: 52px;
+  padding: 0 16px;
+}
+
+/* Large normal (no stroke): rounded-40 border radius */
+.search--large:not(.search--stroke):not(.search--focus):not(.search--filled) .search__field {
+  border-radius: var(--radius-full);
+}
+
+.search--large .search__input-area {
+  padding: 2px 0;
+}
+
+/* Large close button: 52×52 circular */
+.search--large:not(.search--stroke) .search__close {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+}
+
+/* Large close button with stroke */
+.search--large.search--stroke .search__close {
+  padding: 12px;
+  border-radius: var(--radius-full);
+}
+
+/* ══════════════════════════════════════════════════
+   MEDIUM SIZE — fixed 40px height
+   ══════════════════════════════════════════════════ */
+.search--medium .search__field {
+  height: 40px;
+  padding: 0 16px;
+  gap: 9px;
+}
+
+.search--medium .search__input {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.search--medium .search__input:not(:placeholder-shown) {
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* Medium close button */
+.search--medium:not(.search--stroke) .search__close {
+  padding: 8px;
+  border-radius: var(--radius-full);
+}
+
+.search--medium.search--stroke .search__close {
+  padding: 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ══════════════════════════════════════════════════
+   STROKE VARIANT
+   ══════════════════════════════════════════════════ */
+.search--stroke .search__field {
+  background: var(--surface-level-2);
+  border-color: var(--border-neutral-medium);
+  overflow: hidden;
+}
+
+.search--stroke .search__close {
+  background: var(--surface-level-2);
+  border-color: var(--border-neutral-medium);
+}
+
+/* ══════════════════════════════════════════════════
+   FOCUS STATE — green border
+   ══════════════════════════════════════════════════ */
+.search--focus .search__field {
+  border-color: var(--border-positive-strong);
+}
+
+.search--focus.search--stroke .search__field {
+  border-color: var(--border-positive-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   DISABLED
+   ══════════════════════════════════════════════════ */
+.search--disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}

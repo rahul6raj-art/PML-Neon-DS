@@ -1,0 +1,102 @@
+/* ── Base ─────────────────────────────────────────────── */
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-family);
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkbox:focus-within {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}
+
+/* ── Layout ───────────────────────────────────────────── */
+.checkbox--inline {
+  width: auto;
+}
+
+.checkbox--block {
+  width: 100%;
+}
+
+.checkbox--block .checkbox__label {
+  flex: 1 0 0;
+  min-width: 0;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.checkbox--inline .checkbox__label {
+  white-space: nowrap;
+}
+
+/* ── Disabled ─────────────────────────────────────────── */
+.checkbox--disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Indicator ───────────────────────────────────────── */
+.checkbox__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.checkbox__indicator svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Label ────────────────────────────────────────────── */
+.checkbox__label {
+  color: var(--text-neutral-strong);
+}
+
+/* ── Label Emphasis: High — 16px / Medium 500 ────────── */
+.checkbox--emphasis-high .checkbox__label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 2px 0;
+}
+
+/* ── Label Emphasis: Low — 12px / Regular 400 ────────── */
+.checkbox--emphasis-low .checkbox__label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 4px 0;
+}
+
+/* ── Disabled label ──────────────────────────────────── */
+.checkbox--disabled .checkbox__label {
+  color: var(--text-neutral-weak);
+}
+
+/* ── Hidden native input ─────────────────────────────── */
+.checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

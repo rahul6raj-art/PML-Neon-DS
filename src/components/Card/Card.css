@@ -1,0 +1,38 @@
+/* ═══════════════════════════════════════════════════
+   Card
+   ═══════════════════════════════════════════════════ */
+
+.card {
+  position: relative;
+  width: 344px;
+  min-height: 200px;
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* ── Stroke variant ─────────────────────────────── */
+.card--stroke {
+  border: 1px solid var(--border-neutral-weak);
+}
+
+/* ── Clickable ──────────────────────────────────── */
+.card--clickable {
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.card--clickable:hover {
+  box-shadow: 0 2px 8px var(--shadow-elevation-1);
+}
+
+.card--clickable:active {
+  box-shadow: 0 1px 2px var(--shadow-elevation-2);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}

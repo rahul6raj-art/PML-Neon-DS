@@ -1,0 +1,181 @@
+/* ══════════════════════════════════════════════════
+   BOTTOM SHEET HEADER
+   ══════════════════════════════════════════════════ */
+
+/* ── Shared base ─────────────────────────────────── */
+.bsh {
+  display: flex;
+  flex-direction: column;
+  width: 376px;
+  background: var(--surface-level-3);
+  border-radius: var(--radius-24)
+                 var(--radius-24)
+                 0 0;
+  overflow: hidden;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* ── Default Header variant ──────────────────────── */
+.bsh--default {
+  align-items: center;
+  gap: var(--spacing-24);
+  padding-top: var(--spacing-24);
+  padding-bottom: var(--spacing-16);
+}
+
+/* ── Image variant ───────────────────────────────── */
+.bsh--image {
+  position: relative;
+  align-items: flex-end;
+  height: 240px;
+  padding: var(--spacing-16);
+}
+
+/* ── Drag handle ─────────────────────────────────── */
+.bsh__drag-handle {
+  width: 36px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: var(--radius-4);
+  background: var(--icon-neutral-weak);
+}
+
+/* ── Section header (title + subtitle block) ─────── */
+.bsh__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: center;
+  padding: 0 var(--spacing-16);
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* ── Title + Icons row ───────────────────────────── */
+.bsh__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.bsh__title-area {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.bsh__title {
+  margin: 0;
+  width: 100%;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: var(--text-neutral-strong);
+}
+
+/* ── Icons container ─────────────────────────────── */
+.bsh__icons {
+  display: flex;
+  gap: var(--spacing-6);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Icon button (shared for all variants) ───────── */
+.bsh__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--spacing-8);
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-neutral-strong);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.bsh__icon-btn:hover {
+  background: var(--interaction-hover);
+}
+
+.bsh__icon-btn:active {
+  background: var(--interaction-pressed);
+}
+
+.bsh__icon-btn:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Subtitle row ────────────────────────────────── */
+.bsh__subtitle-row {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.bsh__subtitle {
+  margin: 0;
+  flex: 1 0 0;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--text-neutral-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Tabs row ────────────────────────────────────── */
+.bsh__tabs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 0 16px;
+  width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bsh__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Image variant: content area ─────────────────── */
+.bsh__image-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bsh__image-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Image variant: dismiss positioned top-right ─── */
+.bsh__dismiss-image {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
+  z-index: 1;
+}

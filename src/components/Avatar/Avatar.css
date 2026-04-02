@@ -1,0 +1,230 @@
+/* ══════════════════════════════════════════════════
+   AVATAR — Pixel-exact (312:12677)
+   Properties: Type (Profile/Initials/Logo/Icon),
+               Size (Small/Regular/Large/Extra Large),
+               Icon (None/Status/Action), Selected (Yes/No)
+   ══════════════════════════════════════════════════ */
+
+/* ── Wrapper ─────────────────────────────────────── */
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--font-family);
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  vertical-align: middle;
+}
+
+.avatar--clickable {
+  cursor: pointer;
+}
+
+/* ── Frame (circular clip) ───────────────────────── */
+.avatar__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+/* ── Profile / Logo image ────────────────────────── */
+.avatar__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ── Placeholder fallback ────────────────────────── */
+.avatar__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-offset-2);
+  color: var(--text-neutral-medium);
+}
+
+.avatar__placeholder--logo {
+  background: var(--surface-level-4);
+}
+
+/* ── Logo component inside avatar ─────────────── */
+.avatar__frame--logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar__frame--logo > .logo {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50%;
+}
+
+/* ══════════════════════════════════════════════════
+   TYPE: INITIALS — pink/red tinted background
+   ══════════════════════════════════════════════════ */
+.avatar__frame--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar__initials-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--colour-red-strong);
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.avatar__initials-text {
+  position: relative;
+  z-index: 1;
+  color: var(--colour-red-strong);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.avatar__initials-text--small {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.avatar__initials-text--regular {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.avatar__initials-text--large {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.avatar__initials-text--xl {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+/* ══════════════════════════════════════════════════
+   TYPE: ICON — light blue background
+   ══════════════════════════════════════════════════ */
+.avatar__frame--icon {
+  background: var(--background-offset-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar__icon-inner {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--icon-neutral-moderate);
+}
+
+/* ══════════════════════════════════════════════════
+   BADGE (Status / Action / Selected)
+   ══════════════════════════════════════════════════ */
+.avatar__badge {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-level-1);
+  overflow: hidden;
+  color: var(--icon-neutral-moderate);
+}
+
+/* Status: top-right */
+.avatar__badge--status {
+  top: -2px;
+  right: -2px;
+}
+
+/* Action: bottom-right */
+.avatar__badge--action {
+  bottom: -2px;
+  right: -2px;
+}
+
+/* ── Badge positioning per size ─────────────────── */
+
+/* Small: badge overflows slightly outside */
+.avatar--small .avatar__badge--status {
+  top: -2px;
+  right: -2px;
+}
+
+.avatar--small .avatar__badge--action {
+  bottom: -2px;
+  right: -2px;
+}
+
+/* Regular: badge sits at edge */
+.avatar--regular .avatar__badge--status {
+  top: 0;
+  right: 0;
+}
+
+.avatar--regular .avatar__badge--action {
+  bottom: 0;
+  right: 0;
+}
+
+/* Large: badge sits at edge */
+.avatar--large .avatar__badge--status {
+  top: 0;
+  right: 0;
+}
+
+.avatar--large .avatar__badge--action {
+  bottom: 0;
+  right: 0;
+}
+
+/* Extra Large: badge sits at edge */
+.avatar--extraLarge .avatar__badge--status {
+  top: 4px;
+  right: 4px;
+}
+
+.avatar--extraLarge .avatar__badge--action {
+  bottom: 4px;
+  right: 4px;
+}
+
+/* ══════════════════════════════════════════════════
+   SELECTED STATE — green border ring + checkmark
+   ══════════════════════════════════════════════════ */
+.avatar--selected {
+  box-shadow: 0 0 0 2px var(--border-positive-strong);
+}
+
+.avatar--selected.avatar--extraLarge {
+  box-shadow: 0 0 0 3px var(--border-positive-strong);
+}
+
+.avatar__badge--selected {
+  background: var(--background-positive-strong);
+  color: var(--text-universal-light);
+}

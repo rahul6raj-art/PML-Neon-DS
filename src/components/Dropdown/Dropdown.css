@@ -1,0 +1,316 @@
+/* ══════════════════════════════════════════════════
+   DROPDOWN — Pixel-exact implementation
+   Emphasis: High (18px) / Low (14px)
+   States:  Normal → Focus/Open → Filled
+   ══════════════════════════════════════════════════ */
+
+/* ── Wrapper ─────────────────────────────────────── */
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 352px;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.dropdown--has-helper {
+  gap: var(--spacing-4);
+}
+
+/* ── Trigger box ─────────────────────────────────── */
+.dropdown__box {
+  --dd-px: 16px;
+  --dd-py: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  max-height: 52px;
+  padding: var(--dd-py) var(--dd-px);
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--radius-16);
+  background: transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    border-radius 0.15s ease,
+    box-shadow 0.15s ease;
+  user-select: none;
+}
+
+/* ── Value area ──────────────────────────────────── */
+.dropdown__value-area {
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dropdown__value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-neutral-strong);
+}
+
+/* High emphasis value: 18px Regular */
+.dropdown--high .dropdown__value {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* Low emphasis value: 14px Medium */
+.dropdown--low .dropdown__value {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════
+   FLOATING LABEL
+   ══════════════════════════════════════════════════ */
+.dropdown__label {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: var(--dd-px);
+  transform: translateY(-50%);
+  font-weight: 500;
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  transition:
+    top 0.15s ease,
+    left 0.15s ease,
+    transform 0.15s ease,
+    font-size 0.15s ease,
+    line-height 0.15s ease,
+    font-weight 0.15s ease,
+    color 0.15s ease,
+    padding 0.15s ease,
+    background 0.15s ease;
+}
+
+/* Shift label right when leading icon present */
+.dropdown--has-leading .dropdown__label:not(.dropdown__label--float) {
+  left: calc(var(--dd-px) + 24px + 8px);
+}
+
+/* High placeholder: 18px Regular */
+.dropdown--high .dropdown__label {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* Low placeholder: 14px */
+.dropdown--low .dropdown__label {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ── FLOATED label — sits on top border ──────────── */
+.dropdown__label--float {
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  padding: 0 4px;
+  background: var(--surface-level-1);
+  color: var(--text-neutral-strong);
+  overflow: visible;
+}
+
+/* High floated: 14px Regular */
+.dropdown--high .dropdown__label--float {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+/* Low floated: 12px Regular */
+.dropdown--low .dropdown__label--float {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+/* ══════════════════════════════════════════════════
+   STATE: OPEN (focus)
+   ══════════════════════════════════════════════════ */
+.dropdown--open .dropdown__box {
+  border-color: var(--border-positive-strong);
+  box-shadow: inset 0 0 0 1px var(--border-positive-strong);
+  border-radius: var(--radius-12);
+}
+
+.dropdown--open:not(.dropdown--filled) .dropdown__label {
+  color: var(--text-neutral-medium);
+}
+
+.dropdown--open.dropdown--filled .dropdown__label--float {
+  color: var(--text-neutral-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   STATE: FILLED (closed, with value)
+   ══════════════════════════════════════════════════ */
+.dropdown--filled:not(.dropdown--open) .dropdown__box {
+  border-radius: var(--radius-12);
+}
+
+/* ══════════════════════════════════════════════════
+   STATE: ERROR — red border, red label in ALL states
+   ══════════════════════════════════════════════════ */
+.dropdown--error .dropdown__box {
+  border-color: var(--border-negative-strong);
+}
+
+.dropdown--error.dropdown--open .dropdown__box {
+  border-color: var(--border-negative-strong);
+  box-shadow: inset 0 0 0 1px var(--border-negative-strong);
+}
+
+/* Placeholder label — red even when not floated */
+.dropdown--error .dropdown__label {
+  color: var(--text-negative-strong);
+}
+
+/* Floated label — red */
+.dropdown--error .dropdown__label--float {
+  color: var(--text-negative-strong);
+}
+
+/* Override open state grey label when in error */
+.dropdown--error.dropdown--open .dropdown__label {
+  color: var(--text-negative-strong);
+}
+
+.dropdown--error.dropdown--open.dropdown--filled .dropdown__label--float {
+  color: var(--text-negative-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   STATE: DISABLED
+   ══════════════════════════════════════════════════ */
+.dropdown--disabled .dropdown__box {
+  border-color: var(--border-neutral-medium);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.dropdown--disabled .dropdown__label {
+  color: var(--text-neutral-weak);
+}
+
+.dropdown--disabled .dropdown__caret {
+  color: var(--icon-neutral-weak);
+}
+
+/* ── Icons ───────────────────────────────────────── */
+.dropdown__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--icon-neutral-strong);
+}
+
+.dropdown__icon svg {
+  fill: currentColor;
+}
+
+/* ── Caret icon ──────────────────────────────────── */
+.dropdown__caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--icon-neutral-strong);
+  transition: transform 0.2s ease;
+}
+
+.dropdown__caret--open {
+  transform: rotate(180deg);
+}
+
+.dropdown__caret svg {
+  fill: currentColor;
+}
+
+/* ── Helper / Error text ─────────────────────────── */
+.dropdown__helper {
+  margin: 0;
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-neutral-moderate);
+}
+
+.dropdown__helper--error {
+  color: var(--text-negative-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   DROPDOWN MENU
+   ══════════════════════════════════════════════════ */
+.dropdown__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background: var(--surface-level-1);
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--radius-12);
+  box-shadow: 0 4px 16px var(--shadow-elevation-2);
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.dropdown__option {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--text-neutral-strong);
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.dropdown__option:hover,
+.dropdown__option--focused {
+  background: var(--surface-level-4);
+}
+
+.dropdown__option--selected {
+  font-weight: 500;
+  color: var(--text-positive-strong);
+}
+
+/* High normal (no helper, no error, not filled, not open) — rounded corners */
+.dropdown--high:not(.dropdown--has-helper):not(.dropdown--open):not(.dropdown--filled):not(.dropdown--disabled):not(.dropdown--error)
+  .dropdown__box {
+  border-radius: var(--radius-16);
+}

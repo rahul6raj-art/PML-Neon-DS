@@ -1,0 +1,45 @@
+/* ══════════════════════════════════════════════════
+   CARD CONTROL — page indicator dots
+   ══════════════════════════════════════════════════ */
+
+.cc {
+  display: inline-flex;
+  gap: var(--spacing-6);
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+/* Each dot occupies a fixed 6×6 slot for consistent spacing */
+.cc__slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.cc__slot:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* The visual dot circle */
+.cc__dot {
+  border-radius: var(--radius-full);
+  background: var(--icon-neutral-weak);
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.cc__dot--active {
+  background: var(--background-positive-strong);
+}

@@ -1,0 +1,250 @@
+/* ═══════════════════════════════════════════════════
+   List Item
+   ═══════════════════════════════════════════════════ */
+
+.li-item {
+  display: flex;
+  align-items: center;
+  width: 344px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.li-item[role='button'] {
+  cursor: pointer;
+}
+
+.li-item:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: -2px;
+  border-radius: var(--radius-8);
+}
+
+/* ── Leading avatar ─────────────────────────────── */
+.li-item__leading {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ── Content area ───────────────────────────────── */
+.li-item__content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  align-self: stretch;
+}
+
+/* With leading: gap between avatar and content */
+.li-item--with-leading .li-item__content {
+  margin-left: 12px;
+}
+
+/* ── Main row (text block + trailing) ───────────── */
+.li-item__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  padding: 16px 0;
+  min-height: 42px;
+  position: relative;
+}
+
+/* ── Text block ─────────────────────────────────── */
+.li-item__text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Primary text row ───────────────────────────── */
+.li-item__primary-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.li-item__primary {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.li-item--high .li-item__primary {
+  font-weight: 600;
+}
+
+.li-item--low .li-item__primary {
+  font-weight: 500;
+}
+
+.li-item__primary-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--icon-neutral-moderate);
+}
+
+/* Without primary icon, primary text fills full width */
+.li-item:not(.li-item--with-primary-icon) .li-item__primary {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Secondary text row ─────────────────────────── */
+.li-item__secondary-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.li-item__secondary {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.li-item__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--background-positive-strong);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-universal-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.li-item__subtext-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--icon-neutral-moderate);
+}
+
+/* ── Value indicator (colored %) ───────────────── */
+.li-item__value {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.li-item__value--negative {
+  color: var(--text-negative-strong);
+}
+
+.li-item__value--positive {
+  color: var(--text-positive-strong);
+}
+
+/* ── Tertiary text row ──────────────────────────── */
+.li-item__tertiary-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+}
+
+.li-item__tertiary-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--icon-neutral-moderate);
+}
+
+.li-item__tertiary {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Trailing ───────────────────────────────────── */
+.li-item__trailing {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  color: var(--text-neutral-moderate);
+}
+
+.li-item__trailing--icon {
+  align-self: stretch;
+  align-items: flex-start;
+}
+
+/* Trailing text */
+.li-item__trailing-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+}
+
+/* Trailing link */
+.li-item__trailing-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-interactive-default);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.li-item__trailing-link:hover {
+  text-decoration: underline;
+}
+
+.li-item__trailing-link:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}
+
+/* Trailing button — let Button component handle its own styles */
+.li-item__trailing--button {
+  align-items: center;
+}
+
+/* ── Separator ──────────────────────────────────── */
+.li-item__separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-neutral-light);
+}
+
+.li-item__separator--inset {
+  left: 60px;
+}

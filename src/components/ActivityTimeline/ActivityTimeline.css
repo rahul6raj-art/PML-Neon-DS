@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════════════════
+   Activity Timeline
+   ═══════════════════════════════════════════════════ */
+
+.at {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 344px;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VERTICAL
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.at__vertical {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ── Single item row ────────────────────────────── */
+.at__v-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* ── Left track (line + icon + line) ────────────── */
+.at__v-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  flex-shrink: 0;
+  isolation: isolate;
+}
+
+.at__v-line {
+  width: 1px;
+  height: 7px;
+  background: var(--border-neutral-weak);
+  flex-shrink: 0;
+}
+
+.at__v-line--hidden {
+  background: transparent;
+}
+
+/* Connector between items — 24px tall */
+.at__v-item + .at__v-item {
+  margin-top: 0;
+}
+
+/* Long connector between items rendered via gap override */
+.at__v-item:not(:first-child) .at__v-track::before {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+/* ── Status icon ────────────────────────────────── */
+.at__status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.at__status-icon--completed {
+  color: var(--icon-positive-strong);
+  background: var(--surface-level-1);
+  border-radius: 50%;
+}
+
+.at__status-icon--awaiting {
+  color: var(--icon-neutral-medium);
+  background: var(--surface-level-1);
+  border-radius: var(--radius-12);
+}
+
+/* ── Content area ───────────────────────────────── */
+.at__v-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.at__v-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.at__v-title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+.at__v-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+}
+
+/* ── Action button ──────────────────────────────── */
+.at__v-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--background-positive-strong);
+  color: var(--text-universal-light);
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.at__v-action:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Status badge ───────────────────────────────── */
+.at__v-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--background-offset-3);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Vertical inter-item connector ──────────────── */
+.at__vertical > .at__v-item + .at__v-item {
+  position: relative;
+}
+
+.at__vertical > .at__v-item + .at__v-item::before {
+  content: '';
+  position: absolute;
+  left: 11.5px;
+  top: -24px;
+  width: 1px;
+  height: 24px;
+  background: var(--background-neutral-weak);
+}
+
+.at__vertical > .at__v-item + .at__v-item {
+  margin-top: 24px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HORIZONTAL
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.at__horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+/* ── Progress bar ───────────────────────────────── */
+.at__h-bar-wrap {
+  width: 100%;
+  padding: 8px 0;
+  margin-bottom: -24px;
+  position: relative;
+  z-index: 0;
+}
+
+.at__h-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--background-neutral-weak);
+  overflow: hidden;
+}
+
+.at__h-bar-fill {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--background-positive-strong);
+  transition: width 0.3s ease;
+}
+
+/* ── Horizontal steps row ───────────────────────── */
+.at__h-steps {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.at__h-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.at__h-label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  text-align: center;
+  white-space: nowrap;
+  min-width: 100%;
+}
+
+.at__h-label--completed {
+  font-weight: 600;
+  color: var(--text-positive-strong);
+}

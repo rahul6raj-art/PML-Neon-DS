@@ -1,0 +1,274 @@
+/* ══════════════════════════════════════════════════
+   HEADER — Pixel-exact (875:2731)
+   Properties: Type (Homepage / Large / Regular)
+   Optional: Tabs, Chips, Back button, RHS icons
+   ══════════════════════════════════════════════════ */
+
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 376px;
+  background: var(--surface-level-4);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ── Bottom border toggle ────────────────────────── */
+.header--border-bottom {
+  border-bottom: 1px solid var(--border-neutral-medium);
+}
+
+/* ── Common bar ──────────────────────────────────── */
+.header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header__bar--glass {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Icon button (40×40 tap target, 24px icon) ──── */
+.header__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 40px;
+  cursor: pointer;
+  color: var(--text-neutral-strong);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.header__icon-btn:hover {
+  background: var(--interaction-hover);
+}
+
+.header__icon-btn:active {
+  background: var(--interaction-pressed);
+}
+
+/* ── Back button ─────────────────────────────────── */
+.header__back-btn {
+  padding: 8px 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   HOMEPAGE VARIANT
+   ═══════════════════════════════════════════════════ */
+
+/* All header content sits above the gradient */
+.header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Decorative gradient glow — (1880:5882)
+   Green ellipse (20% opacity) with heavy Gaussian blur.
+   Full blurred area is 542×389, centered over the top of the header. */
+.header__gradient {
+  position: absolute;
+  top: -198px;
+  left: -82px;
+  width: 542px;
+  height: 389px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header__gradient-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.header--homepage .header__bar-lhs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.header--homepage .header__bar-rhs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.header__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.header__bar-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════
+   LARGE VARIANT
+   ═══════════════════════════════════════════════════ */
+.header--large .header__bar {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding: 10px 16px 12px;
+  border-bottom: 1px solid var(--border-neutral-weak);
+}
+
+.header--large .header__bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header--large .header__bar-rhs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Title section (icon + text block) */
+.header__title-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.header__lhs-icon {
+  flex-shrink: 0;
+  padding: 4px 0;
+}
+
+.header__title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.header__title {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.header__title--large {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.header__subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   REGULAR VARIANT
+   ═══════════════════════════════════════════════════ */
+.header--regular .header__bar--regular {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 12px;
+  border-bottom: none;
+}
+
+.header__bar-cell {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.header__bar-cell--center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.header__bar-cell--rhs {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.header__title--regular {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__subtitle--center {
+  text-align: center;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════
+   TABS ROW
+   ═══════════════════════════════════════════════════ */
+/* ── Tabs wrapper (uses actual Tabs component) ──── */
+.header__tabs-wrap {
+  padding: 0 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Chips wrapper (uses actual Chip component) ─── */
+.header__chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.header--large .header__chips {
+  padding: 18px 16px 8px;
+}
+
+.header__chips::-webkit-scrollbar {
+  display: none;
+}

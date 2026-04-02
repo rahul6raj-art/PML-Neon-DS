@@ -1,0 +1,270 @@
+/* ══════════════════════════════════════════════════
+   OTP TEXT FIELD — Pixel-exact (100:1544)
+   Properties: OTP Length (4/6), Helper (None/Warning/Error),
+               Resend (Yes/No), Alt Method (Yes/No)
+   ══════════════════════════════════════════════════ */
+
+/* ── Wrapper ──────────────────────────────────────── */
+.otp {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: 344px;
+  font-family: var(--font-family);
+}
+
+/* ── Title (OTP Field Title) ──────────────────────── */
+.otp__title {
+  margin: 0;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-neutral-moderate);
+}
+
+/* ── Cells row ────────────────────────────────────── */
+.otp__cells {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+}
+
+/* 6-digit: equal flex distribution */
+.otp--len-6 .otp__cell {
+  flex: 1 0 0;
+  min-width: 0;
+  height: 48px;
+}
+
+/* 4-digit: fixed 48×48 */
+.otp--len-4 .otp__cell {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
+/* ── Individual cell ──────────────────────────────── */
+.otp__cell {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: var(--radius-8);
+  background: var(--surface-level-2);
+  border: 1px solid var(--border-neutral-weak);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.otp__cell--filled {
+  border-color: var(--border-neutral-medium);
+}
+
+/* Focus — green (normal state only) */
+.otp:not(.otp--error):not(.otp--warning) .otp__cell:focus-within {
+  border-color: var(--border-positive-strong);
+  box-shadow: inset 0 0 0 1px var(--border-positive-strong);
+}
+
+/* ── Native input inside cell ─────────────────────── */
+.otp__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--text-neutral-moderate);
+  caret-color: var(--text-positive-strong);
+}
+
+.otp__input:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════
+   ERROR state — red borders on ALL cells
+   ══════════════════════════════════════════════════ */
+.otp--error .otp__cell {
+  border-color: var(--border-negative-strong);
+}
+
+.otp--error .otp__cell:focus-within {
+  box-shadow: inset 0 0 0 1px var(--border-negative-strong);
+}
+
+.otp--error .otp__input {
+  caret-color: var(--text-negative-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   WARNING state — orange borders on ALL cells
+   ══════════════════════════════════════════════════ */
+.otp--warning .otp__cell {
+  border-color: var(--border-notice-strong);
+}
+
+.otp--warning .otp__cell:focus-within {
+  box-shadow: inset 0 0 0 1px var(--border-notice-strong);
+}
+
+.otp--warning .otp__input {
+  caret-color: var(--text-notice-strong);
+}
+
+/* ══════════════════════════════════════════════════
+   DISABLED
+   ══════════════════════════════════════════════════ */
+.otp--disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.otp--disabled .otp__input {
+  color: var(--text-neutral-weak);
+}
+
+/* ══════════════════════════════════════════════════
+   FOOTER META SECTION
+   Gap 12px default; 16px when alt method present
+   ══════════════════════════════════════════════════ */
+.otp__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.otp__meta--with-alt {
+  gap: 16px;
+}
+
+/* ── Horizontal footer row (6-digit, or 4-digit no-helper) ── */
+.otp__footer-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* 4-digit no-helper: left-aligned */
+.otp__footer-row--left {
+  justify-content: flex-start;
+}
+
+/* When helper text present, push helper left and action right */
+.otp__footer-row:has(.otp__helper) {
+  justify-content: space-between;
+}
+
+/* ── Vertical footer stack (4-digit WITH helper) ──── */
+.otp__footer-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* Tighter gap when alt method is also present */
+.otp__footer-stack--tight {
+  gap: 12px;
+}
+
+/* ── Helper text ──────────────────────────────────── */
+.otp__helper {
+  flex: 1 1 auto;
+  margin: 0;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+/* Inside vertical stack, take full width */
+.otp__footer-stack .otp__helper {
+  width: 100%;
+}
+
+.otp__helper--error {
+  color: var(--text-negative-strong);
+}
+
+.otp__helper--warning {
+  color: var(--text-notice-strong);
+}
+
+/* ── Footer actions (resend link / timer) ─────────── */
+.otp__footer-actions {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 4-digit stacked layout: resend left-aligned */
+.otp__footer-actions--left {
+  justify-content: flex-start;
+}
+
+/* ── Green link ───────────────────────────────────── */
+.otp__link {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-positive-strong);
+  white-space: nowrap;
+}
+
+.otp__link:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.otp__link:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── Timer text (Resend=No) ───────────────────────── */
+.otp__timer {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-neutral-moderate);
+  white-space: nowrap;
+}
+
+/* ── Alt method row ───────────────────────────────── */
+.otp__alt-row {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+/* 4-digit: alt method is LEFT aligned */
+.otp__alt-row--left {
+  justify-content: flex-start;
+}

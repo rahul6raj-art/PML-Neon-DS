@@ -1,0 +1,80 @@
+/* ── Base ─────────────────────────────────────────────── */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.switch--disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Track ────────────────────────────────────────────── */
+.switch__track {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background-color: var(--icon-neutral-weak);
+  transition: background-color 0.2s ease;
+}
+
+/* On track */
+.switch--on .switch__track {
+  background-color: var(--background-positive-strong);
+}
+
+/* Disabled Off track */
+.switch--disabled .switch__track {
+  background-color: var(--background-neutral-weak);
+}
+
+/* Disabled On track */
+.switch--on.switch--disabled .switch__track {
+  background-color: var(--background-positive-weak);
+}
+
+/* ── Thumb (40 × 24 pill) ────────────────────────────── */
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 40px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-level-1);
+  transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+/* On position — slide to right */
+.switch--on .switch__thumb {
+  left: 22px;
+}
+
+/* Disabled thumb */
+.switch--disabled .switch__thumb {
+  opacity: 0.8;
+}
+
+/* ── Focus ring ──────────────────────────────────────── */
+.switch:focus-within .switch__track {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Hidden native input ─────────────────────────────── */
+.switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

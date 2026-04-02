@@ -1,0 +1,198 @@
+/* ═══════════════════════════════════════════════════
+   Button
+   ═══════════════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Size: Large ─────────────────────────────────── */
+.btn--large {
+  height: 52px;
+  padding: 0 var(--spacing-24);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+/* ── Size: Medium ────────────────────────────────── */
+.btn--medium {
+  height: 40px;
+  padding: 0 var(--spacing-16);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+/* ── Size: Small ─────────────────────────────────── */
+.btn--small {
+  height: 32px;
+  padding: 0 var(--spacing-12);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* ── Size: Extra Small ───────────────────────────── */
+.btn--extra-small {
+  height: 24px;
+  padding: 0 var(--spacing-8);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* ── Icon-only (square) ──────────────────────────── */
+.btn--icon-only.btn--large {
+  width: 52px;
+  padding: 0;
+}
+.btn--icon-only.btn--medium {
+  width: 40px;
+  padding: 0;
+}
+.btn--icon-only.btn--small {
+  width: 32px;
+  padding: 0;
+}
+.btn--icon-only.btn--extra-small {
+  width: 24px;
+  padding: 0;
+}
+
+/* ═════════════════════════════════════════════════════
+   Type: Filled
+   ═════════════════════════════════════════════════════ */
+.btn--filled {
+  background-color: var(--background-positive-strong);
+  color: var(--text-neutral-inverse);
+}
+.btn--filled:hover:not(:disabled) {
+  background-color: var(--background-positive-strong);
+  filter: brightness(0.92);
+}
+.btn--filled:active:not(:disabled) {
+  background-color: var(--background-positive-strong);
+  filter: brightness(0.87);
+}
+
+/* ═════════════════════════════════════════════════════
+   Type: Stroke
+   ═════════════════════════════════════════════════════ */
+.btn--stroke {
+  background-color: var(--surface-level-1);
+  color: var(--text-positive-strong);
+  border: 1px solid var(--border-positive-strong);
+}
+.btn--stroke:hover:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  opacity: 0.7;
+}
+.btn--stroke:active:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  opacity: 1;
+}
+
+/* ═════════════════════════════════════════════════════
+   Type: Tonal
+   ═════════════════════════════════════════════════════ */
+.btn--tonal {
+  background-color: var(--background-positive-weak);
+  color: var(--text-positive-strong);
+}
+.btn--tonal:hover:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  filter: brightness(0.95);
+}
+.btn--tonal:active:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  filter: brightness(0.90);
+}
+
+/* ═════════════════════════════════════════════════════
+   Type: Link
+   ═════════════════════════════════════════════════════ */
+.btn--link {
+  background-color: transparent;
+  color: var(--text-positive-strong);
+}
+.btn--link:hover:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  opacity: 0.4;
+}
+.btn--link:active:not(:disabled) {
+  background-color: var(--background-positive-weak);
+  opacity: 0.7;
+}
+
+/* ═════════════════════════════════════════════════════
+   State: Disabled (all types)
+   ═════════════════════════════════════════════════════ */
+.btn--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.btn--disabled.btn--filled {
+  background-color: var(--background-neutral-weak);
+  color: var(--text-neutral-medium);
+}
+.btn--disabled.btn--stroke {
+  background-color: var(--background-neutral-weak);
+  color: var(--text-neutral-medium);
+  border-color: var(--border-neutral-weak);
+}
+.btn--disabled.btn--tonal {
+  background-color: var(--background-neutral-weak);
+  color: var(--text-neutral-medium);
+}
+.btn--disabled.btn--link {
+  background-color: transparent;
+  color: var(--text-neutral-medium);
+}
+
+/* ═════════════════════════════════════════════════════
+   State: Loading
+   ═════════════════════════════════════════════════════ */
+.btn--loading {
+  pointer-events: none;
+}
+
+/* ── Inner elements ──────────────────────────────── */
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn__icon svg {
+  display: block;
+  fill: currentColor;
+}
+
+.btn__label {
+  white-space: nowrap;
+}
+
+/* ── Loading component inside button ──────────────── */
+.btn .loading {
+  pointer-events: none;
+}

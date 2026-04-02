@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════
+   Data Points
+   ═══════════════════════════════════════════════════ */
+
+.dp {
+  display: flex;
+  gap: var(--spacing-8);
+  align-items: flex-start;
+  width: 344px;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* ── Column ─────────────────────────────────────── */
+.dp__col {
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.dp__col--left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.dp__col--center {
+  align-items: center;
+  text-align: center;
+}
+
+.dp__col--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* ── Labels group ───────────────────────────────── */
+.dp__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: inherit;
+  width: 100%;
+}
+
+/* ── Title row (top label + icon) ───────────────── */
+.dp__title-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+}
+
+.dp__col--left .dp__title-row {
+  justify-content: flex-start;
+}
+
+.dp__col--center .dp__title-row {
+  justify-content: center;
+}
+
+.dp__col--right .dp__title-row {
+  justify-content: flex-end;
+}
+
+/* ── Typography ─────────────────────────────────── */
+.dp__top-label,
+.dp__bottom-label,
+.dp__subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.dp__data {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--text-neutral-strong);
+  width: 100%;
+}
+
+/* ── Title icon ─────────────────────────────────── */
+.dp__title-icon {
+  flex-shrink: 0;
+  color: var(--icon-neutral-medium);
+}
+
+/* ── Subtitle ───────────────────────────────────── */
+.dp__subtitle {
+  width: 100%;
+}

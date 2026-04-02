@@ -1,0 +1,71 @@
+/* ══════════════════════════════════════════════════
+   LOGO — Pixel-exact
+   Categories: Mutual Funds (126:5263),
+               Payments (126:5648), Banks (126:5617),
+               Stocks (204:3223), Indices (204:3273)
+   All logos: 32×32 white container with brand image
+   ══════════════════════════════════════════════════ */
+
+/* ── Wrapper ─────────────────────────────────────── */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--surface-level-1);
+  flex-shrink: 0;
+  font-family: var(--font-family);
+}
+
+/* ── Shape variants ──────────────────────────────── */
+.logo--square {
+  border-radius: 0;
+}
+
+.logo--rounded {
+  border-radius: var(--radius-4);
+}
+
+.logo--circle {
+  border-radius: 50%;
+}
+
+/* ── Logo image ──────────────────────────────────── */
+.logo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ── Branded initials (no image) ─────────────────── */
+.logo__brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+
+/* ── Generic fallback (unknown brand, no image) ──── */
+.logo__fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-neutral-medium);
+  background: var(--surface-level-4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+}

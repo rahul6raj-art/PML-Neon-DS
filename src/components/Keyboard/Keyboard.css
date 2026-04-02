@@ -1,0 +1,422 @@
+/* ══════════════════════════════════════════════════
+   KEYBOARD — iOS-style keyboard mockup (99:4874)
+   Properties: Mode (Light / Dark), Type (Alphabetic / Numeric / Dictation / Emoji)
+   ══════════════════════════════════════════════════ */
+
+.kb {
+  width: 376px;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+}
+
+.kb *,
+.kb *::before,
+.kb *::after {
+  box-sizing: border-box;
+}
+
+/* ── Light mode ── */
+.kb--light {
+  background: var(--primitive-mono-400);
+  color: var(--primitive-mono-900);
+}
+
+/* ── Dark mode ── */
+.kb--dark {
+  background: var(--primitive-mono-875);
+  color: var(--primitive-mono-50);
+}
+
+/* ════════════════════════════════════════════════
+   ALPHABETIC
+   ════════════════════════════════════════════════ */
+
+.kb__alpha {
+  display: flex;
+  flex-direction: column;
+}
+
+.kb__rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-8) 3px 0;
+}
+
+.kb__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+/* ── Key base ── */
+.kb__key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border-radius: var(--radius-4);
+  font-size: 22.5px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.55px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.kb__key--letter {
+  width: 32px;
+}
+
+/* ── Light key colours ── */
+.kb--light .kb__key--letter {
+  background: var(--primitive-mono-50);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-550);
+}
+
+.kb--light .kb__key--action {
+  background: var(--primitive-mono-450);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-550);
+}
+
+/* ── Dark key colours ── */
+.kb--dark .kb__key--letter {
+  background: var(--primitive-mono-700);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-900);
+}
+
+.kb--dark .kb__key--action {
+  background: var(--primitive-mono-800);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-900);
+}
+
+/* ── Special key sizes ── */
+.kb__key--shift,
+.kb__key--delete {
+  width: 42px;
+}
+
+.kb__key--shift svg,
+.kb__key--delete svg {
+  width: 19px;
+  height: 17px;
+}
+
+.kb__key--delete svg {
+  width: 22px;
+  height: 17px;
+}
+
+/* ── Bottom row ── */
+.kb__row--bottom {
+  width: 100%;
+  padding: 0;
+  justify-content: center;
+}
+
+.kb__row--bottom .kb__key {
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.32px;
+}
+
+.kb__key--num {
+  width: 87px;
+}
+
+.kb__key--space {
+  width: 182px;
+}
+
+.kb__key--return {
+  width: 88px;
+}
+
+/* ── Toolbar (bottom bar with emoji/mic icons + home indicator) ── */
+.kb__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6) var(--spacing-16) 0;
+  height: 58px;
+}
+
+.kb__toolbar .home-indicator {
+  flex: 1;
+}
+
+.kb__toolbar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.kb__toolbar-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.kb--light .kb__toolbar-icon {
+  color: var(--primitive-mono-900);
+  opacity: 0.6;
+}
+
+.kb--dark .kb__toolbar-icon {
+  color: var(--primitive-mono-50);
+  opacity: 0.6;
+}
+
+/* ════════════════════════════════════════════════
+   NUMERIC
+   ════════════════════════════════════════════════ */
+
+.kb__numeric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kb__num-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px var(--spacing-6);
+  padding: var(--spacing-8) var(--spacing-6) 0;
+  width: 100%;
+}
+
+.kb__numkey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  border-radius: var(--radius-4);
+  position: relative;
+}
+
+.kb--light .kb__numkey {
+  background: var(--primitive-mono-50);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-550);
+}
+
+.kb--dark .kb__numkey {
+  background: var(--primitive-mono-700);
+  box-shadow: 0px 1px 0px 0px var(--primitive-mono-900);
+}
+
+.kb__numkey--empty {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.kb__numkey--delete {
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0.6;
+}
+
+.kb__numkey--delete svg {
+  width: var(--spacing-24);
+  height: 18px;
+}
+
+.kb__numkey-num {
+  font-family: var(--font-family);
+  font-size: 25px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0.29px;
+  line-height: 1;
+}
+
+.kb__numkey-letters {
+  font-family: var(--font-family);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* ════════════════════════════════════════════════
+   DICTATION
+   ════════════════════════════════════════════════ */
+
+.kb__dictation {
+  display: flex;
+  flex-direction: column;
+}
+
+.kb__wave-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 216px;
+  position: relative;
+}
+
+.kb--light .kb__wave-area {
+  background: var(--primitive-mono-550);
+}
+
+.kb--dark .kb__wave-area {
+  background: var(--primitive-mono-890);
+}
+
+.kb__waveform {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 80px;
+  padding: 0 var(--spacing-16);
+}
+
+.kb__wave-bar {
+  width: 3px;
+  border-radius: 1.5px;
+  flex-shrink: 0;
+}
+
+.kb--light .kb__wave-bar {
+  background: var(--primitive-mono-50);
+}
+
+.kb--dark .kb__wave-bar {
+  background: var(--primitive-mono-50);
+}
+
+.kb__mic-muted {
+  margin-top: var(--spacing-12);
+  opacity: 0.6;
+}
+
+.kb__mic-muted svg {
+  width: 44px;
+  height: 44px;
+}
+
+.kb--light .kb__mic-muted {
+  color: var(--primitive-mono-900);
+}
+
+.kb--dark .kb__mic-muted {
+  color: var(--primitive-mono-50);
+}
+
+.kb__toolbar--dictation {
+  padding-top: var(--spacing-8);
+}
+
+/* ════════════════════════════════════════════════
+   EMOJI
+   ════════════════════════════════════════════════ */
+
+.kb__emoji {
+  display: flex;
+  flex-direction: column;
+}
+
+.kb__emoji-title {
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: var(--spacing-6) 14px var(--spacing-4);
+  margin: 0;
+  line-height: 1;
+}
+
+.kb--light .kb__emoji-title {
+  color: var(--primitive-mono-700);
+}
+
+.kb--dark .kb__emoji-title {
+  color: var(--primitive-mono-550);
+}
+
+.kb__emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--spacing-6) var(--spacing-4);
+  padding: var(--spacing-4) 14px var(--spacing-8);
+}
+
+.kb__emoji-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+  line-height: 1;
+}
+
+.kb__emoji-cats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--spacing-4) var(--spacing-8);
+  height: 30px;
+}
+
+.kb--light .kb__emoji-cats {
+  border-top: 1px solid var(--primitive-mono-400);
+}
+
+.kb--dark .kb__emoji-cats {
+  border-top: 1px solid var(--primitive-mono-800);
+}
+
+.kb__emoji-cat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  font-size: 14px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.kb__emoji-cat--active {
+  opacity: 1;
+}
+
+.kb--light .kb__emoji-cat--active {
+  background: var(--primitive-mono-450);
+}
+
+.kb--dark .kb__emoji-cat--active {
+  background: var(--primitive-mono-700);
+}
+
+.kb__emoji-cat--delete {
+  opacity: 0.5;
+}
+
+.kb__emoji-cat--delete svg {
+  width: var(--spacing-16);
+  height: var(--spacing-12);
+}
+
+/* ════════════════════════════════════════════════
+   HOME INDICATOR OVERRIDES (match keyboard width)
+   ════════════════════════════════════════════════ */
+
+.kb .home-indicator {
+  width: 100%;
+}
+
+.kb--light .home-indicator__bar--dark {
+  background-color: var(--background-neutral-strong);
+}
+
+.kb--dark .home-indicator .home-indicator__bar--dark,
+.kb--dark .home-indicator .home-indicator__bar--light {
+  background-color: var(--surface-level-1);
+}

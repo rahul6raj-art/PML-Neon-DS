@@ -1,0 +1,121 @@
+/* ── Tabs Container ───────────────────────────────── */
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-neutral-medium);
+  box-sizing: border-box;
+}
+
+/* ── Individual Tab ───────────────────────────────── */
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-family: var(--font-family);
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Size: Medium ─────────────────────────────────── */
+.tabs--medium .tab {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.tabs--medium .tab--active {
+  font-weight: 600;
+  color: var(--text-neutral-strong);
+  border-bottom-color: var(--border-positive-strong);
+}
+
+/* ── Size: Large ──────────────────────────────────── */
+.tabs--large .tab {
+  padding-top: 8px;
+  padding-bottom: 10px;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.tabs--large .tab--active {
+  font-weight: 600;
+  color: var(--text-neutral-strong);
+  border-bottom-color: var(--border-positive-strong);
+}
+
+/* ── Hover ────────────────────────────────────────── */
+.tab:hover:not(.tab--active):not(:disabled) {
+  color: var(--text-neutral-strong);
+}
+
+/* ── Disabled ─────────────────────────────────────── */
+.tab--disabled {
+  color: var(--text-neutral-weak);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Label ────────────────────────────────────────── */
+.tab__label {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Icon ─────────────────────────────────────────── */
+.tab__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tab__icon svg {
+  fill: currentColor;
+}
+
+/* ── Badge ────────────────────────────────────────── */
+.tab__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;
+  width: 20px;
+  padding: 2px 4px;
+  border-radius: var(--radius-16);
+  background: var(--background-offset-3);
+  color: var(--text-neutral-moderate);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.tab--disabled .tab__badge {
+  background: var(--background-offset-2);
+  color: var(--text-neutral-weak);
+}

@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════════════════
+   Reminder Widget – layout & overrides only.
+   All visual atoms come from Card, ListItem, Button,
+   SectionHeader.
+   ═══════════════════════════════════════════════════ */
+
+.rw {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* When SectionHeader is rendered by the parent page (not inside widget) */
+.rw--no-header .rw__cards {
+  padding-top: var(--spacing-16);
+}
+
+/* ── Section-header spacing ────────────────────────── */
+.rw__section-header {
+  padding-bottom: var(--spacing-12);
+}
+
+/* ── Cards container ───────────────────────────────── */
+.rw__cards {
+  display: flex;
+  padding: 0 var(--spacing-16);
+}
+
+.rw--carousel .rw__cards {
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.rw--carousel .rw__cards::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Card size overrides ───────────────────────────── */
+.rw__card--single.card {
+  width: 344px;
+  min-height: auto;
+  flex-shrink: 0;
+}
+
+.rw__card--carousel.card {
+  width: 324px;
+  min-height: auto;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* ── Inner card padding ────────────────────────────── */
+.rw__card-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── ListItem overrides inside card ────────────────── */
+.rw__list-item.li-item {
+  width: 100%;
+  padding: var(--spacing-12) var(--spacing-12) 0;
+  box-sizing: border-box;
+}
+
+.rw__list-item .li-item__main {
+  padding: var(--spacing-4) 0 0;
+  min-height: 0;
+}
+
+/* ── Divider between list item & footer ────────────── */
+.rw__divider {
+  height: 1px;
+  background: var(--border-neutral-weak);
+  margin: var(--spacing-12) var(--spacing-12) 0;
+}
+
+/* ── CTA footer ────────────────────────────────────── */
+.rw__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-12);
+}
+
+.rw__cta-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+/* Wider CTA than default small button (short labels like "Buy") */
+.rw__footer .btn {
+  min-width: 72px;
+  padding-left: var(--spacing-16);
+  padding-right: var(--spacing-16);
+}

@@ -1,0 +1,124 @@
+/* ── Base chip ────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--radius-full);
+  background: transparent;
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: var(--text-neutral-moderate);
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.chip:hover:not(.chip--disabled) {
+  background: var(--interaction-hover-subtle);
+}
+
+.chip:active:not(.chip--disabled) {
+  background: var(--interaction-pressed-subtle);
+}
+
+.chip:focus-visible {
+  box-shadow: 0 0 0 2px var(--text-universal-light), 0 0 0 4px var(--border-primary-strong);
+}
+
+/* ── Size: Small ──────────────────────────────────── */
+.chip--small {
+  height: 32px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* ── Size: Medium (default) ───────────────────────── */
+.chip--medium {
+  height: 36px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ── Size: Large ──────────────────────────────────── */
+.chip--large {
+  height: 44px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ── Type: Selected ───────────────────────────────── */
+.chip--selected {
+  background: var(--surface-level-1);
+  border-color: var(--border-neutral-strong);
+  color: var(--text-neutral-strong);
+  font-weight: 500;
+}
+
+.chip--selected:hover {
+  background: var(--surface-level-4);
+}
+
+.chip--selected:active {
+  background: var(--background-offset-1);
+}
+
+/* ── Type: Disabled ───────────────────────────────── */
+.chip--disabled {
+  border-color: var(--border-neutral-medium);
+  color: var(--text-neutral-weak);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Label ────────────────────────────────────────── */
+.chip__label {
+  flex-shrink: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ── Icon ─────────────────────────────────────────── */
+.chip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chip__icon svg {
+  fill: currentColor;
+}
+
+/* ── Badge ────────────────────────────────────────── */
+.chip__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;
+  width: 20px;
+  padding: 2px 4px;
+  border-radius: var(--radius-16);
+  background: var(--background-offset-3);
+  color: var(--text-neutral-moderate);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Disabled badge uses a lighter background */
+.chip--disabled .chip__badge {
+  background: var(--background-offset-2);
+}

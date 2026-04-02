@@ -1,0 +1,419 @@
+/* ═══════════════════════════════════════════════════════════
+   PML Design System — Color Tokens
+   Source: PML-DS26-Tokens
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════
+     PRIMITIVE TOKENS
+     Raw color values — never use directly in components.
+     ═══════════════════════════════════════════════════════ */
+
+  /* ── Actions ─────────────────────────────────────────── */
+  --primitive-actions-primary: #0088FF;
+  --primitive-actions-primary-alt-light: #2CB1FE;
+  --primitive-actions-primary-alt-dark: #1561B1;
+  --primitive-actions-positive: #34A34D;
+  --primitive-actions-positive-dark: #47FF8E;
+  --primitive-actions-notice: #FF8D28;
+  --primitive-actions-notice-dark: #FF9D45;
+  --primitive-actions-negative: #D12E20;
+  --primitive-actions-negative-dark: #EA3424;
+
+  /* ── Mono ────────────────────────────────────────────── */
+  --primitive-mono-900: #101010;
+  --primitive-mono-890: #1B1B1B;
+  --primitive-mono-880: #161616;
+  --primitive-mono-875: #202020;
+  --primitive-mono-860: #282828;
+  --primitive-mono-850: #303030;
+  --primitive-mono-800: #414244;
+  --primitive-mono-700: #606163;
+  --primitive-mono-600: #7E7E7E;
+  --primitive-mono-550: #8B8C8C;
+  --primitive-mono-450: #BFBFBF;
+  --primitive-mono-400: #CACACA;
+  --primitive-mono-200: #E0E0E0;
+  --primitive-mono-175: #EBECEE;
+  --primitive-mono-100: #F5F5F5;
+  --primitive-mono-90: #FAFAFA;
+  --primitive-mono-75: #FDFDFD;
+  --primitive-mono-50: #FFFFFF;
+
+  /* ── Blue Offsets ────────────────────────────────────── */
+  --primitive-blue-offset-100: #F5F8FA;
+  --primitive-blue-offset-150: #ECF2F8;
+  --primitive-blue-offset-200: #D8E7F7;
+  --primitive-blue-offset-800: #324252;
+  --primitive-blue-offset-850: #2A3540;
+  --primitive-blue-offset-890: #262B30;
+  --primitive-blue-offset-bg: #F2F2F7;
+  --primitive-blue-offset-bg-alt: #000000;
+
+  /* ── Action Offsets ──────────────────────────────────── */
+  --primitive-action-offset-primary-tint: #D9EDFF;
+  --primitive-action-offset-primary-shade: #0F303D;
+  --primitive-action-offset-positive-tint: #E1F1E4;
+  --primitive-action-offset-positive-shade: #1D3928;
+  --primitive-action-offset-notice-tint: #FFEEDF;
+  --primitive-action-offset-notice-shade: #45311F;
+  --primitive-action-offset-negative-tint: #F8E0DE;
+  --primitive-action-offset-negative-shade: #361B18;
+  --primitive-action-offset-yellow-tint: #FFF2CC;
+  --primitive-action-offset-yellow-shade: #40330C;
+
+  /* ── Grey Offsets ────────────────────────────────────── */
+  --primitive-grey-offset-50: #FAFAFA;
+  --primitive-grey-offset-100: #F5F0F0;
+  --primitive-grey-offset-200: #E8E1E1;
+  --primitive-grey-offset-800: #3B3535;
+  --primitive-grey-offset-850: #302C2C;
+  --primitive-grey-offset-900: #181616;
+
+  /* ── Colours ─────────────────────────────────────────── */
+  --primitive-colour-red: #EB5D2A;
+  --primitive-colour-red-strong: #E85168;
+  --primitive-colour-red-strong-dark: #EB6F82;
+  --primitive-colour-red-medium: #F197A4;
+  --primitive-colour-red-medium-dark: #F3A9B4;
+  --primitive-colour-red-weak: #FFAED5;
+  --primitive-colour-red-weak-dark: #FFCEE6;
+  --primitive-colour-orange: #FF8D28;
+  --primitive-colour-orange-weak: #F18C33;
+  --primitive-colour-orange-weak-dark: #FFA24F;
+  --primitive-colour-yellow-strong: #FFEB12;
+  --primitive-colour-yellow-strong-dark: #FFEF45;
+  --primitive-colour-yellow-medium: #FFF371;
+  --primitive-colour-yellow-medium-dark: #FFF58F;
+  --primitive-colour-green: #34A34D;
+  --primitive-colour-lime-green-strong: #ACE851;
+  --primitive-colour-lime-green-strong-dark: #CDFF82;
+  --primitive-colour-lime-green-medium: #CDF197;
+  --primitive-colour-lime-green-medium-dark: #E1FFB4;
+  --primitive-colour-lime-green-weak: #ECFFB7;
+  --primitive-colour-lime-green-weak-dark: #F4FFD4;
+  --primitive-colour-mint: #85C894;
+  --primitive-colour-mint-dark: #91FFBB;
+  --primitive-colour-teal: #00C3D0;
+  --primitive-colour-cyan: #00C0E8;
+  --primitive-colour-cyan-dark: #3CD3FE;
+  --primitive-colour-blue: #3C3CFF;
+  --primitive-colour-blue-dark: #3D5DFF;
+  --primitive-colour-indigo: #6155F5;
+  --primitive-colour-purple: #CB30E0;
+  --primitive-colour-pink: #FF6784;
+  --primitive-colour-pink-alt: #FF2D55;
+  --primitive-colour-brown: #AC7F5E;
+
+  /* ── Brand ───────────────────────────────────────────── */
+  --primitive-brand-blue: #00B8F5;
+  --primitive-brand-dark-blue: #012A72;
+  --primitive-brand-white: #FFFFFF;
+  --primitive-brand-semi-white: rgba(255, 255, 255, 0.4);
+
+  /* ── Overlays ────────────────────────────────────────── */
+  --primitive-overlay-800: rgba(16, 16, 16, 0.89);
+  --primitive-overlay-600: rgba(16, 16, 16, 0.70);
+  --primitive-overlay-400: rgba(16, 16, 16, 0.39);
+  --primitive-overlay-200: rgba(16, 16, 16, 0.13);
+
+  /* ── Materials ───────────────────────────────────────── */
+  --primitive-material-ff-100: #FFFFFF;
+  --primitive-material-ff-80: rgba(255, 255, 255, 0.80);
+  --primitive-material-ff-60: rgba(255, 255, 255, 0.60);
+  --primitive-material-ff-40: rgba(255, 255, 255, 0.40);
+  --primitive-material-ff-20: rgba(255, 255, 255, 0.20);
+  --primitive-material-ff-15: rgba(255, 255, 255, 0.15);
+  --primitive-material-ff-10: rgba(255, 255, 255, 0.10);
+  --primitive-material-ff-08: rgba(255, 255, 255, 0.08);
+  --primitive-material-ff-04: rgba(255, 255, 255, 0.04);
+  --primitive-material-ff-00: rgba(255, 255, 255, 0);
+  --primitive-material-10-100: #101010;
+  --primitive-material-10-80: rgba(16, 16, 16, 0.80);
+  --primitive-material-10-60: rgba(16, 16, 16, 0.60);
+  --primitive-material-10-40: rgba(16, 16, 16, 0.40);
+  --primitive-material-10-20: rgba(16, 16, 16, 0.20);
+  --primitive-material-10-15: rgba(16, 16, 16, 0.15);
+  --primitive-material-10-10: rgba(16, 16, 16, 0.10);
+  --primitive-material-10-08: rgba(16, 16, 16, 0.08);
+  --primitive-material-10-04: rgba(16, 16, 16, 0.04);
+  --primitive-material-10-00: rgba(16, 16, 16, 0);
+
+  /* ═══════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Light Mode (default)
+     Use these in components.
+     ═══════════════════════════════════════════════════════ */
+
+  /* ── Background ──────────────────────────────────────── */
+  --background-offset-1: #F5F8FA;
+  --background-offset-2: #ECF2F8;
+  --background-offset-3: #D8E7F7;
+  --background-primary-strong: #0088FF;
+  --background-primary-weak: #D9EDFF;
+  --background-positive-strong: #34A34D;
+  --background-positive-weak: #E1F1E4;
+  --background-notice-strong: #FF8D28;
+  --background-notice-weak: #FFEEDF;
+  --background-negative-strong: #D12E20;
+  --background-negative-weak: #F8E0DE;
+  --background-neutral-strong: #101010;
+  --background-neutral-medium: #7E7E7E;
+  --background-neutral-weak: #EBECEE;
+  --background-neutral-inverse: #FFFFFF;
+
+  /* ── Text ────────────────────────────────────────────── */
+  --text-neutral-strong: #282828;
+  --text-neutral-moderate: #414244;
+  --text-neutral-medium: #7E7E7E;
+  --text-neutral-weak: #CACACA;
+  --text-neutral-inverse: #FFFFFF;
+  --text-primary-strong: #0088FF;
+  --text-positive-strong: #34A34D;
+  --text-notice-strong: #FF8D28;
+  --text-negative-strong: #D12E20;
+  --text-universal-light: #FFFFFF;
+  --text-universal-dark: #282828;
+
+  /* ── Icon ────────────────────────────────────────────── */
+  --icon-neutral-strong: #282828;
+  --icon-neutral-moderate: #414244;
+  --icon-neutral-medium: #7E7E7E;
+  --icon-neutral-weak: #CACACA;
+  --icon-neutral-inverse: #FFFFFF;
+  --icon-primary-strong: #0088FF;
+  --icon-positive-strong: #34A34D;
+  --icon-notice-strong: #FF8D28;
+  --icon-negative-strong: #D12E20;
+  --icon-universal-light: #FFFFFF;
+  --icon-universal-dark: #282828;
+
+  /* ── Border ──────────────────────────────────────────── */
+  --border-neutral-strong: #101010;
+  --border-neutral-moderate: #7E7E7E;
+  --border-neutral-medium: #E0E0E0;
+  --border-neutral-weak: #EBECEE;
+  --border-neutral-inverse: #FFFFFF;
+  --border-primary-strong: #0088FF;
+  --border-primary-weak: #D9EDFF;
+  --border-positive-strong: #34A34D;
+  --border-positive-weak: #E1F1E4;
+  --border-notice-strong: #FF8D28;
+  --border-notice-weak: #FFEEDF;
+  --border-negative-strong: #D12E20;
+  --border-negative-weak: #F8E0DE;
+
+  /* ── Overlay ─────────────────────────────────────────── */
+  --overlay-strong: rgba(16, 16, 16, 0.70);
+  --overlay-weak: rgba(16, 16, 16, 0.13);
+
+  /* ── Surface ─────────────────────────────────────────── */
+  --surface-level-1: #FFFFFF;
+  --surface-level-2: #FDFDFD;
+  --surface-level-3: #FAFAFA;
+  --surface-level-4: #F5F5F5;
+
+  /* ── Colours ─────────────────────────────────────────── */
+  --colour-red-strong: #E85168;
+  --colour-red-medium: #F197A4;
+  --colour-red-weak: #FFAED5;
+  --colour-orange: #FF8D28;
+  --colour-orange-weak: #F18C33;
+  --colour-yellow-strong: #FFEB12;
+  --colour-yellow-medium: #FFF371;
+  --colour-yellow-weak: #FFF2CC;
+  --colour-green: #34A34D;
+  --colour-lime-green-strong: #ACE851;
+  --colour-lime-green-medium: #CDF197;
+  --colour-lime-green-weak: #ECFFB7;
+  --colour-mint: #85C894;
+  --colour-teal: #00C3D0;
+  --colour-cyan: #00C0E8;
+  --colour-blue: #3C3CFF;
+  --colour-indigo: #6155F5;
+  --colour-purple: #CB30E0;
+  --colour-pink: #FF6784;
+  --colour-brown: #AC7F5E;
+
+  /* ── Brand ───────────────────────────────────────────── */
+  --brand-blue: #00B8F5;
+  --brand-dark-blue: #012A72;
+  --brand-white: #FFFFFF;
+
+  /* ── Glass ───────────────────────────────────────────── */
+  --glass-tinted-l1: rgba(16, 16, 16, 0.60);
+  --glass-tinted-l2: rgba(16, 16, 16, 0.40);
+  --glass-tinted-l3: rgba(16, 16, 16, 0.20);
+  --glass-tinted-l4: rgba(16, 16, 16, 0.15);
+  --glass-tinted-l5: rgba(16, 16, 16, 0.10);
+  --glass-clear-l1: rgba(255, 255, 255, 0);
+  --glass-clear-l2: rgba(255, 255, 255, 0.04);
+  --glass-clear-l3: rgba(255, 255, 255, 0.08);
+
+  /* ── Interaction States ────────────────────────────────── */
+  --interaction-hover-subtle: rgba(16, 16, 16, 0.03);
+  --interaction-hover: rgba(16, 16, 16, 0.04);
+  --interaction-pressed-subtle: rgba(16, 16, 16, 0.06);
+  --interaction-pressed: rgba(16, 16, 16, 0.08);
+  --interaction-pressed-strong: rgba(16, 16, 16, 0.10);
+
+  /* ── Shadows ───────────────────────────────────────────── */
+  --shadow-elevation-1: rgba(0, 0, 0, 0.06);
+  --shadow-elevation-2: rgba(0, 0, 0, 0.08);
+  --shadow-elevation-3: rgba(0, 0, 0, 0.12);
+  --shadow-elevation-4: rgba(0, 0, 0, 0.24);
+
+  /* ── Backdrop ──────────────────────────────────────────── */
+  --backdrop-overlay: rgba(0, 0, 0, 0.4);
+
+  /* ── Glow (positive) ───────────────────────────────────── */
+  --glow-positive-strong: rgba(52, 163, 77, 0.25);
+  --glow-positive-medium: rgba(52, 163, 77, 0.08);
+  --glow-positive-fade: rgba(52, 163, 77, 0);
+
+  /* ── Snackbar (always dark surface) ────────────────────── */
+  --snackbar-border: rgba(255, 255, 255, 0.9);
+  --snackbar-btn-hover: rgba(255, 255, 255, 0.15);
+  --snackbar-btn-active: rgba(255, 255, 255, 0.25);
+  --snackbar-link-hover: rgba(255, 255, 255, 0.10);
+  --snackbar-link-active: rgba(255, 255, 255, 0.20);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEMANTIC TOKENS — Dark Mode
+   Applied via data-theme="dark" attribute.
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme='dark'] {
+  /* ── Background ──────────────────────────────────────── */
+  --background-offset-1: #262B30;
+  --background-offset-2: #2A3540;
+  --background-offset-3: #324252;
+  --background-primary-strong: #2CB1FE;
+  --background-primary-weak: #0F303D;
+  --background-positive-strong: #47FF8E;
+  --background-positive-weak: #1D3928;
+  --background-notice-strong: #FF9D45;
+  --background-notice-weak: #45311F;
+  --background-negative-strong: #EA3424;
+  --background-negative-weak: #361B18;
+  --background-neutral-strong: #FFFFFF;
+  --background-neutral-medium: #8B8C8C;
+  --background-neutral-weak: #282828;
+  --background-neutral-inverse: #101010;
+
+  /* ── Text ────────────────────────────────────────────── */
+  --text-neutral-strong: #FFFFFF;
+  --text-neutral-moderate: #EBECEE;
+  --text-neutral-medium: #8B8C8C;
+  --text-neutral-weak: #414244;
+  --text-neutral-inverse: #282828;
+  --text-primary-strong: #2CB1FE;
+  --text-positive-strong: #47FF8E;
+  --text-notice-strong: #FF9D45;
+  --text-negative-strong: #EA3424;
+  --text-universal-light: #FFFFFF;
+  --text-universal-dark: #282828;
+
+  /* ── Icon ────────────────────────────────────────────── */
+  --icon-neutral-strong: #FFFFFF;
+  --icon-neutral-moderate: #EBECEE;
+  --icon-neutral-medium: #8B8C8C;
+  --icon-neutral-weak: #414244;
+  --icon-neutral-inverse: #282828;
+  --icon-primary-strong: #2CB1FE;
+  --icon-positive-strong: #47FF8E;
+  --icon-notice-strong: #FF9D45;
+  --icon-negative-strong: #EA3424;
+  --icon-universal-light: #FFFFFF;
+  --icon-universal-dark: #282828;
+
+  /* ── Border ──────────────────────────────────────────── */
+  --border-neutral-strong: #FFFFFF;
+  --border-neutral-moderate: #CACACA;
+  --border-neutral-medium: #414244;
+  --border-neutral-weak: #282828;
+  --border-neutral-inverse: #101010;
+  --border-primary-strong: #2CB1FE;
+  --border-primary-weak: #0F303D;
+  --border-positive-strong: #47FF8E;
+  --border-positive-weak: #1D3928;
+  --border-notice-strong: #FF9D45;
+  --border-notice-weak: #45311F;
+  --border-negative-strong: #EA3424;
+  --border-negative-weak: #361B18;
+
+  /* ── Overlay ─────────────────────────────────────────── */
+  --overlay-strong: rgba(16, 16, 16, 0.89);
+  --overlay-weak: rgba(16, 16, 16, 0.39);
+
+  /* ── Surface ─────────────────────────────────────────── */
+  --surface-level-1: #161616;
+  --surface-level-2: #101010;
+  --surface-level-3: #1B1B1B;
+  --surface-level-4: #101010;
+
+  /* ── Colours ─────────────────────────────────────────── */
+  --colour-red-strong: #EB6F82;
+  --colour-red-medium: #F3A9B4;
+  --colour-red-weak: #FFCEE6;
+  --colour-orange: #FF8D28;
+  --colour-orange-weak: #FFA24F;
+  --colour-yellow-strong: #FFEF45;
+  --colour-yellow-medium: #FFF58F;
+  --colour-yellow-weak: #40330C;
+  --colour-green: #34A34D;
+  --colour-lime-green-strong: #CDFF82;
+  --colour-lime-green-medium: #E1FFB4;
+  --colour-lime-green-weak: #F4FFD4;
+  --colour-mint: #91FFBB;
+  --colour-teal: #00C3D0;
+  --colour-cyan: #3CD3FE;
+  --colour-blue: #3D5DFF;
+  --colour-indigo: #6155F5;
+  --colour-purple: #CB30E0;
+  --colour-pink: #FF2D55;
+  --colour-brown: #AC7F5E;
+
+  /* ── Brand ───────────────────────────────────────────── */
+  --brand-blue: #00B8F5;
+  --brand-dark-blue: #FFFFFF;
+  --brand-white: #012A72;
+
+  /* ── Glass ───────────────────────────────────────────── */
+  --glass-tinted-l1: rgba(255, 255, 255, 0.60);
+  --glass-tinted-l2: rgba(255, 255, 255, 0.40);
+  --glass-tinted-l3: rgba(255, 255, 255, 0.20);
+  --glass-tinted-l4: rgba(255, 255, 255, 0.15);
+  --glass-tinted-l5: rgba(255, 255, 255, 0.10);
+  --glass-clear-l1: rgba(16, 16, 16, 0);
+  --glass-clear-l2: rgba(16, 16, 16, 0.04);
+  --glass-clear-l3: rgba(16, 16, 16, 0.08);
+
+  /* ── Interaction States ────────────────────────────────── */
+  --interaction-hover-subtle: rgba(255, 255, 255, 0.03);
+  --interaction-hover: rgba(255, 255, 255, 0.04);
+  --interaction-pressed-subtle: rgba(255, 255, 255, 0.06);
+  --interaction-pressed: rgba(255, 255, 255, 0.08);
+  --interaction-pressed-strong: rgba(255, 255, 255, 0.10);
+
+  /* ── Shadows ───────────────────────────────────────────── */
+  --shadow-elevation-1: rgba(0, 0, 0, 0.20);
+  --shadow-elevation-2: rgba(0, 0, 0, 0.30);
+  --shadow-elevation-3: rgba(0, 0, 0, 0.40);
+  --shadow-elevation-4: rgba(0, 0, 0, 0.50);
+
+  /* ── Backdrop ──────────────────────────────────────────── */
+  --backdrop-overlay: rgba(0, 0, 0, 0.6);
+
+  /* ── Glow (positive) ───────────────────────────────────── */
+  --glow-positive-strong: rgba(71, 255, 142, 0.25);
+  --glow-positive-medium: rgba(71, 255, 142, 0.08);
+  --glow-positive-fade: rgba(71, 255, 142, 0);
+
+  /* ── Snackbar (always dark surface) ────────────────────── */
+  --snackbar-border: rgba(255, 255, 255, 0.9);
+  --snackbar-btn-hover: rgba(255, 255, 255, 0.15);
+  --snackbar-btn-active: rgba(255, 255, 255, 0.25);
+  --snackbar-link-hover: rgba(255, 255, 255, 0.10);
+  --snackbar-link-active: rgba(255, 255, 255, 0.20);
+}

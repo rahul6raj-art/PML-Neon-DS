@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════
+   Tile
+   ═══════════════════════════════════════════════════ */
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.tile[role='button'] {
+  cursor: pointer;
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+/* ── Variant: Default ── padding 12 all ─────────── */
+.tile--default {
+  padding: var(--spacing-12);
+}
+
+/* ── Variant: Action ── padding 24/12/12 ────────── */
+.tile--action {
+  padding: var(--spacing-24) var(--spacing-12) var(--spacing-12);
+}
+
+/* ── Main icon ──────────────────────────────────── */
+.tile__icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile__icon {
+  color: var(--icon-neutral-strong);
+}
+
+/* ── Text block ─────────────────────────────────── */
+.tile__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 32px;
+  text-align: center;
+}
+
+.tile__title,
+.tile__label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: var(--text-neutral-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── Gradient overlay (favouriteOption=true) ────── */
+.tile__fav-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(
+    225.03deg,
+    var(--surface-level-1) 1.51%,
+    var(--glass-clear-l3) 49.24%
+  );
+  pointer-events: none;
+}
+
+/* ── Favourite icon button (always visible in action) */
+.tile__fav-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-neutral-moderate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.tile__fav-btn:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}

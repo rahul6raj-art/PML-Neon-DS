@@ -1,0 +1,120 @@
+/* ── Container ────────────────────────────────────── */
+.segmented-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 4px;
+  background: var(--border-neutral-medium);
+  border-radius: var(--radius-full);
+  box-sizing: border-box;
+}
+
+.segmented-control--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Segment (tab button) ─────────────────────────── */
+.segment {
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-4);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+  text-align: center;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    border-radius 0.2s ease,
+    font-weight 0.15s ease;
+  outline: none;
+  position: relative;
+}
+
+.segment:hover:not(.segment--active):not(:disabled) {
+  background: var(--interaction-hover);
+  border-radius: var(--radius-24);
+}
+
+.segment:focus-visible {
+  box-shadow: 0 0 0 2px var(--surface-level-1), 0 0 0 4px var(--border-primary-strong);
+  border-radius: var(--radius-24);
+}
+
+/* ── Active segment ───────────────────────────────── */
+.segment--active {
+  background: var(--surface-level-1);
+  border-radius: var(--radius-24);
+  box-shadow: 0 1px 4px var(--shadow-elevation-2);
+  font-weight: 500;
+  cursor: default;
+}
+
+/* ── Disabled segment ─────────────────────────────── */
+.segment--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Label ────────────────────────────────────────── */
+.segment__label {
+  flex-shrink: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* When label is the only child, let it stretch to fill */
+.segment__label:only-child {
+  flex: 1 0 0;
+  min-width: 1px;
+}
+
+/* ── Icon ─────────────────────────────────────────── */
+.segment__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.segment__icon svg {
+  fill: currentColor;
+}
+
+/* ── Badge ────────────────────────────────────────── */
+.segment__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;
+  width: 20px;
+  padding: 2px 6px;
+  border-radius: var(--radius-16);
+  background: var(--background-primary-weak);
+  color: var(--text-positive-strong);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Active segment → green badge with white text */
+.segment--active .segment__badge {
+  background: var(--background-positive-strong);
+  color: var(--text-universal-light);
+}
