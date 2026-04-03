@@ -8,7 +8,7 @@ export interface AppNavItem {
   label: string;
 }
 
-const DEFAULT_NAV: AppNavItem[] = [{ id: 'stock-home', label: 'Stock Home' }];
+const DEFAULT_NAV: AppNavItem[] = [{ id: 'stock-home', label: 'PML Home' }];
 
 export interface AppShellProps {
   /** Current screen id (drives nav highlight) */
