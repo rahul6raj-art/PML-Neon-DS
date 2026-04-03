@@ -305,7 +305,8 @@ const meta: Meta<HeaderStoryArgs> = {
       table: { defaultValue: { summary: 'false' }, category: 'Chip Properties' },
     },
     chipSize: {
-      control: 'inline-radio', options: ['small', 'medium', 'large'],
+      control: 'inline-radio',
+      options: ['extra-small', 'small', 'medium', 'large'],
       description: 'Chip size',
       table: { defaultValue: { summary: 'medium' }, category: 'Chip Properties' },
       if: { arg: 'showChips' },

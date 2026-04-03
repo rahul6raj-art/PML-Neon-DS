@@ -177,21 +177,29 @@
   height: 100%;
 }
 
-/* ── Time Range Chips ── */
+/* ── Time Range Chips (16px inset L/R; compact vs default Chip small) ── */
 .sh-chips {
   display: flex;
-  gap: var(--spacing-12);
-  padding: 0 var(--spacing-16);
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  box-sizing: border-box;
+  width: 100%;
   margin-top: var(--spacing-16);
+  padding-inline: var(--card-padding-inline);
 }
 
-/* ── Investment Values ── */
+.sh-chips .chip {
+  flex-shrink: 0;
+}
+
+/* ── Investment Values (32px below time-range chips) ── */
 .sh-values {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
   padding: 0 var(--spacing-16);
-  margin-top: var(--spacing-16);
+  margin-top: var(--spacing-32);
 }
 
 .sh-values__row {
@@ -230,7 +238,7 @@
   box-sizing: border-box;
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  padding: var(--spacing-16);
+  padding: var(--card-padding-block) var(--card-padding-inline);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -252,9 +260,13 @@
 }
 
 .sh-buying__action {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
+  margin: 0;
+  margin-left: auto;
+  padding: 0;
+  flex-shrink: 0;
   color: var(--text-positive-strong);
   font-size: 14px;
   font-weight: var(--font-weight-regular);
@@ -275,22 +287,27 @@
   box-sizing: border-box;
 }
 
-/* ── Allocation Bar ── */
+/* ── Allocation (bar + item: LHS dot+name / RHS value+return columns) ── */
+.card.sh-allocation-card {
+  min-height: 0;
+}
+
 .sh-allocation {
-  padding: var(--spacing-16);
+  padding: 0;
 }
 
 .sh-allocation__bar {
   display: flex;
-  height: 40px;
-  border-radius: var(--radius-24);
+  height: var(--spacing-8);
+  border-radius: var(--radius-full);
   overflow: hidden;
   gap: var(--spacing-2);
 }
 
 .sh-allocation__segment {
   height: 100%;
-  border-radius: var(--radius-24);
+  min-width: var(--spacing-2);
+  border-radius: var(--radius-full);
 }
 
 .sh-allocation__segment--stocks {
@@ -308,22 +325,55 @@
 .sh-allocation__list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-16);
-  margin-top: var(--spacing-24);
+  gap: 0;
+  margin-top: var(--spacing-16);
 }
 
 .sh-allocation__item {
+  min-width: 0;
+}
+
+.sh-allocation__item:not(:last-child) {
+  padding-bottom: var(--spacing-16);
+  border-bottom: 1px solid var(--border-neutral-weak);
+}
+
+.sh-allocation__item:not(:first-child) {
+  padding-top: var(--spacing-16);
+}
+
+/* LHS: dot + name / % · RHS: amount + return (stacked, right-aligned) */
+.sh-allocation__item-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-12);
+  min-width: 0;
+}
+
+.sh-allocation__item-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  min-width: 0;
+  flex: 1;
+}
+
+.sh-allocation__item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+  text-align: right;
 }
 
 .sh-allocation__dot {
-  width: 16px;
-  height: 16px;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: var(--spacing-2);
 }
 
 .sh-allocation__dot--stocks {
@@ -338,40 +388,32 @@
   background: var(--text-neutral-moderate);
 }
 
-.sh-allocation__info {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-}
-
-.sh-allocation__info-left,
-.sh-allocation__info-right {
+.sh-allocation__name-group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.sh-allocation__info-right {
-  text-align: right;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  min-width: 0;
 }
 
 .sh-allocation__name {
   font-size: 14px;
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   line-height: 20px;
   color: var(--text-neutral-strong);
 }
 
-.sh-allocation__value {
+.sh-allocation__pct {
   font-size: 12px;
   font-weight: var(--font-weight-regular);
   line-height: 16px;
   color: var(--text-neutral-medium);
+  flex-shrink: 0;
 }
 
-.sh-allocation__return-label {
+.sh-allocation__value {
   font-size: 14px;
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-medium);
   line-height: 20px;
   color: var(--text-neutral-strong);
 }
@@ -381,6 +423,10 @@
   font-weight: var(--font-weight-regular);
   line-height: 16px;
   color: var(--text-positive-strong);
+}
+
+.sh-allocation__return-value--negative {
+  color: var(--text-negative-strong);
 }
 
 /* ── Horizontal Card Scrollers ── */
@@ -396,18 +442,33 @@
   display: none;
 }
 
-/* ── SIP Cards ── */
+/* ── SIP Cards: badge row, then title+subtitle with chevron vertically centered to that block ── */
 .sh-sip-card {
   width: 324px;
   flex-shrink: 0;
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  padding: var(--spacing-24) var(--spacing-16) var(--spacing-16);
+  padding: var(--card-padding-block) var(--card-padding-inline);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
 }
 
 .sh-sip-card__status {
-  margin-bottom: var(--spacing-16);
+  flex-shrink: 0;
+}
+
+.sh-sip-card__body {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.sh-sip-card__copy {
+  flex: 1;
+  min-width: 0;
 }
 
 .sh-sip-card__title {
@@ -423,13 +484,25 @@
   line-height: 16px;
   color: var(--text-neutral-medium);
   margin-top: var(--spacing-4);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
 }
 
 .sh-sip-card__chevron {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
   color: var(--icon-neutral-medium);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sh-sip-card__chevron:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
 }
 
 /* ── Goal Card ── */
@@ -439,7 +512,7 @@
   box-sizing: border-box;
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  padding: var(--spacing-16);
+  padding: var(--card-padding-block) var(--card-padding-inline);
 }
 
 .sh-goal-card__header {
@@ -531,7 +604,7 @@
 .sh-market__card {
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  padding: var(--spacing-16);
+  padding: var(--card-padding-block) var(--card-padding-inline);
   display: flex;
   align-items: center;
   gap: var(--spacing-16);
@@ -586,14 +659,28 @@
   flex-shrink: 0;
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  padding: var(--spacing-24) var(--spacing-16) var(--spacing-16);
+  padding: var(--card-padding-block) var(--card-padding-inline);
   box-sizing: border-box;
 }
 
 .sh-news-card__top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.sh-news-card__head {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.sh-news-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
 }
 
 .sh-news-card__title {
@@ -601,13 +688,6 @@
   font-weight: var(--font-weight-medium);
   line-height: 20px;
   color: var(--text-neutral-strong);
-  flex: 1;
-}
-
-.sh-news-card__badges {
-  display: flex;
-  gap: var(--spacing-8);
-  margin-top: var(--spacing-4);
 }
 
 .sh-news-card__chevron {

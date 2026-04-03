@@ -24,7 +24,6 @@ interface TickerItem {
 interface AllocationItem {
   name: string;
   value: string;
-  returnLabel: string;
   returnValue: string;
   color: 'stocks' | 'mf' | 'others';
   percent: number;
@@ -61,13 +60,13 @@ const HEADER_TABS: TabItem[] = [
 const TIME_RANGES = ['1D', '1W', '1M', '6M', '1Y', 'All'];
 
 const ALLOCATIONS: AllocationItem[] = [
-  { name: 'Stocks', value: '₹ 8,00,694', returnLabel: 'Stocks', returnValue: '+10.70%', color: 'stocks', percent: 55 },
-  { name: 'MF', value: '₹ 72,597', returnLabel: 'Mutual Funds', returnValue: '+8.85%', color: 'mf', percent: 30 },
-  { name: 'Others', value: '₹ 40,000', returnLabel: 'Others', returnValue: '+1.53%', color: 'others', percent: 15 },
+  { name: 'Stocks', value: '₹ 8,00,694', returnValue: '+10.70%', color: 'stocks', percent: 55 },
+  { name: 'MF', value: '₹ 72,597', returnValue: '+8.85%', color: 'mf', percent: 30 },
+  { name: 'Others', value: '₹ 40,000', returnValue: '+1.53%', color: 'others', percent: 15 },
 ];
 
 const SIP_CARDS: SipCard[] = [
-  { status: 'Tomorrow', statusContext: 'notice', title: '₹18,500 sitting idle', subtitle: 'See where you can invest' },
+  { status: 'Tomorrow', statusContext: 'notice', title: '₹ 18,500 sitting idle', subtitle: 'See where you can invest' },
   { status: 'Active', statusContext: 'positive', title: '58% in equity', subtitle: 'Rebalance your portfolio' },
 ];
 
@@ -212,7 +211,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
               <Chip
                 key={r}
                 label={r}
-                size="small"
+                size="extra-small"
                 type={activeRange === i ? 'selected' : 'default'}
                 onPress={() => setActiveRange(i)}
               />
@@ -255,7 +254,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
             showSubtext={false}
           />
           <div className="sh-section__content">
-            <Card>
+            <Card className="sh-allocation-card">
               <div className="sh-allocation">
                 <div className="sh-allocation__bar">
                   {ALLOCATIONS.map((a) => (
@@ -269,15 +268,23 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
                 <div className="sh-allocation__list">
                   {ALLOCATIONS.map((a) => (
                     <div className="sh-allocation__item" key={a.color}>
-                      <div className={`sh-allocation__dot sh-allocation__dot--${a.color}`} />
-                      <div className="sh-allocation__info">
-                        <div className="sh-allocation__info-left">
-                          <span className="sh-allocation__name">{a.name}</span>
-                          <span className="sh-allocation__value">{a.value}</span>
+                      <div className="sh-allocation__item-top">
+                        <div className="sh-allocation__item-left">
+                          <div className={`sh-allocation__dot sh-allocation__dot--${a.color}`} />
+                          <div className="sh-allocation__name-group">
+                            <span className="sh-allocation__name">{a.name}</span>
+                            <span className="sh-allocation__pct">{a.percent}%</span>
+                          </div>
                         </div>
-                        <div className="sh-allocation__info-right">
-                          <span className="sh-allocation__return-label">{a.returnLabel}</span>
-                          <span className="sh-allocation__return-value">{a.returnValue}</span>
+                        <div className="sh-allocation__item-right">
+                          <span className="sh-allocation__value">{a.value}</span>
+                          <span
+                            className={`sh-allocation__return-value${
+                              a.returnValue.trim().startsWith('-') ? ' sh-allocation__return-value--negative' : ''
+                            }`}
+                          >
+                            {a.returnValue}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -303,12 +310,14 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
                 <div className="sh-sip-card__status">
                   <Badge type="text" context={sip.statusContext} label={sip.status} />
                 </div>
-                <div className="sh-sip-card__title">{sip.title}</div>
-                <div className="sh-sip-card__subtitle">
-                  {sip.subtitle}
-                  <span className="sh-sip-card__chevron">
-                    <Icon name="caret_small_right_main" size={16} />
-                  </span>
+                <div className="sh-sip-card__body">
+                  <div className="sh-sip-card__copy">
+                    <div className="sh-sip-card__title">{sip.title}</div>
+                    <div className="sh-sip-card__subtitle">{sip.subtitle}</div>
+                  </div>
+                  <button type="button" className="sh-sip-card__chevron" aria-label="Open">
+                    <Icon name="caret_small_right_main" size={24} />
+                  </button>
                 </div>
               </div>
             ))}
@@ -410,13 +419,13 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
             {NEWS_CARDS.map((news, i) => (
               <div className="sh-news-card" key={i}>
                 <div className="sh-news-card__top">
-                  <div>
-                    <div className="sh-news-card__title">{news.title}</div>
+                  <div className="sh-news-card__head">
                     <div className="sh-news-card__badges">
                       {news.badges.map((b, j) => (
                         <Badge key={j} type="text" context={b.context} label={b.label} />
                       ))}
                     </div>
+                    <div className="sh-news-card__title">{news.title}</div>
                   </div>
                   <button className="sh-news-card__chevron" aria-label="Open">
                     <Icon name="caret_small_right_main" size={24} />

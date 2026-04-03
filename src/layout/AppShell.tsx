@@ -38,20 +38,6 @@ export const AppShell = ({
       data-theme={theme === 'dark' ? 'dark' : undefined}
     >
       <aside className="app-shell__aside" aria-label="App navigation">
-        <div className="app-shell__brand">Screens</div>
-        <nav className="app-shell__nav">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="app-shell__nav-item"
-              aria-current={activeScreen === item.id ? 'true' : undefined}
-              onClick={() => onNavigate(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
         <div className="app-shell__theme">
           <span className="app-shell__theme-label" id="app-theme-label">
             Theme
@@ -79,6 +65,20 @@ export const AppShell = ({
             </button>
           </div>
         </div>
+        <div className="app-shell__brand">Screens</div>
+        <nav className="app-shell__nav">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="app-shell__nav-item"
+              aria-current={activeScreen === item.id ? 'true' : undefined}
+              onClick={() => onNavigate(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
       </aside>
       <main className="app-shell__main">{children}</main>
     </div>

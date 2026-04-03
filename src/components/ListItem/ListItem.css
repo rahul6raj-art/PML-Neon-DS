@@ -248,3 +248,105 @@
 .li-item__separator--inset {
   left: 60px;
 }
+
+/* ── Variant: Allocation (portfolio row: dot + name/% · amount + return) ── */
+.li-item--allocation {
+  width: 100%;
+  max-width: 344px;
+  align-items: stretch;
+}
+
+.li-item--allocation-not-first {
+  padding-top: var(--spacing-16);
+}
+
+.li-item--allocation-sep {
+  padding-bottom: var(--spacing-16);
+  border-bottom: 1px solid var(--border-neutral-weak);
+}
+
+.li-item__allocation-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  min-width: 0;
+}
+
+.li-item__allocation-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  min-width: 0;
+  flex: 1;
+}
+
+.li-item__allocation-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.li-item__allocation-dot {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.li-item__allocation-dot--stocks {
+  background: var(--background-positive-strong);
+}
+
+.li-item__allocation-dot--mf {
+  background: var(--colour-blue);
+}
+
+.li-item__allocation-dot--others {
+  background: var(--text-neutral-moderate);
+}
+
+.li-item__allocation-name-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.li-item__allocation-name {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__allocation-pct {
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+  flex-shrink: 0;
+}
+
+.li-item__allocation-value {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__allocation-return {
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-positive-strong);
+}
+
+.li-item__allocation-return--negative {
+  color: var(--text-negative-strong);
+}

@@ -4,4 +4,6 @@ export type {
   ListItemEmphasis,
   ListItemTrailing,
   ListItemValueType,
+  ListItemVariant,
+  ListItemAllocationDot,
 } from './ListItem';

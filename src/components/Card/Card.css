@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════
    Card
+   Default padding: 24px top/bottom, 16px left/right (--card-padding-*)
    ═══════════════════════════════════════════════════ */
 
 .card {
@@ -11,6 +12,7 @@
   overflow: hidden;
   box-sizing: border-box;
   font-family: var(--font-family);
+  padding: var(--card-padding-block) var(--card-padding-inline);
 }
 
 /* ── Stroke variant ─────────────────────────────── */

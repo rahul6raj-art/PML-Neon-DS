@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { Chip } from './Chip';
 import { iconNames } from '../Icon';
 
@@ -24,8 +25,9 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Chip size — affects height, font, and icon size',
+      options: ['extra-small', 'small', 'medium', 'large'],
+      description:
+        'Chip size — extra-small = compact pill (e.g. portfolio time range); smaller than small',
       table: { category: 'Appearance', defaultValue: { summary: 'medium' } },
     },
     label: {
@@ -79,15 +81,26 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /* ── Playground ────────────────────────────────────── */
+const playgroundArgs = {
+  type: 'default' as const,
+  size: 'medium' as const,
+  label: 'Label',
+  showLeadingIcon: false,
+  showTrailingIcon: false,
+  showBadge: false,
+  badgeContent: '3',
+};
+
 export const Playground: Story = {
+  args: { ...playgroundArgs },
+};
+
+/** Same controls as Playground; defaults to `extra-small` (Stock Home time-range style). */
+export const PlaygroundExtraSmall: Story = {
+  name: 'Playground / Extra small',
   args: {
-    type: 'default',
-    size: 'medium',
-    label: 'Label',
-    showLeadingIcon: false,
-    showTrailingIcon: false,
-    showBadge: false,
-    badgeContent: '3',
+    ...playgroundArgs,
+    size: 'extra-small',
   },
 };
 
@@ -112,6 +125,11 @@ export const Disabled: Story = {
 /* ═══════════════════════════════════════════════════
    Size Variants
    ═══════════════════════════════════════════════════ */
+export const SizeExtraSmall: Story = {
+  name: 'Size / Extra small',
+  args: { size: 'extra-small', label: 'Extra small' },
+};
+
 export const SizeSmall: Story = {
   name: 'Size / Small',
   args: { size: 'small', label: 'Small' },
@@ -204,7 +222,7 @@ export const BadgeWithIcons: Story = {
    Type × Size Matrix
    ═══════════════════════════════════════════════════ */
 const TYPES = ['default', 'selected', 'disabled'] as const;
-const SIZES = ['small', 'medium', 'large'] as const;
+const SIZES = ['extra-small', 'small', 'medium', 'large'] as const;
 
 export const TypeSizeMatrix: Story = {
   name: 'Matrix / Type × Size',
@@ -319,10 +337,43 @@ export const RemovableChips: Story = {
 export const SizeComparison: Story = {
   name: 'Usage / Size Comparison',
   render: () => (
-    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Chip size="extra-small" showLeadingIcon leadingIcon="star_filled" showBadge badgeContent="3" label="XS" />
       <Chip size="small" showLeadingIcon leadingIcon="star_filled" showBadge badgeContent="3" label="Small" />
       <Chip size="medium" showLeadingIcon leadingIcon="star_filled" showBadge badgeContent="3" label="Medium" />
       <Chip size="large" showLeadingIcon leadingIcon="star_filled" showBadge badgeContent="3" label="Large" />
     </div>
   ),
+};
+
+const TIME_RANGES = ['1D', '1W', '1M', '6M', '1Y', 'All'];
+
+export const TimeRangeRow: Story = {
+  name: 'Usage / Time range (extra small)',
+  render: function TimeRangeRowRender() {
+    const [active, setActive] = useState(0);
+    return (
+      <div
+        style={{
+          width: 376,
+          boxSizing: 'border-box',
+          padding: '0 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 0,
+        }}
+      >
+        {TIME_RANGES.map((r, i) => (
+          <Chip
+            key={r}
+            label={r}
+            size="extra-small"
+            type={active === i ? 'selected' : 'default'}
+            onPress={() => setActive(i)}
+          />
+        ))}
+      </div>
+    );
+  },
 };

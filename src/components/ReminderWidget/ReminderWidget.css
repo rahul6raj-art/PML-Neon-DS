@@ -27,12 +27,28 @@
   padding: 0 var(--spacing-16);
 }
 
+/*
+ * Carousel: overflow-x on a flex row often ignores horizontal padding in some engines,
+ * so the first/last cards can sit flush to the screen. Use flex spacers that scroll
+ * with the content instead of padding-inline, plus scroll-padding for snap.
+ */
 .rw--carousel .rw__cards {
   gap: var(--spacing-12);
+  padding-inline: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--spacing-16);
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.rw--carousel .rw__cards::before,
+.rw--carousel .rw__cards::after {
+  content: '';
+  flex-shrink: 0;
+  width: var(--spacing-16);
+  align-self: stretch;
+  min-height: 1px;
 }
 
 .rw--carousel .rw__cards::-webkit-scrollbar {
@@ -62,7 +78,7 @@
 /* ── ListItem overrides inside card ────────────────── */
 .rw__list-item.li-item {
   width: 100%;
-  padding: var(--spacing-12) var(--spacing-12) 0;
+  padding: var(--spacing-12) 0 0;
   box-sizing: border-box;
 }
 
@@ -75,7 +91,7 @@
 .rw__divider {
   height: 1px;
   background: var(--border-neutral-weak);
-  margin: var(--spacing-12) var(--spacing-12) 0;
+  margin: var(--spacing-12) 0 0;
 }
 
 /* ── CTA footer ────────────────────────────────────── */
@@ -83,7 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-12);
+  padding: var(--spacing-12) 0 0;
 }
 
 .rw__cta-text {

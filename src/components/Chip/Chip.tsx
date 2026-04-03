@@ -3,7 +3,8 @@ import { Icon } from '../Icon';
 import './Chip.css';
 
 export type ChipType = 'default' | 'selected' | 'disabled';
-export type ChipSize = 'small' | 'medium' | 'large';
+/** `extra-small` — compact pill (e.g. portfolio time-range); smaller than `small`. */
+export type ChipSize = 'extra-small' | 'small' | 'medium' | 'large';
 
 export interface ChipProps extends Omit<HTMLAttributes<HTMLDivElement>, 'type'> {
   /** Visual type / state */
@@ -29,6 +30,7 @@ export interface ChipProps extends Omit<HTMLAttributes<HTMLDivElement>, 'type'> 
 }
 
 const ICON_SIZES: Record<ChipSize, number> = {
+  'extra-small': 16,
   small: 20,
   medium: 20,
   large: 24,

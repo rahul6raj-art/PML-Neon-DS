@@ -39,6 +39,10 @@
   --spacing-56: var(--unit-12); /* 56px — Section gaps */
   --spacing-60: var(--unit-13); /* 60px */
 
+  /* Card container — default padding for all cards (vertical / horizontal) */
+  --card-padding-block: var(--spacing-24);
+  --card-padding-inline: var(--spacing-16);
+
   /* ═══════════════════════════════════════════════════════
      SEMANTIC TOKENS — Radius
      Use these in components for border-radius.

@@ -34,6 +34,25 @@
   box-shadow: 0 0 0 2px var(--text-universal-light), 0 0 0 4px var(--border-primary-strong);
 }
 
+/* ── Size: Extra small (time-range, dense filters) ─── */
+.chip--extra-small {
+  height: 30px;
+  min-height: 30px;
+  padding: 5px 14px;
+  gap: 4px;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.chip--extra-small .chip__badge {
+  min-width: 14px;
+  min-height: 14px;
+  width: auto;
+  padding: 1px 4px;
+  font-size: 10px;
+  line-height: 12px;
+}
+
 /* ── Size: Small ──────────────────────────────────── */
 .chip--small {
   height: 32px;
