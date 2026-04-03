@@ -1,0 +1,79 @@
+/* ═══════════════════════════════════════════════════
+   Graph Widget — multi-layer blur glow line (StockPortfolio-style)
+   ═══════════════════════════════════════════════════ */
+
+.gw {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gw *,
+.gw *::before,
+.gw *::after {
+  box-sizing: border-box;
+}
+
+.gw__svg {
+  display: block;
+  width: 100%;
+  /* height comes from the SVG element attribute (matches viewBox aspect) */
+}
+
+/* Slight GPU hint for blurred paths */
+.gw__blur-path {
+  transform: translateZ(0);
+}
+
+.gw__line {
+  transform: translateZ(0);
+}
+
+/* Endpoint — HTML overlay so it doesn’t stretch with preserveAspectRatio */
+.gw__endpoint {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gw__indicator-pulse {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: gw-pulse 2s ease-in-out infinite;
+}
+
+.gw__indicator-mid {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.65;
+}
+
+.gw__indicator-dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+@keyframes gw-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.2;
+  }
+}
