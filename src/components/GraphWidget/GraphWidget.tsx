@@ -7,7 +7,11 @@ const DEFAULT_VIEW_H = 116;
 const DEFAULT_INDICATOR_X = 308;
 
 export interface GraphWidgetProps {
-  /** SVG `d` for the chart polyline / curve (viewBox 0 0 346 116 unless overridden). */
+  /**
+   * SVG `d` for the chart polyline / curve (viewBox 0 0 346 116 unless overridden).
+   * The path should **end at the ripple** — last point at
+   * `(indicatorXRatio × viewBoxWidth, indicatorY)` so the stroke meets the endpoint indicator.
+   */
   svgPath: string;
   /** Green / teal gradients vs orange–red. */
   isPositive: boolean;
@@ -26,6 +30,12 @@ export interface GraphWidgetProps {
   'aria-label'?: string;
   /** Optional key on the wrapper to remount when series changes (e.g. time period). */
   chartKey?: string;
+  /** Multi-layer blur + horizontal gradient on the stroke. If false, a single solid line (`--gw-line-3`). Default true. */
+  showGradient?: boolean;
+  /** Outer animated pulse ring at the endpoint. Default true. */
+  showRipple?: boolean;
+  /** Inner ring + center dot at the endpoint. Default true. */
+  showDot?: boolean;
 }
 
 /**
@@ -43,6 +53,9 @@ export const GraphWidget = ({
   indicatorXRatio = DEFAULT_INDICATOR_X / DEFAULT_VIEW_W,
   'aria-label': ariaLabel = 'Performance chart',
   chartKey,
+  showGradient = true,
+  showRipple = true,
+  showDot = true,
 }: GraphWidgetProps) => {
   const uid = useId().replace(/:/g, '');
   const lineGradPos = `gw-line-pos-${uid}`;
@@ -54,11 +67,16 @@ export const GraphWidget = ({
   const filterSharp = `gw-glow-sharp-${uid}`;
 
   const pos = isPositive;
-  const lineStroke = pos ? `url(#${lineGradPos})` : `url(#${lineGradNeg})`;
+  const lineStroke = showGradient
+    ? pos
+      ? `url(#${lineGradPos})`
+      : `url(#${lineGradNeg})`
+    : 'var(--gw-line-3)';
   const glowStroke = pos ? `url(#${glowGradPos})` : `url(#${glowGradNeg})`;
-  const dotColor = pos ? '#47FF8E' : '#FF3B3B';
 
-  const rootCls = ['gw', className].filter(Boolean).join(' ');
+  const rootCls = ['gw', pos ? 'gw--positive' : 'gw--negative', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={rootCls} key={chartKey}>
@@ -73,94 +91,126 @@ export const GraphWidget = ({
         aria-label={ariaLabel}
       >
         <defs>
-          <linearGradient id={lineGradPos} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#2CB1FE" />
-            <stop offset="40%" stopColor="#3DD4A0" />
-            <stop offset="100%" stopColor="#47FF8E" />
-          </linearGradient>
-          <linearGradient id={lineGradNeg} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF8D28" />
-            <stop offset="50%" stopColor="#FF5533" />
-            <stop offset="100%" stopColor="#FF0000" />
-          </linearGradient>
-          <linearGradient id={glowGradPos} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#1a3a7a" stopOpacity={0.6} />
-            <stop offset="35%" stopColor="#0a5a6a" stopOpacity={0.7} />
-            <stop offset="70%" stopColor="#0a6a4a" stopOpacity={0.8} />
-            <stop offset="100%" stopColor="#1a7a4a" stopOpacity={0.9} />
-          </linearGradient>
-          <linearGradient id={glowGradNeg} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#7a3a1a" stopOpacity={0.6} />
-            <stop offset="50%" stopColor="#6a2a1a" stopOpacity={0.7} />
-            <stop offset="100%" stopColor="#5a1a1a" stopOpacity={0.9} />
-          </linearGradient>
-          <filter id={filterWide} x="-150%" y="-500%" width="400%" height="1100%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="60" />
-          </filter>
-          <filter id={filterMedium} x="-120%" y="-400%" width="340%" height="900%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="38" />
-          </filter>
-          <filter id={filterSharp} x="-80%" y="-250%" width="260%" height="600%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="16" />
-          </filter>
+          {showGradient &&
+            (pos ? (
+              <>
+                <linearGradient id={lineGradPos} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--gw-line-1)" />
+                  <stop offset="40%" stopColor="var(--gw-line-2)" />
+                  <stop offset="100%" stopColor="var(--gw-line-3)" />
+                </linearGradient>
+                <linearGradient id={glowGradPos} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--gw-glow-1)" stopOpacity={0.6} />
+                  <stop offset="35%" stopColor="var(--gw-glow-2)" stopOpacity={0.7} />
+                  <stop offset="70%" stopColor="var(--gw-glow-3)" stopOpacity={0.8} />
+                  <stop offset="100%" stopColor="var(--gw-glow-4)" stopOpacity={0.9} />
+                </linearGradient>
+              </>
+            ) : (
+              <>
+                <linearGradient id={lineGradNeg} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--gw-line-1)" />
+                  <stop offset="50%" stopColor="var(--gw-line-2)" />
+                  <stop offset="100%" stopColor="var(--gw-line-3)" />
+                </linearGradient>
+                <linearGradient id={glowGradNeg} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--gw-glow-1)" stopOpacity={0.6} />
+                  <stop offset="50%" stopColor="var(--gw-glow-2)" stopOpacity={0.7} />
+                  <stop offset="100%" stopColor="var(--gw-glow-3)" stopOpacity={0.9} />
+                </linearGradient>
+              </>
+            ))}
+          {showGradient && (
+            <>
+              <filter id={filterWide} x="-150%" y="-500%" width="400%" height="1100%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="60" />
+              </filter>
+              <filter id={filterMedium} x="-120%" y="-400%" width="340%" height="900%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="38" />
+              </filter>
+              <filter id={filterSharp} x="-80%" y="-250%" width="260%" height="600%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="16" />
+              </filter>
+            </>
+          )}
         </defs>
 
-        <path
-          d={svgPath}
-          stroke={glowStroke}
-          strokeWidth="120"
-          fill="none"
-          filter={`url(#${filterWide})`}
-          opacity={0.07}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="gw__blur-path"
-        />
+        {showGradient ? (
+          <>
+            <path
+              d={svgPath}
+              stroke={glowStroke}
+              strokeWidth="120"
+              fill="none"
+              filter={`url(#${filterWide})`}
+              opacity={0.07}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="gw__blur-path"
+            />
 
-        <path
-          d={svgPath}
-          stroke={lineStroke}
-          strokeWidth="80"
-          fill="none"
-          filter={`url(#${filterMedium})`}
-          opacity={0.06}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+            <path
+              d={svgPath}
+              stroke={lineStroke}
+              strokeWidth="80"
+              fill="none"
+              filter={`url(#${filterMedium})`}
+              opacity={0.06}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
 
-        <path
-          d={svgPath}
-          stroke={lineStroke}
-          strokeWidth="30"
-          fill="none"
-          filter={`url(#${filterSharp})`}
-          opacity={0.1}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+            <path
+              d={svgPath}
+              stroke={lineStroke}
+              strokeWidth="30"
+              fill="none"
+              filter={`url(#${filterSharp})`}
+              opacity={0.1}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
 
-        <path
-          d={svgPath}
-          stroke={lineStroke}
-          strokeWidth="1.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="gw__line"
-        />
+            <path
+              d={svgPath}
+              stroke={lineStroke}
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="gw__line"
+            />
+          </>
+        ) : (
+          <path
+            d={svgPath}
+            stroke={lineStroke}
+            strokeWidth="1.5"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="gw__line"
+          />
+        )}
       </svg>
 
-      <div
-        className="gw__endpoint"
-        style={{
-          left: `${indicatorXRatio * 100}%`,
-          top: `${(indicatorY / viewBoxHeight) * 100}%`,
-        }}
-      >
-        <span className="gw__indicator-pulse" style={{ backgroundColor: dotColor }} />
-        <span className="gw__indicator-mid" style={{ backgroundColor: dotColor }} />
-        <span className="gw__indicator-dot" style={{ backgroundColor: dotColor }} />
-      </div>
+      {(showRipple || showDot) && (
+        <div
+          className="gw__endpoint"
+          style={{
+            left: `${indicatorXRatio * 100}%`,
+            top: `${(indicatorY / viewBoxHeight) * 100}%`,
+          }}
+        >
+          {showRipple && <span className="gw__indicator-pulse" />}
+          {showDot && (
+            <>
+              <span className="gw__indicator-mid" />
+              <span className="gw__indicator-dot" />
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };

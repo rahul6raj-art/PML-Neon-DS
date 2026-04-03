@@ -51,7 +51,7 @@ const IntroductionPage = () => (
       </thead>
       <tbody>
         <tr style={{ borderBottom: '1px solid var(--border-neutral-weak)' }}>
-          <td style={{ padding: '8px 12px', fontWeight: 500 }}>Reminder Widget</td>
+          <td style={{ padding: '8px 12px', fontWeight: 500 }}>Reminder</td>
           <td style={{ padding: '8px 12px', color: 'var(--text-neutral-moderate)' }}>Stock reminder cards with single and carousel layouts</td>
         </tr>
       </tbody>

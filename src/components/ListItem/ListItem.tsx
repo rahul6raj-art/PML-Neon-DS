@@ -9,27 +9,9 @@ import './ListItem.css';
 export type ListItemEmphasis = 'high' | 'low';
 export type ListItemTrailing = 'none' | 'icon' | 'text' | 'link' | 'button';
 export type ListItemValueType = 'positive' | 'negative';
-/** `allocation` = portfolio allocation row (dot + name / % · amount + return), as on Stock Home. */
-export type ListItemVariant = 'default' | 'allocation';
-export type ListItemAllocationDot = 'stocks' | 'mf' | 'others';
 
 export interface ListItemProps {
-  /** Layout variant; `allocation` uses a dedicated row (see allocation* props). */
-  variant?: ListItemVariant;
   emphasis?: ListItemEmphasis;
-
-  /* ── Allocation variant (variant="allocation") ─── */
-  /** Dot color token (matches allocation bar segments). */
-  allocationDot?: ListItemAllocationDot;
-  allocationName?: string;
-  /** Numeric percent for display (e.g. 55 → "55%"). */
-  allocationPercent?: number;
-  allocationAmount?: string;
-  allocationReturn?: string;
-  /** When true, return uses negative (red) styling. */
-  allocationReturnNegative?: boolean;
-  /** When true, adds top spacing (not first row in a list). */
-  allocationNotFirst?: boolean;
 
   /* ── Leading (Avatar) ────────────────────────── */
   showLeading?: boolean;
@@ -143,63 +125,7 @@ export const ListItem = ({
   showSeparator = true,
   onClick,
   className,
-
-  variant = 'default',
-  allocationDot = 'stocks',
-  allocationName = 'Stocks',
-  allocationPercent = 55,
-  allocationAmount = '₹8,00,694',
-  allocationReturn = '+10.70%',
-  allocationReturnNegative = false,
-  allocationNotFirst = false,
 }: ListItemProps) => {
-  if (variant === 'allocation') {
-    const allocationWrapperCls = [
-      'li-item',
-      'li-item--allocation',
-      allocationNotFirst && 'li-item--allocation-not-first',
-      showSeparator && 'li-item--allocation-sep',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    const dotCls = [
-      'li-item__allocation-dot',
-      `li-item__allocation-dot--${allocationDot}`,
-    ].join(' ');
-
-    const returnCls = [
-      'li-item__allocation-return',
-      allocationReturnNegative && 'li-item__allocation-return--negative',
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    return (
-      <div
-        className={allocationWrapperCls}
-        onClick={onClick}
-        role={onClick ? 'button' : undefined}
-        tabIndex={onClick ? 0 : undefined}
-      >
-        <div className="li-item__allocation-top">
-          <div className="li-item__allocation-left">
-            <div className={dotCls} aria-hidden="true" />
-            <div className="li-item__allocation-name-group">
-              <span className="li-item__allocation-name">{allocationName}</span>
-              <span className="li-item__allocation-pct">{allocationPercent}%</span>
-            </div>
-          </div>
-          <div className="li-item__allocation-right">
-            <span className="li-item__allocation-value">{allocationAmount}</span>
-            <span className={returnCls}>{allocationReturn}</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const wrapperCls = [
     'li-item',
     `li-item--${emphasis}`,

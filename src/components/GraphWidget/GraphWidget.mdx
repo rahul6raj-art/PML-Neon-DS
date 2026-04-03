@@ -1,0 +1,38 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as GraphWidgetStories from './GraphWidget.stories';
+
+<Meta of={GraphWidgetStories} />
+
+<Title>Graph</Title>
+
+<Description of={GraphWidgetStories} />
+
+## Playground
+
+Use **Positive return** to switch between gain (teal / green gradients) and loss (orange / red) styling. Demo paths and indicator position update automatically.
+
+**Appearance** controls:
+
+- **Gradient + glow** — Full gradient stroke + multi-layer blur; off = a single solid line using the accent stop token (`--gw-line-3`).
+- **Ripple (pulse)** — Outer animated pulse ring.
+- **Dot (inner ring + center)** — Inner ring and center dot.
+
+<Canvas of={GraphWidgetStories.Playground} />
+
+<Controls of={GraphWidgetStories.Playground} />
+
+## Behaviour
+
+- **SVG line** — Multi-layer blurred glow plus a 1.5px stroke; gradients and endpoint colors use **design tokens** (`colors.css`) and respect light/dark theme. Optional toggles turn off glow, ripple, or dot for minimal variants.
+- **`svgPath`** — Must end at the ripple: last point at `(indicatorXRatio × viewBoxWidth, indicatorY)` so the line meets the pulse/dot.
+- **Endpoint** — Rendered in HTML so it does not stretch when the SVG uses `preserveAspectRatio="none"`.
+
+## Fixed demos
+
+**Positive** and **Negative** stories use fixed paths for visual comparison (same geometry as the playground demos).

@@ -30,7 +30,6 @@ export interface BottomNavProps {
 const DEFAULT_ITEMS: BottomNavItem[] = [
   { icon: 'home_outline', label: 'Home' },
   { icon: 'chart', label: 'Stocks' },
-  { icon: 'copy_outline', label: 'F&O' },
   { icon: 'handbag_outline', label: 'MF' },
   { icon: 'rupee', label: 'All' },
 ];
@@ -90,3 +89,5 @@ export const BottomNav = ({
     </div>
   );
 };
+
+BottomNav.displayName = 'BottomNav';

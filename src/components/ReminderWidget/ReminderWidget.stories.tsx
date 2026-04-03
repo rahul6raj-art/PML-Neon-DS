@@ -181,7 +181,7 @@ function cardArgs(n: number) {
 
 /* ─── Meta ────────────────────────────────────────────── */
 const meta: Meta<FlatArgs> = {
-  title: 'Widgets/Reminder Widget',
+  title: 'Widgets/Reminder',
   component: ReminderWidget,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

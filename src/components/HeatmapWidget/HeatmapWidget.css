@@ -1,0 +1,294 @@
+/* ═══════════════════════════════════════════════════
+   Heatmap Widget — PML DS26 (Figma 2248:11281)
+   ═══════════════════════════════════════════════════ */
+
+.hmw {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-self: flex-start;
+  gap: var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  /* Don’t clip vertically — WheelCarousel scales tabs; overflow:hidden caused flicker */
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.hmw *,
+.hmw *::before,
+.hmw *::after {
+  box-sizing: border-box;
+}
+
+/* ── Header: SectionHeader + Wheel Carousel (one row) ─
+   flex-shrink: 0 keeps this row pinned when strip / cards grow taller. */
+.hmw__header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: 0 var(--spacing-16);
+}
+
+.hmw__section-header-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.hmw__section-header-wrap[role='button'] {
+  cursor: pointer;
+}
+
+.hmw__section-header-wrap[role='button']:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}
+
+/* Padding comes from .hmw__header; avoid doubling SectionHeader gutters */
+.hmw__section-header.sh {
+  padding: 0;
+  width: 100%;
+}
+
+.hmw__wheel {
+  flex-shrink: 0;
+  width: var(--wheel-carousel-pill-max-width);
+  max-width: var(--wheel-carousel-pill-max-width);
+  overflow: visible;
+  min-height: var(--wheel-carousel-pill-height);
+}
+
+/* ── Horizontal sector strip (carousel inset) ───────
+   align-items: stretch → all cards share the same height (tallest row). */
+.hmw__strip {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: var(--spacing-12);
+  width: 100%;
+  padding-inline: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--spacing-16);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hmw__strip::before,
+.hmw__strip::after {
+  content: '';
+  flex-shrink: 0;
+  width: var(--spacing-16);
+  align-self: stretch;
+  min-height: 1px;
+}
+
+.hmw__strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Sector card (Technology, Banking & Finance — 324px Figma) ─ */
+.hmw__card {
+  flex: 0 0 var(--heatmap-sector-card-width);
+  width: var(--heatmap-sector-card-width);
+  min-width: var(--heatmap-sector-card-width);
+  max-width: var(--heatmap-sector-card-width);
+  scroll-snap-align: start;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding-top: var(--spacing-16);
+  border-radius: var(--radius-16);
+  background: var(--surface-level-1);
+}
+
+.hmw__card-head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: 0 var(--spacing-16);
+}
+
+.hmw__card-title {
+  flex: 1;
+  min-width: 0;
+  color: var(--text-neutral-strong);
+}
+
+.hmw__card-meta {
+  flex-shrink: 0;
+  text-align: right;
+  color: var(--text-neutral-medium);
+}
+
+/* ── Mosaic grid ────────────────────────────────────
+   Fills remaining card height so all cards keep one consistent strip height. */
+.hmw__mosaic {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: var(--heatmap-mosaic-min-height);
+  padding: 0 var(--unit-1) var(--unit-1);
+  gap: var(--unit-1);
+  align-items: stretch;
+}
+
+/* Index / F&O wheel — more vertical room than Stocks */
+.hmw--mosaic-tall .hmw__mosaic {
+  min-height: var(--heatmap-mosaic-min-height-tall);
+}
+
+.hmw__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--unit-1);
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  align-self: stretch;
+}
+
+/* Tech row: 112 : 112 : 92 (Figma proportions, flex to fit card width) */
+.hmw__mosaic--tech4 > .hmw__cell:not(.hmw__stack) {
+  flex: 112 1 0;
+  min-width: 0;
+}
+
+.hmw__mosaic--tech4 > .hmw__stack--narrow {
+  flex: 92 1 0;
+  min-width: 0;
+}
+
+/* Banking row: 112 : 102 : 102 */
+.hmw__mosaic--bank5 > .hmw__cell:not(.hmw__stack) {
+  flex: 112 1 0;
+  min-width: 0;
+}
+
+.hmw__mosaic--bank5 .hmw__stack--bank-mid {
+  flex: 102 1 0;
+  min-width: 0;
+}
+
+/* ── Cells ──────────────────────────────────────────
+   Stretch with row / stack so mosaic height stays even across cards. */
+.hmw__mosaic > .hmw__cell:not(.hmw__stack) {
+  align-self: stretch;
+}
+
+.hmw__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-height: var(--heatmap-cell-min-height);
+  padding: var(--spacing-24) var(--spacing-8);
+}
+
+.hmw__stack .hmw__cell--compact {
+  flex: 1 1 0;
+  min-height: var(--heatmap-cell-compact-min-height);
+}
+
+.hmw__cell--compact {
+  min-height: var(--heatmap-cell-compact-min-height);
+  padding: var(--spacing-8);
+}
+
+.hmw--mosaic-tall .hmw__cell {
+  min-height: var(--heatmap-cell-min-height-tall);
+}
+
+.hmw--mosaic-tall .hmw__cell--compact,
+.hmw--mosaic-tall .hmw__stack .hmw__cell--compact {
+  min-height: var(--heatmap-cell-compact-min-height-tall);
+}
+
+.hmw__cell-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  max-width: 111px;
+  text-align: center;
+}
+
+.hmw__cell--compact .hmw__cell-inner {
+  max-width: 69px;
+  gap: var(--spacing-4);
+}
+
+.hmw__cell-name {
+  color: var(--text-universal-dark);
+}
+
+.hmw__cell-change {
+  color: var(--text-universal-dark);
+}
+
+.hmw__cell-change--compact {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+}
+
+.hmw__cell--lime-strong {
+  background: var(--colour-lime-green-strong);
+}
+
+.hmw__cell--lime-medium {
+  background: var(--colour-lime-green-medium);
+}
+
+.hmw__cell--red-medium {
+  background: var(--colour-red-medium);
+}
+
+.hmw__cell--red-strong {
+  background: var(--colour-red-strong);
+}
+
+/* ── Per-cell radii (Figma) ────────────────────────── */
+.hmw__cell-r--tech-a {
+  border-radius: var(--radius-16) var(--radius-4) var(--radius-4) var(--radius-16);
+}
+
+.hmw__cell-r--tech-b {
+  border-radius: var(--radius-4);
+}
+
+.hmw__cell-r--tech-c {
+  border-radius: var(--radius-4) var(--radius-16) var(--radius-4) var(--radius-4);
+}
+
+.hmw__cell-r--tech-d {
+  border-radius: var(--radius-4) var(--radius-4) var(--radius-16) var(--radius-4);
+}
+
+.hmw__cell-r--bank-a {
+  border-radius: var(--radius-16) var(--radius-4) var(--radius-4) var(--radius-16);
+}
+
+.hmw__cell-r--bank-b,
+.hmw__cell-r--bank-c {
+  border-radius: var(--radius-4);
+}
+
+.hmw__cell-r--bank-d {
+  border-radius: var(--radius-4) var(--radius-16) var(--radius-4) var(--radius-4);
+}
+
+.hmw__cell-r--bank-e {
+  border-radius: var(--radius-4) var(--radius-4) var(--radius-16) var(--radius-4);
+}

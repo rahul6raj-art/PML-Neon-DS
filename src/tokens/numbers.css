@@ -43,6 +43,16 @@
   --card-padding-block: var(--spacing-24);
   --card-padding-inline: var(--spacing-16);
 
+  /* HeatmapWidget — sector cards (Figma PML DS26, horizontal strip) */
+  --heatmap-sector-card-width: 324px;
+  --heatmap-mosaic-min-height: 100px;
+  --heatmap-cell-min-height: 100px;
+  --heatmap-cell-compact-min-height: 49px;
+  /* Index / F&O wheels — taller mosaic for index names & contract symbols */
+  --heatmap-mosaic-min-height-tall: 132px;
+  --heatmap-cell-min-height-tall: 124px;
+  --heatmap-cell-compact-min-height-tall: 58px;
+
   /* ═══════════════════════════════════════════════════════
      SEMANTIC TOKENS — Radius
      Use these in components for border-radius.
@@ -54,4 +64,23 @@
   --radius-16: var(--unit-7);    /* 16px */
   --radius-24: var(--unit-9);    /* 24px — Card Default */
   --radius-full: var(--unit-max); /* 200px — Fully Rounded */
+  /* 40px — Pill controls (Wheel Carousel, segmented pills) */
+  --radius-pill-40: calc(var(--spacing-32) + var(--spacing-8));
+
+  /* ═══════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Wheel Carousel (PML DS26 · Figma 2242:9981)
+     ═══════════════════════════════════════════════════════ */
+
+  --wheel-carousel-pill-height: 44px;
+  --wheel-carousel-pill-max-width: 190px;
+  --wheel-carousel-pill-radius: var(--radius-pill-40);
+  /* One tab column: label max width (42px) */
+  --wheel-carousel-label-column: calc(var(--spacing-32) + var(--spacing-8) + var(--spacing-2));
+  --wheel-carousel-tab-gap: calc(var(--spacing-12) + var(--spacing-8));
+  --wheel-carousel-tab-width: calc(var(--wheel-carousel-label-column) + var(--wheel-carousel-tab-gap));
+  --wheel-carousel-divider-height: 22px;
+  --wheel-carousel-divider-width: 0.5px;
+  /* Horizontal mask fade (pill edge) — gradient stop positions */
+  --wheel-carousel-mask-fade-in: 10%;
+  --wheel-carousel-mask-fade-out: 90%;
 }

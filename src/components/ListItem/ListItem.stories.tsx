@@ -4,8 +4,6 @@ import type {
   ListItemEmphasis,
   ListItemTrailing,
   ListItemValueType,
-  ListItemVariant,
-  ListItemAllocationDot,
 } from './ListItem';
 import type { AvatarType, AvatarSize, AvatarIcon } from '../Avatar';
 import type { ButtonType, ButtonSize } from '../Button';
@@ -40,51 +38,6 @@ const meta: Meta<typeof ListItem> = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'inline-radio',
-      options: ['default', 'allocation'] as ListItemVariant[],
-      description: 'default = avatar row; allocation = portfolio allocation row (dot + name / % · amount + return)',
-      table: { defaultValue: { summary: 'default' }, category: 'Variant' },
-    },
-    allocationDot: {
-      control: 'inline-radio',
-      options: ['stocks', 'mf', 'others'] as ListItemAllocationDot[],
-      description: 'Dot color (allocation variant)',
-      table: { defaultValue: { summary: 'stocks' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationName: {
-      control: 'text',
-      table: { defaultValue: { summary: 'Stocks' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationPercent: {
-      control: 'number',
-      table: { defaultValue: { summary: '55' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationAmount: {
-      control: 'text',
-      table: { defaultValue: { summary: '₹8,00,694' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationReturn: {
-      control: 'text',
-      table: { defaultValue: { summary: '+10.70%' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationReturnNegative: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-    allocationNotFirst: {
-      control: 'boolean',
-      description: 'Top spacing when not the first row in a list',
-      table: { defaultValue: { summary: 'false' }, category: 'Allocation' },
-      if: { arg: 'variant', eq: 'allocation' },
-    },
-
     /* ══ Variant ════════════════════════════════════ */
     showLeading: {
       control: 'boolean',
@@ -345,15 +298,6 @@ const meta: Meta<typeof ListItem> = {
     },
   },
   args: {
-    variant: 'default' as ListItemVariant,
-    allocationDot: 'stocks' as ListItemAllocationDot,
-    allocationName: 'Stocks',
-    allocationPercent: 55,
-    allocationAmount: '₹8,00,694',
-    allocationReturn: '+10.70%',
-    allocationReturnNegative: false,
-    allocationNotFirst: false,
-
     /* Variant */
     showLeading: true,
     showPrimaryIcon: false,
@@ -562,70 +506,5 @@ function ListRender() {
 
 export const ListExample: Story = {
   render: ListRender,
-  parameters: { controls: { disable: true } },
-};
-
-export const Allocation: Story = {
-  name: 'Variant · Allocation',
-  args: {
-    variant: 'allocation',
-    allocationDot: 'stocks',
-    allocationName: 'Stocks',
-    allocationPercent: 55,
-    allocationAmount: '₹8,00,694',
-    allocationReturn: '+10.70%',
-    allocationReturnNegative: false,
-    allocationNotFirst: false,
-    showSeparator: true,
-  },
-};
-
-function AllocationListRender() {
-  return (
-    <div
-      style={{
-        width: 312,
-        boxSizing: 'border-box',
-        background: 'var(--surface-level-1)',
-        borderRadius: 'var(--radius-16)',
-        padding: 'var(--card-padding-block) var(--card-padding-inline)',
-      }}
-    >
-      <ListItem
-        variant="allocation"
-        allocationDot="stocks"
-        allocationName="Stocks"
-        allocationPercent={55}
-        allocationAmount="₹8,00,694"
-        allocationReturn="+10.70%"
-        showSeparator
-      />
-      <ListItem
-        variant="allocation"
-        allocationDot="mf"
-        allocationName="MF"
-        allocationPercent={30}
-        allocationAmount="₹72,597"
-        allocationReturn="+8.85%"
-        allocationNotFirst
-        showSeparator
-      />
-      <ListItem
-        variant="allocation"
-        allocationDot="others"
-        allocationName="Others"
-        allocationPercent={15}
-        allocationAmount="₹40,000"
-        allocationReturn="+1.53%"
-        allocationNotFirst
-        showSeparator={false}
-      />
-    </div>
-  );
-}
-
-export const AllocationList: Story = {
-  name: 'Variant · Allocation (list)',
-  render: AllocationListRender,
   parameters: { controls: { disable: true } },
 };

@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════════════════════
+   Wheel Carousel — PML DS26 (Figma 2242:9981)
+   Scroll-driven scale/opacity (wheel-scroll pattern); snap when idle;
+   spacers center first/last; active = Body Medium; sides = gradient.
+   ═══════════════════════════════════════════════════════════ */
+
+.wheel-carousel {
+  width: 100%;
+  max-width: var(--wheel-carousel-pill-max-width);
+  margin-inline: auto;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+.wheel-carousel *,
+.wheel-carousel *::before,
+.wheel-carousel *::after {
+  box-sizing: border-box;
+}
+
+/* Pill shell — border must NOT use mask (mask fades border alpha at the sides). */
+.wheel-carousel__pill {
+  display: flex;
+  align-items: center;
+  height: var(--wheel-carousel-pill-height);
+  max-width: var(--wheel-carousel-pill-max-width);
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--border-neutral-medium);
+  border-radius: var(--wheel-carousel-pill-radius);
+  background: var(--surface-level-1);
+  overflow: hidden;
+}
+
+.wheel-carousel__scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  width: 100%;
+  min-height: 20px;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  /* Edge fade on labels only — keeps pill border fully opaque */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--wheel-carousel-mask-fade-in),
+    #000 var(--wheel-carousel-mask-fade-out),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--wheel-carousel-mask-fade-in),
+    #000 var(--wheel-carousel-mask-fade-out),
+    transparent 100%
+  );
+}
+
+.wheel-carousel__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.wheel-carousel__scroll:active {
+  cursor: grabbing;
+}
+
+/* Snap only when not dragging (pointer) */
+.wheel-carousel__scroll--snap {
+  scroll-snap-type: x mandatory;
+}
+
+/* Center first/last tabs in the viewport */
+.wheel-carousel__spacer {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: calc(50% - var(--wheel-carousel-tab-width) / 2);
+}
+
+.wheel-carousel__item-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--wheel-carousel-tab-width);
+  width: var(--wheel-carousel-tab-width);
+  height: 100%;
+  scroll-snap-align: center;
+  contain: layout style paint;
+}
+
+.wheel-carousel__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.wheel-carousel__item:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-4);
+}
+
+.wheel-carousel__label {
+  display: block;
+  max-width: var(--wheel-carousel-label-column);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Default / side — Subtext + gradient until active class overrides */
+.wheel-carousel__item .wheel-carousel__label {
+  width: var(--wheel-carousel-label-column);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  font-weight: var(--font-weight-regular);
+}
+
+.wheel-carousel__item--left .wheel-carousel__label {
+  background: linear-gradient(
+    90deg,
+    var(--text-neutral-medium) 0%,
+    var(--background-neutral-weak) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.wheel-carousel__item--right .wheel-carousel__label {
+  background: linear-gradient(
+    90deg,
+    var(--background-neutral-weak) 0%,
+    var(--text-neutral-medium) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Active — Body Medium 14/20 */
+.wheel-carousel__item--active .wheel-carousel__label {
+  max-width: none;
+  width: auto;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-neutral-strong);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentcolor;
+}
+
+@supports not (background-clip: text) {
+  .wheel-carousel__item--left .wheel-carousel__label,
+  .wheel-carousel__item--right .wheel-carousel__label {
+    color: var(--text-neutral-medium);
+    background: none;
+  }
+}
+
+/* Divider between tabs */
+.wheel-carousel__divider {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--wheel-carousel-divider-width);
+  height: var(--wheel-carousel-divider-height);
+  background: var(--border-neutral-medium);
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out;
+}
+
+.wheel-carousel__divider--strong {
+  opacity: 1;
+  background: var(--text-neutral-strong);
+}

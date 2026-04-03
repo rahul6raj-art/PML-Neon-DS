@@ -16,7 +16,7 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 ## Tokens (no one-off magic numbers)
 
 - **Spacing:** `--spacing-*` from `src/tokens/numbers.css` (e.g. section gaps `--spacing-56`, common gutters `--spacing-16`, `--spacing-32`).
-- **Cards:** default padding is **`--card-padding-block`** (24px) × **`--card-padding-inline`** (16px) — use `Card` and/or these variables; do not invent new card insets per screen.
+- **Cards:** default padding is **`--card-padding-block`** (24px) × **`--card-padding-inline`** (16px) — use `Card` and/or these variables; do not invent new card insets per screen. **Cards do not use an outer border by default** — use plain `<Card>` (no `stroke` prop) unless a screen or design explicitly calls for a stroked/outline card.
 - **Colors/type:** semantic tokens (`--surface-*`, `--text-*`, `--border-*`, `--font-weight-*`, etc.) from existing CSS variables — not raw hex for UI chrome.
 
 ## Currency (INR)
@@ -34,8 +34,8 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 
 - **Header / tabs / chips in header:** `Header` from design system.
 - **Section titles:** `SectionHeader`.
-- **Surfaces:** `Card` for card UI; default chip sizing for dense filters/time ranges: **`Chip` `size="extra-small"`** (see `Chip.css` / Stock Home time row).
-- **Rows:** `ListItem`; portfolio-style allocation rows: **`variant="allocation"`** on `ListItem` when that layout is needed.
+- **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. Default chip sizing for dense filters/time ranges: **`Chip` `size="extra-small"`** (see `Chip.css` / Stock Home time row).
+- **Rows:** `ListItem` for standard list rows.
 - **Bottom bar:** `BottomNav` + `HomeIndicator` — default solid **`--surface-level-1`** (no frosted/blur unless specified).
 - **Reminders:** `ReminderWidget` — **carousel** horizontal inset uses **flex `::before` / `::after` spacers** + `scroll-padding-inline` (not padding-only on `overflow-x: auto`). Do not “fix” carousel edge stickiness by removing that pattern.
 
@@ -55,7 +55,7 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 1. Width **376px** column + **`.sh-content`** scroll pattern.
 2. **Sections** use **`--spacing-56`** (or documented exception) + **`SectionHeader`** + **`sh-section__content`** where appropriate.
 3. **16px** horizontal rhythm via **tokens** (`--card-padding-inline` / `--spacing-16`).
-4. **Cards** use **`Card`** + **`--card-padding-*`**.
+4. **Cards** use **`Card`** + **`--card-padding-*`**, **without** `stroke` unless the design requires a border.
 5. Carousels / **overflow-x** rows: confirm **inset** (spacers or scroll-padding), not flush edges.
 6. Storybook: wire screen in **`App`** / shell; use existing **theme** tokens in preview.
 

@@ -97,7 +97,7 @@ const meta: Meta<BottomNavStoryArgs> = {
     itemCount: {
       control: { type: 'range', min: 2, max: 5, step: 1 },
       description: 'Number of navigation tabs',
-      table: { defaultValue: { summary: '5' }, category: 'General' },
+      table: { defaultValue: { summary: '4' }, category: 'General' },
     },
     showHomeIndicator: {
       control: 'boolean',
@@ -111,12 +111,12 @@ const meta: Meta<BottomNavStoryArgs> = {
     },
     ...itemArgTypes(1, 'Home', 'home_outline', 'home_filled'),
     ...itemArgTypes(2, 'Stocks', 'chart', ''),
-    ...itemArgTypes(3, 'F&O', 'copy_outline', ''),
-    ...itemArgTypes(4, 'MF', 'handbag_outline', ''),
-    ...itemArgTypes(5, 'All', 'rupee', ''),
+    ...itemArgTypes(3, 'MF', 'handbag_outline', ''),
+    ...itemArgTypes(4, 'All', 'rupee', ''),
+    ...itemArgTypes(5, 'More', 'search_outline', ''),
   },
   args: {
-    itemCount: 5,
+    itemCount: 4,
     showHomeIndicator: true,
     showGradient: true,
     item1Label: 'Home',
@@ -125,14 +125,14 @@ const meta: Meta<BottomNavStoryArgs> = {
     item2Label: 'Stocks',
     item2Icon: 'chart',
     item2ActiveIcon: '',
-    item3Label: 'F&O',
-    item3Icon: 'copy_outline',
+    item3Label: 'MF',
+    item3Icon: 'handbag_outline',
     item3ActiveIcon: '',
-    item4Label: 'MF',
-    item4Icon: 'handbag_outline',
+    item4Label: 'All',
+    item4Icon: 'rupee',
     item4ActiveIcon: '',
-    item5Label: 'All',
-    item5Icon: 'rupee',
+    item5Label: 'More',
+    item5Icon: 'search_outline',
     item5ActiveIcon: '',
   },
   render: PlaygroundRender,
@@ -144,7 +144,7 @@ type Story = StoryObj<BottomNavStoryArgs>;
 export const Playground: Story = {};
 
 export const DefaultState: Story = {
-  args: { itemCount: 5 },
+  args: { itemCount: 4 },
 };
 
 export const WithoutHomeIndicator: Story = {

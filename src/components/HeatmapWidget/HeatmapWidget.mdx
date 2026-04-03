@@ -1,0 +1,52 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as HeatmapWidgetStories from './HeatmapWidget.stories';
+
+<Meta of={HeatmapWidgetStories} />
+
+<Title>Heatmap</Title>
+
+<Description of={HeatmapWidgetStories} />
+
+## Default (wheel + strip)
+
+Use the controls below to change **tab count**, **comma-separated tab labels**, **wheel repeat count**, **sector cards cap**, and **initial tab** — same knobs as tuning the embedded `WheelCarousel`.
+
+<Canvas of={HeatmapWidgetStories.Default} />
+
+<Controls of={HeatmapWidgetStories.Default} />
+
+## Overview
+
+The heatmap widget combines a **SectionHeader** title row, **WheelCarousel** category tabs, and a **horizontal strip** of sector cards. Each card shows a **mosaic** of performance cells (tech4 or bank5 layouts).
+
+## Data wiring
+
+- **`wheelItems`** — Tab labels in scroll order. Keys in **`sectorsByWheel`** must match. Defaults support up to **seven** canonical categories (see **`HEATMAP_EXTENDED_WHEEL_ORDER`** / **`HEATMAP_DEFAULT_SECTORS_BY_WHEEL`**): Index, Stocks, F&O, Commodities, ETF, Crypto, Debt.
+- **`wheelCanonicalTabOrder`** — Optional: when `wheelItems` use custom display strings, pass the parallel list of canonical ids so **mosaic height** (taller for Index / F&O) stays tied to the right dataset.
+- **`sectorsByWheel`** — Map from each tab label to a list of `HeatmapSector` entries for that category.
+- **`sectors`** — Optional override: a single fixed list; the wheel does not swap data when this is set.
+- **`maxSectorCards`** — Optional cap on how many sector cards appear in the strip (after resolving the active tab).
+
+## WheelCarousel: `wheelRepeatCount`
+
+The widget forwards **`wheelRepeatCount`** to **`WheelCarousel`** as **`repeatCount`**: how many times the tab set is repeated in the infinite scroll track. Larger values reduce edge resets when scrolling; **odd** numbers are recommended (WheelCarousel default **51**).
+
+## Mosaic height
+
+**Index** and **F&O** use a taller mosaic minimum height than **Stocks** (modifier class `hmw--mosaic-tall` on the root).
+
+## Storybook controls (Default story)
+
+Same pattern as **Wheel Carousel**:
+
+- **Tab count** — 1–7 wheel tabs (Index only → … → full set ending with Debt). Each slot maps to real sector data in **`HEATMAP_DEFAULT_SECTORS_BY_WHEEL`**.
+- **Tab labels (comma-separated)** — Rename tabs; order matches position. Fewer names than Tab count fills from the canonical order above. **`wheelCanonicalTabOrder`** is set internally so taller mosaic (Index / F&O) stays correct when labels are renamed.
+- **defaultWheelValue** — Canonical initial tab (any of the seven ids); mapped to the label at that slot when names are custom.
+- **Sector cards (strip)** — **`maxSectorCards`**: cap sector cards in the horizontal strip.
+- **Wheel repeat count** — **`wheelRepeatCount`** forwarded to `WheelCarousel`.

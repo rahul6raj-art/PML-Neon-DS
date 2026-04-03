@@ -4,7 +4,6 @@ import type { TabItem } from '../components/Tab';
 import { Chip } from '../components/Chip';
 import { SectionHeader } from '../components/SectionHeader';
 import { Badge } from '../components/Badge';
-import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { BottomNav } from '../components/BottomNav';
 import { BrandLogo, brandLogoThemeForAppColorScheme } from '../components/BrandLogo';
@@ -19,14 +18,6 @@ interface TickerItem {
   change: string;
   percent: string;
   positive: boolean;
-}
-
-interface AllocationItem {
-  name: string;
-  value: string;
-  returnValue: string;
-  color: 'stocks' | 'mf' | 'others';
-  percent: number;
 }
 
 interface SipCard {
@@ -58,12 +49,6 @@ const HEADER_TABS: TabItem[] = [
 ];
 
 const TIME_RANGES = ['1D', '1W', '1M', '6M', '1Y', 'All'];
-
-const ALLOCATIONS: AllocationItem[] = [
-  { name: 'Stocks', value: '₹8,00,694', returnValue: '+10.70%', color: 'stocks', percent: 55 },
-  { name: 'MF', value: '₹72,597', returnValue: '+8.85%', color: 'mf', percent: 30 },
-  { name: 'Others', value: '₹40,000', returnValue: '+1.53%', color: 'others', percent: 15 },
-];
 
 const SIP_CARDS: SipCard[] = [
   { status: 'Tomorrow', statusContext: 'notice', title: '₹18,500 sitting idle', subtitle: 'See where you can invest' },
@@ -241,57 +226,6 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
                 Add Funds <Icon name="caret_small_right_main" size={24} />
               </button>
             </div>
-          </div>
-        </div>
-
-        {/* ── Allocations ── */}
-        <div className="sh-section">
-          <SectionHeader
-            size="large"
-            title="Allocations"
-            showChevron
-            trailing="none"
-            showSubtext={false}
-          />
-          <div className="sh-section__content">
-            <Card className="sh-allocation-card">
-              <div className="sh-allocation">
-                <div className="sh-allocation__bar">
-                  {ALLOCATIONS.map((a) => (
-                    <div
-                      key={a.color}
-                      className={`sh-allocation__segment sh-allocation__segment--${a.color}`}
-                      style={{ flex: a.percent }}
-                    />
-                  ))}
-                </div>
-                <div className="sh-allocation__list">
-                  {ALLOCATIONS.map((a) => (
-                    <div className="sh-allocation__item" key={a.color}>
-                      <div className="sh-allocation__item-top">
-                        <div className="sh-allocation__item-left">
-                          <div className={`sh-allocation__dot sh-allocation__dot--${a.color}`} />
-                          <div className="sh-allocation__name-group">
-                            <span className="sh-allocation__name">{a.name}</span>
-                            <span className="sh-allocation__pct">{a.percent}%</span>
-                          </div>
-                        </div>
-                        <div className="sh-allocation__item-right">
-                          <span className="sh-allocation__value">{a.value}</span>
-                          <span
-                            className={`sh-allocation__return-value${
-                              a.returnValue.trim().startsWith('-') ? ' sh-allocation__return-value--negative' : ''
-                            }`}
-                          >
-                            {a.returnValue}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
           </div>
         </div>
 

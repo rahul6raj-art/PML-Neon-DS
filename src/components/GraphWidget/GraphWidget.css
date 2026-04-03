@@ -8,6 +8,28 @@
   box-sizing: border-box;
 }
 
+/* Line + glow stops — primitives + semantic tokens (theme-aware where noted) */
+.gw--positive {
+  --gw-line-1: var(--background-primary-strong);
+  --gw-line-2: var(--primitive-colour-mint-dark);
+  --gw-line-3: var(--background-positive-strong);
+  --gw-glow-1: var(--primitive-action-offset-primary-shade);
+  --gw-glow-2: var(--primitive-blue-offset-850);
+  --gw-glow-3: var(--primitive-action-offset-positive-shade);
+  --gw-glow-4: var(--primitive-action-offset-positive-shade);
+  --gw-indicator-fill: var(--background-positive-strong);
+}
+
+.gw--negative {
+  --gw-line-1: var(--background-notice-strong);
+  --gw-line-2: var(--primitive-colour-red-strong);
+  --gw-line-3: var(--background-negative-strong);
+  --gw-glow-1: var(--primitive-action-offset-notice-shade);
+  --gw-glow-2: var(--primitive-action-offset-negative-shade);
+  --gw-glow-3: var(--primitive-action-offset-negative-shade);
+  --gw-indicator-fill: var(--background-negative-strong);
+}
+
 .gw *,
 .gw *::before,
 .gw *::after {
@@ -46,6 +68,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
+  background-color: var(--gw-indicator-fill);
   opacity: 0.35;
   animation: gw-pulse 2s ease-in-out infinite;
 }
@@ -55,6 +78,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  background-color: var(--gw-indicator-fill);
   opacity: 0.65;
 }
 
@@ -63,7 +87,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+  background-color: var(--gw-indicator-fill);
+  box-shadow: 0 0 0 1px var(--primitive-material-ff-15);
 }
 
 @keyframes gw-pulse {
