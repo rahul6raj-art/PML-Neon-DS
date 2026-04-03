@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "patch-package",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -33,6 +34,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "patch-package": "^8.0.1",
     "playwright": "^1.59.0",
     "storybook": "^10.3.3",
     "typescript": "~5.9.3",

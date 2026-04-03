@@ -1,0 +1,52 @@
+diff --git a/node_modules/storybook/dist/core-server/presets/common-manager.js b/node_modules/storybook/dist/core-server/presets/common-manager.js
+index 0aff7a3..bf6f6cc 100644
+--- a/node_modules/storybook/dist/core-server/presets/common-manager.js
++++ b/node_modules/storybook/dist/core-server/presets/common-manager.js
+@@ -6689,7 +6689,7 @@ var manager_default5 = addons5.register(ADDON_ID4, () => {
+   globalThis?.FEATURES?.measure && addons5.add(TOOL_ID2, {
+     type: types5.TOOL,
+     title: "Measure",
+-    match: ({ viewMode, tabId }) => viewMode === "story" && !tabId,
++    match: ({ viewMode, tabId }) => (viewMode === "story" || viewMode === "docs") && !tabId,
+     render: () => React61.createElement(Tool, null)
+   });
+ });
+diff --git a/node_modules/storybook/dist/csf/index.js b/node_modules/storybook/dist/csf/index.js
+index b67a6cf..660f0b5 100644
+--- a/node_modules/storybook/dist/csf/index.js
++++ b/node_modules/storybook/dist/csf/index.js
+@@ -1280,7 +1280,7 @@ var withMeasure = (StoryFn, context) => {
+         rescale();
+       });
+     };
+-    return context.viewMode === "story" && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer.x, pointer.y)), () => {
++    return (context.viewMode === "story" || context.viewMode === "docs") && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer.x, pointer.y)), () => {
+       globalThis.window.removeEventListener("resize", onResize), destroy();
+     };
+   }, [measureEnabled, context.viewMode]), StoryFn();
+diff --git a/node_modules/storybook/dist/manager/globals-runtime.js b/node_modules/storybook/dist/manager/globals-runtime.js
+index c3799d1..20d1d63 100644
+--- a/node_modules/storybook/dist/manager/globals-runtime.js
++++ b/node_modules/storybook/dist/manager/globals-runtime.js
+@@ -57076,7 +57076,7 @@ var withMeasure = (StoryFn, context) => {
+         rescale();
+       });
+     };
+-    return context.viewMode === "story" && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init3(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer3.x, pointer3.y)), () => {
++    return (context.viewMode === "story" || context.viewMode === "docs") && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init3(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer3.x, pointer3.y)), () => {
+       globalThis.window.removeEventListener("resize", onResize), destroy();
+     };
+   }, [measureEnabled, context.viewMode]), StoryFn();
+diff --git a/node_modules/storybook/dist/preview/runtime.js b/node_modules/storybook/dist/preview/runtime.js
+index 8f60425..5963079 100644
+--- a/node_modules/storybook/dist/preview/runtime.js
++++ b/node_modules/storybook/dist/preview/runtime.js
+@@ -31856,7 +31856,7 @@ var withMeasure = (StoryFn, context) => {
+         rescale();
+       });
+     };
+-    return context.viewMode === "story" && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer3.x, pointer3.y)), () => {
++    return (context.viewMode === "story" || context.viewMode === "docs") && measureEnabled && (globalThis.document.addEventListener("pointerover", onPointerOver), init(), globalThis.window.addEventListener("resize", onResize), findAndDrawElement(pointer3.x, pointer3.y)), () => {
+       globalThis.window.removeEventListener("resize", onResize), destroy();
+     };
+   }, [measureEnabled, context.viewMode]), StoryFn();

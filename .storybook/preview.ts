@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import React from 'react';
 
+import { useThemeSync } from './useThemeSync';
 import '../src/tokens/colors.css';
 import '../src/tokens/numbers.css';
 import '../src/tokens/typography.css';
@@ -25,7 +26,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme || 'light';
+      // Call preview hooks here (decorator body), not inside a nested React component.
+      useThemeSync();
+
+      // Toolbar / globals drive the preview shell immediately. Do not prefer args here — after a
+      // toolbar change, args can still be one frame behind globals, which hid dark mode below.
+      const theme = (context.globals?.theme as string) || 'light';
       const isDark = theme === 'dark';
 
       return React.createElement(
