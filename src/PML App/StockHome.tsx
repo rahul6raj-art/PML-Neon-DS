@@ -60,13 +60,13 @@ const HEADER_TABS: TabItem[] = [
 const TIME_RANGES = ['1D', '1W', '1M', '6M', '1Y', 'All'];
 
 const ALLOCATIONS: AllocationItem[] = [
-  { name: 'Stocks', value: '₹ 8,00,694', returnValue: '+10.70%', color: 'stocks', percent: 55 },
-  { name: 'MF', value: '₹ 72,597', returnValue: '+8.85%', color: 'mf', percent: 30 },
-  { name: 'Others', value: '₹ 40,000', returnValue: '+1.53%', color: 'others', percent: 15 },
+  { name: 'Stocks', value: '₹8,00,694', returnValue: '+10.70%', color: 'stocks', percent: 55 },
+  { name: 'MF', value: '₹72,597', returnValue: '+8.85%', color: 'mf', percent: 30 },
+  { name: 'Others', value: '₹40,000', returnValue: '+1.53%', color: 'others', percent: 15 },
 ];
 
 const SIP_CARDS: SipCard[] = [
-  { status: 'Tomorrow', statusContext: 'notice', title: '₹ 18,500 sitting idle', subtitle: 'See where you can invest' },
+  { status: 'Tomorrow', statusContext: 'notice', title: '₹18,500 sitting idle', subtitle: 'See where you can invest' },
   { status: 'Active', statusContext: 'positive', title: '58% in equity', subtitle: 'Rebalance your portfolio' },
 ];
 
@@ -74,8 +74,8 @@ const REMINDER_ITEMS: ReminderItem[] = [
   {
     showLeading: false,
     name: 'Axis Bank Ltd',
-    price: '₹ 28,694.40',
-    change: '₹ 28,694.40',
+    price: '₹28,694.40',
+    change: '₹28,694.40',
     changeType: 'positive',
     ctaText: '+0.2% Since you checked',
     ctaLabel: 'Buy',
@@ -85,8 +85,8 @@ const REMINDER_ITEMS: ReminderItem[] = [
   {
     showLeading: false,
     name: 'ICICI Bank',
-    price: '₹ 28,694.40',
-    change: '₹ 28,694.40',
+    price: '₹28,694.40',
+    change: '₹28,694.40',
     changeType: 'negative',
     ctaText: 'Complete your order',
     ctaLabel: 'Buy',
@@ -197,7 +197,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
           </div>
           <div className="sh-portfolio__returns">
             <span className="sh-portfolio__returns-label">1D Returns:&nbsp;</span>
-            <span className="sh-portfolio__returns-value">+ ₹240.50 (2.40%)</span>
+            <span className="sh-portfolio__returns-value">+₹240.50 (2.40%)</span>
           </div>
 
           {/* Chart */}

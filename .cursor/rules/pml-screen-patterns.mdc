@@ -19,6 +19,10 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 - **Cards:** default padding is **`--card-padding-block`** (24px) × **`--card-padding-inline`** (16px) — use `Card` and/or these variables; do not invent new card insets per screen.
 - **Colors/type:** semantic tokens (`--surface-*`, `--text-*`, `--border-*`, `--font-weight-*`, etc.) from existing CSS variables — not raw hex for UI chrome.
 
+## Currency (INR)
+
+- **No space** between the **₹** symbol and the amount: write `₹8,00,694`, `+₹240.50`, not `₹ 8,00,694` or `+ ₹240.50`. Apply in copy, props, and Storybook defaults.
+
 ## Section pattern
 
 - **Vertical rhythm:** blocks use **`.sh-section`** with **`margin-top: var(--spacing-56)`** (adjust only if design explicitly differs).

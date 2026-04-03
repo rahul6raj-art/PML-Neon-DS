@@ -65,7 +65,7 @@ const meta: Meta<typeof ListItem> = {
     },
     allocationAmount: {
       control: 'text',
-      table: { defaultValue: { summary: '₹ 8,00,694' }, category: 'Allocation' },
+      table: { defaultValue: { summary: '₹8,00,694' }, category: 'Allocation' },
       if: { arg: 'variant', eq: 'allocation' },
     },
     allocationReturn: {
@@ -349,7 +349,7 @@ const meta: Meta<typeof ListItem> = {
     allocationDot: 'stocks' as ListItemAllocationDot,
     allocationName: 'Stocks',
     allocationPercent: 55,
-    allocationAmount: '₹ 8,00,694',
+    allocationAmount: '₹8,00,694',
     allocationReturn: '+10.70%',
     allocationReturnNegative: false,
     allocationNotFirst: false,
@@ -572,7 +572,7 @@ export const Allocation: Story = {
     allocationDot: 'stocks',
     allocationName: 'Stocks',
     allocationPercent: 55,
-    allocationAmount: '₹ 8,00,694',
+    allocationAmount: '₹8,00,694',
     allocationReturn: '+10.70%',
     allocationReturnNegative: false,
     allocationNotFirst: false,
@@ -596,7 +596,7 @@ function AllocationListRender() {
         allocationDot="stocks"
         allocationName="Stocks"
         allocationPercent={55}
-        allocationAmount="₹ 8,00,694"
+        allocationAmount="₹8,00,694"
         allocationReturn="+10.70%"
         showSeparator
       />
@@ -605,7 +605,7 @@ function AllocationListRender() {
         allocationDot="mf"
         allocationName="MF"
         allocationPercent={30}
-        allocationAmount="₹ 72,597"
+        allocationAmount="₹72,597"
         allocationReturn="+8.85%"
         allocationNotFirst
         showSeparator
@@ -615,7 +615,7 @@ function AllocationListRender() {
         allocationDot="others"
         allocationName="Others"
         allocationPercent={15}
-        allocationAmount="₹ 40,000"
+        allocationAmount="₹40,000"
         allocationReturn="+1.53%"
         allocationNotFirst
         showSeparator={false}
