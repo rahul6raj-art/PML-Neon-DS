@@ -5,7 +5,8 @@
 
 .card {
   position: relative;
-  width: 344px;
+  width: 100%;
+  max-width: var(--card-width);
   min-height: 200px;
   border-radius: var(--radius-24);
   background: var(--surface-level-1);

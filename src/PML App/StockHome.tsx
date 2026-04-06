@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Header } from '../components/Header';
 import type { TabItem } from '../components/Tab';
-import { Chip } from '../components/Chip';
 import { SectionHeader } from '../components/SectionHeader';
 import { Badge } from '../components/Badge';
 import { Icon } from '../components/Icon';
@@ -9,6 +8,8 @@ import { BottomNav } from '../components/BottomNav';
 import { BrandLogo, brandLogoThemeForAppColorScheme } from '../components/BrandLogo';
 import { ReminderWidget } from '../components/ReminderWidget';
 import type { ReminderItem } from '../components/ReminderWidget';
+import { NewsWidget, NEWS_WIDGET_DEMO_ITEMS } from '../components/NewsWidget';
+import { PortfolioWidget } from '../components/PortfolioWidget';
 import './StockHome.css';
 
 /* ─── Data types ─── */
@@ -27,13 +28,6 @@ interface SipCard {
   subtitle: string;
 }
 
-interface NewsCard {
-  title: string;
-  badges: { label: string; context: 'positive' | 'negative' | 'notice' | 'default' }[];
-  body: string;
-  time: string;
-}
-
 /* ─── Static data ─── */
 const TICKERS: TickerItem[] = [
   { name: 'NIFTY50', price: '25,155.50', change: '+70.15', percent: '(0.33%)', positive: true },
@@ -47,8 +41,6 @@ const HEADER_TABS: TabItem[] = [
   { value: 'nfo', label: 'NFO' },
   { value: 'mtf', label: 'MTF' },
 ];
-
-const TIME_RANGES = ['1D', '1W', '1M', '6M', '1Y', 'All'];
 
 const SIP_CARDS: SipCard[] = [
   { status: 'Tomorrow', statusContext: 'notice', title: '₹18,500 sitting idle', subtitle: 'See where you can invest' },
@@ -80,45 +72,6 @@ const REMINDER_ITEMS: ReminderItem[] = [
   },
 ];
 
-const NEWS_CARDS: NewsCard[] = [
-  {
-    title: 'Zomato Profit Surge',
-    badges: [{ label: 'Bullish', context: 'positive' }],
-    body: 'Q3 profits jumped 200%. Analysts may upgrade the stock',
-    time: '25 Jan, 10:12 AM',
-  },
-  {
-    title: 'Tata Motors',
-    badges: [{ label: 'Bullish', context: 'positive' }, { label: 'Volume Breakout', context: 'notice' }],
-    body: 'Price crossed ₹980 with 1.8× higher than usual trading volume.',
-    time: '25 Jan, 10:12 AM',
-  },
-];
-
-/* ─── Chart SVG (simplified portfolio line chart) ─── */
-const PortfolioChart = () => (
-  <svg viewBox="0 0 376 116" fill="none" className="sh-chart__svg" preserveAspectRatio="none">
-    <defs>
-      <linearGradient id="chartGrad" x1="188" y1="0" x2="188" y2="116" gradientUnits="userSpaceOnUse">
-        <stop stopColor="var(--background-positive-strong)" stopOpacity="0.15" />
-        <stop offset="1" stopColor="var(--background-positive-strong)" stopOpacity="0" />
-      </linearGradient>
-    </defs>
-    <path
-      d="M0 80 C40 75, 80 70, 120 60 C160 50, 180 55, 200 48 C220 41, 240 38, 260 35 C280 32, 310 40, 340 30 L376 25"
-      stroke="var(--background-positive-strong)"
-      strokeWidth="2"
-      fill="none"
-    />
-    <path
-      d="M0 80 C40 75, 80 70, 120 60 C160 50, 180 55, 200 48 C220 41, 240 38, 260 35 C280 32, 310 40, 340 30 L376 25 V116 H0 Z"
-      fill="url(#chartGrad)"
-    />
-    <circle cx="340" cy="30" r="6" fill="var(--background-positive-strong)" />
-    <circle cx="340" cy="30" r="10" fill="var(--background-positive-strong)" fillOpacity="0.2" />
-  </svg>
-);
-
 export interface StockHomePageProps {
   /** App preview theme — maps to BrandLogo: light surfaces use `light`, dark surfaces use `dark` */
   colorScheme?: 'light' | 'dark';
@@ -127,7 +80,6 @@ export interface StockHomePageProps {
 /* ─── Main Component ─── */
 export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
   const [activeTab, setActiveTab] = useState('portfolio');
-  const [activeRange, setActiveRange] = useState(0);
 
   const headerIsDark = colorScheme === 'dark';
   const brandLogoTheme = brandLogoThemeForAppColorScheme(colorScheme);
@@ -170,64 +122,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
         </div>
 
         {/* ── Portfolio Summary ── */}
-        <div className="sh-portfolio">
-          <div className="sh-portfolio__header">
-            <div className="sh-portfolio__title">Total portfolio value</div>
-          </div>
-          <div className="sh-portfolio__value-row">
-            <span className="sh-portfolio__amount">₹2,15,197</span>
-            <button className="sh-portfolio__eye-btn" aria-label="Toggle visibility">
-              <Icon name="eye_slash_outline" size={20} />
-            </button>
-          </div>
-          <div className="sh-portfolio__returns">
-            <span className="sh-portfolio__returns-label">1D Returns:&nbsp;</span>
-            <span className="sh-portfolio__returns-value">+₹240.50 (2.40%)</span>
-          </div>
-
-          {/* Chart */}
-          <div className="sh-chart">
-            <PortfolioChart />
-          </div>
-
-          {/* Time Range Chips */}
-          <div className="sh-chips">
-            {TIME_RANGES.map((r, i) => (
-              <Chip
-                key={r}
-                label={r}
-                size="extra-small"
-                type={activeRange === i ? 'selected' : 'default'}
-                onPress={() => setActiveRange(i)}
-              />
-            ))}
-          </div>
-
-          {/* Values */}
-          <div className="sh-values">
-            <div className="sh-values__row">
-              <span className="sh-values__label">Invested</span>
-              <span className="sh-values__amount">₹1,79,398</span>
-            </div>
-            <div className="sh-values__row">
-              <span className="sh-values__label">Overall Returns</span>
-              <span className="sh-values__positive">+₹35,799 (28.28%)</span>
-            </div>
-          </div>
-
-          {/* Buying Power */}
-          <div className="sh-buying">
-            <div className="sh-buying__inner">
-              <div>
-                <div className="sh-buying__label">Buying power</div>
-                <div className="sh-buying__amount">₹15,450</div>
-              </div>
-              <button className="sh-buying__action">
-                Add Funds <Icon name="caret_small_right_main" size={24} />
-              </button>
-            </div>
-          </div>
-        </div>
+        <PortfolioWidget />
 
         {/* ── Portfolio Intelligence / Upcoming SIPs ── */}
         <div className="sh-section">
@@ -342,35 +237,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
 
         {/* ── Stocks in the News ── */}
         <div className="sh-section">
-          <SectionHeader
-            size="large"
-            title="Stocks in the News"
-            showChevron
-            trailing="none"
-            showSubtext={false}
-          />
-          <div className="sh-hscroll">
-            {NEWS_CARDS.map((news, i) => (
-              <div className="sh-news-card" key={i}>
-                <div className="sh-news-card__top">
-                  <div className="sh-news-card__head">
-                    <div className="sh-news-card__badges">
-                      {news.badges.map((b, j) => (
-                        <Badge key={j} type="text" context={b.context} label={b.label} />
-                      ))}
-                    </div>
-                    <div className="sh-news-card__title">{news.title}</div>
-                  </div>
-                  <button className="sh-news-card__chevron" aria-label="Open">
-                    <Icon name="caret_small_right_main" size={24} />
-                  </button>
-                </div>
-                <hr className="sh-news-card__divider" />
-                <div className="sh-news-card__body">{news.body}</div>
-                <div className="sh-news-card__time">{news.time}</div>
-              </div>
-            ))}
-          </div>
+          <NewsWidget title="Stocks in the News" items={NEWS_WIDGET_DEMO_ITEMS} />
         </div>
 
         {/* ── Footer ── */}

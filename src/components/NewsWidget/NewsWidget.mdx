@@ -1,0 +1,31 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as NewsWidgetStories from './NewsWidget.stories';
+
+<Meta of={NewsWidgetStories} />
+
+<Title>News</Title>
+
+<Description of={NewsWidgetStories} />
+
+## Playground
+
+Edit **Header** (title, visibility, size, chevron), **`showBadges`**, **number of cards** (1–12), and **extra badges per card** (0–5) in **Controls**. Extra badges append sample chips on every card for layout testing.
+
+<Canvas of={NewsWidgetStories.Playground} />
+
+<Controls of={NewsWidgetStories.Playground} />
+
+## Content shape
+
+Each item in `items` should include:
+
+- **`title`** — headline (14px medium)
+- **`badges`** — `{ label, context }` where `context` is `positive` | `negative` | `notice` | `default`
+- **`body`** — summary paragraph
+- **`time`** — e.g. `25 Jan, 10:12 AM`

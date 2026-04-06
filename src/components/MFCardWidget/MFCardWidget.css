@@ -1,0 +1,304 @@
+/* ═══════════════════════════════════════════════════
+   MF Card Widget — Paytm MF Liquid Fund card (Figma)
+   ═══════════════════════════════════════════════════ */
+
+.mfcw {
+  width: 100%;
+  max-width: 376px;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.mfcw__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Same width as `.card` (see `--card-width`) so alert strip aligns with the card */
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* Override design-system Card min-height: 200px — height follows content (tags on/off). */
+.mfcw__card.card {
+  min-height: auto;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -24px;
+}
+
+.mfcw__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.mfcw--inline .mfcw__inner {
+  justify-content: center;
+  gap: var(--spacing-16);
+}
+
+/* ── Tags ───────────────────────────────────────── */
+.mfcw__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mfcw__tags-lhs,
+.mfcw__tags-rhs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.mfcw__tags-lhs {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Fund row ───────────────────────────────────── */
+.mfcw__fund {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  min-width: 0;
+}
+
+.mfcw__fund-logo {
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.mfcw__fund-main {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+}
+
+.mfcw__fund-main--split {
+  gap: var(--spacing-16);
+  justify-content: space-between;
+}
+
+.mfcw__fund-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.mfcw__fund-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+.mfcw__fund-sub {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mfcw__fund-sub-icon {
+  flex-shrink: 0;
+  color: var(--text-neutral-moderate);
+}
+
+.mfcw__fund-sub-label {
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-neutral-moderate);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mfcw__fund-rhs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.mfcw__fund-rhs-primary {
+  margin: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+.mfcw__fund-rhs-secondary {
+  margin: 0;
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+}
+
+/* ── Separator ───────────────────────────────────── */
+.mfcw__sep {
+  height: 1px;
+  width: 100%;
+  background: var(--border-neutral-weak);
+  flex-shrink: 0;
+}
+
+/* ── Large: two-up data ─────────────────────────── */
+.mfcw__data {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.mfcw__data-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mfcw__data-cell--right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.mfcw__data-label {
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-neutral-medium);
+}
+
+.mfcw__data-value {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 20px;
+  color: var(--text-neutral-strong);
+}
+
+/* ── Medium: footer ──────────────────────────────── */
+.mfcw__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.mfcw__footer-lhs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  min-width: 0;
+  flex: 1;
+}
+
+.mfcw__footer-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.mfcw__star {
+  color: var(--text-positive-strong);
+}
+
+.mfcw__footer-rating-num {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 20px;
+  color: var(--text-neutral-moderate);
+}
+
+.mfcw__footer-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-neutral-moderate);
+  flex-shrink: 0;
+}
+
+.mfcw__footer-meta {
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: 20px;
+  color: var(--text-neutral-moderate);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mfcw__footer-rhs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  flex: 1;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.mfcw__footer-rhs-label {
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-moderate);
+}
+
+.mfcw__footer-rhs-value {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-positive-strong);
+}
+
+/* ── Alert strip ─────────────────────────────────── */
+.mfcw__alert {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  width: 100%;
+  min-width: 0;
+  padding: 36px var(--card-padding-inline) var(--spacing-12);
+  /* Flush with card above: no radius on top; bottom matches card corner radius */
+  border-radius: 0 0 var(--radius-24) var(--radius-24);
+  background: var(--background-primary-weak);
+  box-sizing: border-box;
+}
+
+.mfcw__alert-icon {
+  flex-shrink: 0;
+  color: var(--text-primary-strong);
+}
+
+.mfcw__alert-text {
+  margin: 0;
+  flex: 1;
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  line-height: 16px;
+  color: var(--text-neutral-strong);
+}
+
+.mfcw__stack--compact .mfcw__card {
+  margin-bottom: -24px;
+}

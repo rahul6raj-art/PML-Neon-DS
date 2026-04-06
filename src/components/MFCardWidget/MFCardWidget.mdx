@@ -1,0 +1,29 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as MFCardWidgetStories from './MFCardWidget.stories';
+
+<Meta of={MFCardWidgetStories} />
+
+<Title>MF Card</Title>
+
+<Description of={MFCardWidgetStories} />
+
+## Playground
+
+Use **Controls** to edit every prop. **cardType** switches between **large** (two-up metrics), **medium** (rating + footer row), **small**, and **inline** (compact row). **Alert** and **Tags** groups apply per variant as in Figma.
+
+<Canvas of={MFCardWidgetStories.Playground} />
+
+<Controls of={MFCardWidgetStories.Playground} />
+
+## Layout notes
+
+- **Large** — `dataLeft*` / `dataRight*` appear below the separator; `primaryValue` / `secondaryLabel` are not shown in the fund row.
+- **Medium** — fund row uses `primaryValue` + `secondaryLabel` on the right; subtext under the name is omitted; footer uses `ratingValue`, `ratingTrailingText`, `footerLabel`, `footerValue`.
+- **Small / Inline** — fund row with optional RHS values; **inline** often hides tags (`showTags: false`).
+- **Alert** — `showAlertBanner` + `alertText`; not used for **inline** in the reference implementation.

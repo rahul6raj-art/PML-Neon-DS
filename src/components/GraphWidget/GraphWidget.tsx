@@ -87,6 +87,7 @@ export const GraphWidget = ({
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         fill="none"
         preserveAspectRatio="none"
+        overflow="visible"
         role="img"
         aria-label={ariaLabel}
       >

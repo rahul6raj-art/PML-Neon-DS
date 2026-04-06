@@ -1,0 +1,185 @@
+/* ═══════════════════════════════════════════════════
+   Portfolio Widget — Stock Home portfolio summary
+   Typography + colors: design tokens only (no raw px colors).
+   ═══════════════════════════════════════════════════ */
+
+.pw {
+  margin-top: var(--spacing-32);
+  padding: 0;
+  width: 100%;
+  max-width: var(--phone-column-width);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.pw__header {
+  padding: 0 var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.pw__title {
+  font-size: var(--font-size-title-1);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-title-1);
+  color: var(--text-neutral-strong);
+  padding-top: var(--spacing-8);
+  text-align: left;
+}
+
+.pw__value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-16);
+  margin-top: var(--spacing-4);
+}
+
+.pw__amount {
+  font-size: var(--font-size-display-2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-display-2);
+  color: var(--text-neutral-strong);
+}
+
+.pw__eye-btn {
+  width: var(--touch-target-standard);
+  height: var(--touch-target-standard);
+  border-radius: var(--radius-full);
+  border: var(--border-width-hairline) solid var(--border-neutral-weak);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--icon-neutral-strong);
+}
+
+.pw__returns {
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: center;
+  padding: 0 var(--spacing-16);
+  margin-top: var(--spacing-4);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.pw__returns-label {
+  color: var(--text-neutral-moderate);
+  font-weight: var(--font-weight-regular);
+}
+
+.pw__returns-value {
+  color: var(--text-positive-strong);
+  font-weight: var(--font-weight-regular);
+}
+
+.pw__chart {
+  width: 100%;
+  position: relative;
+  margin-top: var(--spacing-8);
+  overflow: visible;
+  /* GraphWidget blur extends past the 116px SVG; pad so glow isn’t clipped vertically */
+  padding: calc(var(--spacing-32) + var(--spacing-8)) 0 calc(var(--spacing-32) + var(--spacing-4));
+  margin-bottom: calc(-1 * var(--spacing-24));
+  box-sizing: content-box;
+}
+
+.pw__chips {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: var(--spacing-16);
+  padding-inline: var(--card-padding-inline);
+}
+
+.pw__chips .chip {
+  flex-shrink: 0;
+}
+
+.pw__values {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+  margin-top: var(--spacing-32);
+}
+
+.pw__values-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.pw__values-label {
+  color: var(--text-neutral-moderate);
+  font-weight: var(--font-weight-regular);
+}
+
+.pw__values-amount {
+  color: var(--text-neutral-strong);
+  font-weight: var(--font-weight-medium);
+}
+
+.pw__values-positive {
+  color: var(--text-positive-strong);
+  font-weight: var(--font-weight-regular);
+}
+
+.pw__buying {
+  margin-top: var(--spacing-16);
+  padding: var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.pw__buying-inner {
+  width: var(--card-width);
+  max-width: 100%;
+  box-sizing: border-box;
+  background: var(--surface-level-1);
+  border-radius: var(--radius-24);
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pw__buying-label {
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+.pw__buying-amount {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-strong);
+  margin-top: var(--spacing-4);
+}
+
+.pw__buying-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0;
+  margin-left: auto;
+  padding: 0;
+  flex-shrink: 0;
+  color: var(--text-positive-strong);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+}

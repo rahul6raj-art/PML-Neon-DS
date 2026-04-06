@@ -42,6 +42,15 @@
   /* Card container — default padding for all cards (vertical / horizontal) */
   --card-padding-block: var(--spacing-24);
   --card-padding-inline: var(--spacing-16);
+  /* App shell / Stock Home phone column (see pml-screen-patterns) */
+  --phone-column-width: 376px;
+  /* Content-well card width (376px phone column minus 16px gutters × 2) — Card, MF Card, Stock Home cards */
+  --card-width: 344px;
+
+  /* Hairline borders (cards, icon buttons) */
+  --border-width-hairline: 1px;
+  /* Minimum tap target — icon-only controls (e.g. portfolio eye) */
+  --touch-target-standard: calc(var(--spacing-32) + var(--spacing-4));
 
   /* HeatmapWidget — sector cards (Figma PML DS26, horizontal strip) */
   --heatmap-sector-card-width: 324px;

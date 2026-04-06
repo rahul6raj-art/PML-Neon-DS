@@ -16,11 +16,15 @@
   --font-weight-bold: 700;
 
   /* ── Type scale — font-size / line-height (DS26) ─────────
-     Use with --font-weight-* for Body, Subtext, etc. */
+     Use with --font-weight-* for Body, Subtext, Display, Title, etc. */
   --font-size-body: 14px;
   --line-height-body: 20px;
   --font-size-subtext: 12px;
   --line-height-subtext: 16px;
+  --font-size-display-2: 36px;
+  --line-height-display-2: 40px;
+  --font-size-title-1: 22px;
+  --line-height-title-1: 28px;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -48,15 +52,15 @@
 /* ── Display 2 — 36px / 40 ──────────────────────────────── */
 .display-2-bold {
   font-family: var(--font-family);
-  font-size: 36px;
-  line-height: 40px;
+  font-size: var(--font-size-display-2);
+  line-height: var(--line-height-display-2);
   font-weight: 700;
   letter-spacing: 0;
 }
 .display-2-medium {
   font-family: var(--font-family);
-  font-size: 36px;
-  line-height: 40px;
+  font-size: var(--font-size-display-2);
+  line-height: var(--line-height-display-2);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -80,8 +84,8 @@
 /* ── Title 1 — 22px / 28 ────────────────────────────────── */
 .title-1-bold {
   font-family: var(--font-family);
-  font-size: 22px;
-  line-height: 28px;
+  font-size: var(--font-size-title-1);
+  line-height: var(--line-height-title-1);
   font-weight: 700;
   letter-spacing: 0;
 }

@@ -6,12 +6,15 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  /* Let Gaussian blur / glow paths paint outside the 116px SVG bounds */
+  overflow: visible;
 }
 
 /* Line + glow stops — primitives + semantic tokens (theme-aware where noted) */
 .gw--positive {
   --gw-line-1: var(--background-primary-strong);
-  --gw-line-2: var(--primitive-colour-mint-dark);
+  /* Mid gradient: semantic mint (theme-aware), not primitive mint-dark */
+  --gw-line-2: var(--colour-mint);
   --gw-line-3: var(--background-positive-strong);
   --gw-glow-1: var(--primitive-action-offset-primary-shade);
   --gw-glow-2: var(--primitive-blue-offset-850);
@@ -40,6 +43,7 @@
   display: block;
   width: 100%;
   /* height comes from the SVG element attribute (matches viewBox aspect) */
+  overflow: visible;
 }
 
 /* Slight GPU hint for blurred paths */
