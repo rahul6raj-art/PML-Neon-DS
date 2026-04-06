@@ -1,0 +1,37 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as StocksCardStories from './StocksCard.stories';
+
+<Meta of={StocksCardStories} />
+
+<Title>Stocks Card</Title>
+
+<Description of={StocksCardStories} />
+
+## Playground
+
+Use **Show status badge** to show or hide the top **notice** **Badge** (muted). When it is on, edit **statusLabel** (e.g. `Pledge`). Other controls map to the component props: title, quantity, average price line, LTP, and change line (with **changeSentiment** for colour).
+
+<Canvas of={StocksCardStories.Playground} />
+
+<Controls of={StocksCardStories.Playground} />
+
+## Other stories
+
+- **Default** — static card with demo data.
+- **Without status tag** — no badge row.
+- **Negative change** — red change line.
+
+## Content & tokens
+
+- **Surface:** **`Card`** (default padding `--card-padding-*`, radius `--radius-24`, `--surface-level-1`).
+- **Badge:** **`Badge`** `type="text"` **`context="notice"`** **`muted`** when `statusLabel` is set.
+- **Typography:** **`body-medium`** (title), **`body-regular`** (price), **`subtext-regular`** (meta, change).
+- **Colours:** **`--text-neutral-strong`**, **`--text-neutral-weak`** (bullet), **`--text-positive-strong`** / **`--text-negative-strong`** / **`--text-neutral-moderate`** (change).
+- **Spacing:** **`--spacing-4`**, **`--spacing-8`**, **`--spacing-12`**, **`--spacing-16`**.
+- **INR:** No space between **₹** and the amount in copy and props.

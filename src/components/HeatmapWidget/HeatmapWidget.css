@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   Heatmap Widget — PML DS26 (Figma 2248:11281)
+   Heatmap Widget — PML DS26
    ═══════════════════════════════════════════════════ */
 
 .hmw {
@@ -93,7 +93,7 @@
   display: none;
 }
 
-/* ── Sector card (Technology, Banking & Finance — 324px Figma) ─ */
+/* ── Sector card (Technology, Banking & Finance — 324px) ─ */
 .hmw__card {
   flex: 0 0 var(--heatmap-sector-card-width);
   width: var(--heatmap-sector-card-width);
@@ -158,7 +158,7 @@
   align-self: stretch;
 }
 
-/* Tech row: 112 : 112 : 92 (Figma proportions, flex to fit card width) */
+/* Tech row: 112 : 112 : 92 (proportions, flex to fit card width) */
 .hmw__mosaic--tech4 > .hmw__cell:not(.hmw__stack) {
   flex: 112 1 0;
   min-width: 0;
@@ -259,7 +259,7 @@
   background: var(--colour-red-strong);
 }
 
-/* ── Per-cell radii (Figma) ────────────────────────── */
+/* ── Per-cell radii ────────────────────────── */
 .hmw__cell-r--tech-a {
   border-radius: var(--radius-16) var(--radius-4) var(--radius-4) var(--radius-16);
 }

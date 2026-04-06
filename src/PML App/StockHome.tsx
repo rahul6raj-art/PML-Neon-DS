@@ -11,6 +11,7 @@ import type { ReminderItem } from '../components/ReminderWidget';
 import { NewsWidget, NEWS_WIDGET_DEMO_ITEMS } from '../components/NewsWidget';
 import { PortfolioWidget } from '../components/PortfolioWidget';
 import { Ticker, TICKER_WIDGET_DEFAULT_ITEMS } from '../components/Ticker';
+import { StocksCard, STOCKS_CARD_DEFAULT_PROPS } from '../components/StocksCard';
 import './StockHome.css';
 
 /* ─── Data types ─── */
@@ -96,6 +97,20 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
 
         {/* ── Portfolio Summary ── */}
         <PortfolioWidget />
+
+        {/* ── Stocks (holdings card) ── */}
+        <div className="sh-section">
+          <SectionHeader
+            size="large"
+            title="Your stocks"
+            showChevron
+            trailing="none"
+            showSubtext={false}
+          />
+          <div className="sh-section__content">
+            <StocksCard {...STOCKS_CARD_DEFAULT_PROPS} />
+          </div>
+        </div>
 
         {/* ── Portfolio Intelligence / Upcoming SIPs ── */}
         <div className="sh-section">

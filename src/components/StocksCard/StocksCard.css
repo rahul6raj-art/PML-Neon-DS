@@ -1,0 +1,11 @@
+/* ═══════════════════════════════════════════════════
+   Stocks Card — Card chrome only (row = ListItem stocks-card)
+   Matches review frame: 376px column with 16px gutters → 344px card (--card-width);
+   padding uses --card-padding-* (24×16); inner row width 312px.
+   ═══════════════════════════════════════════════════ */
+
+.stocks-card.card {
+  min-height: 0;
+  width: 100%;
+  max-width: var(--card-width);
+}

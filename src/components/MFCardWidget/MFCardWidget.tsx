@@ -164,8 +164,7 @@ function MediumFooter(props: MFCardWidgetProps) {
 }
 
 /**
- * Paytm MF **Liquid Fund** card — tags, fund row, separator, metrics or rating row
- * (see [Figma — MF components](https://www.figma.com/design/FYefy2l7igtb2A7C9XleT9/Paytm-MF-Components---Master?node-id=442-5710)).
+ * Paytm MF **Liquid Fund** card — tags, fund row, separator, metrics or rating row.
  */
 export const MFCardWidget = ({
   cardType = 'large',

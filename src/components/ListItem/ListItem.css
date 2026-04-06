@@ -248,3 +248,213 @@
 .li-item__separator--inset {
   left: 60px;
 }
+
+/* ── Stocks card variant (holdings row) ── */
+.li-item--stocks-card.li-item {
+  width: 100%;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+.li-item__stocks-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.li-item__stocks-tags {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Optional leading avatar + main row (same Avatar API as default List Item) */
+.li-item__stocks-body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.li-item__stocks-body .li-item__stocks-row {
+  flex: 1;
+  min-width: 0;
+}
+
+.li-item__stocks-body .li-item__leading {
+  align-self: flex-start;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.li-item__stocks-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.li-item__stocks-lhs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.li-item__stocks-title {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.li-item__stocks-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.li-item__stocks-qty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-qty-value {
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-dot {
+  color: var(--text-neutral-weak);
+  user-select: none;
+}
+
+.li-item__stocks-avg {
+  color: var(--text-neutral-strong);
+}
+
+/* Price + change, optionally with list-style trailing (icon / text / link / button) */
+.li-item__stocks-rhs-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  flex-shrink: 0;
+}
+
+.li-item__stocks-rhs-group .li-item__trailing {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.li-item__stocks-rhs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 0;
+}
+
+.li-item__stocks-price {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-change {
+  margin: 0;
+}
+
+.li-item__stocks-change--positive {
+  color: var(--text-positive-strong);
+}
+
+.li-item__stocks-change--negative {
+  color: var(--text-negative-strong);
+}
+
+.li-item__stocks-change--neutral {
+  color: var(--text-neutral-moderate);
+}
+
+/* ── Stocks card MTF — margin footer ── */
+.li-item--stocks-card-mtf .li-item__stocks-inner {
+  gap: var(--spacing-12);
+}
+
+.li-item__stocks-margin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-pill-40);
+  background: var(--surface-level-3);
+}
+
+.li-item__stocks-margin-footer-lead {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.li-item__stocks-margin-footer-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-margin-footer-label {
+  color: var(--text-neutral-strong);
+}
+
+.li-item__stocks-margin-footer-value {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0;
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 0;
+}
+
+.li-item__stocks-margin-footer-pct {
+  margin: 0;
+}
+
+.li-item__stocks-margin-footer-pct--positive {
+  color: var(--text-positive-strong);
+}
+
+.li-item__stocks-margin-footer-pct--negative {
+  color: var(--text-negative-strong);
+}
+
+.li-item__stocks-margin-footer-pct--neutral {
+  color: var(--text-neutral-moderate);
+}
+
+.li-item__stocks-margin-footer-mult {
+  margin: 0;
+  margin-left: var(--spacing-4);
+  color: var(--text-primary-strong);
+}

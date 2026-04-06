@@ -49,7 +49,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Paytm MF **Liquid Fund** card: badges, fund logo + name, optional alert strip. Variants: **Large** (two-up metrics), **Medium** (rating + footer), **Small** / **Inline** (compact fund row). [Figma source](https://www.figma.com/design/FYefy2l7igtb2A7C9XleT9/Paytm-MF-Components---Master?node-id=442-5710).',
+          'Paytm MF **Liquid Fund** card: badges, fund logo + name, optional alert strip. Variants: **Large** (two-up metrics), **Medium** (rating + footer), **Small** / **Inline** (compact fund row).',
       },
     },
   },
