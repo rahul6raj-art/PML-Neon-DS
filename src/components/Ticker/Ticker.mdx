@@ -1,0 +1,54 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as TickerStories from './Ticker.stories';
+
+<Meta of={TickerStories} />
+
+<Title>Ticker</Title>
+
+<Description of={TickerStories} />
+
+## Playground
+
+Use the **Controls** panel only: **numberOfTickers** (1–12) and **Per card** — expiry + sentiment for each of the three **template slots** (NIFTY50 / NIFTYBANK / SENSEX). Extra pills repeat that cycle with a numbered suffix. **Top margin** matches Stock Home under the header.
+
+<Canvas of={TickerStories.Playground} />
+
+<Controls of={TickerStories.Playground} />
+
+## All expiry badges
+
+<Canvas of={TickerStories.AllExpiryBadges} />
+
+## Mixed expiry (per card)
+
+<Canvas of={TickerStories.MixedExpiryPerCard} />
+
+## Content shape
+
+Each item in `items` should include:
+
+- **`name`** — index label (`body` size, medium weight)
+- **`price`** — level (`body` size, regular, moderate text)
+- **`change`** — signed move (e.g. `+70.15`, `-625.15`)
+- **`percent`** — e.g. `(0.33%)`
+- **`positive`** — `true` for **muted positive** `Badge`, `false` for **muted negative** `Badge` (move + % combined)
+- **`expiryLabel`** (optional) — when set to a **non-empty** string (after trim), that row shows a **muted** notice **`Badge`** inline at the **front** of the pill. Omit or use empty string for **no** badge on that row (e.g. expiry on NIFTY only, not on NIFTYBANK).
+
+## Demo exports
+
+- **`TICKER_WIDGET_DEFAULT_ITEMS`** — Stock Home, no expiry.
+- **`TICKER_WIDGET_EXPIRY_ITEMS`** — every row has `expiryLabel`.
+- **`TICKER_WIDGET_MIXED_EXPIRY_ITEMS`** — only NIFTY50 has `expiryLabel`; others are plain.
+
+## Structure
+
+- **`.tk`** — flex row, `overflow-x: auto`, hidden scrollbar
+- **`.tk--top-margin`** — optional `margin-top` token (Stock Home)
+- **`.tk__item--expiry`** — only when that row has a badge: row with **`tk__expiry`** + **`tk__item-main`**
+- **`.tk__change`** — wraps **`Badge`** (`type="text"`, **`context`** `positive` | `negative`, **`muted`**) showing **`change` + `percent`** in one label

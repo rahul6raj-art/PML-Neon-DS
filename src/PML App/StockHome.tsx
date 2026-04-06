@@ -10,17 +10,10 @@ import { ReminderWidget } from '../components/ReminderWidget';
 import type { ReminderItem } from '../components/ReminderWidget';
 import { NewsWidget, NEWS_WIDGET_DEMO_ITEMS } from '../components/NewsWidget';
 import { PortfolioWidget } from '../components/PortfolioWidget';
+import { Ticker, TICKER_WIDGET_DEFAULT_ITEMS } from '../components/Ticker';
 import './StockHome.css';
 
 /* ─── Data types ─── */
-interface TickerItem {
-  name: string;
-  price: string;
-  change: string;
-  percent: string;
-  positive: boolean;
-}
-
 interface SipCard {
   status: string;
   statusContext: 'notice' | 'positive' | 'negative' | 'default';
@@ -29,12 +22,6 @@ interface SipCard {
 }
 
 /* ─── Static data ─── */
-const TICKERS: TickerItem[] = [
-  { name: 'NIFTY50', price: '25,155.50', change: '+70.15', percent: '(0.33%)', positive: true },
-  { name: 'NIFTYBANK', price: '58,323.5', change: '-625.15', percent: '(1.91%)', positive: false },
-  { name: 'SENSEX', price: '81,923.5', change: '-225.15', percent: '(0.31%)', positive: false },
-];
-
 const HEADER_TABS: TabItem[] = [
   { value: 'portfolio', label: 'Portfolio' },
   { value: 'ipos', label: 'IPOs', showBadge: true, badgeContent: '3' },
@@ -105,21 +92,7 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
           className="stock-home__header"
         />
 
-        {/* Ticker Strip */}
-        <div className="sh-ticker">
-          {TICKERS.map((t) => (
-            <div className="sh-ticker__item" key={t.name}>
-              <span className="sh-ticker__name">{t.name}</span>
-              <div className="sh-ticker__values">
-                <span className="sh-ticker__price">{t.price}</span>
-                <span className={`sh-ticker__change ${t.positive ? 'sh-ticker__change--positive' : 'sh-ticker__change--negative'}`}>
-                  <span>{t.change}</span>
-                  <span>{t.percent}</span>
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Ticker items={TICKER_WIDGET_DEFAULT_ITEMS} />
 
         {/* ── Portfolio Summary ── */}
         <PortfolioWidget />

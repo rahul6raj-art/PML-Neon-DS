@@ -45,7 +45,7 @@ Use **`PortfolioWidget`** (`.pw__chips`, `.pw__values`) on Stock Home; do not du
 
 - **Time-range chips row (`.pw__chips`):** `Chip` **`extra-small`**, row **`justify-content: space-between`**, horizontal inset **`padding-inline: var(--card-padding-inline)`**, **no** horizontal scroll unless product requires it.
 - **Gap below chips to key values (`.pw__values`):** **`margin-top: var(--spacing-32)`** between chips and the Invested / Returns block.
-- **Horizontal strips** (e.g. ticker): `padding: 0 var(--spacing-16)` (or `--card-padding-inline`), optional `overflow-x: auto` + hidden scrollbar where a scrolling strip is intended.
+- **Horizontal strips** (e.g. **`Ticker`** / `.tk`): `padding: 0 var(--spacing-16)` (or `--card-padding-inline`), optional `overflow-x: auto` + hidden scrollbar where a scrolling strip is intended.
 
 ## File placement
 

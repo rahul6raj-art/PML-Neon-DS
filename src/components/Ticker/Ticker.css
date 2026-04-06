@@ -1,0 +1,82 @@
+/* ═══════════════════════════════════════════════════
+   Ticker — Stock Home horizontal index strip
+   ═══════════════════════════════════════════════════ */
+
+.tk {
+  display: flex;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  max-width: var(--phone-column-width);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.tk--top-margin {
+  margin-top: var(--spacing-32);
+}
+
+.tk::-webkit-scrollbar {
+  display: none;
+}
+
+.tk__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-16);
+  background: var(--surface-level-1);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-8) var(--spacing-8) var(--spacing-8) var(--spacing-16);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Inline badge at the front; tighter gap; 8px left inset (vs 16px default pill) */
+.tk__item--expiry {
+  gap: var(--spacing-8);
+  padding-left: var(--spacing-8);
+}
+
+.tk__expiry {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tk__item-main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.tk__name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-strong);
+}
+
+.tk__values {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.tk__price {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-moderate);
+}
+
+/* Wraps design-system Badge for move + % (muted positive / negative context) */
+.tk__change {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
