@@ -1,7 +1,9 @@
 /* MTF home — Figma MTF (814:4571); Stock Home shell rhythm + tokens */
 
 .mtf-home {
-  width: var(--phone-column-width);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
   height: 100vh;
   height: 100dvh;
   background: var(--surface-level-4);

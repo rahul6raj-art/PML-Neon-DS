@@ -51,6 +51,9 @@
    * (tablet/web). Must match the value in BottomSheet.css @media (min-width: …).
    */
   --bottom-sheet-modal-breakpoint: 600px;
+  /* App viewport → density (see src/layout/viewportPlatform.ts + ViewportPlatformProvider) */
+  --app-viewport-tablet-min: 600px;
+  --app-viewport-web-min: 1024px;
   /* Content-well card width (376px phone column minus 16px gutters × 2) — Card, MF Card, Stock Home cards */
   --card-width: 344px;
   /* Horizontal carousels on the phone column — slightly narrower than --card-width so the next card peeks */

@@ -1,7 +1,9 @@
 /* ── Sign up Page (auth layout aligned with LoginPage) ── */
 
 .sign-up-page {
-  width: var(--phone-column-width);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
   height: 100vh;
   background: var(--surface-level-4);
   display: flex;

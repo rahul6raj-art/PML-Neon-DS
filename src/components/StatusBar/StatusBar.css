@@ -8,11 +8,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: var(--phone-column-width);
+  /* Fill header / phone column; on tablet scopes the column can be narrower than
+     --phone-column-width — match tab row width (100% of .header) instead of overflowing. */
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
+  align-self: stretch;
   height: var(--wheel-carousel-pill-height);
   padding: var(--spacing-12) var(--spacing-16) calc(var(--spacing-8) + var(--spacing-2));
   box-sizing: border-box;
   font-family: var(--font-family);
+}
+
+/* Web density / wide app: no device status bar (Storybook toolbar + Vite viewport provider) */
+[data-pml-platform='web'] .statusbar {
+  display: none;
 }
 
 /* ── Theme: Light (dark text) ─────────────────────── */

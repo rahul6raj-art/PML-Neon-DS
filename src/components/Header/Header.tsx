@@ -8,6 +8,7 @@ import { StatusBar } from '../StatusBar';
 import type { StatusBarTheme } from '../StatusBar';
 import { Tabs } from '../Tab';
 import type { TabItem, TabSize } from '../Tab';
+import { usePlatformTheme } from '../../theme';
 import './Header.css';
 
 export type HeaderType = 'homepage' | 'large' | 'regular';
@@ -33,6 +34,8 @@ export interface HeaderProps {
   rhsIcons?: string[];
   /** RHS icon click handler — receives icon name */
   onRhsIconClick?: (iconName: string) => void;
+  /** Optional controls before RHS icon buttons (e.g. compact CTA beside help) */
+  rhsLeading?: ReactNode;
 
   /** Show tabs row below header */
   showTabs?: boolean;
@@ -109,6 +112,7 @@ export const Header = ({
   onBack,
   rhsIcons = [],
   onRhsIconClick,
+  rhsLeading,
   showTabs = false,
   tabs = DEFAULT_TABS,
   activeTabValue,
@@ -135,6 +139,9 @@ export const Header = ({
   logoAlt = 'Logo',
   className,
 }: HeaderProps) => {
+  const platform = usePlatformTheme();
+  const showStatusBar = platform !== 'web';
+
   const wrapperClass = [
     'header',
     `header--${type}`,
@@ -158,6 +165,7 @@ export const Header = ({
           <span className="header__bar-title">{title}</span>
         </div>
         <div className="header__bar-rhs">
+          {rhsLeading}
           {rhsIcons.map((iconName) => (
             <button
               key={iconName}
@@ -189,6 +197,7 @@ export const Header = ({
             </button>
           )}
           <div className="header__bar-rhs">
+            {rhsLeading}
             {rhsIcons.map((iconName) => (
               <button
                 key={iconName}
@@ -252,6 +261,7 @@ export const Header = ({
         </div>
 
         <div className="header__bar-cell header__bar-cell--rhs">
+          {rhsLeading}
           {rhsIcons.map((iconName) => (
             <button
               key={iconName}
@@ -280,7 +290,7 @@ export const Header = ({
           />
         </div>
       )}
-      <StatusBar theme={statusBarTheme} time={time} />
+      {showStatusBar && <StatusBar theme={statusBarTheme} time={time} />}
 
       {type === 'homepage' && renderHomepage()}
       {type === 'large' && renderLarge()}

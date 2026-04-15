@@ -66,14 +66,18 @@ export const Search = ({
 
   const currentValue = isControlled ? controlledValue : internal;
   const hasValue = currentValue.length > 0;
+  const active = focused || hasValue;
 
   const isLarge = size === 'large';
   const iconSize = isLarge ? 24 : 20;
   const trailingIconSize = isLarge ? 22 : 20;
   const closeIconSize = isLarge ? 24 : 20;
 
+  /** Trailing slot shows clear (cross) instead of mic while focused or non-empty */
+  const trailingIsClear = trailingIcon && active;
+  /** Standalone close orb — hidden when trailing already acts as clear */
   const showClose =
-    (size === 'medium') || focused || hasValue;
+    !trailingIsClear && ((size === 'medium') || active);
 
   const wrapperClass = [
     'search',
@@ -140,11 +144,14 @@ export const Search = ({
               type="button"
               className="search__trailing-icon"
               disabled={disabled}
-              onClick={onMicClick}
-              aria-label="Voice search"
+              onClick={trailingIsClear ? handleClear : onMicClick}
+              aria-label={trailingIsClear ? 'Clear search' : 'Voice search'}
               tabIndex={-1}
             >
-              <Icon name="mic_outline" size={trailingIconSize} />
+              <Icon
+                name={trailingIsClear ? 'cross' : 'mic_outline'}
+                size={trailingIsClear ? closeIconSize : trailingIconSize}
+              />
             </button>
           )}
         </div>

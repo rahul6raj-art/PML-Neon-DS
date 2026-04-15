@@ -9,7 +9,9 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: var(--phone-column-width);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
   background: var(--surface-level-4);
   font-family: var(--font-family);
   box-sizing: border-box;
@@ -114,6 +116,12 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
+  flex-shrink: 0;
+}
+
+/* rhsLeading (e.g. small Button) should stay beside icon buttons, not compress */
+.header__bar-rhs > *,
+.header__bar-cell--rhs > * {
   flex-shrink: 0;
 }
 

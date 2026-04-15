@@ -86,6 +86,7 @@ const preview: Preview = {
         { platform },
         React.createElement('div', {
           className: PLATFORM_SCOPE_CLASS,
+          'data-pml-platform': platform,
           'data-theme': isDark ? 'dark' : undefined,
           style: {
             background: 'var(--surface-level-1)',

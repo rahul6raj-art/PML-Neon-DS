@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Avatar } from '../components/Avatar';
+import { Badge } from '../components/Badge';
 import { BottomNav, type BottomNavItem } from '../components/BottomNav';
 import { BrandLogo, brandLogoThemeForAppColorScheme } from '../components/BrandLogo';
 import { Button } from '../components/Button';
@@ -39,47 +40,56 @@ export function FintechWalletHomePage({ colorScheme = 'dark' }: FintechWalletHom
           showBrandLogo
           showGradient={false}
           statusBarTheme={headerIsDark ? 'dark' : 'light'}
+          rhsLeading={
+            <Button
+              variant="filled"
+              size="small"
+              icon="leading"
+              iconContent={<Icon name="star_filled" size={16} />}
+              label="Rewards"
+              htmlType="button"
+            />
+          }
           rhsIcons={['help']}
           className="fwh__header"
         />
 
-        <div className="fwh__actions-row">
-          <Button
-            variant="filled"
-            size="small"
-            icon="leading"
-            iconContent={<Icon name="star_filled" size={16} />}
-            label="Rewards"
-            htmlType="button"
-          />
-        </div>
-
-        <section className="fwh-section fwh-balance" aria-label="Account balance">
-          <button type="button" className="fwh-balance__label">
-            Priya&apos;s card balance
-            <Icon name="caret_small_down_main" size={16} aria-hidden />
-          </button>
-          <div className="fwh-balance__amount display-2-medium">₹5,21,098.31</div>
-          <div className="fwh-balance__hold">Money on hold ₹2,500.00</div>
-        </section>
-
-        <div className="fwh-quick" role="group" aria-label="Quick actions">
-          <Button
-            variant="stroke"
-            size="large"
-            icon="leading"
-            iconContent={<Icon name="arrow_up_outline" size={20} />}
-            label="Send"
-            htmlType="button"
-          />
-          <Button
-            variant="stroke"
-            size="large"
-            icon="leading"
-            iconContent={<Icon name="arrow_down_outline" size={20} />}
-            label="Receive"
-            htmlType="button"
-          />
+        <div className="fwh-section fwh-balance-card">
+          <Card>
+            <section className="fwh-balance" aria-label="Account balance">
+              <button type="button" className="fwh-balance__label">
+                Priya&apos;s card balance
+                <Icon name="caret_small_down_main" size={16} aria-hidden />
+              </button>
+              <div className="fwh-balance__amount display-2-medium">₹5,21,098.31</div>
+              <div className="fwh-balance__hold">
+                <Badge
+                  type="text"
+                  context="default"
+                  muted
+                  label="Money on hold ₹2,500.00"
+                />
+              </div>
+            </section>
+            <div className="fwh-quick" role="group" aria-label="Quick actions">
+              <Button
+                variant="stroke"
+                size="large"
+                icon="leading"
+                iconContent={<Icon name="arrow_up_outline" size={20} />}
+                label="Send"
+                htmlType="button"
+              />
+              <Button
+                variant="stroke"
+                size="large"
+                icon="leading"
+                iconContent={<Icon name="arrow_down_outline" size={20} />}
+                label="Receive"
+                htmlType="button"
+              />
+            </div>
+          </Card>
         </div>
 
         <div className="fwh-promo">
@@ -101,7 +111,9 @@ export function FintechWalletHomePage({ colorScheme = 'dark' }: FintechWalletHom
             size="extra-large"
             title="Send again"
             showChevron
-            trailing="none"
+            trailing="link"
+            linkText="+Add"
+            onLinkPress={() => {}}
             showSubtext={false}
           />
           <div className="fwh-hscroll" role="list" aria-label="Frequent recipients">

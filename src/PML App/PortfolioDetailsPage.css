@@ -1,7 +1,9 @@
 /* Portfolio details — PhoneColumnScrollShell (Discover / Stock Home parity, pd- prefix) */
 
 .portfolio-details {
-  width: var(--phone-column-width);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
   height: 100vh;
   background: var(--surface-level-4);
   display: flex;

@@ -1,7 +1,9 @@
 /* Order Pad — 376px column; scroll body + sticky footer (Figma 4.0 Order Pad parity) */
 
 .order-pad {
-  width: var(--phone-column-width);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
   height: 100vh;
   height: 100dvh;
   background: var(--surface-level-4);

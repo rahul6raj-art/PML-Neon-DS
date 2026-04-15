@@ -122,6 +122,7 @@ export function TriplePlatformPreview({ Story, isDark, storyKey }: TriplePlatfor
           <PlatformThemeProvider key={platform} platform={platform} scopeClassName={SCOPE_CLASS[platform]}>
             <div
               className={SCOPE_CLASS[platform]}
+              data-pml-platform={platform}
               data-theme={dataTheme}
               style={{
                 flex: `0 0 ${COLUMN_OUTER_PX}px`,
