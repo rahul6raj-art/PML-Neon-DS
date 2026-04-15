@@ -51,10 +51,11 @@
   box-sizing: border-box;
 }
 
+/* Stacked TextFields + CTA: vertical rhythm `--spacing-24` (see pml-screen-patterns.mdc). */
 .login-page__form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-16);
+  gap: var(--spacing-24);
   min-width: 0;
   width: 100%;
 }
@@ -72,7 +73,6 @@
 
 .login-page__submit {
   width: 100%;
-  margin-top: var(--spacing-8);
 }
 
 .login-page__submit .btn {

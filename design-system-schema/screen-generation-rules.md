@@ -24,6 +24,7 @@
 # Styling Rules
 
 - Apply **spacing, color, and typography** via registry tokens and existing component/widget APIs only.
+- **Stacked form inputs (`TextField` rows):** use **`gap: var(--spacing-24)`** on the column **`form`** (or wrapper) between full-width fields — see **`SignUpPage.css`**, **`LoginPage.css`**, and **`.cursor/rules/pml-screen-patterns.mdc`** (stacked `TextField` spacing). Prefer **`--spacing-24`** over **`--spacing-16`** unless PRD/Figma specifies a denser form.
 - **Avoid inline styles** except for rare cases (e.g. dynamic values not expressible as tokens). Default to CSS modules or co-located screen CSS using `var(--token)`.
 - **Do not use arbitrary literals** (random hex, px, font sizes) when a token exists for that role.
 
