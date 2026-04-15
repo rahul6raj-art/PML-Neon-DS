@@ -6,7 +6,7 @@
 .bsh {
   display: flex;
   flex-direction: column;
-  width: 376px;
+  width: var(--phone-column-width);
   background: var(--surface-level-3);
   border-radius: var(--radius-24)
                  var(--radius-24)
@@ -28,14 +28,14 @@
 .bsh--image {
   position: relative;
   align-items: flex-end;
-  height: 240px;
+  height: calc(var(--spacing-60) * 4);
   padding: var(--spacing-16);
 }
 
 /* ── Drag handle ─────────────────────────────────── */
 .bsh__drag-handle {
-  width: 36px;
-  height: 4px;
+  width: calc(var(--spacing-32) + var(--spacing-4));
+  height: var(--unit-2);
   flex-shrink: 0;
   border-radius: var(--radius-4);
   background: var(--icon-neutral-weak);
@@ -73,9 +73,9 @@
 .bsh__title {
   margin: 0;
   width: 100%;
-  font-size: 22px;
+  font-size: var(--font-size-title-1);
   font-weight: 500;
-  line-height: 28px;
+  line-height: var(--line-height-title-1);
   letter-spacing: 0;
   color: var(--text-neutral-strong);
 }
@@ -93,10 +93,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: calc(var(--spacing-32) + var(--spacing-8));
+  height: calc(var(--spacing-32) + var(--spacing-8));
   padding: var(--spacing-8);
-  border: 1px solid var(--border-neutral-medium);
+  border: var(--border-width-hairline) solid var(--border-neutral-medium);
   border-radius: var(--radius-full);
   background: transparent;
   color: var(--text-neutral-strong);
@@ -113,9 +113,16 @@
   background: var(--interaction-pressed);
 }
 
+.bsh__icon-btn svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
+  display: block;
+}
+
 .bsh__icon-btn:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
 }
 
 /* ── Subtitle row ────────────────────────────────── */
@@ -129,9 +136,9 @@
   margin: 0;
   flex: 1 0 0;
   min-width: 0;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   letter-spacing: 0;
   color: var(--text-neutral-medium);
   overflow: hidden;
@@ -141,9 +148,9 @@
 /* ── Tabs row ────────────────────────────────────── */
 .bsh__tabs {
   display: flex;
-  gap: 6px;
+  gap: var(--spacing-6);
   align-items: center;
-  padding: 0 16px;
+  padding: 0 var(--spacing-16);
   width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;

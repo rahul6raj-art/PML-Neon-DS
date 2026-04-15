@@ -196,7 +196,6 @@ const meta: Meta<HeaderStoryArgs> = {
   title: 'Components/Header',
   component: Header,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     type: {
       control: 'select',

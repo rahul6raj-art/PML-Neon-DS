@@ -25,6 +25,8 @@
   /* ═══════════════════════════════════════════════════════
      SEMANTIC TOKENS — Spacing
      Use these in components for padding, margin, gap.
+     Storybook / scoped platforms: the same semantic lines are reinjected from
+     `src/tokens/semanticNumberScopeRedeclarations.ts` after unit overrides.
      ═══════════════════════════════════════════════════════ */
 
   --spacing-2: var(--unit-1);   /* 2px */
@@ -44,8 +46,15 @@
   --card-padding-inline: var(--spacing-16);
   /* App shell / Stock Home phone column (see pml-screen-patterns) */
   --phone-column-width: 376px;
+  /*
+   * BottomSheet: viewport width at and above which the surface becomes a centered modal
+   * (tablet/web). Must match the value in BottomSheet.css @media (min-width: …).
+   */
+  --bottom-sheet-modal-breakpoint: 600px;
   /* Content-well card width (376px phone column minus 16px gutters × 2) — Card, MF Card, Stock Home cards */
   --card-width: 344px;
+  /* Horizontal carousels on the phone column — slightly narrower than --card-width so the next card peeks */
+  --carousel-card-width: 324px;
 
   /* Hairline borders (cards, icon buttons) */
   --border-width-hairline: 1px;

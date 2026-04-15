@@ -13,7 +13,6 @@ const meta: Meta<typeof GraphWidget> = {
   title: 'Widgets/Graph',
   component: GraphWidget,
   parameters: {
-    layout: 'centered',
     docs: {
       description: {
         component:

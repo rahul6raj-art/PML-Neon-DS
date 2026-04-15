@@ -1,0 +1,327 @@
+/* ═══ Stocks Discover — PML tokens + Stock Home rhythm (dv- prefix) ═══ */
+
+.discover {
+  width: var(--phone-column-width);
+  height: 100vh;
+  background: var(--surface-level-4);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+
+.discover__header {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.dv-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: var(--spacing-16);
+}
+
+/* First block below header tabs */
+.discover-indices {
+  padding-top: var(--spacing-16);
+}
+
+.dv-section {
+  margin-top: var(--spacing-56);
+}
+
+.dv-section__content {
+  padding: 0 var(--spacing-16);
+  box-sizing: border-box;
+}
+
+/* ── Market status (e.g. closed) ── */
+.dv-market-status {
+  margin: var(--spacing-8) var(--spacing-16) 0;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-12);
+  border: 1px solid var(--border-neutral-weak);
+  background: var(--surface-level-1);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+/* Index strip — Ticker (`.tk`); extra top padding matches former .dv-index-strip */
+.discover-indices .tk {
+  padding-top: var(--spacing-16);
+}
+
+/* ── Market movers: filter chips — single row, scroll inline (no wrap) ── */
+.dv-mover-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-inline: var(--spacing-16);
+  padding: 0 var(--spacing-16);
+  margin-top: var(--spacing-8);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dv-mover-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.dv-mover-filters .chip {
+  flex-shrink: 0;
+}
+
+.dv-mover-scroll {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  padding: var(--spacing-12) var(--spacing-16) 0;
+  scrollbar-width: none;
+}
+
+.dv-mover-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.dv-mover-card {
+  flex-shrink: 0;
+  width: 156px;
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  box-sizing: border-box;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.dv-mover-card:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+.dv-mover-card__sym {
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-neutral-medium);
+}
+
+.dv-mover-card__name {
+  margin-top: var(--spacing-4);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-moderate);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dv-mover-card__price {
+  margin-top: var(--spacing-8);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-neutral-strong);
+}
+
+.dv-mover-card__pct {
+  margin-top: var(--spacing-4);
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.dv-mover-card__pct--up {
+  color: var(--text-positive-strong);
+}
+
+.dv-mover-card__pct--down {
+  color: var(--text-negative-strong);
+}
+
+/* ── Strategy shortcut cards ── */
+.dv-strategy-scroll {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  padding: var(--spacing-16) var(--spacing-16) 0;
+  scrollbar-width: none;
+}
+
+.dv-strategy-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.dv-strategy-card {
+  flex-shrink: 0;
+  width: 200px;
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  border: none;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  font-family: var(--font-family);
+}
+
+.dv-strategy-card:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+.dv-strategy-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-12);
+  background: var(--surface-level-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--icon-primary-strong);
+}
+
+.dv-strategy-card__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-strong);
+}
+
+.dv-strategy-card__sub {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+/* ── Expert recommendations ── */
+.dv-rec-list {
+  padding: 0 var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.dv-rec-card {
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.dv-rec-card:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+.dv-rec-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+}
+
+.dv-rec-card__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-strong);
+}
+
+.dv-rec-card__summary {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-moderate);
+}
+
+.dv-rec-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spacing-4);
+}
+
+.dv-rec-card__analysts {
+  font-size: 10px;
+  color: var(--text-neutral-medium);
+}
+
+.dv-rec-disclaimer {
+  margin-top: var(--spacing-8);
+  padding: 0 var(--spacing-16);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--text-neutral-medium);
+}
+
+/* ── Screener shortcuts ── */
+.dv-screener-scroll {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  padding: var(--spacing-16) var(--spacing-16) 0;
+  scrollbar-width: none;
+}
+
+.dv-screener-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.dv-screener-card {
+  flex-shrink: 0;
+  width: 168px;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-16);
+  background: var(--surface-level-1);
+  border: 1px solid var(--border-neutral-weak);
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.dv-screener-card:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+.dv-screener-card__label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--text-primary-strong);
+}
+
+.dv-screener-card__desc {
+  margin-top: var(--spacing-4);
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--text-neutral-medium);
+}
+
+/* ── Bottom nav slot ── */
+.dv-bottom-nav {
+  flex-shrink: 0;
+  width: 100%;
+}

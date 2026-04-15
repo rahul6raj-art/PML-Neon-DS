@@ -1,14 +1,43 @@
 import type { ReactNode } from 'react';
 import './AppShell.css';
 
-export type AppScreenId = 'stock-home';
+export type AppScreenId =
+  | 'stock-home'
+  | 'mtf-home'
+  | 'stocks-discover'
+  | 'portfolio-details'
+  | 'order-pad'
+  | 'credit-card-bill-dashboard'
+  | 'credit-card-bill-pay'
+  | 'credit-card-statement-details'
+  | 'login'
+  | 'sign-up'
+  | 'options-terminal';
 
 export interface AppNavItem {
   id: AppScreenId;
   label: string;
+  /** Sidebar section heading (defaults to “Screens” if omitted) */
+  group?: string;
 }
 
-const DEFAULT_NAV: AppNavItem[] = [{ id: 'stock-home', label: 'PML Home' }];
+const DEFAULT_NAV: AppNavItem[] = [
+  { id: 'stock-home', label: 'Stock home', group: 'Stocks & portfolio' },
+  { id: 'stocks-discover', label: 'Discover', group: 'Stocks & portfolio' },
+  { id: 'mtf-home', label: 'MTF home', group: 'Stocks & portfolio' },
+  { id: 'portfolio-details', label: 'Portfolio details', group: 'Stocks & portfolio' },
+  { id: 'order-pad', label: 'Order pad', group: 'Stocks & portfolio' },
+  { id: 'credit-card-bill-dashboard', label: 'CC bill dashboard', group: 'Credit card' },
+  {
+    id: 'credit-card-statement-details',
+    label: 'CC statement details',
+    group: 'Credit card',
+  },
+  { id: 'credit-card-bill-pay', label: 'CC bill pay flow', group: 'Credit card' },
+  { id: 'login', label: 'Log in', group: 'Auth' },
+  { id: 'sign-up', label: 'Sign up', group: 'Auth' },
+  { id: 'options-terminal', label: 'Options terminal', group: 'Other' },
+];
 
 export interface AppShellProps {
   /** Current screen id (drives nav highlight) */
@@ -24,6 +53,20 @@ export interface AppShellProps {
   navItems?: AppNavItem[];
 }
 
+function navGroups(items: AppNavItem[]): { group: string; items: AppNavItem[] }[] {
+  const order: string[] = [];
+  const map = new Map<string, AppNavItem[]>();
+  for (const item of items) {
+    const g = item.group ?? 'Screens';
+    if (!map.has(g)) {
+      order.push(g);
+      map.set(g, []);
+    }
+    map.get(g)!.push(item);
+  }
+  return order.map((group) => ({ group, items: map.get(group)! }));
+}
+
 export const AppShell = ({
   activeScreen,
   onNavigate,
@@ -32,12 +75,14 @@ export const AppShell = ({
   children,
   navItems = DEFAULT_NAV,
 }: AppShellProps) => {
+  const groups = navGroups(navItems);
+
   return (
     <div
       className="app-shell"
       data-theme={theme === 'dark' ? 'dark' : undefined}
     >
-      <aside className="app-shell__aside" aria-label="App navigation">
+      <aside className="app-shell__aside" aria-label="App screen navigation">
         <div className="app-shell__theme">
           <span className="app-shell__theme-label" id="app-theme-label">
             Theme
@@ -65,18 +110,31 @@ export const AppShell = ({
             </button>
           </div>
         </div>
-        <div className="app-shell__brand">Screens</div>
-        <nav className="app-shell__nav">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="app-shell__nav-item"
-              aria-current={activeScreen === item.id ? 'true' : undefined}
-              onClick={() => onNavigate(item.id)}
-            >
-              {item.label}
-            </button>
+        <div className="app-shell__intro">
+          <div className="app-shell__brand">App screens</div>
+          <p className="app-shell__hint">
+            Full pages and flows run here. Use Storybook for components, widgets, and
+            tokens.
+          </p>
+        </div>
+        <nav className="app-shell__nav" aria-label="Screens">
+          {groups.map(({ group, items }) => (
+            <div key={group} className="app-shell__nav-group">
+              <h2 className="app-shell__nav-heading">{group}</h2>
+              <div className="app-shell__nav-list">
+                {items.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className="app-shell__nav-item"
+                    aria-current={activeScreen === item.id ? 'true' : undefined}
+                    onClick={() => onNavigate(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
       </aside>

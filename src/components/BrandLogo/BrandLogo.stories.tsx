@@ -6,7 +6,6 @@ const meta: Meta<typeof BrandLogo> = {
   title: 'Components/BrandLogo',
   component: BrandLogo,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     theme: {
       control: 'inline-radio',

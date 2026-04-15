@@ -10,9 +10,6 @@ const meta = {
   title: 'Components/Alert',
   component: Alert,
   subcomponents: { 'CTA Button': Button as React.ComponentType<unknown> },
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     type: {
@@ -247,7 +244,6 @@ export const DetailedCheckIcon: Story = {
 
 export const FullMatrix: Story = {
   name: 'Matrix / Complete',
-  parameters: { layout: 'padded' },
   render: () => {
     const states = ['primary', 'negative', 'warning', 'positive'] as const;
 

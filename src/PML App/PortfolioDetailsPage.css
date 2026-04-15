@@ -1,0 +1,51 @@
+/* Portfolio details — PhoneColumnScrollShell (Discover / Stock Home parity, pd- prefix) */
+
+.portfolio-details {
+  width: var(--phone-column-width);
+  height: 100vh;
+  background: var(--surface-level-4);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+
+.portfolio-details__header {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.pd-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: var(--spacing-16);
+}
+
+.pd-hero {
+  padding-top: var(--spacing-16);
+}
+
+.pd-banner {
+  padding: 0 var(--spacing-16);
+  margin-top: var(--spacing-16);
+}
+
+.pd-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-56) var(--spacing-16);
+  color: var(--text-secondary);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+}
+
+.pd-section {
+  margin-top: var(--spacing-56);
+}

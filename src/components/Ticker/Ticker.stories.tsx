@@ -108,7 +108,6 @@ const meta = {
   title: 'Widgets/Ticker',
   component: Ticker,
   parameters: {
-    layout: 'centered',
     controls: { expanded: true, sort: 'alpha' },
     docs: {
       description: {

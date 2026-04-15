@@ -1,0 +1,841 @@
+{
+  "widgets": [
+    {
+      "name": "ActivityTimeline",
+      "importPath": "components/ActivityTimeline",
+      "description": "Shows ordered steps as a vertical list or a horizontal progress bar.",
+      "composedFrom": ["Icon"],
+      "props": {
+        "direction": "vertical | horizontal",
+        "steps": "TimelineStep[] (status, title, optional subtitle, action, badge per step)",
+        "className": "string"
+      },
+      "slots": ["track", "stepContent"],
+      "states": ["completed", "awaiting"],
+      "usage": [
+        "Use for onboarding, KYC, or checkout steps where the user should see progress through a sequence.",
+        "Use horizontal layout for compact progress-only UI; vertical when steps need subtitles, actions, or badges."
+      ],
+      "notes": [
+        "Horizontal mode has no per-step action button—only labels and a fill bar.",
+        "Vertical per-step actions use a native `<button>`, not the Button component.",
+        "Do not use for arbitrary lists without a step metaphor; use ListItem or cards instead."
+      ]
+    },
+    {
+      "name": "AllocationBreakdownWidget",
+      "importPath": "components/AllocationBreakdownWidget",
+      "description": "Implemented widget: section title (optional SectionHeader) plus rows of label, formatted value, percent, and a token-styled bar; supports loading and empty copy.",
+      "composedFrom": ["SectionHeader", "Card", "ListItem", "Loading"],
+      "props": {
+        "title": "string",
+        "showSectionHeader": "boolean",
+        "sectionHeaderSize": "extra-large | large | medium | small",
+        "showChevron": "boolean",
+        "trailing": "none | link | text | icons | button",
+        "linkText": "string",
+        "onLinkPress": "() => void",
+        "buttonLabel": "string",
+        "onButtonPress": "() => void",
+        "rows": "AllocationBreakdownRow[] — each { label: string, valueLabel: string, percent: number (0–100), optional trend?: positive | negative | neutral }",
+        "showRowTrend": "boolean",
+        "emptyMessage": "string",
+        "loading": "boolean",
+        "onRowClick": "(row: AllocationBreakdownRow, index: number) => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "card", "rows"],
+      "states": ["default", "empty", "loading"],
+      "usage": [
+        "Use on portfolio drill-downs, MF holdings, goal or risk summaries whenever the spec shows class/category mix with amount and share.",
+        "Use inside `.sh-section` + `.sh-section__content` (or equivalent) after performance or holdings blocks.",
+        "Use when bars are proportional to percent; for two or three KPIs only, consider DataPoints instead."
+      ],
+      "notes": [
+        "Source: `src/components/AllocationBreakdownWidget/` — export `AllocationBreakdownWidget`, types `AllocationBreakdownRow`, `AllocationBreakdownWidgetProps`.",
+        "Prefer this widget over reassembling SectionHeader + Card + ListItem + bar markup so spacing, separators, and tokens stay consistent for generated screens.",
+        "Bar fill width is `percent` clamped to 0–100; format `valueLabel` with INR rules (no space after ₹).",
+        "`showRowTrend` and `row.trend` exist on the API but are not rendered yet—do not rely on visible sentiment until implemented."
+      ]
+    },
+    {
+      "name": "AmountSelectionWidget",
+      "importPath": "components/AmountSelectionWidget",
+      "description": "Payment amount step: choose a predefined option (e.g. minimum due, total due) or enter a custom amount with inline helper and validation, plus optional primary CTA readiness.",
+      "composedFrom": [],
+      "props": {
+        "title": "string — section title (e.g. Choose amount)",
+        "options": "AmountOption[] — each { id: string, label: string }",
+        "selectedOptionId": "string | null — which preset is active; null or sentinel when custom path is active",
+        "customAmount": "string — controlled raw input for custom entry",
+        "customAmountLabel": "string — floating label for custom field (e.g. Amount (INR))",
+        "helperText": "string — rules or limits shown next to custom input (e.g. max outstanding)",
+        "validationMessage": "string — inline error; empty when valid",
+        "currency": "string — e.g. INR for copy/format hints",
+        "showCustomAmount": "boolean — whether custom TextField is visible (true when custom option selected)",
+        "ctaEnabled": "boolean — mirrors whether Continue/Pay step may proceed",
+        "loading": "boolean",
+        "onOptionSelect": "(optionId: string) => void",
+        "onCustomAmountChange": "(value: string) => void",
+        "summaryContent": "ReactNode — optional recap when not in custom mode (e.g. bold amount + suffix)",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "presetChips", "customField", "summaryLine"],
+      "states": ["default", "customEntry", "invalid", "loading"],
+      "usage": [
+        "Prefer AmountSelectionWidget on bill pay, wallet top-up, or loan payment flows immediately after the bill summary (or equivalent) step.",
+        "Use when the product offers both preset amounts and a custom entry—avoid hand-wiring Chip rows and TextField separately without shared validation state.",
+        "Source: `src/components/AmountSelectionWidget/` — parent owns the primary CTA; keep `ctaEnabled` in sync with validation when wiring Continue/Pay outside the widget."
+      ],
+      "notes": [
+        "Source: `src/components/AmountSelectionWidget/` — export `AmountSelectionWidget`, types `AmountOption`, `AmountSelectionWidgetProps`.",
+        "**Predefined vs custom** paths must be explicit: `selectedOptionId` and `showCustomAmount` must stay in sync with the visible UI (no hidden custom value while a preset appears selected).",
+        "**Helper text** and **validation** must appear in the **same visual group** as the custom input, not only after submit or on another screen.",
+        "**ctaEnabled** (or equivalent derived state) must reflect validity—do not enable the step CTA when `invalid` or when custom entry is incomplete.",
+        "Prefer this contract over ad hoc **chips + loose input** so transactional flows pass `screen-review-checklist.md` (custom amount + CTA checks)."
+      ]
+    },
+    {
+      "name": "BillSummaryWidget",
+      "importPath": "components/BillSummaryWidget",
+      "description": "Bill or card payment summary block at the start of a pay flow: card identity, bill/payment status, total due, minimum due, outstanding, due date, and statement period in a clear hierarchy.",
+      "composedFrom": [],
+      "props": {
+        "cardName": "string — product/display name (e.g. card tier or product label)",
+        "maskedCardNumber": "string — e.g. · · · · 4242",
+        "issuer": "string — optional bank or network label",
+        "billStatus": "string — short status (e.g. Payment due, No bill yet)",
+        "totalDue": "string — formatted INR, statement total due",
+        "minimumDue": "string — formatted INR",
+        "outstandingAmount": "string — formatted INR, current outstanding",
+        "dueDate": "string — human-readable due date",
+        "statementPeriod": "string — optional statement window copy",
+        "helperText": "string — optional assistive line under amounts",
+        "statusNote": "string — optional banner-style note (due soon, autopay on, etc.)",
+        "showStatementPeriod": "boolean",
+        "loading": "boolean",
+        "partialFailureMessage": "string — when bill snapshot failed partially; omit or empty when OK",
+        "onRetryFetch": "() => void — optional when partialFailureMessage is set",
+        "className": "string"
+      },
+      "slots": ["identity", "statusChips", "amountBlock", "meta"],
+      "states": ["default", "loading", "partialFailure"],
+      "usage": [
+        "Prefer BillSummaryWidget as the first content block after flow chrome on credit-card bill pay, utility bill pay, or similar checkout-adjacent flows.",
+        "Use when the spec requires total due, minimum due, outstanding, and due date together—avoid one-off Card + loose Text stacks.",
+        "Source: `src/components/BillSummaryWidget/` — maps `statusNote` to a sleek Alert; only one `billStatus` badge today (multi-chip dashboards may need an extension)."
+      ],
+      "notes": [
+        "Source: `src/components/BillSummaryWidget/` — export `BillSummaryWidget`, type `BillSummaryWidgetProps`.",
+        "**Financial hierarchy** must be obvious: lead with what the user owes now vs minimum vs total; do not bury due date or outstanding.",
+        "**Amount groupings** must not look interchangeable—use labels, order, and emphasis so total due, minimum due, and outstanding are never visually ambiguous.",
+        "Prefer this widget contract over ad hoc **Card + text** composition so generated screens stay aligned with `screen-generation-rules.md` payment UX and INR formatting (no space after ₹)."
+      ]
+    },
+    {
+      "name": "BottomNav",
+      "importPath": "components/BottomNav",
+      "description": "Fixed bottom tab bar with icons, labels, and optional home indicator.",
+      "composedFrom": ["Icon", "HomeIndicator"],
+      "props": {
+        "items": "{ icon: string; activeIcon?: string; label: string }[]",
+        "activeIndex": "number",
+        "onChange": "(index: number) => void",
+        "showHomeIndicator": "boolean",
+        "showGradient": "boolean",
+        "className": "string"
+      },
+      "slots": ["tablist", "homeIndicator"],
+      "states": ["selectedTab"],
+      "usage": [
+        "Use as the single primary navigation for a phone-width shell (typically one per screen root).",
+        "Use when switching top-level destinations, not for in-screen filters (use Chip or SegmentedControl)."
+      ],
+      "notes": [
+        "Pin to the bottom of the viewport; pair with solid `--surface-level-1` per design system (no blur unless spec says so).",
+        "Prefer ≤5 items; controlled when `activeIndex` is provided.",
+        "Do not nest a second BottomNav inside scroll content."
+      ]
+    },
+    {
+      "name": "DataPoints",
+      "importPath": "components/DataPoints",
+      "description": "Two- or three-column KPI row with labels, main value, and optional subtitle.",
+      "composedFrom": ["Icon"],
+      "props": {
+        "type": "2-left-aligned | 2-spaced-out | 3",
+        "items": "DataPointItem[] (2 or 3 entries matching type)",
+        "className": "string"
+      },
+      "slots": ["columns"],
+      "states": [],
+      "usage": [
+        "Use inside cards or advisory rows to summarize two or three numbers side by side.",
+        "Use when alignment matters (split ends vs centered triple)—pick `type` to match the design."
+      ],
+      "notes": [
+        "`type=3` requires exactly three items; two-column types require two.",
+        "Do not use for more than three metrics in one row; add another DataPoints block or a different pattern.",
+        "Prefer this over hand-placing three text stacks when spacing must match the design system."
+      ]
+    },
+    {
+      "name": "FlowStepperWidget",
+      "importPath": "components/FlowStepperWidget",
+      "description": "Canonical step-progress UI for multi-step transactional flows (bill pay, checkout, KYC, setup): maps step metadata to completed, current, upcoming, and blocked visuals with optional horizontal or vertical orientation.",
+      "composedFrom": ["ActivityTimeline"],
+      "props": {
+        "steps": "FlowStep[] — each { id: string, label: string, optional shortLabel?: string }",
+        "currentStepId": "string — must match the visible screen step",
+        "completedStepIds": "string[] — prior completed step ids; when every id is listed, all steps render completed (e.g. processing/success)",
+        "status": "default | loading | disabled — widget-level chrome (e.g. dim while submitting)",
+        "orientation": "horizontal | vertical",
+        "onStepPress": "(stepId: string) => void — optional; not wired in ActivityTimeline wrapper yet",
+        "className": "string",
+        "ariaLabel": "string — progress region description (maps to root aria-label)"
+      },
+      "slots": ["track", "stepLabels"],
+      "states": ["default", "inProgress", "complete", "blocked"],
+      "usage": [
+        "Prefer FlowStepperWidget over manually composing circles, connector lines, and labels for payment, checkout, KYC, or onboarding step chrome.",
+        "Use when the screen plan defines explicit step ids and the current route or step state must stay in sync with the progress UI.",
+        "Source: `src/components/FlowStepperWidget/` — thin wrapper over `ActivityTimeline`; steps are only completed vs awaiting (no distinct “current” visual)."
+      ],
+      "notes": [
+        "Source: `src/components/FlowStepperWidget/` — export `FlowStepperWidget`, types `FlowStep`, `FlowStepperWidgetProps`, `FlowStepperStatus`.",
+        "The **current** step id must always match the **visible** screen; never show a future step as complete.",
+        "Label and state mapping must be **explicit** in props (`currentStepId`, `completedStepIds`)—do not infer completion from array order alone without validation.",
+        "Prefer this registry contract over ad hoc progress rows so AI-generated flows stay consistent with `screen-generation-rules.md` (flow accuracy) and `screen-review-checklist.md` (Flow Accuracy)."
+      ]
+    },
+    {
+      "name": "GraphWidget",
+      "importPath": "components/GraphWidget",
+      "description": "Portfolio-style line chart: gradient stroke, glow layers, and endpoint marker.",
+      "composedFrom": [],
+      "props": {
+        "svgPath": "string",
+        "isPositive": "boolean",
+        "indicatorY": "number",
+        "chartKey": "string",
+        "aria-label": "string",
+        "className": "string"
+      },
+      "slots": [],
+      "states": ["positive", "negative"],
+      "usage": [
+        "Use inside PortfolioWidget or another hero when you have an SVG path in the default 346×116 viewBox space.",
+        "Use when you need this exact glow/endpoint treatment—not as a general-purpose charting solution."
+      ],
+      "notes": [
+        "Path must end at the documented endpoint; see GraphWidget.tsx comments.",
+        "Optional tuning: height, viewBox, indicatorXRatio, showGradient, showRipple, showDot—omit unless you know coordinates.",
+        "Do not use without a valid `svgPath`; this is not a data-to-path chart library."
+      ]
+    },
+    {
+      "name": "Header",
+      "importPath": "components/Header",
+      "description": "Top app chrome: status bar, homepage or titled layout, optional Tabs and Chip row.",
+      "composedFrom": ["BrandLogo", "StatusBar", "Tabs", "Chip", "Icon"],
+      "props": {
+        "type": "homepage | large | regular",
+        "title": "string",
+        "subtitle": "string",
+        "time": "string",
+        "statusBarTheme": "light | dark",
+        "showBackButton": "boolean",
+        "onBack": "() => void",
+        "rhsIcons": "string[]",
+        "onRhsIconClick": "(iconName: string) => void",
+        "showTabs": "boolean",
+        "tabs": "TabItem[]",
+        "activeTabValue": "string",
+        "onTabChange": "(value: string) => void",
+        "showChips": "boolean",
+        "chipLabels": "string[]",
+        "activeChip": "number",
+        "onChipChange": "(index: number) => void",
+        "showBrandLogo": "boolean",
+        "brandLogoTheme": "light | dark",
+        "className": "string"
+      },
+      "slots": ["statusBar", "brandOrTitle", "tabs", "chips"],
+      "states": ["selectedTab", "selectedChip"],
+      "usage": [
+        "Use once at the top of each phone screen before scrollable content.",
+        "Use `type=homepage` for discover-style entry; `large`/`regular` for inner pages with back and actions."
+      ],
+      "notes": [
+        "Do not place inside `.sh-content` scroll—keep fixed/sticky at top of the 376px column.",
+        "Chip row is for global header filters; dense portfolio time ranges belong in PortfolioWidget, not duplicate chip rows here unless spec requires.",
+        "Tab props mirror `Tabs` / `TabItem`; align `activeTabValue` with tab `value` strings."
+      ]
+    },
+    {
+      "name": "HeatmapWidget",
+      "importPath": "components/HeatmapWidget",
+      "description": "Sector heatmap strip with wheel tabs and per-sector mosaic cards.",
+      "composedFrom": ["SectionHeader", "WheelCarousel"],
+      "props": {
+        "title": "string",
+        "showHeader": "boolean",
+        "onTitleClick": "() => void",
+        "wheelItems": "string[]",
+        "wheelValue": "string",
+        "defaultWheelValue": "string",
+        "onWheelChange": "(value: string) => void",
+        "sectorsByWheel": "Record<string, HeatmapSector[]>",
+        "sectors": "HeatmapSector[]",
+        "maxSectorCards": "number",
+        "wheelRepeatCount": "number",
+        "wheelCanonicalTabOrder": "string[]",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "wheel", "sectorCards"],
+      "states": ["selectedWheelTab"],
+      "usage": [
+        "Use on Stocks Discover (or similar) for index/stocks/F&O sector performance at a glance.",
+        "Use when `wheelItems` keys must map to `sectorsByWheel` datasets."
+      ],
+      "notes": [
+        "Prefer this over standalone WheelCarousel + custom mosaics—the layout and tall/short mosaic modes are built in.",
+        "`sectors` bypasses wheel switching for a static strip only.",
+        "Index/F&O mosaics are taller than Stocks; use `wheelCanonicalTabOrder` if display labels differ from canonical tab ids."
+      ]
+    },
+    {
+      "name": "HoldingsSectionWidget",
+      "importPath": "components/HoldingsSectionWidget",
+      "description": "Implemented widget: optional SectionHeader, then Loading, or a vertical stack of StocksCard rows, or an empty Card with copy plus optional primary Button.",
+      "composedFrom": ["SectionHeader", "StocksCard", "Card", "Button", "Loading"],
+      "props": {
+        "title": "string",
+        "showSectionHeader": "boolean",
+        "sectionHeaderSize": "extra-large | large | medium | small",
+        "showChevron": "boolean",
+        "trailing": "none | link | text | icons | button",
+        "linkText": "string",
+        "onLinkPress": "() => void",
+        "buttonLabel": "string",
+        "onButtonPress": "() => void",
+        "items": "StocksCardProps[] — each row matches **StocksCard** (title, quantity, avgPriceLabel, price, changeLabel, changeSentiment; optional layout mtf, statusLabel, statusBadgeTone, margin*, avatar*, trailing*, onClick)",
+        "loading": "boolean",
+        "emptyMessage": "string",
+        "emptyCtaLabel": "string",
+        "onEmptyCtaClick": "() => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "holdingsStack", "emptyCard"],
+      "states": ["default", "empty", "loading"],
+      "usage": [
+        "Use on portfolio drill-downs, watchlists, and position summaries when each row is one security (StocksCard shape).",
+        "Place after performance or allocation blocks inside `.sh-section` rhythm; keep stacks in the phone column scroll area.",
+        "Do not use for MF fund cards at AMC density—use MFCardWidget; do not use for simple name+LTP strips—consider MostPopularWidget."
+      ],
+      "notes": [
+        "Source: `src/components/HoldingsSectionWidget/` — export `HoldingsSectionWidget`, type `HoldingsSectionWidgetProps`; `items` is `StocksCardProps[]`.",
+        "Prefer this widget over hand-building SectionHeader + gap stack + StocksCard so empty states, spacing (`--spacing-16` between cards), and INR strings stay consistent for AI-generated screens.",
+        "`loading` shows Loading instead of the stack; `items=[]` with `emptyMessage` and optional `emptyCtaLabel` + `onEmptyCtaClick` drives the empty Card.",
+        "Per-item fields follow **StocksCard**—pass through optional layout, status, margin, avatar, and trailing props as needed."
+      ]
+    },
+    {
+      "name": "LedgerActivityListWidget",
+      "importPath": "components/LedgerActivityListWidget",
+      "description": "Implemented widget: optional SectionHeader, then loading, unavailable plain copy, empty copy, or a Card of default ListItem rows (primary line, subtitle/meta, trailing value).",
+      "composedFrom": ["SectionHeader", "Card", "ListItem", "Loading"],
+      "props": {
+        "title": "string",
+        "showSectionHeader": "boolean",
+        "sectionHeaderSize": "extra-large | large | medium | small",
+        "showChevron": "boolean",
+        "trailing": "none | link | text | icons | button",
+        "linkText": "string",
+        "onLinkPress": "() => void",
+        "buttonLabel": "string",
+        "onButtonPress": "() => void",
+        "items": "LedgerActivityItem[] — each { primaryText: string, secondaryText: string, trailingText: string, optional statusLabel?: string }",
+        "loading": "boolean",
+        "emptyMessage": "string",
+        "unavailableMessage": "string — plain copy when the list failed to load (e.g. partial fetch); omit Card",
+        "onItemClick": "(item: LedgerActivityItem, index: number) => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "card", "rows", "fallbackCopy"],
+      "states": ["default", "empty", "loading", "unavailable"],
+      "usage": [
+        "Use on portfolio drill-downs, order history, SIP/statement feeds, payments, or any dense event list with amount or delta on the trailing edge.",
+        "Place inside `.sh-section` rhythm after holdings or allocation blocks; keep inside the phone column scroll region.",
+        "Do not use for step-based flows—use ActivityTimeline. Do not use for news cards—use NewsWidget."
+      ],
+      "notes": [
+        "Source: `src/components/LedgerActivityListWidget/` — export `LedgerActivityListWidget`, types `LedgerActivityItem`, `LedgerActivityListWidgetProps`.",
+        "Prefer this widget over hand-building SectionHeader + Card + ListItem stacks so separators, subtext, and INR trailing strings stay consistent for AI-generated screens.",
+        "When `unavailableMessage` is non-empty, it renders instead of the Card (partial fetch). `loading` replaces the list with Loading.",
+        "`statusLabel` on items is accepted but not rendered yet—do not rely on visible per-row status until implemented."
+      ]
+    },
+    {
+      "name": "MFCardWidget",
+      "importPath": "components/MFCardWidget",
+      "description": "Mutual fund summary card with AMC avatar, optional tags, metrics, and footer.",
+      "composedFrom": ["Card", "Avatar", "Badge", "Icon"],
+      "props": {
+        "cardType": "large | medium | small | inline",
+        "fundName": "string",
+        "logoName": "string",
+        "logoCategory": "LogoCategory",
+        "primaryValue": "string",
+        "dataLeftTitle": "string",
+        "dataLeftValue": "string",
+        "dataRightTitle": "string",
+        "dataRightValue": "string",
+        "showTags": "boolean",
+        "showAlertBanner": "boolean",
+        "className": "string"
+      },
+      "slots": ["alertBanner", "tags", "fundRow", "metrics", "footer"],
+      "states": [],
+      "usage": [
+        "Use in MF home, watchlists, or fund lists when one fund needs a dense summary in a Card.",
+        "Use `cardType` to match density (large hero vs inline strip)."
+      ],
+      "notes": [
+        "`fundName` is required; visibility of sub-blocks depends on `cardType`.",
+        "Do not use for equity holdings rows—use StocksCard or ListItem stocks variants.",
+        "AMC mark uses Avatar `type=logo`."
+      ]
+    },
+    {
+      "name": "MostPopularWidget",
+      "importPath": "components/MostPopularWidget",
+      "description": "Segment chips plus a Card list of popular instruments with LTP and change.",
+      "composedFrom": ["SectionHeader", "Chip", "Card"],
+      "props": {
+        "title": "string",
+        "showHeader": "boolean",
+        "onTitleClick": "() => void",
+        "segment": "PopularSegment",
+        "onSegmentChange": "(s: PopularSegment) => void",
+        "itemsBySegment": "Record<PopularSegment, PopularListItem[]>",
+        "onRowClick": "(item, segment) => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "segmentChips", "listCard"],
+      "states": ["selectedSegment"],
+      "usage": [
+        "Use on discover when the same list shape repeats per segment (e.g. stocks vs F&O).",
+        "Use when rows are simple title + subtitle + LTP + % change—not full holdings detail."
+      ],
+      "notes": [
+        "Rows are custom buttons inside Card, not ListItem—do not expect ListItem props on rows.",
+        "Wire `itemsBySegment` from API; mock keys/types come from `mostPopularMockData`.",
+        "Do not use for news-style cards—use NewsWidget or a composed Card + SectionHeader pattern."
+      ]
+    },
+    {
+      "name": "NewsWidget",
+      "importPath": "components/NewsWidget",
+      "description": "Section header plus horizontally scrolling news cards (badges, body, time).",
+      "composedFrom": ["SectionHeader", "Badge", "Icon"],
+      "props": {
+        "title": "string",
+        "items": "NewsWidgetItem[]",
+        "showSectionHeader": "boolean",
+        "sectionHeaderSize": "extra-large | large | medium | small",
+        "showChevron": "boolean",
+        "showBadges": "boolean",
+        "onCardAction": "(index: number) => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "cardScroller"],
+      "states": [],
+      "usage": [
+        "Use below portfolio or discover blocks for headline-style market news.",
+        "Use when cards should peek horizontally with consistent card padding tokens."
+      ],
+      "notes": [
+        "`onCardAction` fires from the card chevron—not the whole card (verify UX with product).",
+        "Set `showBadges=false` to hide all badge chips regardless of `items[].badges`.",
+        "Do not use for long-form fund strategy cards—compose SectionHeader + Card + DataPoints + Button instead."
+      ]
+    },
+    {
+      "name": "PaymentMethodSelectionWidget",
+      "importPath": "components/PaymentMethodSelectionWidget",
+      "description": "Payment flow step: pick exactly one saved or available instrument (UPI, net banking, card on file, etc.) with primary and secondary lines per row, empty and unavailable fallbacks, and loading.",
+      "composedFrom": [],
+      "props": {
+        "title": "string — section title (e.g. Payment method)",
+        "methods": "PaymentMethodRow[] — each { id: string, primaryLabel: string, secondaryLabel?: string }",
+        "selectedMethodId": "string | null",
+        "helperText": "string — optional guidance under the list",
+        "emptyMessage": "string — when no methods exist",
+        "unavailableMessage": "string — when methods failed to load (partial fetch)",
+        "loading": "boolean",
+        "onMethodSelect": "(methodId: string) => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "methodList", "fallback"],
+      "states": ["default", "loading", "empty", "unavailable"],
+      "usage": [
+        "Prefer PaymentMethodSelectionWidget after amount selection and before review in bill pay, checkout, or wallet flows.",
+        "Use when exactly one method must be chosen from a list—avoid reassembling Card + ListItem + Radio without a shared selection contract.",
+        "Source: `src/components/PaymentMethodSelectionWidget/` — parent owns Continue; pass `emptyMessage` / `unavailableMessage` when APIs return no or failed methods."
+      ],
+      "notes": [
+        "Source: `src/components/PaymentMethodSelectionWidget/` — export `PaymentMethodSelectionWidget`, types `PaymentMethodRow`, `PaymentMethodSelectionWidgetProps`.",
+        "Exactly **one** row must read as **selected** at a time; `selectedMethodId` must match the highlighted control.",
+        "**Primary** and **secondary** metadata (e.g. VPA vs “Primary”) must stay **readable**—no cramped or low-contrast treatment for the subtitle line.",
+        "**Continue / review CTA** readiness in the parent flow must depend on a **valid** `selectedMethodId` (non-null when methods exist); do not advance with no selection.",
+        "Prefer this contract over ad hoc **card + list + radio** composition so selection, empty, and unavailable states stay consistent with `LedgerActivityListWidget`-style patterns where applicable."
+      ]
+    },
+    {
+      "name": "PaymentOutcomeWidget",
+      "importPath": "components/PaymentOutcomeWidget",
+      "description": "Post-submit payment outcomes: processing (in-flight), success (confirmed with amount/reference and next steps), or failure (recoverable error with retry and safe exit)—one contract instead of three separate screen fragments.",
+      "composedFrom": ["Alert", "Loading", "DataPoints", "Button"],
+      "props": {
+        "status": "processing | success | failure — drives layout and semantics",
+        "title": "string — headline for success/failure; optional or generic for processing",
+        "message": "string — body copy (e.g. bank confirmation timing, error explanation)",
+        "amountPaid": "string — formatted INR line for success; omit or empty when N/A",
+        "referenceId": "string — transaction reference when success; optional",
+        "supportText": "string — secondary line (e.g. where to find receipt, support hint)",
+        "primaryActionLabel": "string — e.g. Done, Retry, View activity",
+        "secondaryActionLabel": "string — optional (e.g. Back home, Contact support)",
+        "onPrimaryAction": "() => void",
+        "onSecondaryAction": "() => void — omit when no secondary CTA",
+        "loading": "boolean — optional extra busy state; must be true or implied when status is processing",
+        "className": "string"
+      },
+      "slots": ["processingRegion", "outcomeSummary", "referenceOrKpis", "actions"],
+      "states": ["processing", "success", "failure"],
+      "usage": [
+        "Render immediately after the user confirms pay/submit—replace ad hoc full-screen Loading, then swap to this widget (or equivalent) for terminal success/failure on the same route or step.",
+        "Use in bill pay, wallet sends, checkout, and UPI/Bank-transfer flows wherever the gateway returns async success, failure, or timeout.",
+        "Parent owns routing: map `onPrimaryAction` / `onSecondaryAction` to dismiss, retry payment, open receipts, or exit without implying funds moved on failure."
+      ],
+      "notes": [
+        "Source: `src/components/PaymentOutcomeWidget/` — export `PaymentOutcomeWidget`, types `PaymentOutcomeStatus`, `PaymentOutcomeWidgetProps`. Success `DataPoints` render only when both `amountPaid` and `referenceId` are provided.",
+        "**Success:** surface `amountPaid` and `referenceId` clearly; `supportText` and CTAs should steer to useful **next actions** (receipts, recent activity, home)—not a dead end.",
+        "**Failure:** message must state **no debit** or safe state when applicable; **primary** action should favor **retry** when product allows; **secondary** should offer a **safe exit** (back, change method, home) without trapping the user.",
+        "**Processing:** use a dedicated in-flight layout (spinner/progress copy)—must feel **distinct** from terminal success/failure (no celebratory or error chrome, no premature reference IDs).",
+        "Prefer this widget contract over scattered **Alert + Loading + DataPoints + Button** blocks so transactional screens stay consistent with `screen-generation-rules.md` and review checklists for outcome clarity and recovery."
+      ]
+    },
+    {
+      "name": "PaymentReviewWidget",
+      "importPath": "components/PaymentReviewWidget",
+      "description": "Final review before submit: restates card/account, paying amount, payment method, optional extra summary rows, disclaimer copy, and an explicit confirmation control (e.g. checkbox) gating the pay action.",
+      "composedFrom": [],
+      "props": {
+        "title": "string — e.g. Review & confirm",
+        "cardLabel": "string — card/account identity value (row label in UI is fixed “Card”)",
+        "amountLabel": "string — e.g. Paying",
+        "amountValue": "string — formatted INR amount",
+        "methodLabel": "string — e.g. Method",
+        "methodValue": "string — selected instrument summary",
+        "summaryRows": "ReviewSummaryRow[] — optional extra { label: string, value: string }[]",
+        "disclaimer": "string — posting / illustrative outstanding note",
+        "confirmationChecked": "boolean",
+        "confirmationLabel": "string — checkbox label (legal or product acknowledgment)",
+        "onConfirmationChange": "(checked: boolean) => void",
+        "loading": "boolean",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "summary", "disclaimer", "confirmation"],
+      "states": ["default", "unchecked", "ready", "processing"],
+      "usage": [
+        "Prefer PaymentReviewWidget immediately before the irreversible pay/submit step in bill pay, checkout, or transfer flows.",
+        "Use when the spec requires restating amount + method + identity and an explicit user acknowledgment—avoid a loose Card plus Checkbox without a shared contract.",
+        "Source: `src/components/PaymentReviewWidget/` — confirm/pay CTA stays in the parent screen; gate on `confirmationChecked` and loading/processing flags."
+      ],
+      "notes": [
+        "Source: `src/components/PaymentReviewWidget/` — export `PaymentReviewWidget`, types `ReviewSummaryRow`, `PaymentReviewWidgetProps`.",
+        "**Critical payment details** (card/account, amount, method) must be **repeated clearly** in the summary—not collapsed into a single vague line.",
+        "The **confirmation affordance** (`confirmationLabel` + `confirmationChecked`) must be **explicit**—no implicit consent from tapping Pay alone unless product legal approves.",
+        "Parent flow **CTA readiness** (Confirm and pay) must track **review completeness**: typically `confirmationChecked` true and not `loading` / `processing`.",
+        "Prefer this contract over ad hoc **summary Card + checkbox** composition so transactional screens meet `screen-generation-rules.md` review and `screen-review-checklist.md` Transaction UX checks."
+      ]
+    },
+    {
+      "name": "PortfolioWidget",
+      "importPath": "components/PortfolioWidget",
+      "description": "Portfolio hero: total value, privacy toggle, returns, chart, time-range chips, KPIs, optional buying power.",
+      "composedFrom": ["Chip", "Icon", "GraphWidget"],
+      "props": {
+        "headerTitle": "string",
+        "totalValue": "string",
+        "showEyeToggle": "boolean",
+        "valuesVisible": "boolean",
+        "onValuesVisibilityChange": "(visible: boolean) => void",
+        "returnsValue": "string",
+        "timeRanges": "readonly string[]",
+        "activeRangeIndex": "number",
+        "onRangeChange": "(index: number) => void",
+        "svgPath": "string",
+        "chartPositive": "boolean",
+        "chartIndicatorY": "number",
+        "chartAriaLabel": "string",
+        "investedAmount": "string",
+        "overallReturnsValue": "string",
+        "showBuyingPower": "boolean",
+        "buyingPowerAmount": "string",
+        "onAddFundsPress": "() => void",
+        "className": "string"
+      },
+      "slots": ["title", "valueRow", "returns", "chart", "rangeChips", "investedReturns", "buyingPower"],
+      "states": ["valuesMasked", "selectedRange"],
+      "usage": [
+        "Use as the first major block on Stock Home after Header/Ticker.",
+        "Use when you need privacy masking, range chips, and the bundled GraphWidget in one unit."
+      ],
+      "notes": [
+        "Do not wrap in Card—widget is already a full-width hero; use section spacing (`--spacing-56`) outside.",
+        "Time-range chips use `Chip` extra-small and space-between row per screen patterns.",
+        "Export `maskPortfolioDigits` for consistent masking with the eye toggle.",
+        "Do not duplicate GraphWidget below this block for the same series unless the spec shows two charts."
+      ]
+    },
+    {
+      "name": "ReminderWidget",
+      "importPath": "components/ReminderWidget",
+      "description": "Upcoming-action cards: single full-width or horizontal carousel with ListItem + CTA.",
+      "composedFrom": ["SectionHeader", "Card", "ListItem", "Button"],
+      "props": {
+        "variant": "single | carousel",
+        "items": "ReminderItem[]",
+        "showHeader": "boolean",
+        "headerTitle": "string",
+        "onTitleClick": "() => void",
+        "className": "string"
+      },
+      "slots": ["sectionHeader", "cardStackOrCarousel"],
+      "states": [],
+      "usage": [
+        "Use for incomplete orders, SIP reminders, or actionable alerts that need a primary CTA per row.",
+        "Use `variant=carousel` when multiple reminders should peek on the sides."
+      ],
+      "notes": [
+        "Carousel uses flex edge spacers—do not remove ReminderWidget.css carousel pattern when changing layout.",
+        "Do not use for passive news—use NewsWidget; do not use for full holdings—use StocksCard.",
+        "Per-item fields (logo, CTA, close) live on `ReminderItem` in the source file."
+      ]
+    },
+    {
+      "name": "Search",
+      "importPath": "components/Search",
+      "description": "Search input styled for chrome: optional search/mic icons, clear, Enter to submit.",
+      "composedFrom": ["Icon"],
+      "props": {
+        "size": "large | medium",
+        "stroke": "boolean",
+        "label": "string",
+        "value": "string",
+        "onChange": "(value: string) => void",
+        "onSubmit": "(value: string) => void",
+        "onClear": "() => void",
+        "disabled": "boolean",
+        "className": "string"
+      },
+      "slots": [],
+      "states": ["disabled", "filled"],
+      "usage": [
+        "Use in Header or discover when the primary action is search, not generic text entry.",
+        "Use when you need mic/clear affordances specific to search."
+      ],
+      "notes": [
+        "Enter runs `onSubmit`; use TextField for forms, passwords, and floating-label fields.",
+        "Do not use inside Card for auth—login/signup use TextField per patterns.",
+        "Prefer full width of the content column; avoid squeezing beside many icons without design check."
+      ]
+    },
+    {
+      "name": "SectionHeader",
+      "importPath": "components/SectionHeader",
+      "description": "Standard section title row with optional chevron, subtext, trailing action, and chip strip.",
+      "composedFrom": ["Chip", "Button", "Icon"],
+      "props": {
+        "size": "extra-large | large | medium | small",
+        "title": "string",
+        "trailing": "none | link | text | icons | button",
+        "showSubtext": "boolean",
+        "subtext": "ReactNode",
+        "showChevron": "boolean",
+        "linkText": "string",
+        "onLinkPress": "() => void",
+        "buttonLabel": "string",
+        "onButtonPress": "() => void",
+        "showChips": "boolean",
+        "chipLabels": "string[]",
+        "activeChip": "number",
+        "onChipChange": "(index: number) => void",
+        "className": "string"
+      },
+      "slots": ["titleRow", "subtext", "trailing", "chipRow"],
+      "states": ["selectedChip"],
+      "usage": [
+        "Use to start any major vertical section (widgets, lists) with consistent 16px-aligned title rhythm.",
+        "Use `trailing=link` or `button` for “View all” / secondary actions tied to the section."
+      ],
+      "notes": [
+        "Wrap content below in `.sh-section__content` with section spacing per pml-screen-patterns.",
+        "`size=extra-large` always shows a chevron.",
+        "Do not nest a full Header inside a section—SectionHeader is for in-page sections only."
+      ]
+    },
+    {
+      "name": "StocksCard",
+      "importPath": "components/StocksCard",
+      "description": "One holding row inside a Card (standard or MTF margin footer).",
+      "composedFrom": ["Card", "ListItem"],
+      "props": {
+        "layout": "standard | mtf",
+        "title": "string",
+        "quantity": "string",
+        "avgPriceLabel": "string",
+        "price": "string",
+        "changeLabel": "string",
+        "changeSentiment": "positive | negative | neutral",
+        "statusLabel": "string",
+        "marginReturnLabel": "string",
+        "onClick": "() => void",
+        "className": "string"
+      },
+      "slots": ["card", "row"],
+      "states": [],
+      "usage": [
+        "Use in portfolio or position lists when each row is one security with qty, avg, LTP, and change.",
+        "Use `layout=mtf` when the design shows margin return footer under the row."
+      ],
+      "notes": [
+        "Composes ListItem `stocks-card` / `stocks-card-mtf`—prefer this over raw ListItem for holdings cards.",
+        "Default layout omits trailing chevron icon; use text/link/button trailing if needed.",
+        "INR: no space after ₹ in formatted strings."
+      ]
+    },
+    {
+      "name": "Ticker",
+      "importPath": "components/Ticker",
+      "description": "Horizontal strip of index-style pills: name, price, change, optional expiry badge.",
+      "composedFrom": ["Badge"],
+      "props": {
+        "items": "TickerItem[]",
+        "topMargin": "boolean",
+        "className": "string"
+      },
+      "slots": ["pills"],
+      "states": [],
+      "usage": [
+        "Use directly under Header on Stock Home for NIFTY/SENSEX-style snapshot.",
+        "Use when each item is one benchmark row, not arbitrary menu items."
+      ],
+      "notes": [
+        "Set `expiryLabel` only on rows that need the expiry Badge; leave others blank for mixed strips.",
+        "Horizontal overflow is expected—strip scrolls within the phone column.",
+        "Do not use for user-generated lists or settings—wrong information density."
+      ]
+    },
+    {
+      "name": "WheelCarousel",
+      "importPath": "components/WheelCarousel",
+      "description": "Center-snapped infinite horizontal selector for short text tabs.",
+      "composedFrom": [],
+      "props": {
+        "items": "string[]",
+        "value": "string",
+        "defaultValue": "string",
+        "onChange": "(value: string) => void",
+        "repeatCount": "number",
+        "aria-label": "string",
+        "className": "string"
+      },
+      "slots": ["scrollTrack"],
+      "states": ["selected"],
+      "usage": [
+        "Use only when you need a wheel-style tab strip without the heatmap (custom filters, experimental layouts).",
+        "Prefer HeatmapWidget when sector cards and wheel belong together."
+      ],
+      "notes": [
+        "Default `repeatCount` is 51 (odd values work best for infinite scroll).",
+        "Do not duplicate the wheel inside HeatmapWidget—that widget already embeds WheelCarousel.",
+        "Not a replacement for Tabs under Header—Tabs is underline style; WheelCarousel is pill + snap scroll."
+      ]
+    },
+    {
+      "name": "SectionErrorBanner",
+      "importPath": "components/Alert",
+      "description": "Section- or page-level error, warning, or recoverable failure message using the sleek or detailed Alert layout with optional primary action (e.g. retry).",
+      "composedFrom": ["Alert", "Button", "Icon"],
+      "props": {
+        "type": "sleek | detailed — compact bar vs titled card",
+        "state": "negative | warning | primary | positive — semantic severity (use negative/warning for failures; primary for neutral notices in error slots)",
+        "description": "string — main message body",
+        "showDescription": "boolean",
+        "title": "string — detailed type only",
+        "showTitle": "boolean",
+        "showIcon": "boolean",
+        "iconContent": "string (glyph) | ReactNode",
+        "showCta": "boolean — show action button (retry, open settings, etc.)",
+        "ctaLabel": "string",
+        "onCtaClick": "() => void",
+        "ctaVariant": "filled | stroke | tonal | link",
+        "ctaSize": "large | medium | small | extra-small",
+        "ctaLoading": "boolean",
+        "ctaDisabled": "boolean",
+        "showClose": "boolean",
+        "onClose": "() => void",
+        "className": "string — e.g. stack spacing in a banner column"
+      },
+      "slots": [],
+      "states": ["negative", "warning", "primary", "positive"],
+      "usage": [
+        "Place at the top of `.sh-section__content`, under a SectionHeader, or in a dedicated notices stack at the top of the scroll region (see CreditCardBillDashboard banner pattern).",
+        "Use when a whole section or screen region failed to load, needs a warning before content, or offers a clear recovery action—pair `state=\"negative\"` or `warning` with `showCta` + `onCtaClick` for retry.",
+        "Use sleek for dense stacks; detailed when title + body + CTA need stronger hierarchy."
+      ],
+      "notes": [
+        "There is no separate `SectionErrorBanner.tsx` export today—this registry entry is the canonical contract: implement with `Alert` from `components/Alert` using the props above until a thin wrapper is added.",
+        "Prefer this documented shape over ad hoc divs + raw colors when modeling the same UX so generated screens stay token-safe and consistent with `Alert.css`.",
+        "Do not use for field-level validation—use `TextField` / `Dropdown` error props; do not replace transient toasts—consider `Snackbar` for short post-action feedback.",
+        "For marketing or one-off copy blocks that are not error/recovery semantics, raw `Alert` with custom `className` is fine; this widget name signals **failure / warning / recoverable** section UI."
+      ]
+    },
+    {
+      "name": "CompactQuantityStepperWidget",
+      "importPath": "components/CompactQuantityStepperWidget",
+      "description": "Implemented single-row − / value / + stepper for dense trading and order-entry: icon-only stroke Buttons + low-emphasis TextField, token-tight `gap: var(--spacing-2)`, shared 32px row height in `CompactQuantityStepperWidget.css`.",
+      "composedFrom": ["Button", "TextField"],
+      "props": {
+        "value": "number | string — displayed quantity (controlled)",
+        "min": "number — inclusive floor (default 0)",
+        "max": "number — inclusive ceiling (default large)",
+        "step": "number — increment/decrement delta; +/- snaps with `round(clamp/step)*step` then reclamps",
+        "disabled": "boolean — disables buttons and input; root gets `cqsw--disabled`",
+        "decrementLabel": "string — accessible name for minus action",
+        "incrementLabel": "string — accessible name for plus action",
+        "onDecrement": "() => void — after a successful decrement",
+        "onIncrement": "() => void — after a successful increment",
+        "onChange": "(value: number | string) => void — from +/- emits clamped numeric; from typing emits raw string (parent normalizes)",
+        "className": "string"
+      },
+      "slots": ["decrement", "value", "increment"],
+      "states": ["default", "disabled", "minReached", "maxReached"],
+      "usage": [
+        "Prefer CompactQuantityStepperWidget on equity, F&O, and other compact transaction flows whenever the spec shows a single integrated stepper row.",
+        "Use instead of hand-building minus/value/plus rows—spacing and neutral step-button styling stay consistent.",
+        "With focus in the center field, ArrowUp / ArrowDown increment or decrement (same clamp rules as buttons)."
+      ],
+      "notes": [
+        "Source: `src/components/CompactQuantityStepperWidget/` — export `CompactQuantityStepperWidget`, type `CompactQuantityStepperWidgetProps`; import from `components/CompactQuantityStepperWidget`.",
+        "Decrement at `min` and increment at `max` disable the respective button; root adds `cqsw--min-reached` / `cqsw--max-reached` for optional styling.",
+        "Step buttons use widget-scoped neutral stroke (overrides default green stroke Button) so the row reads as one trading control.",
+        "Decrement shows a Unicode minus glyph; increment uses `plus_outline` Icon—slight visual asymmetry vs two matching glyphs.",
+        "TextField label `Qty` is visually hidden; center value uses `aria-label=\"Quantity\"`. Typed values are not auto-clamped on blur—parent should validate or rewrite `value` if needed."
+      ]
+    }
+  ]
+}

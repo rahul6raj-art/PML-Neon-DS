@@ -2,7 +2,7 @@
 .radio {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-8);
   padding: 0;
   margin: 0;
   border: none;
@@ -16,8 +16,8 @@
 }
 
 .radio:focus-within {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: var(--radius-4);
 }
 
@@ -31,37 +31,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   flex-shrink: 0;
 }
 
 .radio__indicator svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
 }
 
 /* ── Label ────────────────────────────────────────────── */
 .radio__label {
-  padding: 2px 0;
+  padding: var(--spacing-2) 0;
   color: var(--text-neutral-strong);
 }
 
 /* ── Size: Large ─────────────────────────────────────── */
 .radio--large .radio__label {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
 }
 
 .radio--large.radio--emphasis-low .radio__label {
-  line-height: 20px;
+  line-height: var(--line-height-body);
 }
 
 /* ── Size: Medium ────────────────────────────────────── */
 .radio--medium .radio__label {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
 }
 
 /* ── Label Emphasis: High ────────────────────────────── */
@@ -82,10 +82,10 @@
 /* ── Hidden native input ─────────────────────────────── */
 .radio__input {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--border-width-hairline);
+  height: var(--border-width-hairline);
   padding: 0;
-  margin: -1px;
+  margin: calc(-1 * var(--border-width-hairline));
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;

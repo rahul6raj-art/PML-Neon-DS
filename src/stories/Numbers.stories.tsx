@@ -203,7 +203,7 @@ const NumberTokens = () => {
 const meta: Meta = {
   title: 'Foundation/Number Tokens',
   component: NumberTokens,
-  parameters: { layout: 'padded', controls: { disable: true } },
+  parameters: { controls: { disable: true } },
   tags: ['autodocs'],
 };
 

@@ -45,8 +45,8 @@
 }
 
 .hmw__section-header-wrap[role='button']:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: var(--radius-4);
 }
 
@@ -86,7 +86,7 @@
   flex-shrink: 0;
   width: var(--spacing-16);
   align-self: stretch;
-  min-height: 1px;
+  min-height: var(--border-width-hairline);
 }
 
 .hmw__strip::-webkit-scrollbar {
@@ -221,12 +221,12 @@
   justify-content: center;
   gap: var(--spacing-4);
   width: 100%;
-  max-width: 111px;
+  max-width: calc(var(--heatmap-sector-card-width) * 111 / 324);
   text-align: center;
 }
 
 .hmw__cell--compact .hmw__cell-inner {
-  max-width: 69px;
+  max-width: calc(var(--heatmap-sector-card-width) * 69 / 324);
   gap: var(--spacing-4);
 }
 

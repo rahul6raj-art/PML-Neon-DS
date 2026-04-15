@@ -7,7 +7,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: var(--spacing-4);
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
@@ -21,61 +21,61 @@
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
 }
 
 /* ── Size: Large ─────────────────────────────────── */
 .btn--large {
-  height: 52px;
+  height: calc(var(--spacing-48) + var(--spacing-4));
   padding: 0 var(--spacing-24);
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: 600;
-  line-height: 22px;
+  line-height: var(--line-height-title-4);
 }
 
 /* ── Size: Medium ────────────────────────────────── */
 .btn--medium {
-  height: 40px;
+  height: calc(var(--spacing-32) + var(--spacing-8));
   padding: 0 var(--spacing-16);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 600;
-  line-height: 20px;
+  line-height: var(--line-height-body);
 }
 
 /* ── Size: Small ─────────────────────────────────── */
 .btn--small {
-  height: 32px;
+  height: var(--spacing-32);
   padding: 0 var(--spacing-12);
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
 }
 
 /* ── Size: Extra Small ───────────────────────────── */
 .btn--extra-small {
-  height: 24px;
+  height: var(--spacing-24);
   padding: 0 var(--spacing-8);
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
 }
 
 /* ── Icon-only (square) ──────────────────────────── */
 .btn--icon-only.btn--large {
-  width: 52px;
+  width: calc(var(--spacing-48) + var(--spacing-4));
   padding: 0;
 }
 .btn--icon-only.btn--medium {
-  width: 40px;
+  width: calc(var(--spacing-32) + var(--spacing-8));
   padding: 0;
 }
 .btn--icon-only.btn--small {
-  width: 32px;
+  width: var(--spacing-32);
   padding: 0;
 }
 .btn--icon-only.btn--extra-small {
-  width: 24px;
+  width: var(--spacing-24);
   padding: 0;
 }
 
@@ -101,7 +101,7 @@
 .btn--stroke {
   background-color: var(--surface-level-1);
   color: var(--text-positive-strong);
-  border: 1px solid var(--border-positive-strong);
+  border: var(--border-width-hairline) solid var(--border-positive-strong);
 }
 .btn--stroke:hover:not(:disabled) {
   background-color: var(--background-positive-weak);
@@ -186,6 +186,24 @@
 .btn__icon svg {
   display: block;
   fill: currentColor;
+  /* Token-driven size so icons track platform density (overrides Icon inline width/height). */
+  flex-shrink: 0;
+}
+
+.btn--large .btn__icon svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+}
+
+.btn--medium .btn__icon svg {
+  width: calc(var(--spacing-16) + var(--spacing-4));
+  height: calc(var(--spacing-16) + var(--spacing-4));
+}
+
+.btn--small .btn__icon svg,
+.btn--extra-small .btn__icon svg {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
 }
 
 .btn__label {

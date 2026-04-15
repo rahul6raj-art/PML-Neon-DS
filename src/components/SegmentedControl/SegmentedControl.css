@@ -1,10 +1,10 @@
 /* ── Container ────────────────────────────────────── */
 .segmented-control {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 0;
-  padding: 4px;
+  padding: var(--spacing-4);
   background: var(--border-neutral-medium);
   border-radius: var(--radius-full);
   box-sizing: border-box;
@@ -21,16 +21,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: var(--spacing-6);
+  padding: var(--spacing-8) var(--spacing-16);
   border: none;
   border-radius: var(--radius-4);
   background: transparent;
   cursor: pointer;
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 400;
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
   text-align: center;
   white-space: nowrap;
@@ -49,7 +49,9 @@
 }
 
 .segment:focus-visible {
-  box-shadow: 0 0 0 2px var(--surface-level-1), 0 0 0 4px var(--border-primary-strong);
+  box-shadow:
+    0 0 0 var(--unit-1) var(--surface-level-1),
+    0 0 0 var(--unit-2) var(--border-primary-strong);
   border-radius: var(--radius-24);
 }
 
@@ -57,7 +59,7 @@
 .segment--active {
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
-  box-shadow: 0 1px 4px var(--shadow-elevation-2);
+  box-shadow: 0 var(--border-width-hairline) var(--spacing-4) var(--shadow-elevation-2);
   font-weight: 500;
   cursor: default;
 }
@@ -78,7 +80,7 @@
 /* When label is the only child, let it stretch to fill */
 .segment__label:only-child {
   flex: 1 0 0;
-  min-width: 1px;
+  min-width: var(--border-width-hairline);
 }
 
 /* ── Icon ─────────────────────────────────────────── */
@@ -91,6 +93,10 @@
 
 .segment__icon svg {
   fill: currentColor;
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex-shrink: 0;
+  display: block;
 }
 
 /* ── Badge ────────────────────────────────────────── */
@@ -98,16 +104,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 16px;
-  min-height: 16px;
-  width: 20px;
-  padding: 2px 6px;
+  min-width: var(--spacing-16);
+  min-height: var(--spacing-16);
+  width: calc(var(--spacing-16) + var(--unit-2));
+  padding: var(--unit-1) var(--spacing-6);
   border-radius: var(--radius-16);
   background: var(--background-primary-weak);
   color: var(--text-positive-strong);
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   text-align: center;
   flex-shrink: 0;
   box-sizing: border-box;

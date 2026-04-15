@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-family);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-subtext);
   letter-spacing: 0;
   text-align: center;
   white-space: nowrap;
@@ -15,27 +15,27 @@
 
 /* ── Type: Text ──────────────────────────────────────── */
 .badge--text {
-  gap: 2px;
-  padding: 2px 8px;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-8);
   border-radius: var(--radius-full);
 }
 
 /* ── Type: Count ─────────────────────────────────────── */
 .badge--count {
   gap: 0;
-  padding: 2px 4px;
+  padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--radius-16);
-  min-height: 16px;
-  min-width: 16px;
-  width: 20px;
+  min-height: var(--spacing-16);
+  min-width: var(--spacing-16);
+  width: calc(var(--spacing-16) + var(--spacing-4));
 }
 
 /* ── Type: Dot ───────────────────────────────────────── */
 .badge--dot {
-  width: 6px;
-  height: 6px;
-  min-width: 6px;
-  min-height: 6px;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  min-width: var(--spacing-6);
+  min-height: var(--spacing-6);
   border-radius: var(--radius-16);
   padding: 0;
 }
@@ -128,7 +128,7 @@
 .badge--live {
   background-color: var(--background-negative-strong);
   color: var(--text-universal-light);
-  gap: 4px;
+  gap: var(--spacing-4);
 }
 
 /* ── Context: Live (muted) ───────────────────────────── */
@@ -139,8 +139,8 @@
 
 /* ── Live blink indicator ────────────────────────────── */
 .badge__blink {
-  width: 4px;
-  height: 4px;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
   border-radius: var(--radius-4);
   flex-shrink: 0;
   animation: blink 1.4s infinite;
@@ -156,10 +156,10 @@
 
 /* Dot type for Live context */
 .badge--dot.badge--live {
-  width: 6px;
-  height: 6px;
-  min-width: 6px;
-  min-height: 6px;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+  min-width: var(--spacing-6);
+  min-height: var(--spacing-6);
   border-radius: var(--radius-4);
   background-color: var(--background-negative-strong);
   padding: 0;
@@ -176,8 +176,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 12px;
-  height: 12px;
+  width: var(--spacing-12);
+  height: var(--spacing-12);
   flex-shrink: 0;
 }
 

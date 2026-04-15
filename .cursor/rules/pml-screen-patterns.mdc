@@ -1,9 +1,46 @@
 ---
-description: PML app screen layout, design tokens, and Stock Home patterns — use for every new screen so layout does not drift
+description: PRD/Figma → PML design system — Storybook components, tokens, Stock Home patterns, mandatory for screens and UI work
 alwaysApply: true
 ---
 
 # PML app screens (canonical pattern)
+
+## Automatic enforcement — the user does not need to remind you
+
+This rule has **`alwaysApply: true`**. Treat it as **on for every message** in this workspace.
+
+For **any** request to **make**, **create**, **build**, **add**, **implement**, **design**, or **refactor** UI, screens, widgets, or flows (including “quick” or vague prompts), you **must** follow this document **automatically**. The user should **never** have to say “follow `DESIGN.md`”, “use Storybook”, or “use tokens”—that is **already required** here.
+
+- **Read `DESIGN.md` (repo root) when it exists** and the work could touch documented theme, typography, Figma mapping, or flows—**even if the user does not mention the file.**
+- **Only bypass** these conventions when the user **explicitly** opts out in writing (e.g. prototype-only, external stack).
+
+When adding or refactoring **in-app screens**, **multi-step flows**, or **new UI** (e.g. `src/PML App/`, feature folders such as `src/options-terminal/`, Storybook stories), you **must** follow the pipeline below. Do **not** ship screens built only from ad hoc utility CSS (e.g. raw Tailwind palette names) and one-off markup while ignoring the design system—unless the user **explicitly** opts out in writing.
+
+**Default agent behavior:** For any brief (PRD excerpt, Figma link, screenshot, or chat instruction), **analyze the requirement first**, then **map it to existing components and tokens**, then **implement**. The deliverable is **our** layout language (this repo’s components + CSS variables), not a generic HTML/CSS sketch.
+
+## Requirement analysis → design-system build (PRD, Figma, references)
+
+Use this when translating **PRD**, **Figma**, **screen references**, or **product specs** into code:
+
+1. **Extract** — Scope, flows, states (loading / empty / error), copy, **INR** formatting, density (phone **376px** column). Note interactive patterns (tabs, filters, lists, carousels).
+2. **Map before coding** — List which **`src/components/`** primitives apply (discover usage via **`*.stories.tsx`** in the same folder as the component). Assign **spacing, color, type, radii** to **`src/tokens/`** semantic variables. Choose a **screen shell** reference (**`StockHomePage`** + **`StockHome.css`**, or an existing PML app page such as **`Discover`** when the feature matches).
+3. **Figma** — If the user provides a link, use **file key** and **node id** when using design tools. Prefer **hierarchy, spacing rhythm, and component intent**; in code, bind to **semantic tokens**, not one-off hex from the file unless no token exists (then add or extend tokens deliberately).
+4. **Storybook** — Treat Storybook as the **catalog of truth** for how components behave and compose. Prefer **extending** a component or adding a **story** over cloning markup. New composites (widgets, screen sections) should get a **story** when they are reusable or review-critical—unless the user opts out.
+5. **Do not** — Add parallel “local” button/card/chip styles that duplicate **`src/components/`** for the same role. Do not invent a second spacing or color system beside **`src/tokens/`** for app UI.
+6. **Document** — After shipping a Figma-linked or PRD-owned flow, **update `DESIGN.md`** so the repo keeps one written spec for theme, tokens, and mapping.
+
+If inputs are ambiguous, **infer conservatively** (tokens + existing patterns) and **call out assumptions** in the PR or reply—not unscoped custom CSS.
+
+## Mandatory pipeline (create screen / design / flow)
+
+1. **`DESIGN.md` (repo root)** — **Read it when present** before implementing UI that could relate to documented flows, theme, or Figma. Do **not** wait for the user to name this file. It records **theme, typography roles, spacing intent, and token ↔ Figma mapping**. Align new work with those semantics; **update `DESIGN.md`** when you add or change a documented Figma-linked flow so the single doc stays the written spec.
+2. **Storybook** — Treat Storybook as the **component catalog** for this repo: discover and reuse **`src/components/`** primitives (e.g. `Header`, `Card`, `Chip`, `Button`, `SectionHeader`, `ListItem`, `Icon`, `BottomNav`). Prefer **extending** an existing component over duplicating patterns. When the user asks for a **new screen** and a preview is appropriate, **wire it in the app shell** and/or add or update a **story** so the screen stays discoverable—unless the user says not to add Storybook (e.g. auth-only flows).
+3. **Tokens** — Use **`src/tokens/`** (`colors.css`, `numbers.css`, `typography.css`, etc.) and semantic CSS variables (`--surface-*`, `--text-*`, `--spacing-*`, `--card-padding-*`, …). **No raw hex or arbitrary pixel soup for app chrome** when a token exists. **`index.css`** already loads tokens for the app; screen CSS should **not** redefine a parallel palette.
+4. **Screen pattern (this doc)** — Match **`StockHomePage`** + **`StockHome.css`** for frame, scroll, sections, and rhythm; use the **Checklist** and **Components** sections below for every new screen.
+
+If any step conflicts with a **direct user instruction**, follow the user and then **update this rule or `DESIGN.md`** when the new approach should become standard.
+
+---
 
 When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storybook previews), treat **`StockHomePage`** + **`StockHome.css`** as the reference implementation. Match its **structure, spacing, tokens, and component choices** unless the user explicitly asks for something different.
 
@@ -17,6 +54,7 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 
 - **Spacing:** `--spacing-*` from `src/tokens/numbers.css` (e.g. section gaps `--spacing-56`, common gutters `--spacing-16`, `--spacing-32`).
 - **Cards:** default padding is **`--card-padding-block`** (24px) × **`--card-padding-inline`** (16px) — use `Card` and/or these variables; do not invent new card insets per screen. **Cards do not use an outer border by default** — use plain `<Card>` (no `stroke` prop) unless a screen or design explicitly calls for a stroked/outline card.
+- **`TextField` inside `Card`:** The design-system **`TextField`** root is **`width: 344px`** in `TextField.css` (full phone content width). **`Card`** is **`max-width: 344px`** *including* horizontal padding, so the **inner** content box is **narrower** than 344px. Unscoped `TextField`s therefore **overflow** the card visually (inputs align to 344px while the card body is ~312px). **Always** scope overrides on auth / form screens, e.g. `.my-page__form .textfield { width: 100%; max-width: 100%; min-width: 0; }`, with **`form` / column wrapper** using **`width: 100%; min-width: 0`** where the parent is a flex item. Set **`Card`** to **`width: 100%; max-width: var(--card-width); box-sizing: border-box`** when it sits in a centered column. See **`LoginPage.css`** (`login-page__form`, `login-page__card`).
 - **Colors/type:** semantic tokens (`--surface-*`, `--text-*`, `--border-*`, `--font-weight-*`, etc.) from existing CSS variables — not raw hex for UI chrome.
 
 ## Currency (INR)
@@ -34,7 +72,7 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 
 - **Header / tabs / chips in header:** `Header` from design system.
 - **Section titles:** `SectionHeader`.
-- **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. Default chip sizing for dense filters/time ranges: **`Chip` `size="extra-small"`** (see `Chip.css` / Stock Home time row).
+- **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. **Chip** default for dense filters/time ranges (e.g. portfolio time row) is often **`extra-small`** (see `Chip.css` / Stock Home); **PRD, Figma, or explicit user instruction** may specify **`small` / `medium` / `large`** for filter strips—follow that over this default when documented.
 - **Rows:** `ListItem` for standard list rows.
 - **Bottom bar:** `BottomNav` + `HomeIndicator` — default solid **`--surface-level-1`** (no frosted/blur unless specified).
 - **Reminders:** `ReminderWidget` — **carousel** horizontal inset uses **flex `::before` / `::after` spacers** + `scroll-padding-inline` (not padding-only on `overflow-x: auto`). Do not “fix” carousel edge stickiness by removing that pattern.
@@ -52,13 +90,22 @@ Use **`PortfolioWidget`** (`.pw__chips`, `.pw__values`) on Stock Home; do not du
 - New screen components: **`src/PML App/`** (or parallel feature folder), styles alongside **`*Page.css`** or **`StockHome.css`**-style prefixed classes (`sh-*` or a consistent new prefix per screen).
 - Shared UI: **`src/components/`** — extend existing components and tokens before adding parallel implementations.
 
+## Shared components — platform density (guardrails)
+
+For **CSS under `src/components/`** (not product screens): prefer **token variables** over new magic **`px`** so Mobile / Tablet / Web scaling stays consistent; do not embed **platform branching** in components. **Legitimate exceptions** include hairlines, device-chrome mocks, logos/illustrations, and values with no token yet (then extend tokens deliberately). Human + doc guardrails: **`CONTRIBUTING.md`**, **`src/components/README.md`**, Storybook **Introduction → Contributor checklist**. ESLint does not lint `.css`.
+
 ## Checklist before shipping a new screen
 
-1. Width **376px** column + **`.sh-content`** scroll pattern.
-2. **Sections** use **`--spacing-56`** (or documented exception) + **`SectionHeader`** + **`sh-section__content`** where appropriate.
-3. **16px** horizontal rhythm via **tokens** (`--card-padding-inline` / `--spacing-16`).
-4. **Cards** use **`Card`** + **`--card-padding-*`**, **without** `stroke` unless the design requires a border.
-5. Carousels / **overflow-x** rows: confirm **inset** (spacers or scroll-padding), not flush edges.
-6. Storybook: wire screen in **`App`** / shell; use existing **theme** tokens in preview.
+1. **Requirement mapped:** PRD/Figma/brief translated to **component list + tokens** (not ad hoc layout first).
+2. **`DESIGN.md`:** consulted and updated if this flow is (or should be) documented against Figma.
+3. **Components + Storybook:** screen composes **`src/components/`**; story and/or **App shell** entry added when previews are in scope (skip only if the user said so).
+4. **Tokens only** for layout chrome: spacing, color, type, radii from **`src/tokens/`** — no parallel ad hoc theme.
+5. Width **376px** column + **`.sh-content`** scroll pattern (or documented exception for the feature).
+6. **Sections** use **`--spacing-56`** (or documented exception) + **`SectionHeader`** + **`sh-section__content`** where appropriate.
+7. **16px** horizontal rhythm via **tokens** (`--card-padding-inline` / `--spacing-16`).
+8. **Cards** use **`Card`** + **`--card-padding-*`**, **without** `stroke` unless the design requires a border.
+9. **`TextField` (or other full-width inputs) inside a `Card`:** override fixed **`344px`** width in **screen CSS** so fields stay inside the card’s padded content box (see **Tokens → `TextField` inside `Card`**).
+10. Carousels / **overflow-x** rows: confirm **inset** (spacers or scroll-padding), not flush edges.
+11. Storybook / dev preview: use existing **theme** tokens in the preview.
 
 If a requirement conflicts with this doc, **follow the user’s explicit instruction** and prefer updating this rule when the new pattern is agreed as the new standard.

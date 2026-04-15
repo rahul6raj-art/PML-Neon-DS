@@ -12,7 +12,6 @@ const meta = {
   title: 'Widgets/Portfolio',
   component: PortfolioWidget,
   parameters: {
-    layout: 'centered',
     controls: { expanded: true, sort: 'alpha' },
     docs: {
       description: {

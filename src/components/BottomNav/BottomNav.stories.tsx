@@ -91,7 +91,6 @@ function itemArgTypes(n: number, label: string, icon: string, activeIcon: string
 const meta: Meta<BottomNavStoryArgs> = {
   title: 'Components/Bottom Nav',
   component: BottomNav,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     itemCount: {

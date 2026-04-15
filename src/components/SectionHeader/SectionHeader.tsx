@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { Chip } from '../Chip';
@@ -16,8 +16,8 @@ export interface SectionHeaderProps {
   title?: string;
   /** Show subtext below title */
   showSubtext?: boolean;
-  /** Subtext below title */
-  subtext?: string;
+  /** Subtext below title (string or rich content, e.g. badge + meta) */
+  subtext?: ReactNode;
   /** Show chevron icon next to title (always shown for extra-large) */
   showChevron?: boolean;
   /** Trailing label when trailing = 'text' */
@@ -110,7 +110,11 @@ export const SectionHeader = ({
 
   const renderSubtext = () => (
     <div className="sh__subtext-row">
-      <span className="sh__subtext">{subtext}</span>
+      {typeof subtext === 'string' || typeof subtext === 'number' ? (
+        <span className="sh__subtext">{subtext}</span>
+      ) : (
+        <div className="sh__subtext sh__subtext--rich">{subtext}</div>
+      )}
     </div>
   );
 

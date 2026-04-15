@@ -2,7 +2,7 @@
 .snackbar {
   display: flex;
   flex-direction: column;
-  width: 376px;
+  width: var(--phone-column-width);
   overflow: hidden;
   font-family: var(--font-family);
 }
@@ -12,22 +12,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px;
-  padding: 5px 15px;
+  min-height: calc(var(--spacing-32) + var(--spacing-12));
+  padding: var(--spacing-4) calc(var(--spacing-16) - var(--spacing-2));
   overflow: hidden;
 }
 
 .snackbar__time {
-  font-size: 15px;
+  font-size: var(--font-size-title-4);
   font-weight: 600;
   color: var(--text-universal-light);
-  letter-spacing: -0.2px;
+  letter-spacing: -0.02em;
 }
 
 .snackbar__signals {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-4);
   color: var(--text-universal-light);
 }
 
@@ -35,19 +35,19 @@
 .snackbar__container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-12);
   width: 100%;
   box-sizing: border-box;
 }
 
 .snackbar--fixed .snackbar__container {
-  padding-bottom: 8px;
+  padding-bottom: var(--spacing-8);
 }
 
 .snackbar--floating .snackbar__container {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
 }
 
 /* ── Content ─────────────────────────────────────────── */
@@ -55,18 +55,18 @@
   display: flex;
   flex: 1 0 0;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-4);
   min-width: 0;
 }
 
 /* ── Text ────────────────────────────────────────────── */
 .snackbar__text {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 500;
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-universal-light);
-  padding: 2px 0;
-  max-width: 260px;
+  padding: var(--spacing-2) 0;
+  max-width: calc(var(--spacing-32) * 8 + var(--spacing-4));
 }
 
 .snackbar--floating .snackbar__text {
@@ -81,15 +81,15 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   color: var(--text-universal-light);
 }
 
 .snackbar__icon svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   color: inherit;
 }
 
@@ -102,7 +102,7 @@
 .snackbar__action.btn.btn--stroke {
   background: transparent;
   color: var(--text-universal-light);
-  border: 1px solid var(--snackbar-border);
+  border: var(--border-width-hairline) solid var(--snackbar-border);
 }
 
 .snackbar__action.btn.btn--stroke:hover:not(:disabled) {

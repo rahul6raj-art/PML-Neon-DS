@@ -12,9 +12,6 @@ const iconMapping = Object.fromEntries([
 const meta = {
   title: 'Components/Chip',
   component: Chip,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     type: {

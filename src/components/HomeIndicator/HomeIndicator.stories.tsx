@@ -5,7 +5,6 @@ const meta: Meta<typeof HomeIndicator> = {
   title: 'Components/HomeIndicator',
   component: HomeIndicator,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     inverse: {
       control: 'boolean',

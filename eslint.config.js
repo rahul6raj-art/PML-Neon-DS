@@ -1,3 +1,7 @@
+/**
+ * ESLint targets *.ts / *.tsx only. It does not lint *.css.
+ * Shared component styles: prefer design tokens over raw px — see CONTRIBUTING.md.
+ */
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'

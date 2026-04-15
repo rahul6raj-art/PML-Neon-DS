@@ -21,10 +21,15 @@ const PlaceholderImage = () => (
 const meta: Meta<typeof BottomSheet> = {
   title: 'Components/Bottom Sheet',
   component: BottomSheet,
-  parameters: {
-    layout: 'fullscreen',
-  },
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          '**Mobile (viewport under 600px):** always a **bottom sheet** — anchored to the bottom, top radii only, slide-up, home indicator. **600px and wider (tablet / web):** centered **modal** (full corner radius, elevated shadow, no home indicator). Resize the preview or use device emulation to compare.',
+      },
+    },
+  },
   argTypes: {
     /* ══ Variant ═════════════════════════════════════ */
     showHeader: {

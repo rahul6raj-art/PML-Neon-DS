@@ -7,9 +7,6 @@ const iconOptions = ['(none)', ...iconNames];
 const meta = {
   title: 'Components/Badge',
   component: Badge,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     type: {
@@ -350,7 +347,6 @@ export const AllDotVariants: Story = {
 
 export const FullMatrix: Story = {
   name: 'Matrix / Complete',
-  parameters: { layout: 'padded' },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '100px repeat(6, 1fr)', gap: 8, alignItems: 'center', fontSize: 11, fontWeight: 600, color: 'var(--text-neutral-medium)' }}>

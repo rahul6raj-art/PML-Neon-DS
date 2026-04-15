@@ -152,6 +152,7 @@ export const ReminderWidget = ({
   items = defaultItems,
   className,
 }: ReminderWidgetProps) => {
+  void onTitleClick;
   const cls = ['rw', `rw--${variant}`, !showHeader && 'rw--no-header', className]
     .filter(Boolean)
     .join(' ');

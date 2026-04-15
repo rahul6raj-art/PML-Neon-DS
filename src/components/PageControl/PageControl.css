@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-8);
-  padding: 20px var(--spacing-24);
+  padding: calc(var(--spacing-16) + var(--spacing-4)) var(--spacing-24);
   background: var(--surface-level-1);
   border-radius: var(--radius-full);
 }
@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 8px;
-  height: 8px;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
   flex-shrink: 0;
   cursor: pointer;
   padding: 0;
@@ -27,8 +27,8 @@
 }
 
 .pc__slot:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: 50%;
 }
 

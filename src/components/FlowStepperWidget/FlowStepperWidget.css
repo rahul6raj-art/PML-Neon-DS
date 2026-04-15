@@ -1,0 +1,15 @@
+/* FlowStepperWidget — wraps ActivityTimeline for transactional flows */
+
+.fsw {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fsw--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.fsw__timeline {
+  width: 100%;
+}

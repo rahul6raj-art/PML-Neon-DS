@@ -18,6 +18,9 @@
   margin: 0;
   background: none;
   vertical-align: middle;
+  /* In flex rows (e.g. Storybook side-by-side / narrow docs), default flex-shrink: 1 squashes circles */
+  flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .avatar--clickable {
@@ -98,27 +101,27 @@
 }
 
 .avatar__initials-text--small {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 600;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
 }
 
 .avatar__initials-text--regular {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 700;
-  line-height: 20px;
+  line-height: var(--line-height-body);
 }
 
 .avatar__initials-text--large {
-  font-size: 18px;
+  font-size: var(--font-size-title-3);
   font-weight: 700;
-  line-height: 24px;
+  line-height: var(--line-height-title-3);
 }
 
 .avatar__initials-text--xl {
-  font-size: 42px;
+  font-size: var(--font-size-display-1);
   font-weight: 500;
-  line-height: 48px;
+  line-height: var(--line-height-display-1);
 }
 
 /* ══════════════════════════════════════════════════
@@ -157,27 +160,27 @@
 
 /* Status: top-right */
 .avatar__badge--status {
-  top: -2px;
-  right: -2px;
+  top: calc(-1 * var(--spacing-2));
+  right: calc(-1 * var(--spacing-2));
 }
 
 /* Action: bottom-right */
 .avatar__badge--action {
-  bottom: -2px;
-  right: -2px;
+  bottom: calc(-1 * var(--spacing-2));
+  right: calc(-1 * var(--spacing-2));
 }
 
 /* ── Badge positioning per size ─────────────────── */
 
 /* Small: badge overflows slightly outside */
 .avatar--small .avatar__badge--status {
-  top: -2px;
-  right: -2px;
+  top: calc(-1 * var(--spacing-2));
+  right: calc(-1 * var(--spacing-2));
 }
 
 .avatar--small .avatar__badge--action {
-  bottom: -2px;
-  right: -2px;
+  bottom: calc(-1 * var(--spacing-2));
+  right: calc(-1 * var(--spacing-2));
 }
 
 /* Regular: badge sits at edge */
@@ -204,24 +207,24 @@
 
 /* Extra Large: badge sits at edge */
 .avatar--extraLarge .avatar__badge--status {
-  top: 4px;
-  right: 4px;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
 }
 
 .avatar--extraLarge .avatar__badge--action {
-  bottom: 4px;
-  right: 4px;
+  bottom: var(--spacing-4);
+  right: var(--spacing-4);
 }
 
 /* ══════════════════════════════════════════════════
    SELECTED STATE — green border ring + checkmark
    ══════════════════════════════════════════════════ */
 .avatar--selected {
-  box-shadow: 0 0 0 2px var(--border-positive-strong);
+  box-shadow: 0 0 0 var(--spacing-2) var(--border-positive-strong);
 }
 
 .avatar--selected.avatar--extraLarge {
-  box-shadow: 0 0 0 3px var(--border-positive-strong);
+  box-shadow: 0 0 0 calc(var(--spacing-2) + var(--border-width-hairline)) var(--border-positive-strong);
 }
 
 .avatar__badge--selected {

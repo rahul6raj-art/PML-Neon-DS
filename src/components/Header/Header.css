@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 376px;
+  width: var(--phone-column-width);
   background: var(--surface-level-4);
   font-family: var(--font-family);
   box-sizing: border-box;
@@ -18,7 +18,7 @@
 
 /* ── Bottom border toggle ────────────────────────── */
 .header--border-bottom {
-  border-bottom: 1px solid var(--border-neutral-medium);
+  border-bottom: var(--border-width-hairline) solid var(--border-neutral-medium);
 }
 
 /* ── Common bar ──────────────────────────────────── */
@@ -26,14 +26,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px 12px;
+  padding: calc(var(--spacing-8) + var(--spacing-2)) var(--spacing-16) var(--spacing-12);
   width: 100%;
   box-sizing: border-box;
 }
 
 .header__bar--glass {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(var(--spacing-8));
+  -webkit-backdrop-filter: blur(var(--spacing-8));
 }
 
 /* ── Icon button (40×40 tap target, 24px icon) ──── */
@@ -41,12 +41,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: calc(var(--spacing-32) + var(--spacing-8));
+  height: calc(var(--spacing-32) + var(--spacing-8));
+  padding: var(--spacing-8);
   border: none;
   background: transparent;
-  border-radius: 40px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   color: var(--text-neutral-strong);
   box-sizing: border-box;
@@ -61,9 +61,16 @@
   background: var(--interaction-pressed);
 }
 
+.header__icon-btn svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
+  display: block;
+}
+
 /* ── Back button ─────────────────────────────────── */
 .header__back-btn {
-  padding: 8px 0;
+  padding: var(--spacing-8) 0;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -98,7 +105,7 @@
 .header--homepage .header__bar-lhs {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: calc(var(--spacing-8) + var(--spacing-2));
   flex: 1;
   min-width: 0;
 }
@@ -106,14 +113,14 @@
 .header--homepage .header__bar-rhs {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-8);
   flex-shrink: 0;
 }
 
 .header__logo {
-  width: 34px;
-  height: 34px;
-  border-radius: 4px;
+  width: calc(var(--spacing-32) + var(--spacing-2));
+  height: calc(var(--spacing-32) + var(--spacing-2));
+  border-radius: var(--radius-4);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -126,9 +133,9 @@
 }
 
 .header__bar-title {
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: 400;
-  line-height: 20px;
+  line-height: var(--line-height-title-4);
   color: var(--text-neutral-strong);
   white-space: nowrap;
 }
@@ -139,9 +146,9 @@
 .header--large .header__bar {
   flex-direction: column;
   align-items: stretch;
-  gap: 16px;
-  padding: 10px 16px 12px;
-  border-bottom: 1px solid var(--border-neutral-weak);
+  gap: var(--spacing-16);
+  padding: calc(var(--spacing-8) + var(--spacing-2)) var(--spacing-16) var(--spacing-12);
+  border-bottom: var(--border-width-hairline) solid var(--border-neutral-weak);
 }
 
 .header--large .header__bar-row {
@@ -154,26 +161,38 @@
 .header--large .header__bar-rhs {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-8);
 }
 
 /* Title section (icon + text block) */
 .header__title-section {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--spacing-12);
   width: 100%;
 }
 
 .header__lhs-icon {
   flex-shrink: 0;
-  padding: 4px 0;
+  padding: var(--spacing-4) 0;
+}
+
+.header__title-section--with-trailing {
+  align-items: center;
+}
+
+.header__title-trailing {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin-left: auto;
 }
 
 .header__title-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--spacing-8);
   flex: 1;
   min-width: 0;
 }
@@ -184,15 +203,15 @@
 }
 
 .header__title--large {
-  font-size: 32px;
+  font-size: var(--font-size-display-3);
   font-weight: 500;
-  line-height: 36px;
+  line-height: var(--line-height-display-3);
 }
 
 .header__subtitle {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-medium);
   margin: 0;
 }
@@ -203,8 +222,8 @@
 .header--regular .header__bar--regular {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px 12px;
+  gap: var(--spacing-12);
+  padding: calc(var(--spacing-8) + var(--spacing-2)) var(--spacing-16) var(--spacing-12);
   border-bottom: none;
 }
 
@@ -219,18 +238,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: var(--spacing-2);
 }
 
 .header__bar-cell--rhs {
   justify-content: flex-end;
-  gap: 8px;
+  gap: var(--spacing-8);
 }
 
 .header__title--regular {
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: 600;
-  line-height: 22px;
+  line-height: var(--line-height-title-4);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -238,8 +257,13 @@
 }
 
 .header__subtitle--center {
+  display: block;
   text-align: center;
   width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -247,7 +271,7 @@
    ═══════════════════════════════════════════════════ */
 /* ── Tabs wrapper (uses actual Tabs component) ──── */
 .header__tabs-wrap {
-  padding: 0 16px;
+  padding: 0 var(--spacing-16);
   width: 100%;
   box-sizing: border-box;
 }
@@ -256,8 +280,8 @@
 .header__chips {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-16);
   width: 100%;
   box-sizing: border-box;
   overflow-x: auto;
@@ -266,7 +290,7 @@
 }
 
 .header--large .header__chips {
-  padding: 18px 16px 8px;
+  padding: calc(var(--spacing-16) + var(--spacing-2)) var(--spacing-16) var(--spacing-8);
 }
 
 .header__chips::-webkit-scrollbar {

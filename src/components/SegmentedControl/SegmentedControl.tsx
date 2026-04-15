@@ -5,8 +5,8 @@ import './SegmentedControl.css';
 export interface SegmentItem {
   /** Unique value for this segment */
   value: string;
-  /** Display label */
-  label: string;
+  /** Display label (string or rich content, e.g. stacked lines) */
+  label: ReactNode;
   /** Show a leading icon */
   showLeadingIcon?: boolean;
   /** Leading icon name or ReactNode */
@@ -38,6 +38,8 @@ export interface SegmentedControlProps {
   className?: string;
   /** Disable the entire control */
   disabled?: boolean;
+  /** Accessible name for the tab list (e.g. "Product type") */
+  ariaLabel?: string;
 }
 
 function renderIcon(icon: string | ReactNode | undefined, fallback: string) {
@@ -54,6 +56,7 @@ export const SegmentedControl = ({
   width = 344,
   className,
   disabled = false,
+  ariaLabel,
 }: SegmentedControlProps) => {
   const [internalValue, setInternalValue] = useState(
     () => defaultValue ?? segments[0]?.value ?? '',
@@ -82,7 +85,12 @@ export const SegmentedControl = ({
   const style = typeof width === 'number' ? { width: `${width}px` } : { width };
 
   return (
-    <div className={containerClasses} style={style} role="tablist">
+    <div
+      className={containerClasses}
+      style={style}
+      role="tablist"
+      aria-label={ariaLabel}
+    >
       {segments.map((seg) => {
         const isActive = activeValue === seg.value;
         const isDisabled = disabled || seg.disabled;
@@ -100,8 +108,10 @@ export const SegmentedControl = ({
         return (
           <button
             key={seg.value}
+            type="button"
             className={segClasses}
             role="tab"
+            data-segment={seg.value}
             aria-selected={isActive}
             tabIndex={isActive ? 0 : -1}
             disabled={isDisabled}

@@ -8,9 +8,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 376px;
-  height: 44px;
-  padding: 12px 16px 10px;
+  width: var(--phone-column-width);
+  height: var(--wheel-carousel-pill-height);
+  padding: var(--spacing-12) var(--spacing-16) calc(var(--spacing-8) + var(--spacing-2));
   box-sizing: border-box;
   font-family: var(--font-family);
 }
@@ -30,26 +30,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 22px;
-  padding-top: 2px;
+  height: var(--wheel-carousel-divider-height);
+  padding-top: var(--spacing-2);
 }
 
 .statusbar__time-text {
-  font-size: 17px;
+  font-size: calc(var(--font-size-title-4) + var(--border-width-hairline));
   font-weight: 600;
-  line-height: 22px;
+  line-height: var(--wheel-carousel-divider-height);
   text-align: center;
   white-space: nowrap;
-  letter-spacing: -0.2px;
+  letter-spacing: calc(-0.1 * var(--spacing-2));
 }
 
 /* ── Indicators row ───────────────────────────────── */
 .statusbar__indicators {
   display: flex;
   align-items: center;
-  gap: 7px;
-  height: 22px;
-  padding-top: 1px;
+  gap: calc(var(--spacing-8) - var(--border-width-hairline));
+  height: var(--wheel-carousel-divider-height);
+  padding-top: var(--border-width-hairline);
 }
 
 /* ── Individual icon wrapper ──────────────────────── */
@@ -67,16 +67,16 @@
 }
 
 .statusbar__icon--cellular svg {
-  width: 19px;
-  height: 12px;
+  width: calc(var(--spacing-16) + var(--spacing-2) + var(--border-width-hairline));
+  height: calc(var(--spacing-8) + var(--spacing-4));
 }
 
 .statusbar__icon--wifi svg {
-  width: 17px;
-  height: 12px;
+  width: calc(var(--font-size-title-4) + var(--border-width-hairline));
+  height: calc(var(--spacing-8) + var(--spacing-4));
 }
 
 .statusbar__icon--battery svg {
-  width: 27px;
-  height: 13px;
+  width: calc(var(--spacing-24) + var(--spacing-2) + var(--border-width-hairline));
+  height: calc(var(--line-height-caption) + var(--border-width-hairline));
 }

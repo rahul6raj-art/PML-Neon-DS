@@ -60,8 +60,8 @@
   position: absolute;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +69,8 @@
 
 .gw__indicator-pulse {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   border-radius: 50%;
   background-color: var(--gw-indicator-fill);
   opacity: 0.35;
@@ -79,8 +79,8 @@
 
 .gw__indicator-mid {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: var(--spacing-12);
+  height: var(--spacing-12);
   border-radius: 50%;
   background-color: var(--gw-indicator-fill);
   opacity: 0.65;
@@ -88,11 +88,11 @@
 
 .gw__indicator-dot {
   position: relative;
-  width: 6px;
-  height: 6px;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
   border-radius: 50%;
   background-color: var(--gw-indicator-fill);
-  box-shadow: 0 0 0 1px var(--primitive-material-ff-15);
+  box-shadow: 0 0 0 var(--border-width-hairline) var(--primitive-material-ff-15);
 }
 
 @keyframes gw-pulse {

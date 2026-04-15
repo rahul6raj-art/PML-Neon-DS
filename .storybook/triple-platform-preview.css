@@ -1,0 +1,37 @@
+/**
+ * Side by side: one scroll container spans the preview width; the inner row is wider than
+ * the viewport so you can scroll horizontally across Mobile → Tablet → Web.
+ * Use overflow-x: scroll so trackpad/wheel horizontal pan isn’t stolen by nested overflow:auto.
+ */
+.sb-pml-triple-scrollport {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  overflow-x: scroll;
+  overflow-y: auto;
+  direction: ltr;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Tall stories: scroll inside this pane; does not limit horizontal scroll range */
+  max-height: 100vh;
+  max-height: 100dvh;
+  overscroll-behavior-x: auto;
+  overscroll-behavior-y: auto;
+}
+
+.sb-pml-triple-scrollport .sb-pml-triple-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16);
+  width: max-content;
+  box-sizing: border-box;
+}
+
+/* BottomSheet “true sheet” on wide canvas: see `.sb-pml-bottom-sheet-host` in BottomSheet.css
+   (mobile column + Storybook Mobile toolbar wrap add that class in TS). */

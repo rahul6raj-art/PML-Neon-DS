@@ -5,7 +5,6 @@ import { OtpTextField } from './OtpTextField';
 const meta = {
   title: 'Components/OtpTextField',
   component: OtpTextField,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     length: {

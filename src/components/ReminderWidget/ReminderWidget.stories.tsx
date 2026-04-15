@@ -183,7 +183,6 @@ function cardArgs(n: number) {
 const meta: Meta<FlatArgs> = {
   title: 'Widgets/Reminder',
   component: ReminderWidget,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   decorators: [
     (Story) => (

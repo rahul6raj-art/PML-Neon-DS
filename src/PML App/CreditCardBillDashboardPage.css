@@ -1,0 +1,195 @@
+/* ═══ Credit card bill — PRD bill discovery (B); 376px column, DS tokens ═══ */
+
+.ccb {
+  width: var(--phone-column-width);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--surface-level-4);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+
+.ccb__header {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.ccb__content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
+  min-height: 0;
+}
+
+.ccb__section {
+  margin-top: var(--spacing-56);
+}
+
+.ccb__banners + .ccb__section,
+.ccb__content > .ccb__section:first-child {
+  margin-top: 0;
+}
+
+.ccb__section-header.sh {
+  padding-top: 0;
+}
+
+.ccb-section__content {
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.ccb__banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  margin: 0 var(--spacing-16) var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.ccb__banners .ccb__alert.alert--sleek {
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.ccb__status-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.ccb__inline-hint {
+  margin: 0;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+.ccb__bill-card.card {
+  min-height: unset;
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.ccb__kv {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.ccb__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+.ccb__row-label {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-medium);
+  flex-shrink: 0;
+}
+
+.ccb__row-value {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-neutral-strong);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ccb__row-value--emphasis {
+  font-size: var(--font-size-title-1);
+  line-height: var(--line-height-title-1);
+  font-weight: var(--font-weight-bold);
+}
+
+.ccb__divider {
+  height: var(--border-width-hairline);
+  background: var(--border-neutral-weak);
+  margin: 0;
+  border: none;
+}
+
+.ccb__statement-meta {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+.ccb__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+}
+
+.ccb__history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+}
+
+.ccb__history-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  border-radius: var(--radius-16);
+  background: var(--surface-level-1);
+  box-sizing: border-box;
+}
+
+.ccb__history-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.ccb__history-amt {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-neutral-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.ccb__history-meta {
+  margin: var(--spacing-4) 0 0;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+.ccb__history-ref {
+  margin: var(--spacing-2) 0 0;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-moderate);
+}

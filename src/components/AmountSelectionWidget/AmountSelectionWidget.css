@@ -1,0 +1,55 @@
+.asw__section-header.sh {
+  padding: 0 var(--spacing-16);
+}
+
+.asw__content {
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.asw__loading {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-32) var(--spacing-16);
+}
+
+.asw__chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+}
+
+.asw__form {
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.asw__form .textfield {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.asw__summary {
+  margin: 0;
+  width: 100%;
+  max-width: var(--card-width);
+  margin-inline: auto;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  color: var(--text-neutral-medium);
+}
+
+.asw__summary strong {
+  color: var(--text-neutral-strong);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}

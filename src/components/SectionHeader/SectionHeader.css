@@ -79,16 +79,27 @@
   text-overflow: ellipsis;
 }
 
+.sh__subtext--rich {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-medium);
+  white-space: normal;
+}
+
 /* ── Size: Extra Large ──────────────────────────── */
 .sh--extra-large .sh__title {
-  font-size: 22px;
+  font-size: var(--font-size-title-1);
   font-weight: var(--font-weight-medium);
-  line-height: 28px;
+  line-height: var(--line-height-title-1);
 }
 
 .sh--extra-large .sh__subtext {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
 }
 
 .sh--extra-large .sh__left {
@@ -97,38 +108,38 @@
 
 /* ── Size: Large ────────────────────────────────── */
 .sh--large .sh__title {
-  font-size: 18px;
+  font-size: var(--font-size-title-3);
   font-weight: var(--font-weight-regular);
-  line-height: 24px;
+  line-height: var(--line-height-title-3);
 }
 
 .sh--large .sh__subtext {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
 }
 
 /* ── Size: Medium ───────────────────────────────── */
 .sh--medium .sh__title {
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: var(--font-weight-semibold);
-  line-height: 22px;
+  line-height: var(--line-height-title-4);
 }
 
 .sh--medium .sh__subtext {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
 }
 
 /* ── Size: Small ────────────────────────────────── */
 .sh--small .sh__title {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
-  line-height: 20px;
+  line-height: var(--line-height-body);
 }
 
 .sh--small .sh__subtext {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
 }
 
 /* ── Trailing: Text ─────────────────────────────── */
@@ -137,24 +148,24 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-medium);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-strong);
   white-space: nowrap;
 }
 
 .sh--extra-large .sh__trailing-text {
-  height: 28px;
+  height: var(--line-height-title-1);
 }
 
 .sh--large .sh__trailing-text {
-  height: 24px;
+  height: var(--line-height-title-3);
 }
 
 .sh--medium .sh__trailing-text,
 .sh--small .sh__trailing-text {
-  height: 20px;
+  height: var(--line-height-body);
 }
 
 /* ── Trailing: Link ─────────────────────────────── */
@@ -164,9 +175,9 @@
   justify-content: center;
   flex-shrink: 0;
   font-family: var(--font-family);
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-medium);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-positive-strong);
   white-space: nowrap;
   background: none;
@@ -176,21 +187,21 @@
 }
 
 .sh--extra-large .sh__trailing-link {
-  height: 28px;
+  height: var(--line-height-title-1);
 }
 
 .sh--large .sh__trailing-link {
-  height: 24px;
+  height: var(--line-height-title-3);
 }
 
 .sh--medium .sh__trailing-link,
 .sh--small .sh__trailing-link {
-  height: 20px;
+  height: var(--line-height-body);
 }
 
 .sh__trailing-link:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
   border-radius: var(--radius-4);
 }
 
@@ -206,10 +217,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: calc(var(--spacing-32) + var(--spacing-8));
+  height: calc(var(--spacing-32) + var(--spacing-8));
   padding: var(--spacing-6) var(--spacing-8);
-  border: 1px solid var(--border-neutral-medium);
+  border: var(--border-width-hairline) solid var(--border-neutral-medium);
   border-radius: var(--radius-full);
   background: none;
   cursor: pointer;
@@ -218,8 +229,8 @@
 }
 
 .sh__icon-btn:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
 }
 
 /* ── Chips row ──────────────────────────────────── */

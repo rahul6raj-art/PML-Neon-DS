@@ -25,6 +25,18 @@
   --line-height-display-2: 40px;
   --font-size-title-1: 22px;
   --line-height-title-1: 28px;
+  --font-size-display-1: 42px;
+  --line-height-display-1: 48px;
+  --font-size-display-3: 32px;
+  --line-height-display-3: 36px;
+  --font-size-title-2: 20px;
+  --line-height-title-2: 24px;
+  --font-size-title-3: 18px;
+  --line-height-title-3: 24px;
+  --font-size-title-4: 16px;
+  --line-height-title-4: 22px;
+  --font-size-caption: 10px;
+  --line-height-caption: 12px;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -36,15 +48,15 @@
 /* ── Display 1 — 42px / 48 ──────────────────────────────── */
 .display-1-bold {
   font-family: var(--font-family);
-  font-size: 42px;
-  line-height: 48px;
+  font-size: var(--font-size-display-1);
+  line-height: var(--line-height-display-1);
   font-weight: 700;
   letter-spacing: 0;
 }
 .display-1-medium {
   font-family: var(--font-family);
-  font-size: 42px;
-  line-height: 48px;
+  font-size: var(--font-size-display-1);
+  line-height: var(--line-height-display-1);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -68,15 +80,15 @@
 /* ── Display 3 — 32px / 36 ──────────────────────────────── */
 .display-3-bold {
   font-family: var(--font-family);
-  font-size: 32px;
-  line-height: 36px;
+  font-size: var(--font-size-display-3);
+  line-height: var(--line-height-display-3);
   font-weight: 700;
   letter-spacing: 0;
 }
 .display-3-medium {
   font-family: var(--font-family);
-  font-size: 32px;
-  line-height: 36px;
+  font-size: var(--font-size-display-3);
+  line-height: var(--line-height-display-3);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -93,8 +105,8 @@
 /* ── Title 2 — 20px / 24 ────────────────────────────────── */
 .title-2-bold {
   font-family: var(--font-family);
-  font-size: 20px;
-  line-height: 24px;
+  font-size: var(--font-size-title-2);
+  line-height: var(--line-height-title-2);
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -102,15 +114,15 @@
 /* ── Title 3 — 18px / 24 ────────────────────────────────── */
 .title-3-bold {
   font-family: var(--font-family);
-  font-size: 18px;
-  line-height: 24px;
+  font-size: var(--font-size-title-3);
+  line-height: var(--line-height-title-3);
   font-weight: 700;
   letter-spacing: 0;
 }
 .title-3-medium {
   font-family: var(--font-family);
-  font-size: 18px;
-  line-height: 24px;
+  font-size: var(--font-size-title-3);
+  line-height: var(--line-height-title-3);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -118,29 +130,29 @@
 /* ── Title 4 — 16px / 22 ────────────────────────────────── */
 .title-4-bold {
   font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
   font-weight: 700;
   letter-spacing: 0;
 }
 .title-4-semibold {
   font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
   font-weight: 600;
   letter-spacing: 0;
 }
 .title-4-medium {
   font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
   font-weight: 500;
   letter-spacing: 0;
 }
 .title-4-regular {
   font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -208,15 +220,15 @@
 /* ── Caption — 10px / 12 ────────────────────────────────── */
 .caption-semibold {
   font-family: var(--font-family);
-  font-size: 10px;
-  line-height: 12px;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
   font-weight: 600;
   letter-spacing: 0;
 }
 .caption-regular {
   font-family: var(--font-family);
-  font-size: 10px;
-  line-height: 12px;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
   font-weight: 400;
   letter-spacing: 0;
 }

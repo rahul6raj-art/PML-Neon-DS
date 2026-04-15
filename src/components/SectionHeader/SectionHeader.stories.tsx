@@ -55,7 +55,6 @@ function PlaygroundRender(args: SectionHeaderStoryArgs) {
 const meta: Meta<SectionHeaderStoryArgs> = {
   title: 'Components/Section Header',
   component: SectionHeader,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   decorators: [
     (Story) => (

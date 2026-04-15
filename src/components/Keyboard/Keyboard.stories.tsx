@@ -4,7 +4,6 @@ import { Keyboard } from './Keyboard';
 const meta: Meta<typeof Keyboard> = {
   title: 'Components/Keyboard',
   component: Keyboard,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     mode: {

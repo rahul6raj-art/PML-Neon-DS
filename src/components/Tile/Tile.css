@@ -7,8 +7,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  width: 100px;
+  gap: var(--spacing-8);
+  width: calc(var(--spacing-48) + var(--spacing-32) + var(--spacing-12) + var(--spacing-8));
   border-radius: var(--radius-24);
   background: var(--surface-level-1);
   overflow: hidden;
@@ -21,8 +21,8 @@
 }
 
 .tile:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
 }
 
 /* ── Variant: Default ── padding 12 all ─────────── */
@@ -38,8 +38,8 @@
 /* ── Main icon ──────────────────────────────────── */
 .tile__icon-wrap {
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: calc(var(--spacing-32) + var(--spacing-12));
+  height: calc(var(--spacing-32) + var(--spacing-12));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,16 +55,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 32px;
+  width: calc(var(--spacing-48) + var(--spacing-24));
+  height: var(--spacing-32);
   text-align: center;
 }
 
 .tile__title,
 .tile__label {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   letter-spacing: 0;
   color: var(--text-neutral-strong);
   white-space: nowrap;
@@ -78,8 +78,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100px;
-  height: 120px;
+  width: calc(var(--spacing-48) + var(--spacing-32) + var(--spacing-12) + var(--spacing-8));
+  height: calc(var(--spacing-48) + var(--spacing-32) + var(--spacing-24) + var(--spacing-16));
   overflow: hidden;
   background: linear-gradient(
     225.03deg,
@@ -92,10 +92,10 @@
 /* ── Favourite icon button (always visible in action) */
 .tile__fav-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
+  top: var(--spacing-12);
+  right: var(--spacing-12);
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   padding: 0;
   border: none;
   background: none;
@@ -108,7 +108,7 @@
 }
 
 .tile__fav-btn:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: var(--radius-4);
 }

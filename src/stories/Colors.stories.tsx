@@ -404,7 +404,7 @@ const ColorTokens = () => {
 const meta: Meta = {
   title: 'Foundation/Color Tokens',
   component: ColorTokens,
-  parameters: { layout: 'padded', controls: { disable: true } },
+  parameters: { controls: { disable: true } },
   tags: ['autodocs'],
 };
 

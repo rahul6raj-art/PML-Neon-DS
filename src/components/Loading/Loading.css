@@ -34,10 +34,10 @@
 /* ── Screen-reader only label ─────────────────────── */
 .loading__sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--border-width-hairline);
+  height: var(--border-width-hairline);
   padding: 0;
-  margin: -1px;
+  margin: calc(-1 * var(--border-width-hairline));
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;

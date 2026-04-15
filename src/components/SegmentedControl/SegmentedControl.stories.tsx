@@ -8,9 +8,6 @@ const iconOptions = ['(none)', ...iconNames];
 const meta = {
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     segments: {

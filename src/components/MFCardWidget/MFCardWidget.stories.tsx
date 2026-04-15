@@ -41,7 +41,6 @@ const meta = {
   title: 'Widgets/MF Card',
   component: MFCardWidget,
   parameters: {
-    layout: 'centered',
     controls: {
       expanded: true,
       sort: 'alpha',

@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 6px;
-  height: 6px;
+  width: var(--spacing-6);
+  height: var(--spacing-6);
   flex-shrink: 0;
   cursor: pointer;
   padding: 0;
@@ -25,8 +25,8 @@
 }
 
 .cc__slot:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: 50%;
 }
 

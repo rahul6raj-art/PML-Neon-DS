@@ -2,7 +2,7 @@
 .checkbox {
   display: inline-flex;
   align-items: flex-start;
-  gap: 4px;
+  gap: var(--spacing-4);
   padding: 0;
   margin: 0;
   border: none;
@@ -15,8 +15,8 @@
 }
 
 .checkbox:focus-within {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: var(--radius-4);
 }
 
@@ -51,15 +51,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   flex-shrink: 0;
 }
 
 .checkbox__indicator svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
 }
 
 /* ── Label ────────────────────────────────────────────── */
@@ -69,18 +69,18 @@
 
 /* ── Label Emphasis: High — 16px / Medium 500 ────────── */
 .checkbox--emphasis-high .checkbox__label {
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: 500;
-  line-height: 20px;
-  padding: 2px 0;
+  line-height: var(--line-height-body);
+  padding: var(--spacing-2) 0;
 }
 
 /* ── Label Emphasis: Low — 12px / Regular 400 ────────── */
 .checkbox--emphasis-low .checkbox__label {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
-  padding: 4px 0;
+  line-height: var(--line-height-subtext);
+  padding: var(--spacing-4) 0;
 }
 
 /* ── Disabled label ──────────────────────────────────── */
@@ -91,10 +91,10 @@
 /* ── Hidden native input ─────────────────────────────── */
 .checkbox__input {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--border-width-hairline);
+  height: var(--border-width-hairline);
   padding: 0;
-  margin: -1px;
+  margin: calc(-1 * var(--border-width-hairline));
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;

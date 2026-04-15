@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://local/pml/design-system-manifest.schema.json",
+  "title": "PML design system manifest",
+  "type": "object",
+  "required": ["schemaVersion", "name", "tokenSources", "themes", "layoutContract"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "name": { "type": "string" },
+    "dsSource": { "type": "string", "description": "Upstream token set label" },
+    "documentation": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "tokenSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "role"],
+        "properties": {
+          "path": { "type": "string" },
+          "role": { "type": "string" }
+        }
+      }
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": "string" },
+          "selector": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "layoutContract": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 }
+      }
+    },
+    "typographyUtilityClasses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "conventions": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

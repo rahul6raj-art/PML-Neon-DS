@@ -33,7 +33,6 @@ const meta: Meta<typeof Search> = {
   title: 'Components/Search',
   component: Search,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     size: {
       control: 'inline-radio',

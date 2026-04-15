@@ -48,7 +48,7 @@
   flex-shrink: 0;
   width: var(--spacing-16);
   align-self: stretch;
-  min-height: 1px;
+  min-height: var(--border-width-hairline);
 }
 
 .rw--carousel .rw__cards::-webkit-scrollbar {
@@ -57,13 +57,13 @@
 
 /* ── Card size overrides ───────────────────────────── */
 .rw__card--single.card {
-  width: 344px;
+  width: var(--card-width);
   min-height: auto;
   flex-shrink: 0;
 }
 
 .rw__card--carousel.card {
-  width: 324px;
+  width: var(--carousel-card-width);
   min-height: auto;
   flex-shrink: 0;
   scroll-snap-align: start;
@@ -89,7 +89,7 @@
 
 /* ── Divider between list item & footer ────────────── */
 .rw__divider {
-  height: 1px;
+  height: var(--border-width-hairline);
   background: var(--border-neutral-weak);
   margin: var(--spacing-12) 0 0;
 }
@@ -104,15 +104,15 @@
 
 .rw__cta-text {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 500;
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
 }
 
 /* Wider CTA than default small button (short labels like "Buy") */
 .rw__footer .btn {
-  min-width: 72px;
+  min-width: calc(var(--spacing-48) + var(--spacing-24));
   padding-left: var(--spacing-16);
   padding-right: var(--spacing-16);
 }

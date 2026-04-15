@@ -25,7 +25,6 @@ const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   component: Avatar,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     type: {
       control: 'select',
@@ -134,7 +133,14 @@ export const AllSizes: Story = {
   name: 'All Sizes',
   args: {},
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        gap: 'var(--spacing-24)',
+      }}
+    >
       <Avatar type="profile" size="small" src={SAMPLE_PHOTO} />
       <Avatar type="profile" size="regular" src={SAMPLE_PHOTO} />
       <Avatar type="profile" size="large" src={SAMPLE_PHOTO} />
@@ -196,7 +202,15 @@ export const AllVariants: Story = {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {sizes.map((s) => (
-              <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+              <div
+                key={s}
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-24) var(--spacing-32)',
+                }}
+              >
                 {icons.map((ic) => (
                   <Avatar
                     key={ic}

@@ -16,8 +16,8 @@
 .switch__track {
   position: relative;
   display: block;
-  width: 64px;
-  height: 28px;
+  width: calc(var(--spacing-32) + var(--spacing-32));
+  height: calc(var(--spacing-24) + var(--spacing-4));
   border-radius: var(--radius-full);
   background-color: var(--icon-neutral-weak);
   transition: background-color 0.2s ease;
@@ -41,10 +41,10 @@
 /* ── Thumb (40 × 24 pill) ────────────────────────────── */
 .switch__thumb {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 40px;
-  height: 24px;
+  top: var(--spacing-2);
+  left: var(--spacing-2);
+  width: calc(var(--spacing-32) + var(--spacing-8));
+  height: var(--spacing-24);
   border-radius: var(--radius-full);
   background-color: var(--surface-level-1);
   transition: left 0.2s ease, opacity 0.2s ease;
@@ -52,7 +52,7 @@
 
 /* On position — slide to right */
 .switch--on .switch__thumb {
-  left: 22px;
+  left: calc(var(--spacing-32) - var(--spacing-8) - var(--spacing-2));
 }
 
 /* Disabled thumb */
@@ -62,17 +62,17 @@
 
 /* ── Focus ring ──────────────────────────────────────── */
 .switch:focus-within .switch__track {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
 }
 
 /* ── Hidden native input ─────────────────────────────── */
 .switch__input {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--border-width-hairline);
+  height: var(--border-width-hairline);
   padding: 0;
-  margin: -1px;
+  margin: calc(-1 * var(--border-width-hairline));
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;

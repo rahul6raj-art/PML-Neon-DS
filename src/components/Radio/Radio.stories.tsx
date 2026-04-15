@@ -5,9 +5,6 @@ import { Radio } from './Radio';
 const meta = {
   title: 'Components/Radio',
   component: Radio,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     type: {
@@ -247,7 +244,6 @@ export const InteractiveTickMedium: Story = {
 
 export const FullMatrix: Story = {
   name: 'Matrix / Complete',
-  parameters: { layout: 'padded' },
   render: () => {
     const types = ['radio', 'tick'] as const;
     const sizes = ['large', 'medium'] as const;

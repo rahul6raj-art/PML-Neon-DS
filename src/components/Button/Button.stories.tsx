@@ -7,9 +7,6 @@ const iconOptions = ['(none)', ...iconNames];
 const meta = {
   title: 'Components/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     variant: {

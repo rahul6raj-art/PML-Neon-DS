@@ -6,7 +6,6 @@ const meta: Meta<typeof Loading> = {
   title: 'Components/Loading',
   component: Loading,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     type: {
       control: 'inline-radio',

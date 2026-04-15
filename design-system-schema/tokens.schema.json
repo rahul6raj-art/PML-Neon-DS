@@ -1,0 +1,833 @@
+{
+  "tokens": {
+    "colors": [
+      {
+        "name": "--background-offset-1",
+        "value": "#F5F8FA",
+        "usage": "Cool off-background (lightest)."
+      },
+      {
+        "name": "--background-offset-2",
+        "value": "#ECF2F8",
+        "usage": "Cool off-background (mid)."
+      },
+      {
+        "name": "--background-offset-3",
+        "value": "#D8E7F7",
+        "usage": "Cool off-background (strong)."
+      },
+      {
+        "name": "--background-primary-strong",
+        "value": "#0088FF",
+        "usage": "Primary solid fill (buttons, key actions)."
+      },
+      {
+        "name": "--background-primary-weak",
+        "value": "#D9EDFF",
+        "usage": "Primary tint / selected row."
+      },
+      {
+        "name": "--background-positive-strong",
+        "value": "#34A34D",
+        "usage": "Success solid fill."
+      },
+      {
+        "name": "--background-positive-weak",
+        "value": "#E1F1E4",
+        "usage": "Success tint."
+      },
+      {
+        "name": "--background-notice-strong",
+        "value": "#FF8D28",
+        "usage": "Warning solid fill."
+      },
+      {
+        "name": "--background-notice-weak",
+        "value": "#FFEEDF",
+        "usage": "Warning tint."
+      },
+      {
+        "name": "--background-negative-strong",
+        "value": "#D12E20",
+        "usage": "Error solid fill."
+      },
+      {
+        "name": "--background-negative-weak",
+        "value": "#F8E0DE",
+        "usage": "Error tint."
+      },
+      {
+        "name": "--background-neutral-strong",
+        "value": "#101010",
+        "usage": "Strong neutral fill."
+      },
+      {
+        "name": "--background-neutral-medium",
+        "value": "#7E7E7E",
+        "usage": "Mid neutral fill."
+      },
+      {
+        "name": "--background-neutral-weak",
+        "value": "#EBECEE",
+        "usage": "Subtle neutral fill / hover."
+      },
+      {
+        "name": "--background-neutral-inverse",
+        "value": "#FFFFFF",
+        "usage": "Inverted neutral fill."
+      },
+      {
+        "name": "--text-neutral-strong",
+        "value": "#282828",
+        "usage": "Primary text."
+      },
+      {
+        "name": "--text-neutral-moderate",
+        "value": "#414244",
+        "usage": "Secondary emphasis text."
+      },
+      {
+        "name": "--text-neutral-medium",
+        "value": "#7E7E7E",
+        "usage": "Secondary / caption text."
+      },
+      {
+        "name": "--text-neutral-weak",
+        "value": "#CACACA",
+        "usage": "Tertiary / disabled text."
+      },
+      {
+        "name": "--text-neutral-inverse",
+        "value": "#FFFFFF",
+        "usage": "Text on inverted surfaces."
+      },
+      {
+        "name": "--text-primary-strong",
+        "value": "#0088FF",
+        "usage": "Primary / link text."
+      },
+      {
+        "name": "--text-positive-strong",
+        "value": "#34A34D",
+        "usage": "Success text."
+      },
+      {
+        "name": "--text-notice-strong",
+        "value": "#FF8D28",
+        "usage": "Warning text."
+      },
+      {
+        "name": "--text-negative-strong",
+        "value": "#D12E20",
+        "usage": "Error text."
+      },
+      {
+        "name": "--text-universal-light",
+        "value": "#FFFFFF",
+        "usage": "Always-light text (e.g. on dark)."
+      },
+      {
+        "name": "--text-universal-dark",
+        "value": "#282828",
+        "usage": "Always-dark text (e.g. on light)."
+      },
+      {
+        "name": "--icon-neutral-strong",
+        "value": "#282828",
+        "usage": "Primary icon."
+      },
+      {
+        "name": "--icon-neutral-moderate",
+        "value": "#414244",
+        "usage": "Secondary icon."
+      },
+      {
+        "name": "--icon-neutral-medium",
+        "value": "#7E7E7E",
+        "usage": "Muted icon."
+      },
+      {
+        "name": "--icon-neutral-weak",
+        "value": "#CACACA",
+        "usage": "Disabled / placeholder icon."
+      },
+      {
+        "name": "--icon-neutral-inverse",
+        "value": "#FFFFFF",
+        "usage": "Icon on inverted surface."
+      },
+      {
+        "name": "--icon-primary-strong",
+        "value": "#0088FF",
+        "usage": "Primary accent icon."
+      },
+      {
+        "name": "--icon-positive-strong",
+        "value": "#34A34D",
+        "usage": "Success icon."
+      },
+      {
+        "name": "--icon-notice-strong",
+        "value": "#FF8D28",
+        "usage": "Warning icon."
+      },
+      {
+        "name": "--icon-negative-strong",
+        "value": "#D12E20",
+        "usage": "Error icon."
+      },
+      {
+        "name": "--icon-universal-light",
+        "value": "#FFFFFF",
+        "usage": "Always-light icon."
+      },
+      {
+        "name": "--icon-universal-dark",
+        "value": "#282828",
+        "usage": "Always-dark icon."
+      },
+      {
+        "name": "--border-neutral-strong",
+        "value": "#101010",
+        "usage": "Strong neutral border."
+      },
+      {
+        "name": "--border-neutral-moderate",
+        "value": "#7E7E7E",
+        "usage": "Mid neutral border."
+      },
+      {
+        "name": "--border-neutral-medium",
+        "value": "#E0E0E0",
+        "usage": "Default neutral border."
+      },
+      {
+        "name": "--border-neutral-weak",
+        "value": "#EBECEE",
+        "usage": "Subtle divider / hairline context."
+      },
+      {
+        "name": "--border-neutral-inverse",
+        "value": "#FFFFFF",
+        "usage": "Border on inverted surface."
+      },
+      {
+        "name": "--border-primary-strong",
+        "value": "#0088FF",
+        "usage": "Primary focus / active border."
+      },
+      {
+        "name": "--border-primary-weak",
+        "value": "#D9EDFF",
+        "usage": "Primary subtle border."
+      },
+      {
+        "name": "--border-positive-strong",
+        "value": "#34A34D",
+        "usage": "Success border."
+      },
+      {
+        "name": "--border-positive-weak",
+        "value": "#E1F1E4",
+        "usage": "Success subtle border."
+      },
+      {
+        "name": "--border-notice-strong",
+        "value": "#FF8D28",
+        "usage": "Warning border."
+      },
+      {
+        "name": "--border-notice-weak",
+        "value": "#FFEEDF",
+        "usage": "Warning subtle border."
+      },
+      {
+        "name": "--border-negative-strong",
+        "value": "#D12E20",
+        "usage": "Error border."
+      },
+      {
+        "name": "--border-negative-weak",
+        "value": "#F8E0DE",
+        "usage": "Error subtle border."
+      },
+      {
+        "name": "--overlay-strong",
+        "value": "rgba(16, 16, 16, 0.70)",
+        "usage": "Heavy scrim."
+      },
+      {
+        "name": "--overlay-weak",
+        "value": "rgba(16, 16, 16, 0.13)",
+        "usage": "Light scrim."
+      },
+      {
+        "name": "--surface-level-1",
+        "value": "#FFFFFF",
+        "usage": "Primary surface (cards, bars)."
+      },
+      {
+        "name": "--surface-level-2",
+        "value": "#FDFDFD",
+        "usage": "Raised / nested surface."
+      },
+      {
+        "name": "--surface-level-3",
+        "value": "#FAFAFA",
+        "usage": "Canvas behind phone column (e.g. shell main)."
+      },
+      {
+        "name": "--surface-level-4",
+        "value": "#F5F5F5",
+        "usage": "App page backdrop."
+      },
+      {
+        "name": "--colour-red-strong",
+        "value": "#E85168",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-red-medium",
+        "value": "#F197A4",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-red-weak",
+        "value": "#FFAED5",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-orange",
+        "value": "#FF8D28",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-orange-weak",
+        "value": "#F18C33",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-yellow-strong",
+        "value": "#FFEB12",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-yellow-medium",
+        "value": "#FFF371",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-yellow-weak",
+        "value": "#FFF2CC",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-green",
+        "value": "#34A34D",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-lime-green-strong",
+        "value": "#ACE851",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-lime-green-medium",
+        "value": "#CDF197",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-lime-green-weak",
+        "value": "#ECFFB7",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-mint",
+        "value": "#85C894",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-teal",
+        "value": "#00C3D0",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-cyan",
+        "value": "#00C0E8",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-blue",
+        "value": "#3C3CFF",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-indigo",
+        "value": "#6155F5",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-purple",
+        "value": "#CB30E0",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-pink",
+        "value": "#FF6784",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--colour-brown",
+        "value": "#AC7F5E",
+        "usage": "Data viz / decorative accent (not status text)."
+      },
+      {
+        "name": "--brand-blue",
+        "value": "#00B8F5",
+        "usage": "Brand accent."
+      },
+      {
+        "name": "--brand-dark-blue",
+        "value": "#012A72",
+        "usage": "Brand dark / contrast."
+      },
+      {
+        "name": "--brand-white",
+        "value": "#FFFFFF",
+        "usage": "Brand white slot (remaps in dark)."
+      },
+      {
+        "name": "--glass-tinted-l1",
+        "value": "rgba(16, 16, 16, 0.60)",
+        "usage": "Tinted glass overlay layer."
+      },
+      {
+        "name": "--glass-tinted-l2",
+        "value": "rgba(16, 16, 16, 0.40)",
+        "usage": "Tinted glass overlay layer."
+      },
+      {
+        "name": "--glass-tinted-l3",
+        "value": "rgba(16, 16, 16, 0.20)",
+        "usage": "Tinted glass overlay layer."
+      },
+      {
+        "name": "--glass-tinted-l4",
+        "value": "rgba(16, 16, 16, 0.15)",
+        "usage": "Tinted glass overlay layer."
+      },
+      {
+        "name": "--glass-tinted-l5",
+        "value": "rgba(16, 16, 16, 0.10)",
+        "usage": "Tinted glass overlay layer."
+      },
+      {
+        "name": "--glass-clear-l1",
+        "value": "rgba(255, 255, 255, 0)",
+        "usage": "Clear glass highlight layer."
+      },
+      {
+        "name": "--glass-clear-l2",
+        "value": "rgba(255, 255, 255, 0.04)",
+        "usage": "Clear glass highlight layer."
+      },
+      {
+        "name": "--glass-clear-l3",
+        "value": "rgba(255, 255, 255, 0.08)",
+        "usage": "Clear glass highlight layer."
+      },
+      {
+        "name": "--interaction-hover-subtle",
+        "value": "rgba(16, 16, 16, 0.03)",
+        "usage": "Hover overlay."
+      },
+      {
+        "name": "--interaction-hover",
+        "value": "rgba(16, 16, 16, 0.04)",
+        "usage": "Hover overlay."
+      },
+      {
+        "name": "--interaction-pressed-subtle",
+        "value": "rgba(16, 16, 16, 0.06)",
+        "usage": "Pressed overlay."
+      },
+      {
+        "name": "--interaction-pressed",
+        "value": "rgba(16, 16, 16, 0.08)",
+        "usage": "Pressed overlay."
+      },
+      {
+        "name": "--interaction-pressed-strong",
+        "value": "rgba(16, 16, 16, 0.10)",
+        "usage": "Pressed overlay."
+      },
+      {
+        "name": "--backdrop-overlay",
+        "value": "rgba(0, 0, 0, 0.4)",
+        "usage": "Modal / sheet backdrop dim."
+      },
+      {
+        "name": "--glow-positive-strong",
+        "value": "rgba(52, 163, 77, 0.25)",
+        "usage": "Positive glow (charts / highlights)."
+      },
+      {
+        "name": "--glow-positive-medium",
+        "value": "rgba(52, 163, 77, 0.08)",
+        "usage": "Positive glow (charts / highlights)."
+      },
+      {
+        "name": "--glow-positive-fade",
+        "value": "rgba(52, 163, 77, 0)",
+        "usage": "Positive glow (charts / highlights)."
+      },
+      {
+        "name": "--snackbar-border",
+        "value": "rgba(255, 255, 255, 0.9)",
+        "usage": "Snackbar chrome on dark bar."
+      },
+      {
+        "name": "--snackbar-btn-hover",
+        "value": "rgba(255, 255, 255, 0.15)",
+        "usage": "Snackbar chrome on dark bar."
+      },
+      {
+        "name": "--snackbar-btn-active",
+        "value": "rgba(255, 255, 255, 0.25)",
+        "usage": "Snackbar chrome on dark bar."
+      },
+      {
+        "name": "--snackbar-link-hover",
+        "value": "rgba(255, 255, 255, 0.10)",
+        "usage": "Snackbar chrome on dark bar."
+      },
+      {
+        "name": "--snackbar-link-active",
+        "value": "rgba(255, 255, 255, 0.20)",
+        "usage": "Snackbar chrome on dark bar."
+      }
+    ],
+    "spacing": [
+      {
+        "name": "--spacing-2",
+        "value": "var(--unit-1)",
+        "usage": "Micro gap."
+      },
+      {
+        "name": "--spacing-4",
+        "value": "var(--unit-2)",
+        "usage": "Tight stack (nav, chips)."
+      },
+      {
+        "name": "--spacing-6",
+        "value": "var(--unit-3)",
+        "usage": "Compact gap."
+      },
+      {
+        "name": "--spacing-8",
+        "value": "var(--unit-4)",
+        "usage": "Small gap."
+      },
+      {
+        "name": "--spacing-12",
+        "value": "var(--unit-6)",
+        "usage": "Control vertical padding."
+      },
+      {
+        "name": "--spacing-16",
+        "value": "var(--unit-7)",
+        "usage": "Section gutters; card horizontal padding."
+      },
+      {
+        "name": "--spacing-24",
+        "value": "var(--unit-9)",
+        "usage": "Card vertical padding; large gaps."
+      },
+      {
+        "name": "--spacing-32",
+        "value": "var(--unit-10)",
+        "usage": "Below chip rows; roomy stacks."
+      },
+      {
+        "name": "--spacing-48",
+        "value": "var(--unit-11)",
+        "usage": "Large section gap."
+      },
+      {
+        "name": "--spacing-56",
+        "value": "var(--unit-12)",
+        "usage": "Default gap between major sections."
+      },
+      {
+        "name": "--spacing-60",
+        "value": "var(--unit-13)",
+        "usage": "Extra-large section gap."
+      },
+      {
+        "name": "--card-padding-block",
+        "value": "var(--spacing-24)",
+        "usage": "Card vertical padding (default)."
+      },
+      {
+        "name": "--card-padding-inline",
+        "value": "var(--spacing-16)",
+        "usage": "Card horizontal padding (default)."
+      },
+      {
+        "name": "--wheel-carousel-tab-gap",
+        "value": "calc(var(--spacing-12) + var(--spacing-8))",
+        "usage": "Wheel carousel column gap."
+      }
+    ],
+    "typography": [
+      {
+        "name": "--font-family",
+        "value": "'Inter Subset', 'Inter', sans-serif",
+        "usage": "UI font stack."
+      },
+      {
+        "name": "--font-weight-regular",
+        "value": "400",
+        "usage": "Body weight."
+      },
+      {
+        "name": "--font-weight-medium",
+        "value": "500",
+        "usage": "Labels and emphasis."
+      },
+      {
+        "name": "--font-weight-semibold",
+        "value": "600",
+        "usage": "Strong UI emphasis."
+      },
+      {
+        "name": "--font-weight-bold",
+        "value": "700",
+        "usage": "Display / titles."
+      },
+      {
+        "name": "--font-size-body",
+        "value": "14px",
+        "usage": "Body size."
+      },
+      {
+        "name": "--line-height-body",
+        "value": "20px",
+        "usage": "Body line height."
+      },
+      {
+        "name": "--font-size-subtext",
+        "value": "12px",
+        "usage": "Meta / helper size."
+      },
+      {
+        "name": "--line-height-subtext",
+        "value": "16px",
+        "usage": "Meta line height."
+      },
+      {
+        "name": "--font-size-display-2",
+        "value": "36px",
+        "usage": "Large display size."
+      },
+      {
+        "name": "--line-height-display-2",
+        "value": "40px",
+        "usage": "Display line height."
+      },
+      {
+        "name": "--font-size-title-1",
+        "value": "22px",
+        "usage": "Section title size."
+      },
+      {
+        "name": "--line-height-title-1",
+        "value": "28px",
+        "usage": "Section title line height."
+      },
+      {
+        "name": "typography-utility-classes",
+        "value": ".display-1-bold|.display-1-medium|.display-2-*|.display-3-*|.title-1-bold|.title-2-bold|.title-3-*|.title-4-*|.body-*|.subtext-*|.caption-*",
+        "usage": "Prebuilt type classes in typography.css (display, title, body, subtext, caption)."
+      },
+      {
+        "name": "--mono",
+        "value": "ui-monospace, Consolas, monospace",
+        "usage": "Code / monospace."
+      }
+    ],
+    "radius": [
+      {
+        "name": "--radius-4",
+        "value": "var(--unit-2)",
+        "usage": "Badges, small chips."
+      },
+      {
+        "name": "--radius-8",
+        "value": "var(--unit-4)",
+        "usage": "Buttons, inputs, nav items."
+      },
+      {
+        "name": "--radius-12",
+        "value": "var(--unit-6)",
+        "usage": "Medium containers."
+      },
+      {
+        "name": "--radius-16",
+        "value": "var(--unit-7)",
+        "usage": "Large panels."
+      },
+      {
+        "name": "--radius-24",
+        "value": "var(--unit-9)",
+        "usage": "Default card radius."
+      },
+      {
+        "name": "--radius-full",
+        "value": "var(--unit-max)",
+        "usage": "Pills / avatars (capped)."
+      },
+      {
+        "name": "--radius-pill-40",
+        "value": "calc(var(--spacing-32) + var(--spacing-8))",
+        "usage": "Wheel / segmented pills."
+      }
+    ],
+    "shadow": [
+      {
+        "name": "--shadow-elevation-1",
+        "value": "rgba(0, 0, 0, 0.06)",
+        "usage": "Shadow color, low elevation (pair with offset/blur)."
+      },
+      {
+        "name": "--shadow-elevation-2",
+        "value": "rgba(0, 0, 0, 0.08)",
+        "usage": "Shadow color, mid-low elevation."
+      },
+      {
+        "name": "--shadow-elevation-3",
+        "value": "rgba(0, 0, 0, 0.12)",
+        "usage": "Shadow color, mid elevation."
+      },
+      {
+        "name": "--shadow-elevation-4",
+        "value": "rgba(0, 0, 0, 0.24)",
+        "usage": "Shadow color, high elevation."
+      },
+      {
+        "name": "--shadow",
+        "value": "var(--shadow-elevation-2) 0 10px 15px -3px, var(--shadow-elevation-1) 0 4px 6px -2px",
+        "usage": "Stacked box-shadow preset on :root; prefer elevations in app UI."
+      }
+    ],
+    "breakpoints": [],
+    "sizing": [
+      {
+        "name": "--phone-column-width",
+        "value": "376px",
+        "usage": "Phone screen column width."
+      },
+      {
+        "name": "--card-width",
+        "value": "344px",
+        "usage": "Max card width inside column."
+      },
+      {
+        "name": "--carousel-card-width",
+        "value": "324px",
+        "usage": "Carousel card with peek."
+      },
+      {
+        "name": "--border-width-hairline",
+        "value": "1px",
+        "usage": "1px borders."
+      },
+      {
+        "name": "--touch-target-standard",
+        "value": "calc(var(--spacing-32) + var(--spacing-4))",
+        "usage": "Min tap target (icon buttons)."
+      },
+      {
+        "name": "--heatmap-sector-card-width",
+        "value": "324px",
+        "usage": "Heatmap sector strip width."
+      },
+      {
+        "name": "--heatmap-mosaic-min-height",
+        "value": "100px",
+        "usage": "Heatmap mosaic row min height."
+      },
+      {
+        "name": "--heatmap-cell-min-height",
+        "value": "100px",
+        "usage": "Heatmap cell min height."
+      },
+      {
+        "name": "--heatmap-cell-compact-min-height",
+        "value": "49px",
+        "usage": "Heatmap compact cell height."
+      },
+      {
+        "name": "--heatmap-mosaic-min-height-tall",
+        "value": "132px",
+        "usage": "Tall mosaic (index / F&O)."
+      },
+      {
+        "name": "--heatmap-cell-min-height-tall",
+        "value": "124px",
+        "usage": "Tall heatmap cell."
+      },
+      {
+        "name": "--heatmap-cell-compact-min-height-tall",
+        "value": "58px",
+        "usage": "Tall compact cell."
+      },
+      {
+        "name": "--wheel-carousel-pill-height",
+        "value": "44px",
+        "usage": "Wheel pill height."
+      },
+      {
+        "name": "--wheel-carousel-pill-max-width",
+        "value": "190px",
+        "usage": "Wheel pill max width."
+      },
+      {
+        "name": "--wheel-carousel-pill-radius",
+        "value": "var(--radius-pill-40)",
+        "usage": "Wheel pill radius (→ --radius-pill-40)."
+      },
+      {
+        "name": "--wheel-carousel-label-column",
+        "value": "calc(var(--spacing-32) + var(--spacing-8) + var(--spacing-2))",
+        "usage": "Wheel label column width."
+      },
+      {
+        "name": "--wheel-carousel-tab-width",
+        "value": "calc(var(--wheel-carousel-label-column) + var(--wheel-carousel-tab-gap))",
+        "usage": "Wheel tab column width."
+      },
+      {
+        "name": "--wheel-carousel-divider-height",
+        "value": "22px",
+        "usage": "Wheel divider height."
+      },
+      {
+        "name": "--wheel-carousel-divider-width",
+        "value": "0.5px",
+        "usage": "Wheel divider stroke."
+      },
+      {
+        "name": "--wheel-carousel-mask-fade-in",
+        "value": "10%",
+        "usage": "Wheel edge fade gradient start."
+      },
+      {
+        "name": "--wheel-carousel-mask-fade-out",
+        "value": "90%",
+        "usage": "Wheel edge fade gradient end."
+      }
+    ],
+    "zIndex": []
+  }
+}

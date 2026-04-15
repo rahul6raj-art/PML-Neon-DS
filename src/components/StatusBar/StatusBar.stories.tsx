@@ -6,7 +6,6 @@ const meta: Meta<typeof StatusBar> = {
   title: 'Components/StatusBar',
   component: StatusBar,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     theme: {
       control: 'inline-radio',

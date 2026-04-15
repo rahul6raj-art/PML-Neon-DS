@@ -42,7 +42,6 @@ const meta = {
   title: 'Widgets/Stocks Card',
   component: StocksCard,
   parameters: {
-    layout: 'centered',
     docs: {
       description: {
         component:

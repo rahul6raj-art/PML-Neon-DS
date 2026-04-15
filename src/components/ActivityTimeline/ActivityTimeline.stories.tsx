@@ -83,15 +83,6 @@ function buildSteps(args: ActivityTimelineStoryArgs): TimelineStep[] {
   return all.slice(0, args.stepCount);
 }
 
-function PlaygroundRender(args: ActivityTimelineStoryArgs) {
-  return (
-    <ActivityTimeline
-      direction={args.direction}
-      steps={buildSteps(args)}
-    />
-  );
-}
-
 function stepArgTypes(
   n: number,
   defaults: { status: StepStatus; title: string; subtitle: string },
@@ -152,8 +143,15 @@ function stepArgTypes(
 const meta: Meta<ActivityTimelineStoryArgs> = {
   title: 'Components/Activity Timeline',
   component: ActivityTimeline,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  decorators: [
+    (_, context) => (
+      <ActivityTimeline
+        direction={(context.args as ActivityTimelineStoryArgs).direction}
+        steps={buildSteps(context.args as ActivityTimelineStoryArgs)}
+      />
+    ),
+  ],
   argTypes: {
     direction: {
       control: 'inline-radio',
@@ -203,7 +201,6 @@ const meta: Meta<ActivityTimelineStoryArgs> = {
     step5Title: 'Title',
     step5Subtitle: 'Subtitle',
   },
-  render: PlaygroundRender,
 };
 
 export default meta;

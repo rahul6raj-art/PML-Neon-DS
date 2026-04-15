@@ -28,7 +28,6 @@ function getSelection(args: FlatArgs): number {
 const meta: Meta<FlatArgs> = {
   title: 'Components/Page Control',
   component: PageControl,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   render: (args) => (
     <PageControl

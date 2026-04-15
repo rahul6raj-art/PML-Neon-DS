@@ -105,7 +105,6 @@ const iconArgType = (description: string, defaultVal: string, category: string) 
 const meta: Meta<OverflowMenuStoryArgs> = {
   title: 'Components/Overflow Menu',
   component: OverflowMenu,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     /* ── Icons Section ─────────────────────────────── */

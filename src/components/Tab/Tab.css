@@ -2,9 +2,9 @@
 .tabs {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--border-neutral-medium);
+  gap: var(--spacing-24);
+  padding: 0 var(--spacing-16);
+  border-bottom: var(--border-width-hairline) solid var(--border-neutral-medium);
   box-sizing: border-box;
 }
 
@@ -12,11 +12,11 @@
 .tab {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--spacing-6);
   padding: 0;
   margin: 0;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: calc(var(--spacing-2) * 2) solid transparent;
   background: transparent;
   font-family: var(--font-family);
   color: var(--text-neutral-medium);
@@ -30,17 +30,17 @@
 }
 
 .tab:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
+  border-radius: var(--spacing-2);
 }
 
 /* ── Size: Medium ─────────────────────────────────── */
 .tabs--medium .tab {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 14px;
-  line-height: 20px;
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   font-weight: 400;
 }
 
@@ -52,10 +52,10 @@
 
 /* ── Size: Large ──────────────────────────────────── */
 .tabs--large .tab {
-  padding-top: 8px;
-  padding-bottom: 10px;
-  font-size: 16px;
-  line-height: 22px;
+  padding-top: var(--spacing-8);
+  padding-bottom: calc(var(--spacing-8) + var(--spacing-2));
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
   font-weight: 400;
 }
 
@@ -100,16 +100,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 16px;
-  min-height: 16px;
-  width: 20px;
-  padding: 2px 4px;
+  min-width: var(--spacing-16);
+  min-height: var(--spacing-16);
+  width: calc(var(--spacing-16) + var(--spacing-4));
+  padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--radius-16);
   background: var(--background-offset-3);
   color: var(--text-neutral-moderate);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-subtext);
   text-align: center;
   flex-shrink: 0;
   box-sizing: border-box;

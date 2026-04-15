@@ -84,6 +84,8 @@ export interface HeaderProps {
 
   /** Large: LHS icon/avatar content */
   lhsIcon?: ReactNode;
+  /** Large: trailing controls on the title row (e.g. LIVE + segmented toggle) */
+  titleTrailing?: ReactNode;
 
   className?: string;
 }
@@ -124,6 +126,7 @@ export const Header = ({
   chipShowBadge = false,
   chipBadgeContent,
   lhsIcon,
+  titleTrailing,
   showBorderBottom = false,
   showGradient = true,
   showBrandLogo = true,
@@ -200,7 +203,14 @@ export const Header = ({
           </div>
         </div>
 
-        <div className="header__title-section">
+        <div
+          className={[
+            'header__title-section',
+            titleTrailing && 'header__title-section--with-trailing',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
           {lhsIcon && <div className="header__lhs-icon">{lhsIcon}</div>}
           <div className="header__title-block">
             <h1 className="header__title header__title--large">{title}</h1>
@@ -208,6 +218,9 @@ export const Header = ({
               <p className="header__subtitle">{subtitle}</p>
             )}
           </div>
+          {titleTrailing && (
+            <div className="header__title-trailing">{titleTrailing}</div>
+          )}
         </div>
       </div>
     </>

@@ -1,0 +1,99 @@
+/* Compact quantity stepper — horizontal minus | input | plus; sizes follow platform tokens */
+
+.cqsw {
+  width: 100%;
+  max-width: var(--card-width);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.cqsw__box {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: calc(var(--spacing-48) + var(--spacing-4));
+  min-height: calc(var(--spacing-48) + var(--spacing-4));
+  max-height: calc(var(--spacing-48) + var(--spacing-4));
+  border: var(--border-width-hairline) solid var(--border-neutral-medium);
+  border-radius: var(--radius-8);
+  background: var(--surface-level-1);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.cqsw--disabled .cqsw__box {
+  opacity: 0.55;
+}
+
+.cqsw__step {
+  flex: 0 0 calc(var(--spacing-32) + var(--spacing-12));
+  width: calc(var(--spacing-32) + var(--spacing-12));
+  min-width: calc(var(--spacing-32) + var(--spacing-12));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--surface-level-1);
+  color: var(--text-neutral-strong);
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cqsw__step:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cqsw__step:focus-visible {
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: calc(-1 * var(--spacing-2));
+  z-index: 1;
+}
+
+.cqsw__glyph {
+  font-size: var(--font-size-title-2);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+}
+
+.cqsw__input-area {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-inline: var(--border-width-hairline) solid var(--border-neutral-medium);
+}
+
+.cqsw__input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 var(--spacing-8);
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  font-family: inherit;
+  font-size: var(--font-size-title-2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-title-2);
+  color: var(--text-neutral-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cqsw__input:focus {
+  outline: none;
+}
+
+.cqsw__input:disabled {
+  color: var(--text-neutral-weak);
+}
+
+.cqsw__step svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+}

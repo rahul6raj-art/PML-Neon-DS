@@ -10,9 +10,6 @@ const meta = {
   title: 'Components/Snackbar',
   component: Snackbar,
   subcomponents: { 'Action Button': Button as React.ComponentType<unknown> },
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     position: {
@@ -224,7 +221,6 @@ export const WithCheckIcon: Story = {
 
 export const FloatingMatrix: Story = {
   name: 'Matrix / Floating',
-  parameters: { layout: 'padded' },
   render: () => {
     const contexts = ['notice', 'negative', 'positive', 'neutral', 'brand'] as const;
     const icons = ['leading', 'trailing', 'none'] as const;
@@ -258,7 +254,6 @@ export const FloatingMatrix: Story = {
 
 export const FloatingNoActionMatrix: Story = {
   name: 'Matrix / Floating No Action',
-  parameters: { layout: 'padded' },
   render: () => {
     const contexts = ['notice', 'negative', 'positive', 'neutral', 'brand'] as const;
     const icons = ['leading', 'trailing', 'none'] as const;

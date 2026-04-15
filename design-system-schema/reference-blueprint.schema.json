@@ -1,0 +1,35 @@
+{
+  "referenceBlueprintSchema": {
+    "screenName": "string",
+    "referenceIntent": "string",
+    "regions": [
+      {
+        "name": "string",
+        "purpose": "string",
+        "position": "string",
+        "layoutBehavior": "string",
+        "visualDensity": "string",
+        "stickyBehavior": "string"
+      }
+    ],
+    "sectionOrder": ["string"],
+    "dsMapping": [
+      {
+        "referenceRegion": "string",
+        "layout": "string",
+        "widgets": ["string"],
+        "components": ["string"]
+      }
+    ],
+    "tokenPlan": [
+      {
+        "area": "string",
+        "tokenType": "string",
+        "token": "string",
+        "reason": "string"
+      }
+    ],
+    "missingMappings": ["string"],
+    "risks": ["string"]
+  }
+}

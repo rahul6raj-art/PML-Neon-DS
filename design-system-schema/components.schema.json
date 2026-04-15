@@ -1,0 +1,631 @@
+{
+  "components": [
+    {
+      "name": "Alert",
+      "importPath": "components/Alert",
+      "description": "Feedback banner: compact bar (sleek) or titled card (detailed) with optional CTA and close.",
+      "props": {
+        "type": "sleek | detailed",
+        "state": "primary | negative | warning | positive",
+        "showIcon": "boolean",
+        "iconContent": "string (glyph name) | ReactNode",
+        "title": "string",
+        "showTitle": "boolean",
+        "description": "string — alert body copy (Alert prop, not schema metadata)",
+        "showDescription": "boolean",
+        "showCta": "boolean",
+        "ctaLabel": "string",
+        "ctaVariant": "filled | stroke | tonal | link",
+        "ctaSize": "large | medium | small | extra-small",
+        "ctaIcon": "none | leading | trailing | only",
+        "ctaIconContent": "string | ReactNode",
+        "ctaLoading": "boolean",
+        "ctaDisabled": "boolean",
+        "onCtaClick": "() => void",
+        "showClose": "boolean",
+        "onClose": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["sleek", "detailed"],
+      "states": ["primary", "negative", "warning", "positive"],
+      "notes": [
+        "Use `type=detailed` when you need a title row; `sleek` is a single-line-style bar.",
+        "CTA is a nested Button: tune via cta* props."
+      ]
+    },
+    {
+      "name": "Avatar",
+      "importPath": "components/Avatar",
+      "description": "Round avatar: photo, initials, brand logo (via Logo), or icon; optional badge and selection ring.",
+      "props": {
+        "type": "profile | initials | logo | icon",
+        "size": "small | regular | large | extraLarge",
+        "icon": "none | status | action",
+        "selected": "boolean",
+        "src": "string",
+        "alt": "string",
+        "initials": "string",
+        "logoName": "string",
+        "logoCategory": "mutualFunds | payments | banks | stocks | indices",
+        "iconName": "string",
+        "badgeIcon": "string",
+        "onClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["profile", "initials", "logo", "icon"],
+      "states": ["selected"],
+      "notes": [
+        "`type=logo` uses the Logo component; supply logoName + logoCategory or logo image fields as needed."
+      ]
+    },
+    {
+      "name": "Badge",
+      "importPath": "components/Badge",
+      "description": "Text label, numeric count, or dot with semantic color context.",
+      "props": {
+        "type": "text | count | dot",
+        "context": "default | default-alt | primary | positive | notice | negative | highlight | live",
+        "muted": "boolean",
+        "label": "string",
+        "count": "number | string",
+        "showLeadingIcon": "boolean",
+        "showTrailingIcon": "boolean",
+        "leadingIcon": "string | ReactNode",
+        "trailingIcon": "string | ReactNode"
+      },
+      "allowedVariants": ["text", "count", "dot"],
+      "states": [],
+      "notes": [
+        "Leading/trailing icons only apply when `type=text`.",
+        "If an icon flag is true but no custom icon is passed, a default star glyph is used."
+      ]
+    },
+    {
+      "name": "BottomSheet",
+      "importPath": "components/BottomSheet",
+      "description": "Modal sheet from the bottom: optional custom header, title/subtitle, two CTAs, dismiss, Escape to close.",
+      "props": {
+        "open": "boolean",
+        "showDismiss": "boolean",
+        "headerContent": "ReactNode",
+        "showHeader": "boolean",
+        "showTitle": "boolean",
+        "title": "string",
+        "showSubtitle": "boolean",
+        "subtitle": "string",
+        "showPrimaryCta": "boolean",
+        "primaryCtaLabel": "string",
+        "showSecondaryCta": "boolean",
+        "secondaryCtaLabel": "string",
+        "onClose": "() => void",
+        "onPrimaryClick": "() => void",
+        "onSecondaryClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["open", "closed"],
+      "notes": [
+        "When `open`, Escape calls `onClose`.",
+        "Includes BottomSheetHeader + HomeIndicator in the layout."
+      ]
+    },
+    {
+      "name": "BottomSheetHeader",
+      "importPath": "components/BottomSheetHeader",
+      "description": "Sheet header: default (handle, title, subtitle, optional Chip tabs, dismiss) or image (240px slot).",
+      "props": {
+        "variant": "default | image",
+        "dragHandle": "boolean",
+        "title": "boolean",
+        "titleText": "string",
+        "subtitle": "boolean",
+        "subtitleText": "string",
+        "secondaryIcons": "boolean",
+        "secondaryIcon": "string",
+        "dismiss": "boolean",
+        "tabs": "boolean",
+        "tabLabels": "string[]",
+        "activeTabIndex": "number",
+        "onTabChange": "(index: number) => void",
+        "onDismiss": "() => void",
+        "onSecondaryClick": "() => void",
+        "headerContent": "ReactNode",
+        "className": "string"
+      },
+      "allowedVariants": ["default", "image"],
+      "states": [],
+      "notes": [
+        "Props named `title` / `subtitle` are booleans that toggle rows; copy goes in `titleText` / `subtitleText`.",
+        "Tab row uses Chip components when `tabs` is true."
+      ]
+    },
+    {
+      "name": "BrandLogo",
+      "importPath": "components/BrandLogo",
+      "description": "PML mark SVG; pick theme for light vs dark surfaces.",
+      "props": {
+        "theme": "light | dark",
+        "size": "number (px, default 34)",
+        "alt": "string",
+        "className": "string"
+      },
+      "allowedVariants": ["light", "dark"],
+      "states": [],
+      "notes": [
+        "Import `brandLogoThemeForAppColorScheme(appScheme)` to map app `light`/`dark` to `theme`."
+      ]
+    },
+    {
+      "name": "Button",
+      "importPath": "components/Button",
+      "description": "Button with optional icon placement and built-in loading spinner.",
+      "props": {
+        "variant": "filled | stroke | tonal | link",
+        "size": "large | medium | small | extra-small",
+        "icon": "none | leading | trailing | only",
+        "iconContent": "string | ReactNode",
+        "label": "string",
+        "loading": "boolean",
+        "htmlType": "button | submit | reset",
+        "disabled": "boolean",
+        "onClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["filled", "stroke", "tonal", "link"],
+      "states": ["disabled", "loading"],
+      "notes": [
+        "Extends native `<button>` props except `type` — use `htmlType` for submit/reset.",
+        "If an icon placement is set but `iconContent` is omitted, defaults to arrow_right_outline."
+      ]
+    },
+    {
+      "name": "Card",
+      "importPath": "components/Card",
+      "description": "Default surface wrapper; optional outline stroke and optional click behavior.",
+      "props": {
+        "stroke": "boolean",
+        "children": "ReactNode",
+        "onClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "Prefer `stroke={false}` unless the spec needs an outlined card.",
+        "Narrow parents: override `.textfield` width when placing TextField inside (TextField root is 344px in CSS)."
+      ]
+    },
+    {
+      "name": "CardControl",
+      "importPath": "components/CardControl",
+      "description": "Carousel page dots; 2–8 pages with condensed layouts for 7 and 8.",
+      "props": {
+        "dots": "2 | 3 | 4 | 5 | 6 | 7 | 8",
+        "selection": "number (1-based page)",
+        "onChange": "(index: number) => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "Same props as PageControl (dots, selection, onChange); default dot sizes differ slightly between the two components."
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "importPath": "components/Checkbox",
+      "description": "Labeled checkbox; supports indeterminate display via `state`.",
+      "props": {
+        "state": "checked | unchecked | indeterminate",
+        "layout": "inline | block",
+        "label": "string",
+        "showLabel": "boolean",
+        "labelEmphasis": "high | low",
+        "disabled": "boolean",
+        "onChange": "(e: ChangeEvent<HTMLInputElement>) => void",
+        "name": "optional — HTML `name` on the underlying input",
+        "value": "optional — HTML `value` on the underlying input",
+        "className": "string"
+      },
+      "allowedVariants": ["inline", "block"],
+      "states": ["checked", "unchecked", "indeterminate", "disabled"],
+      "notes": [
+        "Visual check state comes from `state`; the hidden input `checked` matches checked vs not (indeterminate set on the element ref).",
+        "For controlled usage, update `state` in `onChange` from the event.",
+        "Other native input attributes (e.g. `id`, `aria-*`) are spread onto the hidden checkbox — see `Checkbox.tsx`."
+      ]
+    },
+    {
+      "name": "Chip",
+      "importPath": "components/Chip",
+      "description": "Pill control for filters/tags; keyboard-activatable when not disabled.",
+      "props": {
+        "type": "default | selected | disabled",
+        "size": "extra-small | small | medium | large",
+        "label": "string",
+        "showLeadingIcon": "boolean",
+        "leadingIcon": "string | ReactNode",
+        "showTrailingIcon": "boolean",
+        "trailingIcon": "string | ReactNode",
+        "showBadge": "boolean",
+        "badgeContent": "string",
+        "onPress": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["default", "selected", "disabled"],
+      "notes": [
+        "`type=disabled` removes interaction; otherwise role=button, Enter/Space call `onPress`.",
+        "Use `size=extra-small` for dense chip rows (e.g. time-range filters)."
+      ]
+    },
+    {
+      "name": "Dropdown",
+      "importPath": "components/Dropdown",
+      "description": "Floating-label single-select; optional helper or error line under the field.",
+      "props": {
+        "emphasis": "high | low",
+        "label": "string",
+        "value": "string",
+        "options": "array of options, each { label, value }",
+        "placeholder": "string",
+        "showHelperText": "boolean",
+        "helperText": "string",
+        "showErrorText": "boolean",
+        "errorText": "string",
+        "showLeadingIcon": "boolean",
+        "leadingIcon": "string | ReactNode",
+        "disabled": "boolean",
+        "onChange": "(value: string) => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["open", "closed", "disabled", "error"],
+      "notes": [
+        "Controlled when `value` is passed; otherwise internal state.",
+        "Click outside closes the list."
+      ]
+    },
+    {
+      "name": "HomeIndicator",
+      "importPath": "components/HomeIndicator",
+      "description": "Bottom safe-area home bar for phone mockups.",
+      "props": {
+        "inverse": "boolean",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "`inverse=true`: dark bar on light chrome; `false`: light bar on dark chrome."
+      ]
+    },
+    {
+      "name": "Icon",
+      "importPath": "components/Icon",
+      "description": "SVG glyph by asset name from `icons/svg/glyphs/` (lazy-loaded).",
+      "props": {
+        "name": "glyph id string — valid names from `iconNames` export in this module",
+        "size": "number (px, default 24)",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "Extra props are passed through to the root `<svg>` (SVGAttributes).",
+        "Use the `iconNames` export to enumerate valid `name` values.",
+        "Unknown names leave nothing rendered after the import resolves."
+      ]
+    },
+    {
+      "name": "ListItem",
+      "importPath": "components/ListItem",
+      "description": "Rich list row: default layout or stocks-card / stocks-card-mtf (holdings + optional MTF footer).",
+      "props": {
+        "variant": "default | stocks-card | stocks-card-mtf",
+        "emphasis": "high | low",
+        "showLeading": "boolean",
+        "avatarType": "profile | initials | logo | icon",
+        "primaryText": "string",
+        "secondaryText": "string",
+        "trailing": "none | icon | text | link | button",
+        "trailingLinkText": "string",
+        "trailingButtonLabel": "string",
+        "onTrailingLinkPress": "() => void",
+        "onTrailingButtonPress": "() => void",
+        "stocksTitle": "string",
+        "stocksPrice": "string",
+        "stocksChangeLabel": "string",
+        "stocksChangeSentiment": "positive | negative | neutral",
+        "stocksStatusLabel": "string",
+        "stocksQuantity": "string",
+        "stocksAvgPriceLabel": "string",
+        "stocksMarginFooterLabel": "string",
+        "stocksMarginReturnLabel": "string",
+        "stocksMarginMultiplierLabel": "string",
+        "onClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["default", "stocks-card", "stocks-card-mtf"],
+      "states": [],
+      "notes": [
+        "For `stocks-card*` variants, trailing chevron is off unless you set `showTrailing` and a non-icon trailing.",
+        "Many more optional props exist for avatars, badges, tertiary lines — see ListItem.tsx for full API."
+      ]
+    },
+    {
+      "name": "Loading",
+      "importPath": "components/Loading",
+      "description": "Five-dot progress animation.",
+      "props": {
+        "type": "theme | monotone",
+        "dotSize": "number",
+        "label": "string",
+        "className": "string"
+      },
+      "allowedVariants": ["theme", "monotone"],
+      "states": [],
+      "notes": [
+        "Button `loading` uses this pattern internally."
+      ]
+    },
+    {
+      "name": "Logo",
+      "importPath": "components/Logo",
+      "description": "Square brand image from category + name lookup, or explicit `src`.",
+      "props": {
+        "category": "mutualFunds | payments | banks | stocks | indices",
+        "name": "logo asset key for the chosen category (when not using `src` alone)",
+        "src": "string",
+        "alt": "string",
+        "size": "number (px, default 32)",
+        "shape": "square | rounded | circle",
+        "className": "string"
+      },
+      "allowedVariants": ["square", "rounded", "circle"],
+      "states": [],
+      "notes": [
+        "Broken/missing image falls back to initials / placeholder styling."
+      ]
+    },
+    {
+      "name": "OtpTextField",
+      "importPath": "components/OtpTextField",
+      "description": "Fixed-length OTP cells (4 or 6) with optional resend and validation messaging.",
+      "props": {
+        "length": "4 | 6",
+        "otpFieldTitle": "boolean",
+        "titleText": "string",
+        "value": "string",
+        "defaultValue": "string",
+        "onChange": "(value: string) => void",
+        "onComplete": "(value: string) => void",
+        "disabled": "boolean",
+        "helper": "none | warning | error",
+        "errorText": "string",
+        "warningText": "string",
+        "resend": "boolean",
+        "resendAction": "string",
+        "resendTime": "string",
+        "onResend": "() => void",
+        "altMethod": "boolean",
+        "alternateAction": "string",
+        "onAlternateMethod": "() => void",
+        "id": "string",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["disabled", "error", "warning"],
+      "notes": [
+        "Digits only; paste fills sequential cells.",
+        "`helper` switches validation styling under the cells."
+      ]
+    },
+    {
+      "name": "OverflowMenu",
+      "importPath": "components/OverflowMenu",
+      "description": "Vertical list: optional icon shortcut row, then titled sections of icon+label rows.",
+      "props": {
+        "showIconsSection": "boolean",
+        "iconActions": "array of top shortcut rows: { icon, label, onClick? }",
+        "sections": "array of groups: { title?, items: { icon, label, onClick? }[] }",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "Presentational only — wrap in your own popover/anchor for a live menu."
+      ]
+    },
+    {
+      "name": "PageControl",
+      "importPath": "components/PageControl",
+      "description": "Horizontal dot pager; same rules as CardControl.",
+      "props": {
+        "dots": "2 | 3 | 4 | 5 | 6 | 7 | 8",
+        "selection": "number (1-based page)",
+        "onChange": "(index: number) => void",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": [],
+      "notes": [
+        "Same props API as CardControl; 7- and 8-page ellipsis-style logic matches CardControl."
+      ]
+    },
+    {
+      "name": "Radio",
+      "importPath": "components/Radio",
+      "description": "Radio circle or tick-circle indicator with label.",
+      "props": {
+        "type": "radio | tick",
+        "checked": "boolean",
+        "label": "string",
+        "showLabel": "boolean",
+        "labelEmphasis": "high | low",
+        "size": "large | medium",
+        "disabled": "boolean",
+        "onChange": "(e: ChangeEvent<HTMLInputElement>) => void",
+        "name": "optional — HTML `name` (group radios with the same name)",
+        "value": "optional — HTML `value` for this option",
+        "className": "string"
+      },
+      "allowedVariants": ["radio", "tick"],
+      "states": ["selected", "disabled"],
+      "notes": [
+        "Extends native input props except `type` and `size` (size is the component prop)."
+      ]
+    },
+    {
+      "name": "SegmentedControl",
+      "importPath": "components/SegmentedControl",
+      "description": "2–3 segment toggle; each segment can have icons, badge, and disabled.",
+      "props": {
+        "segments": "array of 2–3 segments; each has value, label, optional leadingIcon/trailingIcon flags + icons, optional badge, optional disabled",
+        "value": "string",
+        "defaultValue": "string",
+        "onChange": "(value: string) => void",
+        "width": "number | string",
+        "disabled": "boolean",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["disabled"],
+      "notes": [
+        "Default `width` is 344 (phone content width).",
+        "Provide 2 or 3 segments (stories follow this range)."
+      ]
+    },
+    {
+      "name": "Snackbar",
+      "importPath": "components/Snackbar",
+      "description": "Toast-style bar with optional icon and optional action button.",
+      "props": {
+        "position": "fixed | floating",
+        "context": "notice | negative | positive | neutral | brand",
+        "icon": "leading | trailing | none",
+        "iconContent": "string | ReactNode",
+        "message": "string",
+        "showAction": "boolean",
+        "actionLabel": "string",
+        "actionVariant": "filled | stroke | tonal | link",
+        "actionSize": "large | medium | small | extra-small",
+        "actionIcon": "none | leading | trailing | only",
+        "actionIconContent": "string | ReactNode",
+        "actionLoading": "boolean",
+        "actionDisabled": "boolean",
+        "onAction": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["fixed", "floating"],
+      "states": [],
+      "notes": [
+        "`position=fixed` draws a decorative status bar strip above the message.",
+        "Styling uses `snackbar-*` CSS variables on a dark surface."
+      ]
+    },
+    {
+      "name": "StatusBar",
+      "importPath": "components/StatusBar",
+      "description": "Decorative status line (time + signal cluster) for mockups.",
+      "props": {
+        "theme": "light | dark",
+        "time": "string",
+        "className": "string"
+      },
+      "allowedVariants": ["light", "dark"],
+      "states": [],
+      "notes": [
+        "`aria-hidden` — not for real system status; used inside Header and similar layouts."
+      ]
+    },
+    {
+      "name": "Switch",
+      "importPath": "components/Switch",
+      "description": "Toggle; underlying input is `type=checkbox` with `role=switch`.",
+      "props": {
+        "on": "boolean",
+        "disabled": "boolean",
+        "onChange": "(e: ChangeEvent<HTMLInputElement>) => void",
+        "name": "optional — HTML `name` on the underlying checkbox input",
+        "value": "optional — HTML `value` on the underlying input",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["on", "off", "disabled"],
+      "notes": [
+        "Use prop `on`, not `checked`, for the visual on state."
+      ]
+    },
+    {
+      "name": "Tabs",
+      "importPath": "components/Tab",
+      "description": "Underlined tab row; export name is `Tabs` from the `Tab` folder.",
+      "props": {
+        "tabs": "array of TabItem: value, label, optional icon/badge flags and content per tab, optional disabled",
+        "value": "string",
+        "defaultValue": "string",
+        "onChange": "(value: string) => void",
+        "size": "medium | large",
+        "width": "number | string",
+        "className": "string"
+      },
+      "allowedVariants": ["medium", "large"],
+      "states": ["disabled"],
+      "notes": [
+        "Also export types `TabItem`, `TabSize` from the same module.",
+        "Typical import: `import { Tabs } from '../components/Tab'` (or `components/Tab`)."
+      ]
+    },
+    {
+      "name": "TextField",
+      "importPath": "components/TextField",
+      "description": "Single-line field with floating label and optional leading/trailing icons.",
+      "props": {
+        "emphasis": "high | low",
+        "label": "string",
+        "value": "string",
+        "defaultValue": "string",
+        "assistiveText": "string",
+        "errorText": "string",
+        "showLeadingIcon": "boolean",
+        "leadingIcon": "string | ReactNode",
+        "showTrailingIcon": "boolean",
+        "trailingIcon": "string | ReactNode",
+        "disabled": "boolean",
+        "onChange": "(e: ChangeEvent<HTMLInputElement>) => void",
+        "onFocus": "(e) => void — input focus",
+        "onBlur": "(e) => void — input blur",
+        "placeholder": "string",
+        "className": "string"
+      },
+      "allowedVariants": [],
+      "states": ["focus", "filled", "error", "disabled"],
+      "notes": [
+        "Additional native input attributes are spread onto the input (except conflicting `size`).",
+        "Root is 344px wide in CSS — scope a width override when the parent is narrower than the phone column."
+      ]
+    },
+    {
+      "name": "Tile",
+      "importPath": "components/Tile",
+      "description": "Large tap target with icon, title, subtitle; optional favourite affordance.",
+      "props": {
+        "variant": "default | action",
+        "icon": "string (glyph name)",
+        "title": "string",
+        "label": "string",
+        "favouriteOption": "boolean",
+        "favouriteIcon": "string",
+        "onClick": "() => void",
+        "onFavouriteClick": "() => void",
+        "className": "string"
+      },
+      "allowedVariants": ["default", "action"],
+      "states": [],
+      "notes": [
+        "`variant=action` enables favourite control and optional gradient behind the star."
+      ]
+    }
+  ]
+}

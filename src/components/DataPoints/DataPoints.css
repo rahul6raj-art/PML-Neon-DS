@@ -6,7 +6,7 @@
   display: flex;
   gap: var(--spacing-8);
   align-items: flex-start;
-  width: 344px;
+  width: var(--card-width);
   font-family: var(--font-family);
   box-sizing: border-box;
 }
@@ -15,7 +15,7 @@
 .dp__col {
   flex: 1 0 0;
   min-width: 0;
-  min-height: 1px;
+  min-height: var(--border-width-hairline);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
@@ -40,7 +40,7 @@
 .dp__labels {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-4);
   align-items: inherit;
   width: 100%;
 }
@@ -48,7 +48,7 @@
 /* ── Title row (top label + icon) ───────────────── */
 .dp__title-row {
   display: flex;
-  gap: 4px;
+  gap: var(--spacing-4);
   align-items: center;
   width: 100%;
 }
@@ -69,9 +69,9 @@
 .dp__top-label,
 .dp__bottom-label,
 .dp__subtitle {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   letter-spacing: 0;
   color: var(--text-neutral-medium);
   white-space: nowrap;
@@ -81,9 +81,9 @@
 }
 
 .dp__data {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 500;
-  line-height: 20px;
+  line-height: var(--line-height-body);
   letter-spacing: 0;
   color: var(--text-neutral-strong);
   width: 100%;

@@ -58,8 +58,6 @@ const meta: Meta<HeatmapStoryArgs> = {
   title: 'Widgets/Heatmap',
   component: HeatmapWidget,
   parameters: {
-    /* padded: top-aligned preview — centered layout shifts the whole widget when height changes */
-    layout: 'padded',
     docs: {
       description: {
         component:

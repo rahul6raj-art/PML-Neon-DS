@@ -21,7 +21,6 @@ const meta: Meta<typeof Logo> = {
   title: 'Components/Logo',
   component: Logo,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
   argTypes: {
     category: {
       control: 'select',

@@ -9,15 +9,17 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  width: 376px;
-  height: 34px;
-  padding-bottom: 8px;
+  width: var(--phone-column-width);
+  height: calc(var(--spacing-32) + var(--spacing-2));
+  padding-bottom: var(--spacing-8);
   box-sizing: border-box;
 }
 
 .home-indicator__bar {
-  width: 134px;
-  height: 5px;
+  /* iOS home pill — width sums to 134px at mobile baseline */
+  width: calc(var(--spacing-56) + var(--spacing-48) + var(--spacing-24) + var(--spacing-6));
+  /* Pill height between unit steps — derived from spacing tokens for density scale */
+  height: calc(var(--spacing-8) - var(--spacing-2) - var(--border-width-hairline));
   border-radius: var(--radius-full);
 }
 

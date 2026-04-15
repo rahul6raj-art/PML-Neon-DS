@@ -4,7 +4,7 @@
 
 .nw {
   width: 100%;
-  max-width: 376px;
+  max-width: var(--phone-column-width);
   box-sizing: border-box;
   font-family: var(--font-family);
 }
@@ -25,7 +25,7 @@
 }
 
 .nw__card {
-  width: 324px;
+  width: var(--carousel-card-width);
   flex-shrink: 0;
   background: var(--surface-level-1);
   border-radius: var(--radius-24);
@@ -56,9 +56,9 @@
 
 .nw__card-title {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-medium);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
 }
 
@@ -76,29 +76,29 @@
 }
 
 .nw__card-chevron:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
   border-radius: var(--radius-4);
 }
 
 .nw__card-divider {
   border: none;
-  border-top: 1px solid var(--border-neutral-weak);
+  border-top: var(--border-width-hairline) solid var(--border-neutral-weak);
   margin: var(--spacing-16) 0;
 }
 
 .nw__card-body {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
-  line-height: 22px;
+  line-height: var(--line-height-title-4);
   color: var(--text-neutral-moderate);
 }
 
 .nw__card-time {
   margin: var(--spacing-12) 0 0;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-medium);
 }

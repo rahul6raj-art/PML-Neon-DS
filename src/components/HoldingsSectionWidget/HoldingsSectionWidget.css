@@ -1,0 +1,47 @@
+/* HoldingsSectionWidget — section + StocksCard stack (hsw-) */
+
+.hsw {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.hsw__body {
+  padding: 0 var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.hsw__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-32) var(--spacing-16);
+  color: var(--text-secondary);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+}
+
+.hsw__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.hsw__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24) 0;
+}
+
+.hsw__empty-copy {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+}

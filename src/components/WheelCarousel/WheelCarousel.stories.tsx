@@ -36,7 +36,6 @@ type WheelCarouselStoryArgs = ComponentProps<typeof WheelCarousel> & {
 const meta: Meta<WheelCarouselStoryArgs> = {
   title: 'Components/Wheel Carousel',
   component: WheelCarousel,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     storyItemCount: {

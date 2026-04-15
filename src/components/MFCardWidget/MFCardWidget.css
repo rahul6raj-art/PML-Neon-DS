@@ -4,7 +4,7 @@
 
 .mfcw {
   width: 100%;
-  max-width: 376px;
+  max-width: var(--phone-column-width);
   box-sizing: border-box;
   font-family: var(--font-family);
 }
@@ -25,7 +25,7 @@
   min-height: auto;
   position: relative;
   z-index: 2;
-  margin-bottom: -24px;
+  margin-bottom: calc(-1 * var(--spacing-24));
 }
 
 .mfcw__inner {
@@ -44,7 +44,7 @@
 .mfcw__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: calc(var(--spacing-8) + var(--spacing-2));
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
@@ -74,7 +74,7 @@
 
 .mfcw__fund-logo {
   flex-shrink: 0;
-  padding-top: 2px;
+  padding-top: var(--spacing-2);
 }
 
 .mfcw__fund-main {
@@ -99,16 +99,16 @@
 
 .mfcw__fund-name {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-medium);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
 }
 
 .mfcw__fund-sub {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--spacing-2);
   min-width: 0;
 }
 
@@ -118,9 +118,9 @@
 }
 
 .mfcw__fund-sub-label {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-moderate);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -138,23 +138,23 @@
 
 .mfcw__fund-rhs-primary {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-medium);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
 }
 
 .mfcw__fund-rhs-secondary {
   margin: 0;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-medium);
 }
 
 /* ── Separator ───────────────────────────────────── */
 .mfcw__sep {
-  height: 1px;
+  height: var(--border-width-hairline);
   width: 100%;
   background: var(--border-neutral-weak);
   flex-shrink: 0;
@@ -172,7 +172,7 @@
 .mfcw__data-cell {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-2);
   flex: 1;
   min-width: 0;
 }
@@ -183,16 +183,16 @@
 }
 
 .mfcw__data-label {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-medium);
 }
 
 .mfcw__data-value {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
 }
 
@@ -216,7 +216,7 @@
 .mfcw__footer-rating {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--spacing-2);
 }
 
 .mfcw__star {
@@ -224,24 +224,24 @@
 }
 
 .mfcw__footer-rating-num {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-moderate);
 }
 
 .mfcw__footer-dot {
-  width: 4px;
-  height: 4px;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
   border-radius: 50%;
   background: var(--text-neutral-moderate);
   flex-shrink: 0;
 }
 
 .mfcw__footer-meta {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
-  line-height: 20px;
+  line-height: var(--line-height-body);
   color: var(--text-neutral-moderate);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -252,10 +252,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 2px;
+  gap: var(--spacing-2);
   flex: 1;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   white-space: nowrap;
 }
 
@@ -278,7 +278,7 @@
   gap: var(--spacing-8);
   width: 100%;
   min-width: 0;
-  padding: 36px var(--card-padding-inline) var(--spacing-12);
+  padding: calc(var(--spacing-32) + var(--spacing-4)) var(--card-padding-inline) var(--spacing-12);
   /* Flush with card above: no radius on top; bottom matches card corner radius */
   border-radius: 0 0 var(--radius-24) var(--radius-24);
   background: var(--background-primary-weak);
@@ -293,12 +293,12 @@
 .mfcw__alert-text {
   margin: 0;
   flex: 1;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: var(--font-weight-medium);
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-strong);
 }
 
 .mfcw__stack--compact .mfcw__card {
-  margin-bottom: -24px;
+  margin-bottom: calc(-1 * var(--spacing-24));
 }

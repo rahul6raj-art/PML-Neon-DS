@@ -5,9 +5,6 @@ import { Checkbox } from './Checkbox';
 const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     state: {
@@ -248,7 +245,6 @@ export const InteractiveBlockLowGroup: Story = {
 
 export const FullMatrix: Story = {
   name: 'Matrix / Complete',
-  parameters: { layout: 'padded' },
   render: () => {
     const states = ['checked', 'indeterminate', 'unchecked'] as const;
     const emphases = ['high', 'low'] as const;

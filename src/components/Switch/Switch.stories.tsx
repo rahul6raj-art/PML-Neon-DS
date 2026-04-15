@@ -5,9 +5,6 @@ import { Switch } from './Switch';
 const meta = {
   title: 'Components/Switch',
   component: Switch,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     on: {
@@ -140,7 +137,6 @@ export const InteractiveSettingsPanel: Story = {
 
 export const FullMatrix: Story = {
   name: 'Matrix / Complete',
-  parameters: { layout: 'padded' },
   render: () => (
     <div
       style={{

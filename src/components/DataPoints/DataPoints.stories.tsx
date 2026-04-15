@@ -69,7 +69,6 @@ function argsToItems(args: FlatArgs): DataPointItem[] {
 
 const meta: Meta<FlatArgs> = {
   title: 'Components/Data Points',
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     /* ══ Layout Type ═════════════════════════════════ */

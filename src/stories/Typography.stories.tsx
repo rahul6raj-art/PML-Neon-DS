@@ -234,7 +234,7 @@ function SpecimenPage() {
 const meta: Meta = {
   title: 'Foundation/Typography',
   component: TypeScalePage,
-  parameters: { layout: 'padded', controls: { disable: true } },
+  parameters: { controls: { disable: true } },
   tags: ['autodocs'],
 };
 

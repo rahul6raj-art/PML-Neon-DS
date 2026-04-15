@@ -1,0 +1,50 @@
+{
+  "screenPlanSchema": {
+    "screenName": "string",
+    "description": "string",
+    "flowType": "string",
+    "steps": [
+      {
+        "id": "string",
+        "label": "string",
+        "status": "string",
+        "screenTitle": "string",
+        "primaryCta": "string",
+        "secondaryCta": "string"
+      }
+    ],
+    "primaryActions": ["string"],
+    "secondaryActions": ["string"],
+    "navigation": ["string"],
+    "dataDependencies": ["string"],
+    "copyConstraints": ["string"],
+    "validationRules": ["string"],
+    "completionRules": ["string"],
+    "failureRecovery": ["string"],
+    "layouts": [
+      {
+        "name": "string",
+        "purpose": "string"
+      }
+    ],
+    "sections": [
+      {
+        "name": "string",
+        "purpose": "string",
+        "importance": "string",
+        "interactionType": "string",
+        "layout": "string",
+        "widgets": ["string"],
+        "components": ["string"],
+        "states": ["string"],
+        "primaryAction": "string",
+        "secondaryActions": ["string"],
+        "dataNeeds": ["string"],
+        "validation": ["string"]
+      }
+    ],
+    "globalStates": ["string"],
+    "responsiveNotes": ["string"],
+    "missingPieces": ["string"]
+  }
+}

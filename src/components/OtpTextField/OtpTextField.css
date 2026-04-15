@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 12px;
-  width: 344px;
+  gap: var(--spacing-12);
+  width: var(--card-width);
   font-family: var(--font-family);
 }
 
@@ -18,9 +18,9 @@
 .otp__title {
   margin: 0;
   width: 100%;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-moderate);
 }
 
@@ -29,23 +29,23 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--spacing-12);
   width: 100%;
-  height: 48px;
+  height: var(--spacing-48);
 }
 
 /* 6-digit: equal flex distribution */
 .otp--len-6 .otp__cell {
   flex: 1 0 0;
   min-width: 0;
-  height: 48px;
+  height: var(--spacing-48);
 }
 
 /* 4-digit: fixed 48×48 */
 .otp--len-4 .otp__cell {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
 }
 
 /* ── Individual cell ──────────────────────────────── */
@@ -54,7 +54,7 @@
   box-sizing: border-box;
   border-radius: var(--radius-8);
   background: var(--surface-level-2);
-  border: 1px solid var(--border-neutral-weak);
+  border: var(--border-width-hairline) solid var(--border-neutral-weak);
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
@@ -67,7 +67,7 @@
 /* Focus — green (normal state only) */
 .otp:not(.otp--error):not(.otp--warning) .otp__cell:focus-within {
   border-color: var(--border-positive-strong);
-  box-shadow: inset 0 0 0 1px var(--border-positive-strong);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-positive-strong);
 }
 
 /* ── Native input inside cell ─────────────────────── */
@@ -82,9 +82,9 @@
   background: transparent;
   text-align: center;
   font-family: inherit;
-  font-size: 16px;
+  font-size: var(--font-size-title-4);
   font-weight: 600;
-  line-height: 22px;
+  line-height: var(--line-height-title-4);
   color: var(--text-neutral-moderate);
   caret-color: var(--text-positive-strong);
 }
@@ -102,7 +102,7 @@
 }
 
 .otp--error .otp__cell:focus-within {
-  box-shadow: inset 0 0 0 1px var(--border-negative-strong);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-negative-strong);
 }
 
 .otp--error .otp__input {
@@ -117,7 +117,7 @@
 }
 
 .otp--warning .otp__cell:focus-within {
-  box-shadow: inset 0 0 0 1px var(--border-notice-strong);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-notice-strong);
 }
 
 .otp--warning .otp__input {
@@ -143,12 +143,12 @@
 .otp__meta {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-12);
   width: 100%;
 }
 
 .otp__meta--with-alt {
-  gap: 16px;
+  gap: var(--spacing-16);
 }
 
 /* ── Horizontal footer row (6-digit, or 4-digit no-helper) ── */
@@ -157,10 +157,10 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-end;
-  gap: 8px;
+  gap: var(--spacing-8);
   width: 100%;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
 }
 
 /* 4-digit no-helper: left-aligned */
@@ -178,15 +178,15 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--spacing-16);
   width: 100%;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
 }
 
 /* Tighter gap when alt method is also present */
 .otp__footer-stack--tight {
-  gap: 12px;
+  gap: var(--spacing-12);
 }
 
 /* ── Helper text ──────────────────────────────────── */
@@ -194,9 +194,9 @@
   flex: 1 1 auto;
   margin: 0;
   min-width: 0;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
 }
 
 /* Inside vertical stack, take full width */
@@ -232,9 +232,9 @@
   background: none;
   cursor: pointer;
   font-family: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-positive-strong);
   white-space: nowrap;
 }
@@ -250,9 +250,9 @@
 
 /* ── Timer text (Resend=No) ───────────────────────── */
 .otp__timer {
-  font-size: 12px;
+  font-size: var(--font-size-subtext);
   font-weight: 500;
-  line-height: 16px;
+  line-height: var(--line-height-subtext);
   color: var(--text-neutral-moderate);
   white-space: nowrap;
 }

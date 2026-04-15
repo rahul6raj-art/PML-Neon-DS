@@ -59,7 +59,6 @@ const meta = {
   title: 'Widgets/News',
   component: NewsWidget,
   parameters: {
-    layout: 'centered',
     controls: { expanded: true, sort: 'alpha' },
     docs: {
       description: {

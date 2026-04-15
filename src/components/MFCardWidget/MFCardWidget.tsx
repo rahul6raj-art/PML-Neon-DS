@@ -197,7 +197,7 @@ export const MFCardWidget = ({
         externalLabel={props.externalLabel}
         rhsTagLabel={props.rhsTagLabel}
       />
-      <FundNameRow cardType={cardType} fundName={props.fundName} {...props} />
+      <FundNameRow cardType={cardType} {...props} />
       {(cardType === 'large' || cardType === 'medium') && (
         <>
           <div className="mfcw__sep" role="separator" />

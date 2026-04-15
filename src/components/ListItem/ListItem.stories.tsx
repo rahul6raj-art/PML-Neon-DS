@@ -43,7 +43,6 @@ const ALL_LOGO_NAMES = [
 const meta: Meta<typeof ListItem> = {
   title: 'Components/List Item',
   component: ListItem,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     /* ══ Variant ════════════════════════════════════ */
@@ -656,7 +655,6 @@ export const StocksCardRow: StoryObj<ListItemStocksStoryArgs> = {
           'Same **`StocksCard`** as **Widgets/Stocks Card**: **`stocks-card`** or **`stocks-card-mtf`** (MTF adds return-on-margin footer). Use **Show status badge** to toggle the pill.',
       },
     },
-    layout: 'centered',
   },
   decorators: [
     (Story) => (

@@ -12,9 +12,6 @@ const iconMapping = Object.fromEntries([
 const meta = {
   title: 'Components/TextField',
   component: TextField,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     emphasis: {

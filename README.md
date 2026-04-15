@@ -1,5 +1,11 @@
 # React + TypeScript + Vite
 
+## Design system & platform density
+
+Shared UI lives in **`src/components/`**. To avoid regressions on **Mobile / Tablet / Web** token scaling, follow **[CONTRIBUTING.md](./CONTRIBUTING.md)** and the optional header pattern in **[`src/components/README.md`](./src/components/README.md)**. Storybook **Introduction** documents platform density for designers and developers.
+
+---
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

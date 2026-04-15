@@ -7,7 +7,7 @@
   position: relative;
   width: 100%;
   max-width: var(--card-width);
-  min-height: 200px;
+  min-height: calc(var(--spacing-48) + var(--spacing-48) + var(--spacing-48) + var(--spacing-56));
   border-radius: var(--radius-24);
   background: var(--surface-level-1);
   overflow: hidden;
@@ -16,9 +16,18 @@
   padding: var(--card-padding-block) var(--card-padding-inline);
 }
 
+/* ListItem defaults to 344px (full phone column). Card inner width is smaller because of
+   horizontal padding — unconstrained rows overflow and clip under overflow:hidden. */
+.card .li-item {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 /* ── Stroke variant ─────────────────────────────── */
 .card--stroke {
-  border: 1px solid var(--border-neutral-weak);
+  border: var(--border-width-hairline) solid var(--border-neutral-weak);
 }
 
 /* ── Clickable ──────────────────────────────────── */
@@ -28,14 +37,14 @@
 }
 
 .card--clickable:hover {
-  box-shadow: 0 2px 8px var(--shadow-elevation-1);
+  box-shadow: 0 var(--unit-1) var(--spacing-8) var(--shadow-elevation-1);
 }
 
 .card--clickable:active {
-  box-shadow: 0 1px 2px var(--shadow-elevation-2);
+  box-shadow: 0 var(--border-width-hairline) var(--unit-1) var(--shadow-elevation-2);
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
 }

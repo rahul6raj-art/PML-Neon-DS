@@ -10,27 +10,27 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
-  width: 344px;
+  width: var(--card-width);
   position: relative;
   font-family: var(--font-family);
 }
 
 .textfield--has-helper {
-  gap: 4px;
+  gap: var(--spacing-4);
 }
 
 /* ── Input Box ────────────────────────────────────── */
 .textfield__box {
-  --tf-px: 12px;
-  --tf-py: 12px;
+  --tf-px: var(--spacing-12);
+  --tf-py: var(--spacing-12);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-8);
   width: 100%;
-  height: 52px;
-  max-height: 52px;
+  height: calc(var(--spacing-48) + var(--spacing-4));
+  max-height: calc(var(--spacing-48) + var(--spacing-4));
   padding: var(--tf-py) var(--tf-px);
-  border: 1px solid var(--border-neutral-medium);
+  border: var(--border-width-hairline) solid var(--border-neutral-medium);
   border-radius: var(--radius-12);
   background: transparent;
   box-sizing: border-box;
@@ -76,13 +76,13 @@
 }
 
 .textfield--high .textfield__input {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
 }
 
 .textfield--low .textfield__input {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
 }
 
 /* ══════════════════════════════════════════════════
@@ -115,27 +115,27 @@
 
 /* Shift label right when a leading icon is present */
 .textfield--has-leading .textfield__label:not(.textfield__label--float) {
-  left: calc(var(--tf-px) + 24px + 8px);
+  left: calc(var(--tf-px) + var(--spacing-24) + var(--spacing-8));
 }
 
 /* High placeholder: 16px / 22px Medium */
 .textfield--high .textfield__label {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
 }
 
 /* Low placeholder: 14px / 20px Medium */
 .textfield--low .textfield__label {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
 }
 
 /* ── FLOATED label — sits on the top border ───────── */
 .textfield__label--float {
   top: 0;
-  left: 12px;
+  left: var(--spacing-12);
   transform: translateY(-50%);
-  padding: 0 4px;
+  padding: 0 var(--spacing-4);
   background: var(--surface-level-1);
   color: var(--text-neutral-strong);
   overflow: visible;
@@ -143,15 +143,15 @@
 
 /* High floated: 14px / 20px Regular */
 .textfield--high .textfield__label--float {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   font-weight: 400;
 }
 
 /* Low floated: 12px / 16px Regular */
 .textfield--low .textfield__label--float {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
   font-weight: 400;
 }
 
@@ -160,7 +160,7 @@
    ══════════════════════════════════════════════════ */
 .textfield--focus .textfield__box {
   border-color: var(--border-positive-strong);
-  box-shadow: inset 0 0 0 1px var(--border-positive-strong);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-positive-strong);
   border-radius: var(--radius-12);
 }
 
@@ -188,7 +188,7 @@
 
 .textfield--error.textfield--focus .textfield__box {
   border-color: var(--border-negative-strong);
-  box-shadow: inset 0 0 0 1px var(--border-negative-strong);
+  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-negative-strong);
 }
 
 .textfield--error .textfield__input {
@@ -235,21 +235,24 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   color: var(--text-neutral-strong);
 }
 
 .textfield__icon svg {
   fill: currentColor;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
 }
 
 /* ── Helper text ──────────────────────────────────── */
 .textfield__helper {
   margin: 0;
-  padding: 0 12px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 0 var(--spacing-12);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   font-weight: 400;
   color: var(--text-neutral-medium);
 }

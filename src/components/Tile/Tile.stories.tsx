@@ -14,7 +14,6 @@ const ICON_OPTIONS = iconNames.reduce<Record<string, string>>(
 const meta: Meta<typeof Tile> = {
   title: 'Components/Tile',
   component: Tile,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     /* ══ Variant ═════════════════════════════════════ */

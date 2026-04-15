@@ -36,7 +36,6 @@ const PlaceholderImage = () => (
 const meta: Meta<typeof BottomSheetHeader> = {
   title: 'Components/Bottom Sheet Header',
   component: BottomSheetHeader,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     /* ══ Variant ═════════════════════════════════════ */

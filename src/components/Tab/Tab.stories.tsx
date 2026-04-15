@@ -12,9 +12,6 @@ const iconMapping = Object.fromEntries([
 const meta = {
   title: 'Components/Tabs',
   component: Tabs,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   argTypes: {
     tabs: {
