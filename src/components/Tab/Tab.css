@@ -16,7 +16,8 @@
   padding: 0;
   margin: 0;
   border: none;
-  border-bottom: calc(var(--spacing-2) * 2) solid transparent;
+  /* Reserve 2px so active green stroke is 2px without layout shift */
+  border-bottom: var(--spacing-2) solid transparent;
   background: transparent;
   font-family: var(--font-family);
   color: var(--text-neutral-medium);
