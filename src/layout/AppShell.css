@@ -23,27 +23,6 @@
   gap: var(--spacing-24);
 }
 
-.app-shell__intro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-}
-
-.app-shell__brand {
-  font-size: 13px;
-  font-weight: var(--font-weight-semibold);
-  line-height: 18px;
-  color: var(--text-neutral-strong);
-}
-
-.app-shell__hint {
-  margin: 0;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: var(--font-weight-regular);
-  color: var(--text-neutral-moderate);
-}
-
 .app-shell__nav {
   display: flex;
   flex-direction: column;

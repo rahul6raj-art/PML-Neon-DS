@@ -118,7 +118,7 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
 
         <div className="dv-section">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Market Movers"
             showChevron
             trailing="none"
@@ -169,7 +169,7 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
 
         <div className="dv-section">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Curated strategies"
             showChevron
             trailing="none"
@@ -197,7 +197,7 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
 
         <div className="dv-section">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Expert recommendations"
             showChevron
             trailing="none"
@@ -212,8 +212,8 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
                 onClick={() => {}}
               >
                 <div className="dv-rec-card__tags">
-                  <Badge type="text" context="notice" label={r.riskLabel} />
-                  <Badge type="text" context="primary" label={r.styleLabel} />
+                  <Badge type="text" context={r.riskContext} muted label={r.riskLabel} />
+                  <Badge type="text" context={r.styleContext} muted label={r.styleLabel} />
                 </div>
                 <div className="dv-rec-card__title">{r.title}</div>
                 <p className="dv-rec-card__summary">{r.summary}</p>
@@ -242,7 +242,7 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
 
         <div className="dv-section">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Smart screeners"
             showChevron
             trailing="none"

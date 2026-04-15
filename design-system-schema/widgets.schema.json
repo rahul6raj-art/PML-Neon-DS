@@ -121,7 +121,7 @@
       "slots": ["identity", "statusChips", "amountBlock", "meta"],
       "states": ["default", "loading", "partialFailure"],
       "usage": [
-        "Prefer BillSummaryWidget as the first content block after flow chrome on credit-card bill pay, utility bill pay, or similar checkout-adjacent flows.",
+        "Prefer BillSummaryWidget as the first content block after flow chrome on bill pay, utility bill pay, or similar checkout-adjacent flows.",
         "Use when the spec requires total due, minimum due, outstanding, and due date together—avoid one-off Card + loose Text stacks.",
         "Source: `src/components/BillSummaryWidget/` — maps `statusNote` to a sleek Alert; only one `billStatus` badge today (multi-chip dashboards may need an extension)."
       ],
@@ -766,7 +766,7 @@
       "slots": [],
       "states": ["negative", "warning", "primary", "positive"],
       "usage": [
-        "Place at the top of `.sh-section__content`, under a SectionHeader, or in a dedicated notices stack at the top of the scroll region (see CreditCardBillDashboard banner pattern).",
+        "Place at the top of `.sh-section__content`, under a SectionHeader, or in a dedicated notices stack at the top of the scroll region (e.g. bill / settings dashboard banner row).",
         "Use when a whole section or screen region failed to load, needs a warning before content, or offers a clear recovery action—pair `state=\"negative\"` or `warning` with `showCta` + `onCtaClick` for retry.",
         "Use sleek for dense stacks; detailed when title + body + CTA need stronger hierarchy."
       ],

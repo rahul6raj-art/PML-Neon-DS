@@ -1,5 +1,7 @@
 /** Mock data for Stocks Discover — replace with API responses (PRD: indices, movers, strategies, etc.). */
 
+import type { BadgeContext } from '../components/Badge';
+
 export interface IndexChipData {
   id: string;
   name: string;
@@ -25,7 +27,11 @@ export interface StrategyCardData {
 export interface ExpertRecData {
   id: string;
   riskLabel: string;
+  /** Passed to design-system `Badge` (`context`). */
+  riskContext: BadgeContext;
   styleLabel: string;
+  /** Passed to design-system `Badge` (`context`). */
+  styleContext: BadgeContext;
   title: string;
   summary: string;
   analystCount: number;
@@ -82,7 +88,9 @@ export const DISCOVER_EXPERT_RECS: ExpertRecData[] = [
   {
     id: 'e1',
     riskLabel: 'Medium Risk',
+    riskContext: 'notice',
     styleLabel: 'Swing Trade',
+    styleContext: 'primary',
     title: 'Accumulate on dips — IT services',
     summary: 'Analysts cite resilient deal wins vs. seasonal weakness.',
     analystCount: 3,
@@ -90,7 +98,9 @@ export const DISCOVER_EXPERT_RECS: ExpertRecData[] = [
   {
     id: 'e2',
     riskLabel: 'Low Risk',
+    riskContext: 'positive',
     styleLabel: 'Wealth',
+    styleContext: 'default',
     title: 'Defensive tilt — FMCG leaders',
     summary: 'Consensus view: margin stability through FY26.',
     analystCount: 5,

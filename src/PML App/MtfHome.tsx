@@ -98,7 +98,7 @@ export function MtfHomePage({ colorScheme = 'dark' }: MtfHomePageProps) {
 
         <section className="mtf-section" aria-label="Active positions">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Active Positions"
             showChevron={false}
             trailing="none"
@@ -150,7 +150,7 @@ export function MtfHomePage({ colorScheme = 'dark' }: MtfHomePageProps) {
 
         <section className="mtf-section" aria-label="Opportunity scanners">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Opportunity Scanners"
             showChevron
             trailing="none"
@@ -206,7 +206,7 @@ export function MtfHomePage({ colorScheme = 'dark' }: MtfHomePageProps) {
 
         <section className="mtf-section" aria-label="Common questions">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="Common Questions"
             showChevron
             trailing="none"
@@ -227,7 +227,7 @@ export function MtfHomePage({ colorScheme = 'dark' }: MtfHomePageProps) {
 
         <section className="mtf-section" aria-label="MTF health">
           <SectionHeader
-            size="large"
+            size="extra-large"
             title="MTF Health"
             showChevron
             trailing="none"

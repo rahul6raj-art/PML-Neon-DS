@@ -39,7 +39,7 @@ export interface AllocationBreakdownWidgetProps {
 export const AllocationBreakdownWidget = ({
   title = 'Allocation',
   showSectionHeader = true,
-  sectionHeaderSize = 'large',
+  sectionHeaderSize = 'extra-large',
   showChevron = true,
   trailing = 'none',
   linkText,

@@ -1,4 +1,4 @@
-/* Compact quantity stepper — horizontal minus | input | plus; sizes follow platform tokens */
+/* Compact quantity stepper — horizontal minus | input | plus; shell uses --radius-16 (16px). */
 
 .cqsw {
   width: 100%;
@@ -15,7 +15,7 @@
   min-height: calc(var(--spacing-48) + var(--spacing-4));
   max-height: calc(var(--spacing-48) + var(--spacing-4));
   border: var(--border-width-hairline) solid var(--border-neutral-medium);
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-16);
   background: var(--surface-level-1);
   box-sizing: border-box;
   overflow: hidden;

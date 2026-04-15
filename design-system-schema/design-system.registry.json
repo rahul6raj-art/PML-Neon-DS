@@ -889,7 +889,7 @@
         "partialFailure"
       ],
       "usage": [
-        "Prefer BillSummaryWidget as the first content block after flow chrome on credit-card bill pay, utility bill pay, or similar checkout-adjacent flows.",
+        "Prefer BillSummaryWidget as the first content block after flow chrome on bill pay, utility bill pay, or similar checkout-adjacent flows.",
         "Use when the spec requires total due, minimum due, outstanding, and due date together—avoid one-off Card + loose Text stacks.",
         "Source: `src/components/BillSummaryWidget/` — maps `statusNote` to a sleek Alert; only one `billStatus` badge today (multi-chip dashboards may need an extension)."
       ],
@@ -1724,7 +1724,7 @@
         "positive"
       ],
       "usage": [
-        "Place at the top of `.sh-section__content`, under a SectionHeader, or in a dedicated notices stack at the top of the scroll region (see CreditCardBillDashboard banner pattern).",
+        "Place at the top of `.sh-section__content`, under a SectionHeader, or in a dedicated notices stack at the top of the scroll region (e.g. bill / settings dashboard banner row).",
         "Use when a whole section or screen region failed to load, needs a warning before content, or offers a clear recovery action—pair `state=\"negative\"` or `warning` with `showCta` + `onCtaClick` for retry.",
         "Use sleek for dense stacks; detailed when title + body + CTA need stronger hierarchy."
       ],
@@ -1839,7 +1839,7 @@
       "layoutRules": [
         "Root: `width: var(--phone-column-width); height: 100vh; display: flex; flex-direction: column; background: var(--surface-level-4); overflow: hidden; text-align: left;` (canonical class `.stock-home` on `StockHomePage`).",
         "Scroll region: child with `flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-bottom: var(--spacing-16)` (`.sh-content`). Only this region scrolls vertically; the root stays `overflow: hidden`.",
-        "On Stock Home, `Header` lives inside `.sh-content` and scrolls with content; `width: 100%; flex-shrink: 0` on `.stock-home__header`. If a screen needs a fixed header above scroll (e.g. credit-card bill), document that deviation explicitly — it is not the Stock Home default.",
+        "On Stock Home, `Header` lives inside `.sh-content` and scrolls with content; `width: 100%; flex-shrink: 0` on `.stock-home__header`. If a screen needs a fixed header above scroll (e.g. bill pay), document that deviation explicitly — it is not the Stock Home default.",
         "Bottom nav: sibling of `.sh-content` under the root, wrapped in `.sh-bottom-nav` — `flex-shrink: 0`, optional `z-index` for stacking; must not be inside the scrolling div.",
         "Sections: use `.sh-section` with `margin-top: var(--spacing-56)` (first section may use design-approved exceptions); content wells use `.sh-section__content` with `padding: var(--spacing-16)` unless a widget owns its own horizontal inset.",
         "Use design tokens only for shell chrome (`--spacing-*`, `--surface-*`, `--font-family`); do not hardcode 376px when `--phone-column-width` applies.",
@@ -1853,7 +1853,7 @@
       "notes": [
         "Pattern-based today: there is no `layout/PhoneColumnScrollShell.tsx` export. Reference implementation is `PML App/StockHome` + `StockHome.css`; Discover (`Discover.css`) duplicates the same geometry with different class names.",
         "`importPath` points at the canonical page module for discovery and parity with the registry — implement by copying the documented class structure into new pages until a shared shell component (e.g. `PhoneScrollShell`) is extracted.",
-        "Login and similar screens use the column + scroll stack without `BottomNav`; credit-card bill uses header outside the scroll region — valid variants, not the default Stock Home header-in-scroll model."
+        "Login and similar screens use the column + scroll stack without `BottomNav`; some bill-pay style screens use header outside the scroll region — valid variants, not the default Stock Home header-in-scroll model."
       ]
     }
   ],

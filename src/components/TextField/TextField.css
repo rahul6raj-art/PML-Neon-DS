@@ -42,9 +42,8 @@
     box-shadow 0.15s ease;
 }
 
-/* HIGH pristine (normal, empty, no helper, no error, not disabled) */
-.textfield--high:not(.textfield--has-helper):not(.textfield--focus):not(.textfield--filled):not(.textfield--disabled):not(.textfield--error)
-  .textfield__box {
+/* HIGH without helper: 16px corners in every state (field, focus, filled) */
+.textfield--high:not(.textfield--has-helper) .textfield__box {
   border-radius: var(--radius-16);
 }
 
@@ -156,12 +155,12 @@
 }
 
 /* ══════════════════════════════════════════════════
-   STATE: FOCUS — green 2px border
+   STATE: FOCUS — 1px accent border (single stroke, no inset doubling)
    ══════════════════════════════════════════════════ */
 .textfield--focus .textfield__box {
+  /* Single 1px stroke via inherited --border-width-hairline; no inset ring */
   border-color: var(--border-positive-strong);
-  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-positive-strong);
-  border-radius: var(--radius-12);
+  box-shadow: none;
 }
 
 .textfield--focus:not(.textfield--filled) .textfield__label {
@@ -173,13 +172,6 @@
 }
 
 /* ══════════════════════════════════════════════════
-   STATE: FILLED (blurred, with value)
-   ══════════════════════════════════════════════════ */
-.textfield--filled:not(.textfield--focus) .textfield__box {
-  border-radius: var(--radius-12);
-}
-
-/* ══════════════════════════════════════════════════
    STATE: ERROR — red border, red label, red caret
    ══════════════════════════════════════════════════ */
 .textfield--error .textfield__box {
@@ -188,7 +180,7 @@
 
 .textfield--error.textfield--focus .textfield__box {
   border-color: var(--border-negative-strong);
-  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-negative-strong);
+  box-shadow: none;
 }
 
 .textfield--error .textfield__input {

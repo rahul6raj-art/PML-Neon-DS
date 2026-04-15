@@ -14,7 +14,7 @@ For **any** request to **make**, **create**, **build**, **add**, **implement**, 
 - **Read `DESIGN.md` (repo root) when it exists** and the work could touch documented theme, typography, Figma mapping, or flows—**even if the user does not mention the file.**
 - **Only bypass** these conventions when the user **explicitly** opts out in writing (e.g. prototype-only, external stack).
 
-When adding or refactoring **in-app screens**, **multi-step flows**, or **new UI** (e.g. `src/PML App/`, feature folders such as `src/options-terminal/`, Storybook stories), you **must** follow the pipeline below. Do **not** ship screens built only from ad hoc utility CSS (e.g. raw Tailwind palette names) and one-off markup while ignoring the design system—unless the user **explicitly** opts out in writing.
+When adding or refactoring **in-app screens**, **multi-step flows**, or **new UI** (e.g. `src/PML App/`, other feature folders under `src/`, Storybook stories), you **must** follow the pipeline below. Do **not** ship screens built only from ad hoc utility CSS (e.g. raw Tailwind palette names) and one-off markup while ignoring the design system—unless the user **explicitly** opts out in writing.
 
 **Default agent behavior:** For any brief (PRD excerpt, Figma link, screenshot, or chat instruction), **analyze the requirement first**, then **map it to existing components and tokens**, then **implement**. The deliverable is **our** layout language (this repo’s components + CSS variables), not a generic HTML/CSS sketch.
 
@@ -64,14 +64,22 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 ## Section pattern
 
 - **Vertical rhythm:** blocks use **`.sh-section`** with **`margin-top: var(--spacing-56)`** (adjust only if design explicitly differs).
-- **Typical block:** `SectionHeader` (large title row) + content.
+- **Typical block:** `SectionHeader` (**`size="extra-large"`** by default — primary section title row) + content.
 - **Content wrapper:** wrap cards / primary content in **`.sh-section__content`** with **`padding: var(--spacing-16)`** (full padding around the block). Keep the same **16px horizontal alignment** as section titles (`SectionHeader` uses `padding: 0 var(--spacing-16)` on `.sh`).
 - **Exception:** when a widget manages its own horizontal inset (e.g. `ReminderWidget` `.rw__cards`), follow that component’s CSS — do not double-wrap with extra horizontal padding unless intentional.
+
+### `SectionHeader` — size, chevron, not trailing “See more”
+
+- **Default size:** **`size="extra-large"`** for main screen section titles unless **PRD, Figma, or explicit user instruction** calls for a denser step (**`large`**, **`medium`**, **`small`**). Treat **`extra-large`** as the standard product title band; do not default new sections to **`large`** without a documented density reason.
+- **Default (PML app list / summary sections):** Use **`SectionHeader`** with **`showChevron`** and **`trailing="none"`** — same rhythm as **`StockHomePage`** (`Your stocks`, `Goals`, `Pickup where you left`, …). The chevron signals **drill-in / full list**; do **not** place **“See more”**, **“View all”**, **“+ Add”**, or similar beside the title via **`trailing="link"`** or **`trailing="text"`** for that pattern.
+- **When navigation ships later:** Keep **`showChevron`**; make the header row (or screen) handle tap — do not revert to a text link beside the title unless **PRD / Figma / explicit user instruction** requires that copy.
+- **Other `trailing` values (`button`, `icons`, …):** Use only when the spec calls for a **distinct control** (e.g. icon action, compact CTA) — not as a substitute for the standard list-header affordance above.
+- **Purely static labels** (no list, no drill-in, no disclosure): **`showChevron={false}`** and **`trailing="none"`** — do not show a chevron that implies navigation where none exists (`design-system-schema/screen-generation-rules.md` aligns on this case).
 
 ## Components (reuse, don’t reinvent)
 
 - **Header / tabs / chips in header:** `Header` from design system.
-- **Section titles:** `SectionHeader`.
+- **Section titles:** `SectionHeader` — default **`size="extra-large"`**; chevron + **`trailing="none"`** for list-style sections (see **`SectionHeader` — size, chevron** above).
 - **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. **Chip** default for dense filters/time ranges (e.g. portfolio time row) is often **`extra-small`** (see `Chip.css` / Stock Home); **PRD, Figma, or explicit user instruction** may specify **`small` / `medium` / `large`** for filter strips—follow that over this default when documented.
 - **Rows:** `ListItem` for standard list rows.
 - **Bottom bar:** `BottomNav` + `HomeIndicator` — default solid **`--surface-level-1`** (no frosted/blur unless specified).
@@ -101,7 +109,7 @@ For **CSS under `src/components/`** (not product screens): prefer **token variab
 3. **Components + Storybook:** screen composes **`src/components/`**; story and/or **App shell** entry added when previews are in scope (skip only if the user said so).
 4. **Tokens only** for layout chrome: spacing, color, type, radii from **`src/tokens/`** — no parallel ad hoc theme.
 5. Width **376px** column + **`.sh-content`** scroll pattern (or documented exception for the feature).
-6. **Sections** use **`--spacing-56`** (or documented exception) + **`SectionHeader`** + **`sh-section__content`** where appropriate.
+6. **Sections** use **`--spacing-56`** (or documented exception) + **`SectionHeader`** (**`size="extra-large"`** by default) + **`sh-section__content`** where appropriate; list-style section titles use **`showChevron`** + **`trailing="none"`** (not **`trailing="link"`** for “See more” / “+ Add”) unless PRD/Figma explicitly requires trailing copy or a smaller header size.
 7. **16px** horizontal rhythm via **tokens** (`--card-padding-inline` / `--spacing-16`).
 8. **Cards** use **`Card`** + **`--card-padding-*`**, **without** `stroke` unless the design requires a border.
 9. **`TextField` (or other full-width inputs) inside a `Card`:** override fixed **`344px`** width in **screen CSS** so fields stay inside the card’s padded content box (see **Tokens → `TextField` inside `Card`**).

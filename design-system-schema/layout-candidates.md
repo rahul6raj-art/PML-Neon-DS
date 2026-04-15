@@ -40,7 +40,6 @@ Layout structure itself is **class-driven** (`.stock-home`, `.sh-content`, …),
 | **`src/PML App/StockHome.tsx`** + **`StockHome.css`** | **Canonical** — defines `.stock-home`, `.sh-content`, `.sh-section*`, `.sh-bottom-nav`. |
 | **`src/PML App/Discover.tsx`** + **`Discover.css`** | Same **geometry** (`.discover`, `.dv-content`, `.dv-section*`, bottom nav); comments describe **Stock Home rhythm**. |
 | **`src/PML App/LoginPage.tsx`** + **`LoginPage.css`** | Same **outer column** + scrollable content stack; **no** `BottomNav`; header/body structure tuned for auth. |
-| **`src/PML App/CreditCardBillDashboardPage.tsx`** + **`CreditCardBillDashboardPage.css`** | Same **outer frame** (`.ccb`, `.ccb__content` scroll); **Header is outside** the scroll region (fixed under the column top), unlike Stock Home. |
 
 # If Missing
 

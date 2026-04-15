@@ -143,6 +143,26 @@ export const Filled: Story = {
   },
 };
 
+/** Renders with focus so border radius + 1px focus stroke are visible in the catalog */
+export const Focus: Story = {
+  name: 'State / Focus',
+  args: {
+    emphasis: 'high',
+    label: 'Label',
+    autoFocus: true,
+  },
+};
+
+export const FocusFilled: Story = {
+  name: 'State / Focus + Filled',
+  args: {
+    emphasis: 'high',
+    label: 'Label',
+    defaultValue: 'Input Text',
+    autoFocus: true,
+  },
+};
+
 export const FilledLow: Story = {
   name: 'State / Filled (Low)',
   args: {

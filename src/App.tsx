@@ -4,10 +4,8 @@ import './tokens/numbers.css';
 import './tokens/typography.css';
 import { AppShell } from './layout';
 import {
-  CreditCardBillDashboardPage,
-  CreditCardBillPaymentFlowPage,
-  CreditCardStatementDetailsPage,
   DiscoverPage,
+  FintechWalletHomePage,
   LoginPage,
   MtfHomePage,
   OrderPadPage,
@@ -15,7 +13,6 @@ import {
   SignUpPage,
   StockHomePage,
 } from './PML App';
-import { OptionsTerminalPage } from './options-terminal';
 import type { AppScreenId } from './layout';
 
 const THEME_STORAGE_KEY = 'pml-theme';
@@ -41,6 +38,9 @@ function App() {
       onThemeChange={setTheme}
     >
       {activeScreen === 'stock-home' && <StockHomePage colorScheme={theme} />}
+      {activeScreen === 'fintech-wallet-home' && (
+        <FintechWalletHomePage colorScheme={theme} />
+      )}
       {activeScreen === 'mtf-home' && <MtfHomePage colorScheme={theme} />}
       {activeScreen === 'stocks-discover' && (
         <DiscoverPage colorScheme={theme} />
@@ -57,30 +57,6 @@ function App() {
           onBack={() => setActiveScreen('stock-home')}
         />
       )}
-      {activeScreen === 'credit-card-bill-dashboard' && (
-        <CreditCardBillDashboardPage
-          colorScheme={theme}
-          onBack={() => setActiveScreen('stocks-discover')}
-          onPayNow={() => setActiveScreen('credit-card-bill-pay')}
-          onViewStatement={() => setActiveScreen('credit-card-statement-details')}
-        />
-      )}
-      {activeScreen === 'credit-card-bill-pay' && (
-        <CreditCardBillPaymentFlowPage
-          colorScheme={theme}
-          onExit={() => setActiveScreen('credit-card-bill-dashboard')}
-        />
-      )}
-      {activeScreen === 'credit-card-statement-details' && (
-        <CreditCardStatementDetailsPage
-          colorScheme={theme}
-          onBack={() => setActiveScreen('credit-card-bill-dashboard')}
-          onPayNow={() => setActiveScreen('credit-card-bill-pay')}
-          onViewFullStatement={() => {}}
-          onDownloadStatement={() => {}}
-          onSetupAutopay={() => {}}
-        />
-      )}
       {activeScreen === 'login' && (
         <LoginPage
           colorScheme={theme}
@@ -95,7 +71,6 @@ function App() {
           onLogIn={() => setActiveScreen('login')}
         />
       )}
-      {activeScreen === 'options-terminal' && <OptionsTerminalPage />}
     </AppShell>
   );
 }

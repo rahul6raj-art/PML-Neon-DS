@@ -85,7 +85,7 @@ const meta = {
   args: {
     title: 'Stocks in the News',
     showSectionHeader: true,
-    sectionHeaderSize: 'large',
+    sectionHeaderSize: 'extra-large',
     showChevron: true,
     showBadges: true,
     items: NEWS_WIDGET_DEMO_ITEMS,

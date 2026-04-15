@@ -1,3 +1,10 @@
+/**
+ * PML convention (see `.cursor/rules/pml-screen-patterns.mdc`):
+ * - Default **size** on app screens: **extra-large** unless PRD/Figma calls for smaller.
+ * - List / drill-in sections: **showChevron** + **trailing="none"** — not **trailing="link"**
+ *   for “See more” / “View all” beside the title. Use **trailing** variants only when PRD/Figma
+ *   calls for a distinct trailing control.
+ */
 import { useState, type ReactNode } from 'react';
 import { Icon } from '../Icon';
 import { Button } from '../Button';
@@ -8,7 +15,7 @@ export type SectionHeaderSize = 'extra-large' | 'large' | 'medium' | 'small';
 export type SectionHeaderTrailing = 'none' | 'link' | 'text' | 'icons' | 'button';
 
 export interface SectionHeaderProps {
-  /** Size variant */
+  /** Size variant — defaults **extra-large** (PML app standard for primary section titles). */
   size?: SectionHeaderSize;
   /** Trailing content type */
   trailing?: SectionHeaderTrailing;

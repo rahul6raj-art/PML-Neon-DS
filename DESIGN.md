@@ -144,27 +144,6 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 ---
 
-## Credit card bill payment (PRD)
-
-**Product PRD** (full journey: bill generation → payment → reconciliation). **Code today:** `CreditCardBillDashboardPage.tsx`, `CreditCardBillDashboardPage.css`, `creditCardBillMockData.ts` — **Bill discovery (B)** only: bill summary, due date, **Pay now** / statement CTAs, **recent payments** with success / pending / failed badges. **Statement details (single screen):** `CreditCardStatementDetailsPage.tsx` + `creditCardStatementMockData.ts` — bill summary via **`BillSummaryWidget`**, INR breakdown rows, recent statement lines via **`LedgerActivityListWidget`**, optional insights card, notices + **Pay now** / download / autopay. **INR:** no space after `₹`.
-
-| PRD area | App / Storybook status |
-|----------|-------------------------|
-| A Bill generation | Not built — notifications & statement engine |
-| **B Bill discovery** | **Dashboard screen** (mock bill + history) |
-| C Payment initiation (amounts) | Not built — add step: total / min / outstanding / custom + validations |
-| D Payment method | Not built |
-| E Review & confirm | Not built |
-| F–M Processing, success, pending, failure, settlement, reconciliation, refunds | Backend + status UX — not built |
-
-**Non-goals (PRD):** card application/onboarding; rewards-as-payment; post-statement merchant EMI — out of scope unless product expands.
-
-**Next slices (suggested):** amount selection + warnings (min due / overpay); method picker with settlement copy; review screen; status/polling UI for pending; receipt download stub; payment history from API.
-
-**Shell:** **Screens → Credit card bill**; back returns to **Stocks Discover**. Theme follows `data-theme` on `AppShell`.
-
----
-
 ## Bottom Sheet (responsive surface)
 
 **Code:** `BottomSheet.tsx`, `BottomSheet.css`, `BottomSheetHeader`.

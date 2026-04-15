@@ -30,7 +30,7 @@ export interface HoldingsSectionWidgetProps {
 export const HoldingsSectionWidget = ({
   title = 'Top holdings',
   showSectionHeader = true,
-  sectionHeaderSize = 'large',
+  sectionHeaderSize = 'extra-large',
   showChevron = true,
   trailing = 'none',
   linkText,

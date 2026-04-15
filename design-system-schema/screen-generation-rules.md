@@ -59,7 +59,8 @@
 
 # Visual Hierarchy Rules
 
-- Do **not** use **chevron** or **disclosure** treatment for **static** screen headings (e.g. `SectionHeader` chevron when there is no expand/collapse or navigation).
+- **`SectionHeader` (PML app):** Default **`size="extra-large"`** for primary section titles unless PRD/Figma specifies a smaller size for density. For list / drill-in sections, use **`showChevron`** with **`trailing="none"`** (patterns often mis-labeled “See more” or “+ Add” beside the title). **Do not** use **`trailing="link"`** (or trailing text as a faux link) for that affordance; the chevron is the standard treatment.
+- Do **not** use **chevron** or **disclosure** on **`SectionHeader`** for **static** headings — titles that **never** lead to navigation, expand/collapse, or a fuller list (**`showChevron={false}`**, **`trailing="none"`**). A chevron must not imply interaction that does not exist.
 - Avoid **large dead space** between the **progress indicator** and **main content** unless an **existing product pattern** in the repo requires it; keep transactional flows tight.
 - **Section spacing** in transactional flows should feel **dense and purposeful**—use tokens, but prefer rhythms that match bill/pay/checkout references over marketing-style gaps.
 - **Inactive** step labels and **metadata** must stay **readable** and must not fall below **practical contrast** (treat “inactive” as de-emphasized, not illegible).

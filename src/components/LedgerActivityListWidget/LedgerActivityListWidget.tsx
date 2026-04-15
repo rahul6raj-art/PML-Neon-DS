@@ -38,7 +38,7 @@ export interface LedgerActivityListWidgetProps {
 export const LedgerActivityListWidget = ({
   title = 'Recent activity',
   showSectionHeader = true,
-  sectionHeaderSize = 'large',
+  sectionHeaderSize = 'extra-large',
   showChevron = true,
   trailing = 'none',
   linkText,

@@ -2,7 +2,7 @@
 
 **No dedicated reusable empty-state or “no data” block exists** in the codebase. Widgets (`ReminderWidget`, `NewsWidget`, etc.) assume populated arrays; they do not render a standard empty illustration + title + CTA.
 
-The closest **page-level** pattern is **conditional content inside a `Card`** (e.g. `CreditCardBillDashboardPage` when `bill.billGenerated` is false — still a compact key-value summary, not a generic “nothing here” module). That logic is **not** extracted as a component.
+The closest **page-level** pattern is **conditional content inside a `Card`** (e.g. a bill or settings screen that swaps summary rows for “not yet available” copy — still a compact key-value summary, not a generic “nothing here” module). That logic is **not** extracted as a component.
 
 **`Loading`** (`components/Loading`) covers **in-flight** data only (dots, `role="status"`), not an empty dataset after a successful fetch.
 
@@ -10,7 +10,7 @@ The closest **page-level** pattern is **conditional content inside a `Card`** (e
 
 **`Alert`** (`components/Alert`) — product-facing **sleek** or **detailed** banner/card with semantic **`state`**: `primary` | `negative` | `warning` | `positive`, optional **icon**, **description** (and **title** on detailed), optional **CTA `Button`** via `showCta`, `ctaLabel`, `onCtaClick` (supports **retry**-style actions).
 
-**Real screen usage:** `CreditCardBillDashboardPage` stacks **`Alert`** rows in a notices area (`type="sleek"`, `showCta={false}`, `showClose={false}`) for reminder and secondary banners — demonstrates **section-top / in-flow** placement with tokens and DS styling.
+**Real screen usage:** Product screens stack **`Alert`** rows in a notices area (`type="sleek"`, `showCta={false}`, `showClose={false}`) for reminder and secondary banners — demonstrates **section-top / in-flow** placement with tokens and DS styling.
 
 # Why They Fit
 

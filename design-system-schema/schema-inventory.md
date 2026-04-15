@@ -62,8 +62,7 @@
 
 # Ambiguous Items
 
-- **Screen-level compositions** (not exported from `src/components/` as a single primitive): `StockHomePage`, `DiscoverPage`, `LoginPage`, `SignUpPage`, `CreditCardBillDashboardPage`, `OptionsTerminalPage` — each pairs TSX with page-scoped CSS (`StockHome.css`, `Discover.css`, etc.)
+- **Screen-level compositions** (not exported from `src/components/` as a single primitive): `StockHomePage`, `DiscoverPage`, `FintechWalletHomePage`, `LoginPage`, `SignUpPage`, `MtfHomePage`, `OrderPadPage`, `PortfolioDetailsPage`, etc. — each pairs TSX with page-scoped CSS (`StockHome.css`, `Discover.css`, etc.)
 - **Page layout as CSS convention** — shared patterns like `.stock-home`, `.sh-content`, `.sh-section` live in page stylesheets rather than a dedicated `Stack` / `Section` / `Container` layout component library
-- **`src/options-terminal/`** — feature-scoped UI (`TradingDrawer`, `FloatingActionBar`, `CandlestickChart`, `GreeksPanel`, `MarketDepthPanel`, `MiniSparkline`, `QuickSelectPanel`, etc.); only `OptionsTerminalPage` is exported from the folder index; unclear vs design-system “widgets”
 - **No dedicated token files** in `src/tokens/` for z-index scales or breakpoint tokens (responsive rules appear ad hoc in CSS / Storybook)
-- **Storybook** — `Introduction.stories.tsx` (meta/docs); `CreditCardBillDashboardPage.stories.tsx` (page story) — documentation/preview, not UI building blocks
+- **Storybook** — `Introduction.stories.tsx` (meta/docs) and component stories — documentation/preview, not UI building blocks

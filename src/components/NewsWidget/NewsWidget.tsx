@@ -58,7 +58,7 @@ export const NEWS_WIDGET_DEMO_ITEMS: NewsWidgetItem[] = [
 export const NewsWidget = ({
   title = 'Stocks in the News',
   showSectionHeader = true,
-  sectionHeaderSize = 'large',
+  sectionHeaderSize = 'extra-large',
   showChevron = true,
   items,
   showBadges = true,
