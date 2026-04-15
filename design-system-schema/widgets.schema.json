@@ -331,7 +331,7 @@
       "usage": [
         "Use on portfolio drill-downs, watchlists, and position summaries when each row is one security (StocksCard shape).",
         "Place after performance or allocation blocks inside `.sh-section` rhythm; keep stacks in the phone column scroll area.",
-        "Do not use for MF fund cards at AMC density—use MFCardWidget; do not use for simple name+LTP strips—consider MostPopularWidget."
+        "Do not use for MF fund cards at AMC density—use MFCardWidget; do not use for simple name+LTP strips—compose SectionHeader + Chip + Card + ListItem instead."
       ],
       "notes": [
         "Source: `src/components/HoldingsSectionWidget/` — export `HoldingsSectionWidget`, type `HoldingsSectionWidgetProps`; `items` is `StocksCardProps[]`.",
@@ -405,33 +405,6 @@
         "`fundName` is required; visibility of sub-blocks depends on `cardType`.",
         "Do not use for equity holdings rows—use StocksCard or ListItem stocks variants.",
         "AMC mark uses Avatar `type=logo`."
-      ]
-    },
-    {
-      "name": "MostPopularWidget",
-      "importPath": "components/MostPopularWidget",
-      "description": "Segment chips plus a Card list of popular instruments with LTP and change.",
-      "composedFrom": ["SectionHeader", "Chip", "Card"],
-      "props": {
-        "title": "string",
-        "showHeader": "boolean",
-        "onTitleClick": "() => void",
-        "segment": "PopularSegment",
-        "onSegmentChange": "(s: PopularSegment) => void",
-        "itemsBySegment": "Record<PopularSegment, PopularListItem[]>",
-        "onRowClick": "(item, segment) => void",
-        "className": "string"
-      },
-      "slots": ["sectionHeader", "segmentChips", "listCard"],
-      "states": ["selectedSegment"],
-      "usage": [
-        "Use on discover when the same list shape repeats per segment (e.g. stocks vs F&O).",
-        "Use when rows are simple title + subtitle + LTP + % change—not full holdings detail."
-      ],
-      "notes": [
-        "Rows are custom buttons inside Card, not ListItem—do not expect ListItem props on rows.",
-        "Wire `itemsBySegment` from API; mock keys/types come from `mostPopularMockData`.",
-        "Do not use for news-style cards—use NewsWidget or a composed Card + SectionHeader pattern."
       ]
     },
     {

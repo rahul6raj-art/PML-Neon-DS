@@ -39,7 +39,6 @@
 - `Header`
 - `HeatmapWidget`
 - `MFCardWidget`
-- `MostPopularWidget`
 - `NewsWidget`
 - `PortfolioWidget`
 - `ReminderWidget`

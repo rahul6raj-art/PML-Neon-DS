@@ -2,7 +2,7 @@
 
 - **Tokens** — Semantic colors, spacing scale, radius, shadows, and phone-column sizing (`--phone-column-width`, `--card-width`, carousel widths) give a usable styling vocabulary for generated screens.
 - **Primitives** — Core components cover forms (`TextField`, `Checkbox`, `Radio`, `Switch`, `OtpTextField`), actions (`Button`), containment (`Card`, `Tile`), lists (`ListItem`), navigation chrome (`Tabs`, `Header`, `BottomNav`, `BottomSheet`), feedback (`Alert`, `Snackbar`, `Loading`), and density controls (`Chip`, `SegmentedControl`, `Dropdown`).
-- **Domain widgets** — Rich blocks exist for investing-style UIs: `PortfolioWidget`, `HeatmapWidget`, `GraphWidget`, `ReminderWidget`, `NewsWidget`, `StocksCard`, `MFCardWidget`, `Ticker`, `WheelCarousel`, plus marketing-style blocks (`MostPopularWidget`) and structure helpers (`SectionHeader`, `Search`, `ActivityTimeline`).
+- **Domain widgets** — Rich blocks exist for investing-style UIs: `PortfolioWidget`, `HeatmapWidget`, `GraphWidget`, `ReminderWidget`, `NewsWidget`, `StocksCard`, `MFCardWidget`, `Ticker`, `WheelCarousel`, and structure helpers (`SectionHeader`, `Search`, `ActivityTimeline`).
 - **Rules + plan shape** — `screen-generation-rules.md` enforces registry-only composition and explicit `MISSING_*` handling; `screen-plan.schema.json` forces a named plan before code.
 
 # Gaps

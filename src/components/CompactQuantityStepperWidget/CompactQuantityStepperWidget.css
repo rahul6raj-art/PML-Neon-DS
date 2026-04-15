@@ -83,6 +83,8 @@
   line-height: var(--line-height-title-2);
   color: var(--text-neutral-strong);
   font-variant-numeric: tabular-nums;
+  /* Match TextField / Search: green caret when editing (positive token). */
+  caret-color: var(--text-positive-strong);
 }
 
 .cqsw__input:focus {
@@ -91,6 +93,7 @@
 
 .cqsw__input:disabled {
   color: var(--text-neutral-weak);
+  caret-color: transparent;
 }
 
 .cqsw__step svg {

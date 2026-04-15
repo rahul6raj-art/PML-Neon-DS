@@ -4,7 +4,6 @@ import { BottomNav, type BottomNavItem } from '../components/BottomNav';
 import { Chip } from '../components/Chip';
 import { BrandLogo, brandLogoThemeForAppColorScheme } from '../components/BrandLogo';
 import { HeatmapWidget } from '../components/HeatmapWidget';
-import { MostPopularWidget } from '../components/MostPopularWidget';
 import { Header } from '../components/Header';
 import { Icon } from '../components/Icon';
 import { NewsWidget, NEWS_WIDGET_DEMO_ITEMS } from '../components/NewsWidget';
@@ -115,10 +114,6 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
             onTitleClick={() => {}}
             maxSectorCards={4}
           />
-        </div>
-
-        <div className="dv-section">
-          <MostPopularWidget onTitleClick={() => {}} />
         </div>
 
         <div className="dv-section">
