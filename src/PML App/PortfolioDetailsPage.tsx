@@ -3,11 +3,9 @@ import { AllocationBreakdownWidget } from '../components/AllocationBreakdownWidg
 import { Alert } from '../components/Alert';
 import { Header } from '../components/Header';
 import { HoldingsSectionWidget } from '../components/HoldingsSectionWidget';
-import { LedgerActivityListWidget } from '../components/LedgerActivityListWidget';
 import { Loading } from '../components/Loading';
 import { PortfolioWidget, PORTFOLIO_WIDGET_CHART_PATH_POSITIVE } from '../components/PortfolioWidget';
 import {
-  PORTFOLIO_DETAILS_ACTIVITY,
   PORTFOLIO_DETAILS_ALLOCATION,
   PORTFOLIO_DETAILS_HOLDINGS,
   PORTFOLIO_DETAILS_NAME,
@@ -51,7 +49,6 @@ export function PortfolioDetailsPage({
     [isEmptyHoldings],
   );
 
-  const showActivity = !isPartial && !isLoading;
   const showPartialBanner = isPartial && !dismissedBanner;
 
   return (
@@ -77,7 +74,7 @@ export function PortfolioDetailsPage({
               showIcon
               showTitle={false}
               showDescription
-              description="Recent activity couldn’t be refreshed. Other details are up to date."
+              description="Some information couldn’t be refreshed. The rest of your portfolio is up to date."
               showCta
               ctaLabel="Retry"
               ctaVariant="tonal"
@@ -137,26 +134,6 @@ export function PortfolioDetailsPage({
                   valueLabel: row.valueLabel,
                   percent: row.percent,
                 }))}
-              />
-            </section>
-
-            <section className="pd-section" aria-label="Recent activity">
-              <LedgerActivityListWidget
-                title="Recent activity"
-                items={
-                  showActivity
-                    ? PORTFOLIO_DETAILS_ACTIVITY.map((row) => ({
-                        primaryText: row.title,
-                        secondaryText: row.subtitle,
-                        trailingText: row.amountLabel,
-                      }))
-                    : []
-                }
-                unavailableMessage={
-                  isPartial
-                    ? 'Recent activity is unavailable until you retry or the connection improves.'
-                    : undefined
-                }
               />
             </section>
           </>

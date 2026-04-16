@@ -54,26 +54,3 @@ export const PORTFOLIO_DETAILS_ALLOCATION: PortfolioAllocationRow[] = [
   { assetClass: 'Alternatives', percent: 5, valueLabel: '₹42,146' },
 ];
 
-export interface PortfolioActivityRow {
-  title: string;
-  subtitle: string;
-  amountLabel: string;
-}
-
-export const PORTFOLIO_DETAILS_ACTIVITY: PortfolioActivityRow[] = [
-  {
-    title: 'Bought · Reliance Industries Ltd.',
-    subtitle: '12 Apr 2026 · NSE',
-    amountLabel: '₹69,460',
-  },
-  {
-    title: 'SIP · Parag Parikh Flexi Cap Fund',
-    subtitle: '10 Apr 2026',
-    amountLabel: '₹15,000',
-  },
-  {
-    title: 'Sold · Tata Motors Ltd.',
-    subtitle: '08 Apr 2026 · BSE',
-    amountLabel: '₹38,200',
-  },
-];

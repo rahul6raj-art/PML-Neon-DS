@@ -341,42 +341,6 @@
       ]
     },
     {
-      "name": "LedgerActivityListWidget",
-      "importPath": "components/LedgerActivityListWidget",
-      "description": "Implemented widget: optional SectionHeader, then loading, unavailable plain copy, empty copy, or a Card of default ListItem rows (primary line, subtitle/meta, trailing value).",
-      "composedFrom": ["SectionHeader", "Card", "ListItem", "Loading"],
-      "props": {
-        "title": "string",
-        "showSectionHeader": "boolean",
-        "sectionHeaderSize": "extra-large | large | medium | small",
-        "showChevron": "boolean",
-        "trailing": "none | link | text | icons | button",
-        "linkText": "string",
-        "onLinkPress": "() => void",
-        "buttonLabel": "string",
-        "onButtonPress": "() => void",
-        "items": "LedgerActivityItem[] — each { primaryText: string, secondaryText: string, trailingText: string, optional statusLabel?: string }",
-        "loading": "boolean",
-        "emptyMessage": "string",
-        "unavailableMessage": "string — plain copy when the list failed to load (e.g. partial fetch); omit Card",
-        "onItemClick": "(item: LedgerActivityItem, index: number) => void",
-        "className": "string"
-      },
-      "slots": ["sectionHeader", "card", "rows", "fallbackCopy"],
-      "states": ["default", "empty", "loading", "unavailable"],
-      "usage": [
-        "Use on portfolio drill-downs, order history, SIP/statement feeds, payments, or any dense event list with amount or delta on the trailing edge.",
-        "Place inside `.sh-section` rhythm after holdings or allocation blocks; keep inside the phone column scroll region.",
-        "Do not use for step-based flows—use ActivityTimeline. Do not use for news cards—use NewsWidget."
-      ],
-      "notes": [
-        "Source: `src/components/LedgerActivityListWidget/` — export `LedgerActivityListWidget`, types `LedgerActivityItem`, `LedgerActivityListWidgetProps`.",
-        "Prefer this widget over hand-building SectionHeader + Card + ListItem stacks so separators, subtext, and INR trailing strings stay consistent for AI-generated screens.",
-        "When `unavailableMessage` is non-empty, it renders instead of the Card (partial fetch). `loading` replaces the list with Loading.",
-        "`statusLabel` on items is accepted but not rendered yet—do not rely on visible per-row status until implemented."
-      ]
-    },
-    {
       "name": "MFCardWidget",
       "importPath": "components/MFCardWidget",
       "description": "Mutual fund summary card with AMC avatar, optional tags, metrics, and footer.",
@@ -462,7 +426,7 @@
         "Exactly **one** row must read as **selected** at a time; `selectedMethodId` must match the highlighted control.",
         "**Primary** and **secondary** metadata (e.g. VPA vs “Primary”) must stay **readable**—no cramped or low-contrast treatment for the subtitle line.",
         "**Continue / review CTA** readiness in the parent flow must depend on a **valid** `selectedMethodId` (non-null when methods exist); do not advance with no selection.",
-        "Prefer this contract over ad hoc **card + list + radio** composition so selection, empty, and unavailable states stay consistent with `LedgerActivityListWidget`-style patterns where applicable."
+        "Prefer this contract over ad hoc **card + list + radio** composition so selection, empty, and unavailable states stay consistent for payment flows."
       ]
     },
     {

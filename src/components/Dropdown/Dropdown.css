@@ -2,6 +2,10 @@
    DROPDOWN — Pixel-exact implementation
    Emphasis: High (18px) / Low (14px)
    States:  Normal → Focus/Open → Filled
+   Radius:  --radius-12 default; --radius-16 when emphasis=high and no helper
+            (matches TextField). List panel: --radius-12.
+   Focus:   single 1px border via --border-width-hairline + border-color;
+            no inset box-shadow (avoids double stroke).
    ══════════════════════════════════════════════════ */
 
 /* ── Wrapper ─────────────────────────────────────── */
@@ -31,7 +35,8 @@
   max-height: calc(var(--spacing-48) + var(--spacing-4));
   padding: var(--dd-py) var(--dd-px);
   border: var(--border-width-hairline) solid var(--border-neutral-medium);
-  border-radius: var(--radius-16);
+  /* Default matches TextField; high without helper uses 16px below */
+  border-radius: var(--radius-12);
   background: transparent;
   box-sizing: border-box;
   cursor: pointer;
@@ -42,6 +47,11 @@
     border-radius 0.15s ease,
     box-shadow 0.15s ease;
   user-select: none;
+}
+
+/* HIGH without helper: 16px corners in every state (parity with TextField) */
+.dropdown--high:not(.dropdown--has-helper) .dropdown__box {
+  border-radius: var(--radius-16);
 }
 
 /* ── Value area ──────────────────────────────────── */
@@ -146,12 +156,17 @@
 }
 
 /* ══════════════════════════════════════════════════
-   STATE: OPEN (focus)
+   STATE: OPEN (focus) — single 1px stroke (TextField parity, no inset doubling)
    ══════════════════════════════════════════════════ */
 .dropdown--open .dropdown__box {
   border-color: var(--border-positive-strong);
-  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-positive-strong);
-  border-radius: var(--radius-12);
+  box-shadow: none;
+}
+
+/* Keyboard focus when closed */
+.dropdown:not(.dropdown--disabled):not(.dropdown--open) .dropdown__box:focus-visible {
+  border-color: var(--border-positive-strong);
+  box-shadow: none;
 }
 
 .dropdown--open:not(.dropdown--filled) .dropdown__label {
@@ -163,13 +178,6 @@
 }
 
 /* ══════════════════════════════════════════════════
-   STATE: FILLED (closed, with value)
-   ══════════════════════════════════════════════════ */
-.dropdown--filled:not(.dropdown--open) .dropdown__box {
-  border-radius: var(--radius-12);
-}
-
-/* ══════════════════════════════════════════════════
    STATE: ERROR — red border, red label in ALL states
    ══════════════════════════════════════════════════ */
 .dropdown--error .dropdown__box {
@@ -178,7 +186,12 @@
 
 .dropdown--error.dropdown--open .dropdown__box {
   border-color: var(--border-negative-strong);
-  box-shadow: inset 0 0 0 var(--border-width-hairline) var(--border-negative-strong);
+  box-shadow: none;
+}
+
+.dropdown--error:not(.dropdown--open) .dropdown__box:focus-visible {
+  border-color: var(--border-negative-strong);
+  box-shadow: none;
 }
 
 /* Placeholder label — red even when not floated */
@@ -313,10 +326,4 @@
 .dropdown__option--selected {
   font-weight: 500;
   color: var(--text-positive-strong);
-}
-
-/* High normal (no helper, no error, not filled, not open) — rounded corners */
-.dropdown--high:not(.dropdown--has-helper):not(.dropdown--open):not(.dropdown--filled):not(.dropdown--disabled):not(.dropdown--error)
-  .dropdown__box {
-  border-radius: var(--radius-16);
 }

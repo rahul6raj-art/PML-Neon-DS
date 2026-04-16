@@ -84,6 +84,7 @@ export const AllocationBreakdownWidget = ({
                 <div key={`${row.label}-${index}`} className="abw__row">
                   <ListItem
                     variant="default"
+                    emphasis="low"
                     showLeading={false}
                     primaryText={row.label}
                     secondaryText={row.valueLabel}

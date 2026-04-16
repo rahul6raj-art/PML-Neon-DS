@@ -46,14 +46,38 @@
 }
 
 .abw__track {
-  height: var(--spacing-6);
+  height: var(--spacing-2);
   border-radius: var(--radius-full);
-  background: var(--surface-level-2);
+  background: var(--background-offset-1);
   overflow: hidden;
 }
 
 .abw__fill {
   height: 100%;
   border-radius: var(--radius-full);
+}
+
+/* One token per row; repeats after six rows (theme-aware semantic + palette tokens). */
+.abw__row:nth-child(6n + 1) .abw__fill {
   background: var(--background-primary-strong);
+}
+
+.abw__row:nth-child(6n + 2) .abw__fill {
+  background: var(--background-positive-strong);
+}
+
+.abw__row:nth-child(6n + 3) .abw__fill {
+  background: var(--background-notice-strong);
+}
+
+.abw__row:nth-child(6n + 4) .abw__fill {
+  background: var(--colour-teal);
+}
+
+.abw__row:nth-child(6n + 5) .abw__fill {
+  background: var(--colour-indigo);
+}
+
+.abw__row:nth-child(6n + 6) .abw__fill {
+  background: var(--colour-purple);
 }
