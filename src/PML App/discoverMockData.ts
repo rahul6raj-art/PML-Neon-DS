@@ -52,7 +52,7 @@ export const DISCOVER_INDEX_CHIPS: IndexChipData[] = [
 
 export const DISCOVER_MOVERS_POPULAR: MoverCardData[] = [
   { symbol: 'RELIANCE', name: 'Reliance Ind.', price: 2_890.5, changePct: 1.24 },
-  { symbol: 'TCS', name: 'TCS', price: 4_120.0, changePct: 0.42 },
+  { symbol: 'TCS', name: 'Tata Consultancy Services', price: 4_120.0, changePct: 0.42 },
   { symbol: 'HDFCBANK', name: 'HDFC Bank', price: 1_650.2, changePct: -0.35 },
 ];
 

@@ -7,9 +7,10 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
   stories: [
     '../src/Introduction.stories.tsx',
-    '../src/**/*.mdx',
+    /* CSF before MDX: doc pages use `<Meta of={…Stories} />`; loading `.mdx` first can leave that import empty at runtime. */
     '../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/**/*.mdx',
   ],
   addons: [
     '@chromatic-com/storybook',

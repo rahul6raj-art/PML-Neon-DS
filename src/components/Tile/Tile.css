@@ -35,6 +35,77 @@
   padding: var(--spacing-24) var(--spacing-12) var(--spacing-12);
 }
 
+/* ── Variant: Strategy — **Discover** curated-strategies rhythm (see **`.dv-strategies-stw`** on **`StocksTilesWidget`**) ── */
+.tile--strategy {
+  align-items: stretch;
+  text-align: left;
+  width: var(--unit-max);
+  max-width: 100%;
+  gap: 0;
+  padding: var(--card-padding-block) var(--card-padding-inline);
+}
+
+.tile--strategy .tile__icon-wrap {
+  width: calc(var(--spacing-32) + var(--spacing-8));
+  height: calc(var(--spacing-32) + var(--spacing-8));
+  border-radius: var(--radius-12);
+  background: var(--surface-level-3);
+  align-self: flex-start;
+  margin-bottom: var(--spacing-24);
+}
+
+.tile--strategy .tile__text {
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  text-align: left;
+  gap: var(--spacing-2);
+}
+
+.tile__title--strategy {
+  margin: 0;
+  color: var(--text-neutral-strong);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.tile--strategy .tile__label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-medium);
+}
+
+/* Horizontal **strategy** strip (`strategyItems`) — same rhythm as **Discover** / **`StocksTilesWidget`** scroll row */
+.tile-strategy-strip {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: var(--phone-column-width);
+  min-width: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tile-strategy-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.tile-strategy-strip > .tile.tile--strategy {
+  flex-shrink: 0;
+}
+
 /* ── Main icon ──────────────────────────────────── */
 .tile__icon-wrap {
   flex-shrink: 0;

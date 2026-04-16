@@ -1,0 +1,46 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as StocksTilesWidgetStories from './StocksTilesWidget.stories.tsx';
+
+<Meta of={StocksTilesWidgetStories} />
+
+<Title>Stocks tiles</Title>
+
+<Description of={StocksTilesWidgetStories} />
+
+## Playground
+
+On the **Docs** tab, the **Controls** table lives in this section (below the canvas). **Playground** starts with every boolean **off** (no section header, no chevron, text moves, no status badges, no **top** icon/logo row, not pressable)—turn them on to match your layout. Expand **`items`** (object) for **`leadingLogoName`** / **`leadingIconName`**, **`changeSentiment`**, **`statusBadgeLabel`**, and per-tile overrides.
+
+<Canvas of={StocksTilesWidgetStories.Playground} />
+
+<Controls of={StocksTilesWidgetStories.Playground} />
+
+## Variants
+
+Fixed recipes for review. Open a story in the sidebar for full-screen canvas; snippets here are quick references.
+
+**Text moves** — move line as coloured subtext instead of Badge.
+
+<Canvas of={StocksTilesWidgetStories.TextMoves} />
+
+**No status badges** — status row hidden; top media + body unchanged.
+
+<Canvas of={StocksTilesWidgetStories.StatusBadgesOff} />
+
+**No top media** — widget-level top icon/logo row off.
+
+<Canvas of={StocksTilesWidgetStories.TopMediaOff} />
+
+**No section header** — tiles strip only.
+
+<Canvas of={StocksTilesWidgetStories.NoSectionHeader} />
+
+**Pressable tiles** — tiles are buttons (handler wired in the story).
+
+<Canvas of={StocksTilesWidgetStories.PressableTiles} />

@@ -8,6 +8,8 @@ import { Header } from '../components/Header';
 import { Icon } from '../components/Icon';
 import { NewsWidget, NEWS_WIDGET_DEMO_ITEMS } from '../components/NewsWidget';
 import { SectionHeader } from '../components/SectionHeader';
+import { StocksTilesWidget } from '../components/StocksTilesWidget';
+import type { StocksTilesItem } from '../components/StocksTilesWidget';
 import type { TabItem } from '../components/Tab';
 import { Ticker, type TickerItem } from '../components/Ticker';
 import {
@@ -17,6 +19,8 @@ import {
   DISCOVER_MOVERS_POPULAR,
   DISCOVER_SCREENERS,
   DISCOVER_STRATEGIES,
+  type MoverCardData,
+  type StrategyCardData,
 } from './discoverMockData';
 import './Discover.css';
 
@@ -47,6 +51,28 @@ function formatIndexValue(n: number) {
   });
 }
 
+function strategyToStocksTileItem(s: StrategyCardData): StocksTilesItem {
+  return {
+    title: s.title,
+    price: s.subtitle,
+    changeLabel: '',
+    changeSentiment: 'neutral',
+    leadingIconName: s.iconName,
+  };
+}
+
+function moverToStocksTileItem(m: MoverCardData): StocksTilesItem {
+  const changePct = m.changePct;
+  const changeSentiment =
+    changePct > 0 ? 'positive' : changePct < 0 ? 'negative' : 'neutral';
+  return {
+    title: m.name,
+    price: `₹${formatIndexValue(m.price)}`,
+    changeLabel: `${Math.abs(changePct).toFixed(2)}%`,
+    changeSentiment,
+  };
+}
+
 export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
   const [activePrimaryTab, setActivePrimaryTab] = useState('discover');
   const [moverFilterIndex, setMoverFilterIndex] = useState(0);
@@ -59,6 +85,16 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
     void moverFilterIndex;
     return DISCOVER_MOVERS_POPULAR;
   }, [moverFilterIndex]);
+
+  const moverStocksTileItems = useMemo(
+    (): StocksTilesItem[] => movers.map(moverToStocksTileItem),
+    [movers],
+  );
+
+  const strategyStocksTileItems = useMemo(
+    (): StocksTilesItem[] => DISCOVER_STRATEGIES.map(strategyToStocksTileItem),
+    [],
+  );
 
   const discoverTickerItems = useMemo((): TickerItem[] => {
     return DISCOVER_INDEX_CHIPS.map((ix) => {
@@ -101,11 +137,6 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
           <Ticker items={discoverTickerItems} topMargin={false} />
         </div>
 
-        <p className="dv-market-status" role="status">
-          Quotes shown are illustrative. Label delayed or last close per your data
-          entitlements in production.
-        </p>
-
         <div className="dv-section">
           <HeatmapWidget
             title="Heatmap"
@@ -139,31 +170,17 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
               />
             ))}
           </div>
-          <div className="dv-mover-scroll" aria-label="Market movers">
-            {movers.map((m) => {
-              const up = m.changePct >= 0;
-              return (
-                <button
-                  key={m.symbol}
-                  type="button"
-                  className="dv-mover-card"
-                  onClick={() => {}}
-                >
-                  <div className="dv-mover-card__sym">{m.symbol}</div>
-                  <div className="dv-mover-card__name">{m.name}</div>
-                  <div className="dv-mover-card__price">₹{formatIndexValue(m.price)}</div>
-                  <div
-                    className={[
-                      'dv-mover-card__pct',
-                      up ? 'dv-mover-card__pct--up' : 'dv-mover-card__pct--down',
-                    ].join(' ')}
-                  >
-                    {up ? '+' : ''}
-                    {m.changePct.toFixed(2)}%
-                  </div>
-                </button>
-              );
-            })}
+          <div className="dv-mover-scroll dv-mover-scroll--stw" aria-label="Market movers">
+            <StocksTilesWidget
+              className="dv-movers-stw"
+              showSectionHeader={false}
+              showChevron={false}
+              items={moverStocksTileItems}
+              changeAsBadge={false}
+              showStatusBadges={false}
+              showTopMedia={false}
+              onTilePress={() => {}}
+            />
           </div>
         </div>
 
@@ -175,23 +192,20 @@ export function DiscoverPage({ colorScheme = 'dark' }: DiscoverPageProps) {
             trailing="none"
             showSubtext={false}
           />
-          <div className="dv-strategy-scroll" aria-label="Curated strategies">
-            {DISCOVER_STRATEGIES.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                className="dv-strategy-card"
-                onClick={() => {}}
-              >
-                <div className="dv-strategy-card__icon" aria-hidden>
-                  <Icon name={s.iconName} size={22} />
-                </div>
-                <div>
-                  <div className="dv-strategy-card__title">{s.title}</div>
-                  <div className="dv-strategy-card__sub">{s.subtitle}</div>
-                </div>
-              </button>
-            ))}
+          <div
+            className="dv-strategy-scroll dv-strategy-scroll--stw"
+            aria-label="Curated strategies"
+          >
+            <StocksTilesWidget
+              className="dv-strategies-stw"
+              showSectionHeader={false}
+              showChevron={false}
+              items={strategyStocksTileItems}
+              changeAsBadge={false}
+              showStatusBadges={false}
+              showTopMedia
+              onTilePress={() => {}}
+            />
           </div>
         </div>
 

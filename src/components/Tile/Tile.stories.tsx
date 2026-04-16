@@ -1,7 +1,40 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tile } from './Tile';
-import type { TileVariant } from './Tile';
+import type { TileProps, TileStrategyItem, TileVariant } from './Tile';
 import { iconNames } from '../Icon';
+
+const DEFAULT_STRATEGY_STRIP: TileStrategyItem[] = [
+  {
+    icon: 'briefcase_outline',
+    title: 'Stable Indian Co.',
+    label: 'Quality large caps',
+  },
+  {
+    icon: 'chart',
+    title: 'Consistent profit maker',
+    label: 'Earnings momentum',
+  },
+  {
+    icon: 'volume_up_outline',
+    title: 'High volume today',
+    label: 'Unusual activity',
+  },
+  {
+    icon: 'filter_outline',
+    title: 'Quality filters',
+    label: 'Saved screeners',
+  },
+  {
+    icon: 'bookmark_outline',
+    title: 'Dividend yield',
+    label: 'Income names',
+  },
+  {
+    icon: 'bell_outline',
+    title: 'Analyst picks',
+    label: 'Consensus buys',
+  },
+];
 
 const ICON_OPTIONS = iconNames.reduce<Record<string, string>>(
   (acc, name) => {
@@ -19,8 +52,9 @@ const meta: Meta<typeof Tile> = {
     /* ══ Variant ═════════════════════════════════════ */
     variant: {
       control: 'select',
-      options: ['default', 'action'] as TileVariant[],
-      description: 'Tile variant — "action" shows a favourite icon in the top-right',
+      options: ['default', 'action', 'strategy'] as TileVariant[],
+      description:
+        '**default** / **action** (favourite) / **strategy** — **Discover → Curated strategies** rhythm (see **`StocksTilesWidget`** + **`Discover.css`** **`.dv-strategies-stw`**).',
       table: { defaultValue: { summary: 'default' }, category: 'Variant' },
     },
 
@@ -71,6 +105,19 @@ const meta: Meta<typeof Tile> = {
       table: { category: 'Events' },
       if: { arg: 'variant', eq: 'action' },
     },
+    strategyItems: {
+      control: 'object',
+      description:
+        '**Strategy** only. Non-empty **array** → horizontal strip (overrides **Strategy cards (count)** in **Playground**). Each item: **`icon`**, **`title`**, **`label`**.',
+      if: { arg: 'variant', eq: 'strategy' },
+      table: { category: 'Strategy strip' },
+    },
+    onStrategyItemPress: {
+      action: 'strategyItemPressed',
+      description: '**Strategy** strip: receives the tapped card **index**.',
+      if: { arg: 'variant', eq: 'strategy' },
+      table: { category: 'Events' },
+    },
   },
   args: {
     variant: 'default',
@@ -85,8 +132,84 @@ const meta: Meta<typeof Tile> = {
 export default meta;
 type Story = StoryObj<typeof Tile>;
 
+type TilePlaygroundArgs = TileProps & {
+  /** **Playground** only: when **variant** is **strategy** and **`strategyItems`** is empty, builds a strip of this many demo cards (1 = single tile). */
+  storyStrategyCardCount?: number;
+};
+
 /* ── Playground ──────────────────────────────────── */
-export const Playground: Story = {};
+export const Playground: StoryObj<TilePlaygroundArgs> = {
+  args: {
+    storyStrategyCardCount: 1,
+  },
+  argTypes: {
+    storyStrategyCardCount: {
+      name: 'Strategy cards (count)',
+      control: { type: 'number', min: 1, max: 6, step: 1 },
+      description:
+        '**Strategy** only (when **`strategyItems`** is empty). **1** = one tile from **icon** / **title** / **label**. **2–6** = demo strip.',
+      if: { arg: 'variant', eq: 'strategy' },
+      table: { category: 'Strategy strip' },
+    },
+  },
+  render: (args) => {
+    const {
+      storyStrategyCardCount = 1,
+      strategyItems: rawItems,
+      onStrategyItemPress,
+      ...rest
+    } = args as TilePlaygroundArgs;
+
+    if (rest.variant !== 'strategy') {
+      const a = args as TilePlaygroundArgs;
+      const { storyStrategyCardCount, strategyItems, ...tileArgs } = a;
+      void storyStrategyCardCount;
+      void strategyItems;
+      return <Tile {...tileArgs} />;
+    }
+
+    const manualStrip =
+      Array.isArray(rawItems) && rawItems.length > 0 ? rawItems : null;
+
+    if (manualStrip) {
+      return (
+        <Tile
+          {...(rest as TileProps)}
+          variant="strategy"
+          strategyItems={manualStrip}
+          onStrategyItemPress={onStrategyItemPress}
+        />
+      );
+    }
+
+    const n = Math.min(
+      6,
+      Math.max(1, Math.floor(Number(storyStrategyCardCount) || 1)),
+    );
+    if (n <= 1) {
+      const a = args as TilePlaygroundArgs;
+      const {
+        storyStrategyCardCount,
+        strategyItems,
+        onStrategyItemPress,
+        ...tileArgs
+      } = a;
+      void storyStrategyCardCount;
+      void strategyItems;
+      void onStrategyItemPress;
+      return <Tile {...tileArgs} variant="strategy" />;
+    }
+
+    return (
+      <Tile
+        {...(rest as TileProps)}
+        variant="strategy"
+        strategyItems={DEFAULT_STRATEGY_STRIP.slice(0, n)}
+        onStrategyItemPress={onStrategyItemPress}
+      />
+    );
+  },
+};
 
 /* ── Default ─────────────────────────────────────── */
 export const Default: Story = {
@@ -107,6 +230,73 @@ export const ActionWithFavourite: Story = {
     label: 'label',
     favouriteOption: true,
     favouriteIcon: 'star_outline',
+  },
+};
+
+/** **Discover → Curated strategies** single tile — use **Controls** (variant **strategy**, **icon** / **title** / **label**). */
+export const StrategyDiscoverCurated: Story = {
+  args: {
+    variant: 'strategy',
+    icon: 'briefcase_outline',
+    title: 'Stable Indian Co.',
+    label: 'Quality large caps',
+    onClick: () => {},
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Horizontal strips in the app use **`StocksTilesWidget`** with **Discover** **`.dv-strategies-stw`** overrides (`Widgets/Stocks tiles`). This **Tile** variant matches one tile’s look for isolated previews.',
+      },
+    },
+  },
+};
+
+/** Strategy strip via **`strategyItems`** (same three as **Discover**); edit **`strategyItems`** in **Controls** to add or remove cards. */
+export const StrategyStripRow: Story = {
+  args: {
+    variant: 'strategy',
+    strategyItems: DEFAULT_STRATEGY_STRIP.slice(0, 3),
+    onStrategyItemPress: () => {},
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          padding: 'var(--spacing-16)',
+          background: 'var(--surface-level-4)',
+          boxSizing: 'border-box',
+          maxWidth: 'var(--phone-column-width)',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Uses **`strategyItems`** on one **`Tile`**. Production horizontal lists should still prefer **`StocksTilesWidget`** (same data shape as **Discover**).',
+      },
+    },
+  },
+};
+
+/** Six demo cards — scroll the strip. */
+export const StrategyStripManyCards: Story = {
+  args: {
+    variant: 'strategy',
+    strategyItems: DEFAULT_STRATEGY_STRIP,
+    onStrategyItemPress: () => {},
+  },
+  decorators: StrategyStripRow.decorators,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates **`strategyItems`** with more than three entries.',
+      },
+    },
   },
 };
 

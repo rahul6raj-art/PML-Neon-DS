@@ -40,18 +40,6 @@
   box-sizing: border-box;
 }
 
-/* ── Market status (e.g. closed) ── */
-.dv-market-status {
-  margin: var(--spacing-8) var(--spacing-16) 0;
-  padding: var(--spacing-8) var(--spacing-12);
-  border-radius: var(--radius-12);
-  border: 1px solid var(--border-neutral-weak);
-  background: var(--surface-level-1);
-  font-size: var(--font-size-subtext);
-  line-height: var(--line-height-subtext);
-  color: var(--text-neutral-medium);
-}
-
 /* Index strip — Ticker (`.tk`); extra top padding matches former .dv-index-strip */
 .discover-indices .tk {
   padding-top: var(--spacing-16);
@@ -93,63 +81,18 @@
   display: none;
 }
 
-.dv-mover-card {
-  flex-shrink: 0;
-  width: 156px;
-  padding: var(--card-padding-block) var(--card-padding-inline);
-  border-radius: var(--radius-24);
-  background: var(--surface-level-1);
-  box-sizing: border-box;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-family: var(--font-family);
+/* **StocksTilesWidget** supplies inner scroll + padding — avoid double inset */
+.dv-mover-scroll--stw {
+  display: block;
+  padding: 0;
 }
 
-.dv-mover-card:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+.dv-movers-stw.stw {
+  max-width: none;
 }
 
-.dv-mover-card__sym {
-  font-size: 10px;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-neutral-medium);
-}
-
-.dv-mover-card__name {
-  margin-top: var(--spacing-4);
-  font-size: var(--font-size-subtext);
-  line-height: var(--line-height-subtext);
-  color: var(--text-neutral-moderate);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dv-mover-card__price {
-  margin-top: var(--spacing-8);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  font-variant-numeric: tabular-nums;
-  color: var(--text-neutral-strong);
-}
-
-.dv-mover-card__pct {
-  margin-top: var(--spacing-4);
-  font-size: var(--font-size-subtext);
-  font-weight: var(--font-weight-medium);
-  font-variant-numeric: tabular-nums;
-}
-
-.dv-mover-card__pct--up {
-  color: var(--text-positive-strong);
-}
-
-.dv-mover-card__pct--down {
-  color: var(--text-negative-strong);
+.dv-movers-stw .stw__scroll {
+  padding-top: var(--spacing-12);
 }
 
 /* ── Strategy shortcut cards ── */
@@ -165,48 +108,26 @@
   display: none;
 }
 
-.dv-strategy-card {
-  flex-shrink: 0;
-  width: 200px;
-  padding: var(--card-padding-block) var(--card-padding-inline);
-  border-radius: var(--radius-24);
-  background: var(--surface-level-1);
-  border: none;
-  box-sizing: border-box;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-12);
-  font-family: var(--font-family);
+/* **StocksTilesWidget** supplies inner scroll + padding — avoid double inset */
+.dv-strategy-scroll--stw {
+  display: block;
+  padding: 0;
 }
 
-.dv-strategy-card:focus-visible {
-  outline: 2px solid var(--border-primary-strong);
-  outline-offset: 2px;
+.dv-strategies-stw.stw {
+  max-width: none;
 }
 
-.dv-strategy-card__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-12);
-  background: var(--surface-level-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--icon-primary-strong);
+/* Curated strategies (descriptor in **price** row): **24px** under top **icon**, **2px** title→descriptor, **neutral medium** descriptor — scoped here; **`StocksTilesWidget`** keeps default stock rhythm. */
+.dv-strategies-stw .stw__top-media {
+  margin-bottom: var(--spacing-24);
 }
 
-.dv-strategy-card__title {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-body);
-  color: var(--text-neutral-strong);
+.dv-strategies-stw .stw__price-row {
+  margin-top: var(--spacing-2);
 }
 
-.dv-strategy-card__sub {
-  font-size: var(--font-size-subtext);
-  line-height: var(--line-height-subtext);
+.dv-strategies-stw .stw__price {
   color: var(--text-neutral-medium);
 }
 
@@ -296,7 +217,7 @@
   padding: var(--spacing-12) var(--spacing-16);
   border-radius: var(--radius-16);
   background: var(--surface-level-1);
-  border: 1px solid var(--border-neutral-weak);
+  border: none;
   box-sizing: border-box;
   text-align: left;
   cursor: pointer;

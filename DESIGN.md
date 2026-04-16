@@ -136,6 +136,14 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 ---
 
+## Stocks Tiles widget
+
+**Source:** [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1614-5966), frame **Stocks Tiles** (`1614:5966`).
+
+**Code:** `StocksTilesWidget.tsx`, `StocksTilesWidget.css` — optional **`SectionHeader`** (chevron **off** by default) + horizontal scroll of **tiles** (`--unit-max` width, **`--surface-level-1`**, **no outer border**): optional **top** **`Icon`** / **`Logo`** row (toggle **`showTopMedia`**), optional **status** **`Badge`** between media and title, one primary **`title`** line (full **company** name, e.g. **Reliance Ind.**), **`price`**, and move as muted **Badge** or **subtext**. Empty **`changeLabel`** hides the move row (e.g. **Discover → Curated strategies** shortcut copy in **`price`**). **Discover** scopes strategy spacing / descriptor colour on **`.dv-strategies-stw`** in **`Discover.css`**. For strategy-style tiles in isolation, **`Tile`** **`variant="strategy"`** (`Tile.tsx` / **Components/Tile** in Storybook) uses the same rhythm; optional **`strategyItems`** renders a horizontal strip of multiple cards inside one **`Tile`**. **`changeSentiment`** drives sign normalization (same idea as **ListItem** stock rows). **INR:** no space after **`₹`** in demo copy.
+
+---
+
 ## Order Pad (equity order entry)
 
 **Source:** [4.0 — Order Pad](https://www.figma.com/design/rS7HCW00LH1onTHwaLn99N/4.0---Order-Pad?node-id=7500-107975) (`7500:107975`).

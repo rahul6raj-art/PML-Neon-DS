@@ -1,0 +1,142 @@
+/*
+ * Shared DS component — prefer tokens (--spacing-*, --radius-*, --font-size-*, …)
+ * over raw px so Mobile / Tablet / Web density stays consistent.
+ * CONTRIBUTING.md — platform density & PR checklist.
+ */
+
+/* ═══════════════════════════════════════════════════
+   Stocks Tiles Widget — horizontal stock shortcut tiles
+   ═══════════════════════════════════════════════════ */
+
+.stw {
+  width: 100%;
+  max-width: var(--phone-column-width);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.stw__scroll {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  padding: var(--spacing-16) var(--spacing-16) 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+}
+
+.stw__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.stw__tile {
+  flex-shrink: 0;
+  width: var(--unit-max);
+  padding: var(--card-padding-block) var(--card-padding-inline);
+  border-radius: var(--radius-24);
+  background: var(--surface-level-1);
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  text-align: left;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.stw__tile--pressable {
+  cursor: pointer;
+}
+
+.stw__tile:focus-visible {
+  outline: var(--spacing-2) solid var(--border-primary-strong);
+  outline-offset: var(--spacing-2);
+}
+
+/* Icon / Logo row — top of tile */
+.stw__top-media {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: var(--spacing-8);
+  min-width: 0;
+}
+
+.stw__top-media-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-12);
+  background: var(--surface-level-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--icon-neutral-strong);
+}
+
+.stw__status-row {
+  margin-bottom: var(--spacing-8);
+}
+
+.stw__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stw__title-row {
+  min-width: 0;
+}
+
+/* Same type ramp as **StocksCard** / **ListItem** `stocksTitle` — `body-medium` from typography.css */
+.stw__title {
+  margin: 0;
+  color: var(--text-neutral-strong);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 24px step from company name to price (PRD / Figma rhythm) */
+.stw__price-row {
+  margin-top: var(--spacing-24);
+}
+
+.stw__price {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-moderate);
+  font-variant-numeric: tabular-nums;
+}
+
+.stw__change-row {
+  margin-top: var(--spacing-4);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.stw__change-text {
+  font-size: var(--font-size-subtext);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-subtext);
+  font-variant-numeric: tabular-nums;
+}
+
+.stw__change-text--positive {
+  color: var(--text-positive-strong);
+}
+
+.stw__change-text--negative {
+  color: var(--text-negative-strong);
+}
+
+.stw__change-text--neutral {
+  color: var(--text-neutral-moderate);
+}
