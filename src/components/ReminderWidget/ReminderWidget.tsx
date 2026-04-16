@@ -103,7 +103,7 @@ function ReminderCard({
     <Card className={cardCls}>
       <div className="rw__card-inner">
         <ListItem
-          emphasis="high"
+          emphasis="low"
           showLeading={showLeading}
           avatarType="logo"
           avatarLogoName={logoName}
