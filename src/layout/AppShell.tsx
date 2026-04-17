@@ -1,15 +1,7 @@
 import type { ReactNode } from 'react';
 import './AppShell.css';
 
-export type AppScreenId =
-  | 'stock-home'
-  | 'fintech-wallet-home'
-  | 'mtf-home'
-  | 'stocks-discover'
-  | 'portfolio-details'
-  | 'order-pad'
-  | 'login'
-  | 'sign-up';
+export type AppScreenId = 'stock-home' | 'stocks-discover' | 'login' | 'sign-up';
 
 export interface AppNavItem {
   id: AppScreenId;
@@ -20,11 +12,7 @@ export interface AppNavItem {
 
 const DEFAULT_NAV: AppNavItem[] = [
   { id: 'stock-home', label: 'Stock home', group: 'Stocks & portfolio' },
-  { id: 'fintech-wallet-home', label: 'Fintech wallet home', group: 'Payments' },
   { id: 'stocks-discover', label: 'Discover', group: 'Stocks & portfolio' },
-  { id: 'mtf-home', label: 'MTF home', group: 'Stocks & portfolio' },
-  { id: 'portfolio-details', label: 'Portfolio details', group: 'Stocks & portfolio' },
-  { id: 'order-pad', label: 'Order pad', group: 'Stocks & portfolio' },
   { id: 'login', label: 'Log in', group: 'Auth' },
   { id: 'sign-up', label: 'Sign up', group: 'Auth' },
 ];

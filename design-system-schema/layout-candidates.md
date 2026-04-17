@@ -1,5 +1,7 @@
 # Best Candidate
 
+**Agent note:** Cursor **`.cursor/rules/pml-screen-patterns.mdc`** (`alwaysApply: true`) requires reading this file (with **`DESIGN.md`** and **`design-system-schema/screen-generation-rules.md`**) when choosing or implementing the phone shell, scroll region, and section rhythm—the user does **not** need to attach it.
+
 **Stock Home screen shell** — `StockHomePage` with co-located **`StockHome.css`**, using the **`.stock-home`** root, **`.sh-content`** scroll region, **`.sh-section` / `.sh-section__content`** section rhythm, and **`.sh-bottom-nav`** for the bottom bar wrapper.
 
 This is the implementation the repo treats as the reference product frame (phone column, full height, scrollable body, optional sticky bottom nav), not the dev-only `AppShell`.

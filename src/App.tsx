@@ -3,16 +3,7 @@ import './tokens/colors.css';
 import './tokens/numbers.css';
 import './tokens/typography.css';
 import { AppShell } from './layout';
-import {
-  DiscoverPage,
-  FintechWalletHomePage,
-  LoginPage,
-  MtfHomePage,
-  OrderPadPage,
-  PortfolioDetailsPage,
-  SignUpPage,
-  StockHomePage,
-} from './PML App';
+import { DiscoverPage, LoginPage, SignUpPage, StockHomePage } from './PML App';
 import type { AppScreenId } from './layout';
 
 const THEME_STORAGE_KEY = 'pml-theme';
@@ -38,24 +29,8 @@ function App() {
       onThemeChange={setTheme}
     >
       {activeScreen === 'stock-home' && <StockHomePage colorScheme={theme} />}
-      {activeScreen === 'fintech-wallet-home' && (
-        <FintechWalletHomePage colorScheme={theme} />
-      )}
-      {activeScreen === 'mtf-home' && <MtfHomePage colorScheme={theme} />}
       {activeScreen === 'stocks-discover' && (
         <DiscoverPage colorScheme={theme} />
-      )}
-      {activeScreen === 'portfolio-details' && (
-        <PortfolioDetailsPage
-          colorScheme={theme}
-          onBack={() => setActiveScreen('stock-home')}
-        />
-      )}
-      {activeScreen === 'order-pad' && (
-        <OrderPadPage
-          colorScheme={theme}
-          onBack={() => setActiveScreen('stock-home')}
-        />
       )}
       {activeScreen === 'login' && (
         <LoginPage

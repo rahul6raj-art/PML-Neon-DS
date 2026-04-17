@@ -1,9 +1,10 @@
 /**
  * PML convention (see `.cursor/rules/pml-screen-patterns.mdc`):
- * - Default **size** on app screens: **extra-large** unless PRD/Figma calls for smaller.
- * - List / drill-in sections: **showChevron** + **trailing="none"** — not **trailing="link"**
- *   for “See more” / “View all” beside the title. Use **trailing** variants only when PRD/Figma
- *   calls for a distinct trailing control.
+ * - **Default size on new app screens: extra-large** (mandatory unless PRD/Figma density or the
+ *   documented static-heading exception: **large** + **showChevron={false}** when chevron must not appear).
+ * - List / drill-in sections: **trailing="none"** — not **trailing="link"** for “See more” /
+ *   “View all” / “View more” (refs map to chevron; at **extra-large** chevron is always shown).
+ *   Use **trailing** variants only when PRD/Figma calls for a distinct trailing control.
  */
 import { useState, type ReactNode } from 'react';
 import { Icon } from '../Icon';

@@ -125,7 +125,12 @@ export const StockHomePage = ({ colorScheme = 'dark' }: StockHomePageProps) => {
             {SIP_CARDS.map((sip, i) => (
               <div className="sh-sip-card" key={i}>
                 <div className="sh-sip-card__status">
-                  <Badge type="text" context={sip.statusContext} label={sip.status} />
+                  <Badge
+                    type="text"
+                    context={sip.statusContext}
+                    muted
+                    label={sip.status}
+                  />
                 </div>
                 <div className="sh-sip-card__body">
                   <div className="sh-sip-card__copy">

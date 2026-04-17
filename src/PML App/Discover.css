@@ -133,7 +133,8 @@
 
 /* ── Expert recommendations ── */
 .dv-rec-list {
-  padding: 0 var(--spacing-16);
+  /* Space below `SectionHeader` — same intent as `sh-section__content` top inset */
+  padding: var(--spacing-16) var(--spacing-16) 0;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);

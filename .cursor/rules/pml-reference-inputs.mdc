@@ -1,0 +1,39 @@
+---
+description: PRD/Figma/images/PDFs/wireframes → map to Storybook + registry + tokens; extends pml-screen-patterns
+alwaysApply: true
+---
+
+# PML reference inputs → design system (always on)
+
+This rule **extends** **`.cursor/rules/pml-screen-patterns.mdc`**. For shell, tokens, `SectionHeader`, checklist, and full screen discipline, **follow that rule and its mandatory spec table** (`DESIGN.md`, `design-system-schema/screen-generation-rules.md`, `design-system-schema/layout-candidates.md`). If anything here **conflicts** with a **direct user instruction**, follow the user and update the rule or doc that should become standard.
+
+## When this rule applies
+
+Whenever the user provides **any** of the following as input for building or changing UI, screens, widgets, or flows — alone or with chat text — treat it as **authoritative intent** for structure, hierarchy, and experience (alongside explicit instructions):
+
+- **PRD** (excerpt, doc, bullets)
+- **Figma** (file, frame, component, or **link** with node when available)
+- **Raster images** (**PNG**, **JPEG**, **WebP**, etc.) or **reference images**
+- **PDF**
+- **Wireframe** (image, export, or embedded in another format)
+- **Generic links** to design assets or specs, when they are clearly the visual/UX reference
+
+## Non‑negotiable implementation surface
+
+The result **must** be expressed with this repo’s **design system**:
+
+- **Storybook** — `*.stories.tsx` and the catalog as the source for how components **compose** and **behave**
+- **Registry** — `design-system-schema/design-system.registry.json` for allowed building blocks and alignment with codegen expectations
+- **Tokens** — `src/tokens/` semantic variables (`--spacing-*`, `--surface-*`, `--text-*`, `--card-padding-*`, …), not a parallel ad hoc theme
+- **Patterns** — documented shells and rhythm (e.g. **Stock Home** / **`.sh-content`**, section rules) per **`pml-screen-patterns.mdc`** and **`layout-candidates.md`**
+
+Do **not** ship the screen as a **generic HTML/CSS sketch** or primary reliance on unconstrained utility styling when the design system already covers the role — unless the user **explicitly** opts out in writing (e.g. prototype-only).
+
+## Required order of work
+
+1. **Analyze the reference** — Sections, hierarchy, controls, density, states (loading / empty / error if implied or requested), **scroll vs sticky** chrome, key interactions. For **Figma**, use **file key** and **node id** when using design tools.
+2. **Map before coding** — For **each** major **region**, **section**, **row pattern**, and **widget-like** block, state the target: **`src/components/`** primitive, registered **widget**, registered **layout**, or **composition** of those. Prefer registry names and real import paths.
+3. **No exact single component** — **Recreate the experience as closely as possible** by **combining or adapting** existing components and tokens (props, composition, token-scoped feature CSS). Prefer **one** coherent composition over many one-off styled elements. Do **not** add **unnecessary** new visual or interaction patterns when an existing piece already covers the **role**.
+4. **Cannot be built from the design system** — If something is **required** and **not** representable from registry + components + tokens, use the **Missing Piece** convention in **`design-system-schema/screen-generation-rules.md`** (`MISSING_COMPONENT`, `MISSING_WIDGET`, `MISSING_LAYOUT`, or **`MISSING_MAPPING`** when the gap is reference → DS fidelity). Do **not** invent an unofficial substitute and treat it as canonical.
+
+After implementation, if the flow is **product-owned** or **Figma-linked**, **`DESIGN.md`** should stay updated per **`pml-screen-patterns.mdc`**.

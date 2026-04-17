@@ -9,7 +9,7 @@
 # Why They Should Become Widgets
 
 - **Allocation rows:** Generators and humans repeatedly recreate the same structure (metric row + bar). Without a named widget, prompts drift on spacing (`--spacing-8` vs `--spacing-16`), bar height, rounding tokens, and whether `ListItem` separators appear — hurting visual parity and registry alignment.
-- **Holdings section:** `StocksCard` is correct atomically, but “N cards with gap + empty state card” is a repeated **molecule**. Registering it gives AI a single import and props surface (`items`, `emptyTitle`, `emptyCtaLabel`, `onEmptyCta`) instead of re-deriving layout from `PortfolioDetailsPage.css` each time.
+- **Holdings section:** `StocksCard` is correct atomically, but “N cards with gap + empty state card” is a repeated **molecule**. Registering it gives AI a single import and props surface (`items`, `emptyTitle`, `emptyCtaLabel`, `onEmptyCta`) instead of re-deriving layout from ad hoc page CSS each time (see **`docs/LEARNINGS.md`** for patterns from a removed portfolio-details demo).
 - **Loading well (if promoted):** Reduces one-off class names (`pd-loading`) and keeps loading blocks token-identical across pages.
 
 # Suggested Widget Names

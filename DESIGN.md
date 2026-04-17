@@ -1,6 +1,6 @@
 # Common Home (Dark) — implementation notes
 
-**Agent note:** Cursor rule **`.cursor/rules/pml-screen-patterns.mdc`** (`alwaysApply: true`) requires reading this file when relevant to new UI work—the user does **not** need to say “follow DESIGN.md”.
+**Agent note:** Cursor rule **`.cursor/rules/pml-screen-patterns.mdc`** (`alwaysApply: true`) bundles mandatory reads for this repo: **`DESIGN.md`** (this file), **`design-system-schema/screen-generation-rules.md`**, and **`design-system-schema/layout-candidates.md`**—open them when in scope; the user does **not** need to paste or say “follow DESIGN.md”.
 
 Source: [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1562-5365), frame **Common Home | Dark** (`1562:5365`).
 
@@ -120,6 +120,12 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 ---
 
+## Archived demo screens (removed from repo)
+
+The following flows used to ship as **`src/PML App/`** previews and were **removed** to shrink the maintenance surface: **Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**. **Patterns and gotchas** from building them (dividers, **`BottomNav`**, **`TextField` in `Card`**, scroll + sticky footer, INR, etc.) are kept in **`docs/LEARNINGS.md`** — use that file when re-implementing similar surfaces.
+
+---
+
 ## Stocks Discover (product PRD)
 
 **Code:** `Discover.tsx`, `Discover.css`, `discoverMockData.ts` — same **376px column**, **`Header`** (homepage + primary tabs), **`HeatmapWidget`** (wheel **Index / Stocks / F&O**, default **Stocks**), **`Chip` `extra-small`** mover filters, horizontal carousels with token spacing, **`NewsWidget`**, **`BottomNav`** (five tabs, **Stocks** selected). Data is **mock** until backend contracts (indices, movers, strategies, recommendations, news, screeners) are wired.
@@ -128,27 +134,11 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 ---
 
-## MTF (Margin Trading Facility) home
-
-**Source:** [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=814-4571), frame **MTF** (`814:4571`).
-
-**Code:** `MtfHome.tsx`, `MtfHome.css`, `mtfMockData.ts` — same **376px** **Stock Home–style shell** (`.mtf-home`, `.mtf-content` scroll, `.mtf-bottom-nav`): **`Header`** (Home + tabs **Portfolio / IPOs / NFO / MTF**, **MTF** selected), **Return on margin** summary **`Card`** + **`Badge`** + three-column stats, **Active Positions** (`SectionHeader` + quick-action **`button`**s + position **`Card`**s), **Opportunity Scanners** horizontal carousel (**`Card`** + **`Button`** Simulate/Trade, edge spacers + `scroll-padding-inline`), **Common Questions** (FAQ **`Card`**s), **MTF Health** (`Card` + **`Badge`** notice + token gradient bar + buying-power copy), **`BottomNav`**. **INR:** no space after `₹` on amounts; profit line uses `+₹` form where shown.
-
----
-
 ## Stocks Tiles widget
 
 **Source:** [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1614-5966), frame **Stocks Tiles** (`1614:5966`).
 
 **Code:** `StocksTilesWidget.tsx`, `StocksTilesWidget.css` — optional **`SectionHeader`** (chevron **off** by default) + horizontal scroll of **tiles** (`--unit-max` width, **`--surface-level-1`**, **no outer border**): optional **top** **`Icon`** / **`Logo`** row (toggle **`showTopMedia`**), optional **status** **`Badge`** between media and title, one primary **`title`** line (full **company** name, e.g. **Reliance Ind.**), **`price`**, and move as muted **Badge** or **subtext**. Empty **`changeLabel`** hides the move row (e.g. **Discover → Curated strategies** shortcut copy in **`price`**). **Discover** scopes strategy spacing / descriptor colour on **`.dv-strategies-stw`** in **`Discover.css`**. For strategy-style tiles in isolation, **`Tile`** **`variant="strategy"`** (`Tile.tsx` / **Components/Tile** in Storybook) uses the same rhythm; optional **`strategyItems`** renders a horizontal strip of multiple cards inside one **`Tile`**. **`changeSentiment`** drives sign normalization (same idea as **ListItem** stock rows). **INR:** no space after **`₹`** in demo copy.
-
----
-
-## Order Pad (equity order entry)
-
-**Source:** [4.0 — Order Pad](https://www.figma.com/design/rS7HCW00LH1onTHwaLn99N/4.0---Order-Pad?node-id=7500-107975) (`7500:107975`).
-
-**Code:** `OrderPadPage.tsx`, `OrderPadPage.css`, `orderPadMockData.ts` — **376px** column: scrollable **`.op-scroll`** + **non-scrolling** **`.op-footer`**. **`Header`** `large` (back, scrip title, **`titleTrailing`**: **`Badge`** `live` + Buy/Sell pill), **`Radio`** rows for **NSE/BSE** + LTP, **`SegmentedControl`** for **Delivery / Intraday / Pay Later (MTF - 4x)** (purple “Pay Later” via **`--colour-purple`**), **`Tabs`** for **Regular / Stop-Loss / SIP**, **`Card`** with **`CompactQuantityStepperWidget`**, limit **`TextField`**, **Market Depth** disclosure placeholder, footer MTF promo **`Checkbox`**, required/balance rows, primary **Buy/Sell** CTA (token **positive/negative** fills). **`TextField`** width scoped in **`.op-limit-field`**. **INR:** no space after **`₹`**.
 
 ---
 

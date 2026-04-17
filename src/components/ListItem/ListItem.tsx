@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Badge } from '../Badge';
 import { Icon } from '../Icon';
 import { Avatar } from '../Avatar';
@@ -12,6 +13,7 @@ export type ListItemTrailing = 'none' | 'icon' | 'text' | 'link' | 'button';
 export type ListItemValueType = 'positive' | 'negative';
 export type ListItemVariant = 'default' | 'stocks-card' | 'stocks-card-mtf';
 export type ListItemStocksChangeSentiment = 'positive' | 'negative' | 'neutral';
+export type ListItemTrailingTextTone = 'default' | 'positive' | 'negative';
 
 /** Leading +/- on the change line matches **sentiment** (negative → minus, positive → plus). */
 function formatStocksChangeLabelForSentiment(
@@ -45,6 +47,7 @@ export type ListItemStocksStatusBadgeTone = 'notice' | 'primary';
 export interface ListItemProps {
   /** Row layout. `stocks-card` / `stocks-card-mtf` match **Stocks Card** (MTF adds margin footer). */
   variant?: ListItemVariant;
+  /** Root class `li-item--high` | `li-item--low`. Primary line is always **body-medium** (same as stocks card title). */
   emphasis?: ListItemEmphasis;
 
   /* ── Stocks card row (when variant === 'stocks-card' | 'stocks-card-mtf') ── */
@@ -98,6 +101,8 @@ export interface ListItemProps {
   primaryIcon?: string;
   showPrimaryText?: boolean;
   primaryText?: string;
+  /** Inline content after the primary title (e.g. points). Renders inside **`li-item__primary-row`**. */
+  primarySuffix?: ReactNode;
 
   /* ── Subtext row ─────────────────────────────── */
   showSubtext?: boolean;
@@ -128,6 +133,10 @@ export interface ListItemProps {
   trailing?: ListItemTrailing;
   trailingIcon?: string;
   trailingText?: string;
+  /** Second line under **`trailingText`** when **`trailing="text"`** (e.g. time). Uses **subtext-regular**. */
+  trailingSubtext?: string;
+  /** When **`trailing="text"`**, styles the primary trailing line (e.g. signed top-up amount). */
+  trailingTextTone?: ListItemTrailingTextTone;
   trailingLinkText?: string;
   onTrailingLinkPress?: () => void;
   trailingButtonLabel?: string;
@@ -137,6 +146,11 @@ export interface ListItemProps {
 
   /* ── Misc ────────────────────────────────────── */
   showSeparator?: boolean;
+  /**
+   * When `true` with a leading avatar, the bottom hairline starts after the avatar (legacy inset).
+   * Default **`false`** — divider spans the full row width (e.g. inside **`Card`** with card padding).
+   */
+  separatorInset?: boolean;
   onClick?: () => void;
   className?: string;
 }
@@ -177,6 +191,7 @@ export const ListItem = ({
   primaryIcon = 'info_circle_outline',
   showPrimaryText = true,
   primaryText = 'Primary',
+  primarySuffix,
 
   showSubtext = true,
   showBadge = false,
@@ -201,6 +216,8 @@ export const ListItem = ({
   trailing = 'icon',
   trailingIcon = 'caret_small_right_main',
   trailingText = 'Text',
+  trailingSubtext,
+  trailingTextTone = 'default',
   trailingLinkText = 'Link',
   onTrailingLinkPress,
   trailingButtonLabel = 'Button',
@@ -209,6 +226,7 @@ export const ListItem = ({
   onTrailingButtonPress,
 
   showSeparator = true,
+  separatorInset = false,
   onClick,
   className,
 }: ListItemProps) => {
@@ -253,12 +271,32 @@ export const ListItem = ({
             <Icon name={trailingIcon} size={24} />
           </div>
         );
-      case 'text':
+      case 'text': {
+        const stack = Boolean(trailingSubtext?.trim());
+        const labelClass = [
+          'li-item__trailing-label',
+          trailingTextTone === 'positive' && 'li-item__trailing-label--positive',
+          trailingTextTone === 'negative' && 'li-item__trailing-label--negative',
+        ]
+          .filter(Boolean)
+          .join(' ');
         return (
-          <div className="li-item__trailing li-item__trailing--text">
-            <span className="li-item__trailing-label">{trailingText}</span>
+          <div
+            className={[
+              'li-item__trailing',
+              'li-item__trailing--text',
+              stack && 'li-item__trailing--stack',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            <span className={labelClass}>{trailingText}</span>
+            {stack ? (
+              <span className="li-item__trailing-sub subtext-regular">{trailingSubtext}</span>
+            ) : null}
           </div>
         );
+      }
       case 'link':
         return (
           <div className="li-item__trailing li-item__trailing--link">
@@ -445,7 +483,10 @@ export const ListItem = ({
           <div className="li-item__text-block">
             {showPrimaryText && (
               <div className="li-item__primary-row">
-                <span className="li-item__primary">{primaryText}</span>
+                <span className="li-item__primary body-medium">{primaryText}</span>
+                {primarySuffix != null ? (
+                  <span className="li-item__primary-suffix">{primarySuffix}</span>
+                ) : null}
                 {showPrimaryIcon && (
                   <span className="li-item__primary-icon">
                     <Icon name={primaryIcon} size={20} />
@@ -497,7 +538,14 @@ export const ListItem = ({
       </div>
 
       {showSeparator && (
-        <div className={`li-item__separator ${resolvedShowLeading ? 'li-item__separator--inset' : ''}`} />
+        <div
+          className={[
+            'li-item__separator',
+            separatorInset && resolvedShowLeading ? 'li-item__separator--inset' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        />
       )}
     </div>
   );

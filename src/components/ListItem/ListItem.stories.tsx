@@ -59,7 +59,8 @@ const meta: Meta<typeof ListItem> = {
     emphasis: {
       control: 'select',
       options: ['high', 'low'] as ListItemEmphasis[],
-      description: 'Text emphasis — High = SemiBold, Low = Medium',
+      description:
+        'Root modifier `li-item--high` / `li-item--low`. Primary copy uses **body-medium** (same as stocks card title).',
       table: { defaultValue: { summary: 'high' }, category: 'Variant' },
     },
 
@@ -140,6 +141,12 @@ const meta: Meta<typeof ListItem> = {
       control: 'boolean',
       description: 'Show bottom separator line',
       table: { defaultValue: { summary: 'true' }, category: 'Properties' },
+    },
+    separatorInset: {
+      control: 'boolean',
+      description:
+        'With leading avatar: **`false`** (default) = hairline **edge-to-edge** on the row; **`true`** = hairline starts after the avatar (legacy inset).',
+      table: { defaultValue: { summary: 'false' }, category: 'Properties' },
     },
     showBadge: {
       control: 'boolean',
@@ -323,6 +330,7 @@ const meta: Meta<typeof ListItem> = {
     showTertiaryIcon2: false,
     tertiaryIcon2: 'info_circle_outline',
     showSeparator: true,
+    separatorInset: false,
     showBadge: false,
     badgeLabel: 'Label',
     showSubtextIcon: false,
@@ -601,8 +609,15 @@ export const StocksCardRow: StoryObj<ListItemStocksStoryArgs> = {
     showSeparator: {
       control: 'boolean',
       description:
-        'Bottom separator line on the row (usually off when the row sits inside **Card**).',
+        'Bottom separator on the row. **Default list rows:** divider is **edge-to-edge** unless **`separatorInset`** is on. Usually off when the row sits inside **Card**.',
       table: { category: 'Layout' },
+    },
+    separatorInset: {
+      control: 'boolean',
+      description:
+        '**Default** variant only: with leading avatar, use legacy hairline inset after the avatar.',
+      table: { category: 'Layout' },
+      if: { arg: 'variant', eq: 'default' },
     },
     onClick: { action: 'clicked', table: { category: 'Events' } },
     className: { table: { disable: true } },
@@ -646,6 +661,7 @@ export const StocksCardRow: StoryObj<ListItemStocksStoryArgs> = {
         'trailingButtonVariant',
         'trailingButtonSize',
         'showSeparator',
+        'separatorInset',
         'onClick',
       ],
     },

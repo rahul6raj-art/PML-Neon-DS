@@ -7,5 +7,6 @@ export type {
   ListItemVariant,
   ListItemStocksChangeSentiment,
   ListItemStocksStatusBadgeTone,
+  ListItemTrailingTextTone,
 } from './ListItem';
 

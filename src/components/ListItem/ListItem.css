@@ -75,21 +75,24 @@
   width: 100%;
 }
 
+.li-item__primary-row:has(.li-item__primary-suffix) {
+  flex-wrap: wrap;
+  row-gap: var(--spacing-4);
+}
+
+.li-item__primary-suffix {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+/* Same as stocks card title: `body-medium` (typography.css). */
 .li-item__primary {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
   color: var(--text-neutral-strong);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.li-item--high .li-item__primary {
-  font-weight: 600;
-}
-
-.li-item--low .li-item__primary {
-  font-weight: 500;
 }
 
 .li-item__primary-icon {
@@ -226,10 +229,31 @@
 }
 
 /* Trailing text */
+.li-item__trailing--stack {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+}
+
 .li-item__trailing-label {
   font-size: var(--font-size-body);
   font-weight: 500;
   line-height: var(--line-height-body);
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+}
+
+.li-item__trailing-label--positive {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-positive-strong);
+}
+
+.li-item__trailing-label--negative {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-negative-strong);
+}
+
+.li-item__trailing-sub {
   color: var(--text-neutral-medium);
   white-space: nowrap;
 }
@@ -270,9 +294,10 @@
   left: 0;
   right: 0;
   height: var(--border-width-hairline);
-  background: var(--border-neutral-light);
+  background: var(--border-neutral-weak);
 }
 
+/* Opt-in via **`separatorInset`** — default row divider is edge-to-edge on the ListItem box. */
 .li-item__separator--inset {
   left: var(--spacing-60);
 }
