@@ -22,6 +22,14 @@ const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
   component: Dropdown,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          '**Mobile / Tablet:** floating label; trigger height **52px** (`spacing-48` + `spacing-4`). **Web:** set Storybook **Platform** to **Web** (or `PlatformThemeProvider` with `platform="web"`): label is **inside** the trigger with a trailing **`:`**, same type scale as the selected value (**high** = title-3, **low** = body); trigger height **`spacing-48` (48px)**; when empty, **`placeholder`** appears in the value area in muted style.',
+      },
+    },
+  },
   argTypes: {
     /* ══ Variant ═════════════════════════════════════ */
     emphasis: {
@@ -49,12 +57,13 @@ const meta: Meta<typeof Dropdown> = {
     /* ══ Content ═════════════════════════════════════ */
     label: {
       control: 'text',
-      description: 'Floating label text',
+      description:
+        'Label — floats on mobile/tablet; on **Web** shown inline with trailing **`:`** (appended if missing), same size as the value',
       table: { category: 'Content', defaultValue: { summary: 'Label' } },
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text when no value is selected',
+      description: 'When no selection — on **Web** shown in the value area (muted); floating pattern uses it for center text on mobile/tablet',
       table: { category: 'Content' },
     },
     helperText: {

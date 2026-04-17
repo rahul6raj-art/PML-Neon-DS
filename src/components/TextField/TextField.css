@@ -252,3 +252,60 @@
 .textfield__helper--error {
   color: var(--text-negative-strong);
 }
+
+/* ══════════════════════════════════════════════════
+   Web density (Storybook toolbar “Web” + app web scope):
+   label as a static prefix inside the box, beside the input.
+   ══════════════════════════════════════════════════ */
+
+/* Web only: 48px control height (mobile/tablet keep 52px: spacing-48 + spacing-4). */
+.textfield--web .textfield__box {
+  height: var(--spacing-48);
+  max-height: var(--spacing-48);
+}
+
+.textfield--web .textfield__label.textfield__label--inline {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+  flex-shrink: 0;
+  max-width: 42%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  pointer-events: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-neutral-medium);
+}
+
+/* Match `.textfield__input` type scale and weight (high = title-4, low = body). */
+.textfield--web.textfield--high .textfield__label.textfield__label--inline {
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
+  font-weight: 500;
+}
+
+.textfield--web.textfield--low .textfield__label.textfield__label--inline {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: 500;
+}
+
+.textfield--web.textfield--focus .textfield__label.textfield__label--inline {
+  color: var(--text-neutral-strong);
+}
+
+.textfield--web.textfield--filled .textfield__label.textfield__label--inline {
+  color: var(--text-neutral-medium);
+}
+
+.textfield--web.textfield--error .textfield__label.textfield__label--inline {
+  color: var(--text-negative-strong);
+}
+
+.textfield--web.textfield--disabled .textfield__label.textfield__label--inline {
+  color: var(--text-neutral-disabled);
+}

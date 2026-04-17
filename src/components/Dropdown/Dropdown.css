@@ -327,3 +327,76 @@
   font-weight: 500;
   color: var(--text-positive-strong);
 }
+
+/* ══════════════════════════════════════════════════
+   Web density (Storybook “Web” + app web scope):
+   inline `:` label beside value; 48px box (parity with TextField web).
+   ══════════════════════════════════════════════════ */
+
+.dropdown--web .dropdown__box {
+  height: var(--spacing-48);
+  max-height: var(--spacing-48);
+}
+
+.dropdown--web .dropdown__label.dropdown__label--inline {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+  flex-shrink: 0;
+  max-width: 42%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-neutral-medium);
+}
+
+/* Match `.dropdown__value` typography (high = title-3, low = body). */
+.dropdown--web.dropdown--high .dropdown__label.dropdown__label--inline {
+  font-size: var(--font-size-title-3);
+  line-height: var(--line-height-title-3);
+  font-weight: 400;
+}
+
+.dropdown--web.dropdown--low .dropdown__label.dropdown__label--inline {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: 500;
+}
+
+.dropdown--web .dropdown__value.dropdown__value--placeholder {
+  color: var(--text-neutral-medium);
+}
+
+.dropdown--web.dropdown--high .dropdown__value.dropdown__value--placeholder {
+  font-size: var(--font-size-title-3);
+  line-height: var(--line-height-title-3);
+  font-weight: 400;
+}
+
+.dropdown--web.dropdown--low .dropdown__value.dropdown__value--placeholder {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: 500;
+}
+
+.dropdown--web.dropdown--open .dropdown__label.dropdown__label--inline,
+.dropdown--web .dropdown__box:focus-visible .dropdown__label.dropdown__label--inline {
+  color: var(--text-neutral-strong);
+}
+
+.dropdown--web.dropdown--filled:not(.dropdown--open) .dropdown__label.dropdown__label--inline {
+  color: var(--text-neutral-medium);
+}
+
+.dropdown--web.dropdown--error .dropdown__label.dropdown__label--inline {
+  color: var(--text-negative-strong);
+}
+
+.dropdown--web.dropdown--disabled .dropdown__label.dropdown__label--inline {
+  color: var(--text-neutral-weak);
+}

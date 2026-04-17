@@ -13,6 +13,14 @@ const meta = {
   title: 'Components/TextField',
   component: TextField,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          '**Mobile / Tablet:** floating label (placeholder in the box, label moves to the top border when focused or filled); bordered box height **52px** (`spacing-48` + `spacing-4`). **Web:** set the Storybook **Platform** toolbar to **Web** (or wrap the tree in `PlatformThemeProvider` with `platform="web"`): bordered box height **`spacing-48` (48px)**; label stays **inside** the box as a left prefix, ends with **`:`**, same type size as the input.',
+      },
+    },
+  },
   argTypes: {
     emphasis: {
       control: 'inline-radio',
@@ -22,7 +30,8 @@ const meta = {
     },
     label: {
       control: 'text',
-      description: 'Floating label text',
+      description:
+        'Label copy — floats on mobile/tablet; on **Web** shown inside the box with a trailing **`:`** (appended if missing), same type size as the input',
       table: { category: 'Content', defaultValue: { summary: 'Label' } },
     },
     value: {

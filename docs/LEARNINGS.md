@@ -119,4 +119,4 @@ Do **not** assume only the first model when **`ListItem`** lives inside a padded
 
 ---
 
-*Last updated: repo trimmed to Stock home, Discover, Login, Sign up; learnings for removed demos preserved in this file.*
+*Last updated: active **AppShell** screens are Stock home, Discover, Log in, Sign up; learnings for removed demos preserved in this file.*

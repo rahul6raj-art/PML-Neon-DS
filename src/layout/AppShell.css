@@ -21,6 +21,92 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-24);
+  transition:
+    width 0.2s ease,
+    min-height 0.2s ease,
+    max-height 0.2s ease,
+    opacity 0.2s ease,
+    padding 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.app-shell--nav-hidden .app-shell__aside {
+  width: 0;
+  min-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-right-color: transparent;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.app-shell__aside-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+  padding-top: var(--spacing-12);
+  border-top: 1px solid var(--border-neutral-weak);
+}
+
+.app-shell__nav-collapse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: var(--spacing-10) var(--spacing-12);
+  border-radius: var(--radius-8);
+  border: 1px solid var(--border-neutral-medium);
+  background: var(--surface-level-2);
+  color: var(--text-neutral-strong);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.app-shell__nav-collapse:hover {
+  border-color: var(--border-neutral-moderate);
+  background: var(--background-neutral-weak);
+}
+
+.app-shell__nav-collapse:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
+}
+
+.app-shell__nav-collapse svg {
+  color: var(--icon-neutral-strong);
+}
+
+.app-shell__nav-reveal {
+  position: fixed;
+  top: var(--spacing-16);
+  left: var(--spacing-16);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  padding: 0;
+  border-radius: var(--radius-12);
+  border: 1px solid var(--border-neutral-medium);
+  background: var(--surface-level-1);
+  color: var(--icon-neutral-strong);
+  box-shadow: 0 var(--unit-1) var(--spacing-8) var(--shadow-elevation-1);
+  cursor: pointer;
+}
+
+.app-shell__nav-reveal:hover {
+  border-color: var(--border-primary-weak);
+  background: var(--background-primary-weak);
+}
+
+.app-shell__nav-reveal:focus-visible {
+  outline: 2px solid var(--border-primary-strong);
+  outline-offset: 2px;
 }
 
 .app-shell__nav {
@@ -139,6 +225,7 @@
 .app-shell__main {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -172,5 +259,21 @@
     width: 100%;
     min-height: 50vh;
     justify-content: flex-start;
+  }
+
+  .app-shell--nav-hidden .app-shell__aside {
+    width: 100%;
+    max-height: 0;
+    min-height: 0;
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom-color: transparent;
+    flex-shrink: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
   }
 }

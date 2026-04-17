@@ -100,3 +100,66 @@
   width: var(--spacing-24);
   height: var(--spacing-24);
 }
+
+/* ── Stack (value + optional web caption) ───────── */
+.cqsw__stack {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.cqsw__stack--web {
+  flex-direction: column;
+  gap: 0;
+  padding-block: 0;
+  justify-content: center;
+}
+
+/* ══════════════════════════════════════════════════
+   Web — quantity + step glyphs at **12px** (product spec; web token scale would otherwise
+   shrink `--font-size-subtext`). Line height matches subtext rhythm via token.
+   + caption row under the quantity.
+   ══════════════════════════════════════════════════ */
+
+.cqsw--web .cqsw__box {
+  height: var(--spacing-48);
+  min-height: var(--spacing-48);
+  max-height: var(--spacing-48);
+  align-items: stretch;
+}
+
+.cqsw--web .cqsw__input {
+  font-size: 12px;
+  line-height: var(--line-height-subtext);
+  font-weight: var(--font-weight-semibold);
+}
+
+.cqsw--web .cqsw__glyph {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+}
+
+.cqsw__caption {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-neutral-medium);
+}
+
+.cqsw--web .cqsw__caption {
+  line-height: 1.15;
+}
+
+.cqsw--disabled .cqsw__caption {
+  color: var(--text-neutral-weak);
+}

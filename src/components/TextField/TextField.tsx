@@ -6,6 +6,7 @@ import {
   useId,
 } from 'react';
 import { Icon } from '../Icon';
+import { usePlatformTheme } from '../../theme';
 import './TextField.css';
 
 export type TextFieldEmphasis = 'high' | 'low';
@@ -44,6 +45,13 @@ function renderIcon(icon: string | ReactNode | undefined, fallback: string) {
   return icon;
 }
 
+/** Web inline label: show as a prefix ending with `:` (no double colon). */
+function formatWebInlineLabel(text: string): string {
+  const t = text.trimEnd();
+  if (!t) return '';
+  return t.endsWith(':') ? t : `${t}:`;
+}
+
 export const TextField = ({
   emphasis = 'high',
   label = 'Label',
@@ -63,6 +71,9 @@ export const TextField = ({
   onChange,
   ...rest
 }: TextFieldProps) => {
+  const platform = usePlatformTheme();
+  const webInlineLabel = platform === 'web';
+
   const generatedId = useId();
   const inputId = externalId ?? generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -73,7 +84,7 @@ export const TextField = ({
 
   const [isFocused, setIsFocused] = useState(false);
   const hasValue = currentValue.length > 0;
-  const isFloating = isFocused || hasValue;
+  const isFloating = !webInlineLabel && (isFocused || hasValue);
   const hasError = !!errorText;
   const hasHelper = !!errorText || !!assistiveText;
   const hasLeading = showLeadingIcon || leadingIcon;
@@ -82,6 +93,7 @@ export const TextField = ({
   const wrapperClasses = [
     'textfield',
     `textfield--${emphasis}`,
+    webInlineLabel && 'textfield--web',
     isFocused && 'textfield--focus',
     hasValue && 'textfield--filled',
     hasError && 'textfield--error',
@@ -96,55 +108,73 @@ export const TextField = ({
   const helperText = errorText || assistiveText;
   const helperClass = hasError ? 'textfield__helper--error' : '';
 
+  const inputArea = (
+    <div className="textfield__input-area">
+      <input
+        ref={inputRef}
+        id={inputId}
+        className="textfield__input"
+        value={currentValue}
+        disabled={disabled}
+        placeholder=" "
+        aria-invalid={hasError || undefined}
+        aria-describedby={helperText ? `${inputId}-helper` : undefined}
+        onFocus={(e) => {
+          setIsFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setIsFocused(false);
+          onBlur?.(e);
+        }}
+        onChange={(e) => {
+          if (!isControlled) setInternalValue(e.target.value);
+          onChange?.(e);
+        }}
+        {...rest}
+      />
+    </div>
+  );
+
+  const leadingIconEl = hasLeading ? (
+    <span className="textfield__icon textfield__icon--leading">
+      {renderIcon(leadingIcon, 'search_outline')}
+    </span>
+  ) : null;
+
+  const trailingIconEl = hasTrailing ? (
+    <span className="textfield__icon textfield__icon--trailing">
+      {renderIcon(trailingIcon, 'x_circle_filled')}
+    </span>
+  ) : null;
+
   return (
     <div className={wrapperClasses}>
       <div
         className="textfield__box"
         onClick={() => inputRef.current?.focus()}
       >
-        <label
-          className={`textfield__label ${isFloating ? 'textfield__label--float' : ''}`}
-          htmlFor={inputId}
-        >
-          {label}
-        </label>
-
-        {hasLeading && (
-          <span className="textfield__icon textfield__icon--leading">
-            {renderIcon(leadingIcon, 'search_outline')}
-          </span>
-        )}
-
-        <div className="textfield__input-area">
-          <input
-            ref={inputRef}
-            id={inputId}
-            className="textfield__input"
-            value={currentValue}
-            disabled={disabled}
-            placeholder=" "
-            aria-invalid={hasError || undefined}
-            aria-describedby={helperText ? `${inputId}-helper` : undefined}
-            onFocus={(e) => {
-              setIsFocused(true);
-              onFocus?.(e);
-            }}
-            onBlur={(e) => {
-              setIsFocused(false);
-              onBlur?.(e);
-            }}
-            onChange={(e) => {
-              if (!isControlled) setInternalValue(e.target.value);
-              onChange?.(e);
-            }}
-            {...rest}
-          />
-        </div>
-
-        {hasTrailing && (
-          <span className="textfield__icon textfield__icon--trailing">
-            {renderIcon(trailingIcon, 'x_circle_filled')}
-          </span>
+        {webInlineLabel ? (
+          <>
+            {leadingIconEl}
+            <label className="textfield__label textfield__label--inline" htmlFor={inputId}>
+              {formatWebInlineLabel(label)}
+            </label>
+            {inputArea}
+            {trailingIconEl}
+          </>
+        ) : (
+          <>
+            <label
+              className={`textfield__label ${isFloating ? 'textfield__label--float' : ''}`}
+              htmlFor={inputId}
+            >
+              {label}
+            </label>
+            {leadingIconEl}
+            {inputArea}
+            {trailingIconEl}
+          </>
         )}
       </div>
 

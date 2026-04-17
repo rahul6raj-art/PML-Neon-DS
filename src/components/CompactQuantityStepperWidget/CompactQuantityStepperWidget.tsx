@@ -5,6 +5,7 @@ import {
   useMemo,
 } from 'react';
 import { Icon } from '../Icon';
+import { usePlatformTheme } from '../../theme';
 import './CompactQuantityStepperWidget.css';
 
 function toNum(v: number | string): number {
@@ -33,6 +34,12 @@ export interface CompactQuantityStepperWidgetProps {
   onIncrement?: () => void;
   onChange?: (value: number | string) => void;
   className?: string;
+  /**
+   * On **web** only: caption prefix below the quantity; rendered as **`Prefix:display`**
+   * where **`display`** matches the field (updates with **`value`**).
+   * Omit for default **`Qty`** → **`Qty:1`**; pass **`''`** to hide the caption on web.
+   */
+  valueCaption?: string;
 }
 
 const MINUS_GLYPH = '\u2212';
@@ -49,9 +56,21 @@ export function CompactQuantityStepperWidget({
   onIncrement,
   onChange,
   className,
+  valueCaption,
 }: CompactQuantityStepperWidgetProps) {
+  const platform = usePlatformTheme();
+  const web = platform === 'web';
+
   const numeric = useMemo(() => toNum(value), [value]);
   const strValue = String(value);
+
+  const captionBelow = useMemo(() => {
+    if (!web) return null;
+    if (valueCaption === '') return null;
+    const prefix = (valueCaption ?? 'Qty').trim();
+    if (!prefix) return null;
+    return `${prefix}:${strValue}`;
+  }, [web, valueCaption, strValue]);
 
   const minReached = numeric <= min;
   const maxReached = numeric >= max;
@@ -103,6 +122,7 @@ export function CompactQuantityStepperWidget({
 
   const rootClass = [
     'cqsw',
+    web && 'cqsw--web',
     disabled && 'cqsw--disabled',
     !disabled && minReached && 'cqsw--min-reached',
     !disabled && maxReached && 'cqsw--max-reached',
@@ -129,16 +149,23 @@ export function CompactQuantityStepperWidget({
           </span>
         </button>
         <div className="cqsw__input-area">
-          <input
-            className="cqsw__input"
-            value={strValue}
-            disabled={disabled}
-            onChange={handleInputChange}
-            onKeyDown={handleInputKeyDown}
-            inputMode="decimal"
-            autoComplete="off"
-            aria-label="Quantity"
-          />
+          <div className={['cqsw__stack', web && 'cqsw__stack--web'].filter(Boolean).join(' ')}>
+            <input
+              className="cqsw__input"
+              value={strValue}
+              disabled={disabled}
+              onChange={handleInputChange}
+              onKeyDown={handleInputKeyDown}
+              inputMode="decimal"
+              autoComplete="off"
+              aria-label="Quantity"
+            />
+            {captionBelow && (
+              <span className="cqsw__caption" aria-hidden>
+                {captionBelow}
+              </span>
+            )}
+          </div>
         </div>
         <button
           type="button"

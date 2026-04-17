@@ -7,6 +7,7 @@ import {
   useCallback,
 } from 'react';
 import { Icon } from '../Icon';
+import { usePlatformTheme } from '../../theme';
 import './Dropdown.css';
 
 export type DropdownEmphasis = 'high' | 'low';
@@ -53,6 +54,13 @@ function renderIcon(icon: string | ReactNode | undefined, fallback: string) {
   return icon;
 }
 
+/** Web inline label: prefix ending with `:` (no double colon). */
+function formatWebInlineLabel(text: string): string {
+  const t = text.trimEnd();
+  if (!t) return '';
+  return t.endsWith(':') ? t : `${t}:`;
+}
+
 export const Dropdown = ({
   emphasis = 'high',
   label = 'Label',
@@ -69,6 +77,9 @@ export const Dropdown = ({
   onChange,
   className,
 }: DropdownProps) => {
+  const platform = usePlatformTheme();
+  const webInlineLabel = platform === 'web';
+
   const generatedId = useId();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
@@ -82,7 +93,7 @@ export const Dropdown = ({
 
   const selectedOption = options.find((o) => o.value === currentValue);
   const hasValue = !!currentValue;
-  const isFloating = isOpen || hasValue;
+  const isFloating = !webInlineLabel && (isOpen || hasValue);
   const hasError = showErrorText && !!errorText;
   const visibleHelper = hasError ? errorText : showHelperText ? helperText : undefined;
   const hasHelper = !!visibleHelper;
@@ -91,6 +102,7 @@ export const Dropdown = ({
   const wrapperCls = [
     'dropdown',
     `dropdown--${emphasis}`,
+    webInlineLabel && 'dropdown--web',
     isOpen && 'dropdown--open',
     hasValue && 'dropdown--filled',
     hasError && 'dropdown--error',
@@ -102,6 +114,28 @@ export const Dropdown = ({
 
   const displayText = selectedOption?.label || currentValue || placeholder || '';
   const bottomCls = hasError ? 'dropdown__helper--error' : '';
+
+  const leadingIconEl = hasLeading ? (
+    <span className="dropdown__icon dropdown__icon--leading">
+      {renderIcon(leadingIcon, 'search_outline')}
+    </span>
+  ) : null;
+
+  const valueArea = (
+    <div className="dropdown__value-area">
+      {hasValue ? (
+        <span className="dropdown__value">{displayText}</span>
+      ) : webInlineLabel && placeholder ? (
+        <span className="dropdown__value dropdown__value--placeholder">{placeholder}</span>
+      ) : null}
+    </div>
+  );
+
+  const caretEl = (
+    <span className={`dropdown__caret ${isOpen ? 'dropdown__caret--open' : ''}`}>
+      <Icon name="caret_small_down_main" size={24} />
+    </span>
+  );
 
   const selectOption = useCallback(
     (val: string) => {
@@ -180,32 +214,31 @@ export const Dropdown = ({
         onClick={() => !disabled && setIsOpen((p) => !p)}
         onKeyDown={handleKeyDown}
       >
-        {/* Floating label */}
-        <label
-          id={`${generatedId}-label`}
-          className={`dropdown__label ${isFloating ? 'dropdown__label--float' : ''}`}
-        >
-          {label}
-        </label>
-
-        {/* Leading icon */}
-        {hasLeading && (
-          <span className="dropdown__icon dropdown__icon--leading">
-            {renderIcon(leadingIcon, 'search_outline')}
-          </span>
+        {webInlineLabel ? (
+          <>
+            {leadingIconEl}
+            <label
+              id={`${generatedId}-label`}
+              className="dropdown__label dropdown__label--inline"
+            >
+              {formatWebInlineLabel(label)}
+            </label>
+            {valueArea}
+            {caretEl}
+          </>
+        ) : (
+          <>
+            <label
+              id={`${generatedId}-label`}
+              className={`dropdown__label ${isFloating ? 'dropdown__label--float' : ''}`}
+            >
+              {label}
+            </label>
+            {leadingIconEl}
+            {valueArea}
+            {caretEl}
+          </>
         )}
-
-        {/* Value display */}
-        <div className="dropdown__value-area">
-          {hasValue && (
-            <span className="dropdown__value">{displayText}</span>
-          )}
-        </div>
-
-        {/* Caret icon — always visible */}
-        <span className={`dropdown__caret ${isOpen ? 'dropdown__caret--open' : ''}`}>
-          <Icon name="caret_small_down_main" size={24} />
-        </span>
       </div>
 
       {/* Helper / error text */}

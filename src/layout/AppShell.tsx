@@ -1,7 +1,14 @@
-import type { ReactNode } from 'react';
+import { useId, useState, type ReactNode } from 'react';
+
+import { Icon } from '../components/Icon';
+
 import './AppShell.css';
 
-export type AppScreenId = 'stock-home' | 'stocks-discover' | 'login' | 'sign-up';
+export type AppScreenId =
+  | 'stock-home'
+  | 'stocks-discover'
+  | 'login'
+  | 'sign-up';
 
 export interface AppNavItem {
   id: AppScreenId;
@@ -54,13 +61,35 @@ export const AppShell = ({
   navItems = DEFAULT_NAV,
 }: AppShellProps) => {
   const groups = navGroups(navItems);
+  const navPanelId = useId().replace(/:/g, '');
+  const [navPanelVisible, setNavPanelVisible] = useState(true);
 
   return (
     <div
-      className="app-shell"
+      className={['app-shell', !navPanelVisible && 'app-shell--nav-hidden']
+        .filter(Boolean)
+        .join(' ')}
       data-theme={theme === 'dark' ? 'dark' : undefined}
     >
-      <aside className="app-shell__aside" aria-label="App screen navigation">
+      {!navPanelVisible && (
+        <button
+          type="button"
+          className="app-shell__nav-reveal"
+          aria-label="Show app navigation"
+          aria-expanded="false"
+          aria-controls={navPanelId}
+          onClick={() => setNavPanelVisible(true)}
+        >
+          <Icon name="menu_lines_3_horizontal" size={20} />
+        </button>
+      )}
+      <aside
+        id={navPanelId}
+        className="app-shell__aside"
+        aria-label="App screen navigation"
+        aria-hidden={!navPanelVisible}
+        {...(!navPanelVisible ? { inert: true as const } : {})}
+      >
         <div className="app-shell__theme">
           <span className="app-shell__theme-label" id="app-theme-label">
             Theme
@@ -108,8 +137,22 @@ export const AppShell = ({
             </div>
           ))}
         </nav>
+        <div className="app-shell__aside-footer">
+          <button
+            type="button"
+            className="app-shell__nav-collapse"
+            aria-expanded={navPanelVisible}
+            aria-controls={navPanelId}
+            onClick={() => setNavPanelVisible(false)}
+          >
+            <Icon name="caret_large_left_main" size={20} aria-hidden />
+            <span>Hide panel</span>
+          </button>
+        </div>
       </aside>
-      <main className="app-shell__main">{children}</main>
+      <main className="app-shell__main">
+        {children}
+      </main>
     </div>
   );
 };
