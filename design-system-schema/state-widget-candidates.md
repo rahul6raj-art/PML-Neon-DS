@@ -21,7 +21,7 @@ The closest **page-level** pattern is **conditional content inside a `Card`** (e
 
 - **`components/Alert`** — `Alert`, `AlertProps`, `AlertType`, `AlertState`
 - **`components/Loading`** — `Loading`, `LoadingProps` (loading only; optional companion in the same screen region)
-- **`components/Snackbar`** — transient / toast-style feedback (see Typical Usage); no PML app page usage found in `src/PML App/`, only Storybook stories
+- **`components/Snackbar`** — transient / toast-style feedback (see Typical Usage); no bundled product app screens in this repo — usage is Storybook stories
 
 # Common Props
 

@@ -1,8 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
 /**
- * App / full-page screens live in the Vite dev app (`npm run dev`) with AppShell —
- * not in Storybook. Storybook is for components, widgets, and foundation tokens only.
+ * Storybook is the primary surface for components, widgets, and foundation tokens.
+ * `npm run dev` mounts an empty `App` (null) — tokens load from `main.tsx` / `index.css`.
  */
 const config: StorybookConfig = {
   stories: [

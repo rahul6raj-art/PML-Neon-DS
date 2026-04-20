@@ -1732,49 +1732,12 @@
   ],
   "layouts": [
     {
-      "name": "AppShell",
-      "importPath": "layout/AppShell",
-      "description": "Two-region flex shell: fixed 260px aside (theme + screen links) and a flex-growing main that centers its child preview.",
-      "purpose": "Provides a stable dev/preview frame so phone-width screens sit in a predictable centered column with shared theme tokens; product routing must not depend on this shell.",
-      "props": {
-        "children": "ReactNode — rendered inside `<main class=\"app-shell__main\">`; must be the single primary screen root (see allowedChildren).",
-        "theme": "light | dark — when dark, sets `data-theme=\"dark\"` on `.app-shell` so descendants resolve dark semantic tokens.",
-        "activeScreen": "AppScreenId — highlights nav only; does not change main layout geometry.",
-        "onNavigate": "(id: AppScreenId) => void — aside nav handler; does not change main layout geometry.",
-        "navItems": "Optional `{ id, label }[]`; overrides default nav list; does not change main layout geometry."
-      },
-      "allowedChildren": [
-        "One primary full-screen page component per preview (e.g. a 376px-wide column root that implements `.sh-content` or equivalent internal scroll).",
-        "Fragments or arrays only if they resolve to a single visual column; avoid multiple unrelated roots that each assume full viewport height.",
-        "Do not mount widgets, cards, or section fragments directly as top-level `children` without the screen wrapper — the screen owns section stacking, gutters, and scroll."
-      ],
-      "layoutRules": [
-        "Treat `.app-shell` as the root flex row: `display: flex; min-height: 100vh; width: 100%`. Do not switch it to column or grid from screen-level CSS.",
-        "Aside (`.app-shell__aside`) is `width: 260px; flex-shrink: 0; flex-direction: column; gap: var(--spacing-24); padding: var(--spacing-16)`. Nav stack uses `gap: var(--spacing-4)`. Do not add competing vertical margins between aside children; rely on these gaps.",
-        "Main (`.app-shell__main`) is `flex: 1; min-width: 0; display: flex; justify-content: center; align-items: flex-start; padding: var(--spacing-24); overflow: auto; background: var(--surface-level-3)`. Prefer this centering over ad hoc wrapper divs in screens solely to center the phone column.",
-        "Do not mix custom outer margins on the screen root with main’s `padding: var(--spacing-24)` — keep horizontal alignment to tokens inside the screen; let main provide the harness gutter.",
-        "Shell chrome (aside, main background, borders) must use design tokens only (`--spacing-*`, `--surface-*`, `--border-*`, `--text-*`, `--radius-*`). Do not patch shell layout from feature CSS files.",
-        "Do not nest `AppShell` inside a screen or inside another `AppShell`.",
-        "Do not target `.app-shell__main` or `.app-shell__aside` from screen stylesheets to change flex direction, padding, or alignment for a one-off screen; change `AppShell.css` only with explicit harness requirements.",
-        "Screens must implement product scroll inside the phone column (e.g. `flex: 1; overflow-y: auto` on the inner content region). Relying on `.app-shell__main` overflow for primary scrolling is a fallback, not the Stock Home pattern."
-      ],
-      "responsiveRules": [
-        "No breakpoints in `AppShell.css`: the layout is always one row (aside | main) at every viewport width.",
-        "This shell does not collapse to a single column or stack aside below main on small viewports; narrow windows may show horizontal overflow or browser-level scroll.",
-        "Main grows with available width (`flex: 1`); the preview stays horizontally centered; aside width stays 260px."
-      ],
-      "notes": [
-        "Export surface: `layout/AppShell` and types `AppShellProps`, `AppScreenId`, `AppNavItem` from `layout/index.ts`.",
-        "AppShell is preview scaffolding, not the canonical in-app navigation chrome for shipped product."
-      ]
-    },
-    {
       "name": "PhoneColumnScrollShell",
-      "importPath": "PML App/StockHome",
+      "importPath": "(pattern only — no bundled reference page; see layout-candidates.md)",
       "description": "Product phone frame: fixed-width column (--phone-column-width), full viewport height, flex column, inner scroll region (.sh-content), optional sticky bottom chrome (.sh-bottom-nav), section rhythm (.sh-section / .sh-section__content).",
       "purpose": "Standard in-app screen structure for PML: one mobile-width column with tokenized surfaces, scrollable main stack, and optional BottomNav that stays pinned to the bottom of the column.",
       "props": {
-        "pattern": "Implemented with CSS classes, not a standalone layout package — mirror `StockHome.tsx` + `StockHome.css` (or same geometry with a page-specific BEM prefix, e.g. Discover’s `.discover` / `.dv-content`).",
+        "pattern": "Implemented with CSS classes, not a standalone layout package — mirror the documented `.stock-home` / `.sh-content` geometry (or same flex + scroll rules with a page-specific BEM prefix).",
         "colorScheme": "light | dark — optional page prop for Header status bar and BrandLogo alignment; does not change flex geometry.",
         "scrollRegionContent": "ReactNode — everything that belongs inside the `flex: 1; overflow-y: auto` region (on Stock Home this includes Header + body; other pages may differ).",
         "bottomChrome": "ReactNode | omit — typically `BottomNav` wrapped in `.sh-bottom-nav` (or equivalent); omit for flows without tab bar (e.g. login)."
@@ -1782,11 +1745,11 @@
       "allowedChildren": [
         "Inside the scroll region: `Header`, widgets, `SectionHeader`, cards, lists — composed with section wrappers (e.g. `.sh-section` + `.sh-section__content` with `margin-top: var(--spacing-56)` on sections).",
         "Optional sibling below scroll: bottom chrome (e.g. `BottomNav` in `.sh-bottom-nav`) — `flex-shrink: 0`, not inside the overflow-y region.",
-        "New screens may use a page-specific root class (e.g. `.discover`, `.login-page`) if they preserve the same flex + scroll + token rules as `StockHome.css`.",
+        "New screens may use a page-specific root class if they preserve the same flex + scroll + token rules as the documented phone-column shell.",
         "Do not place multiple independent `100vh` columns inside one shell; one product column per screen root."
       ],
       "layoutRules": [
-        "Root: `width: var(--phone-column-width); height: 100vh; display: flex; flex-direction: column; background: var(--surface-level-4); overflow: hidden; text-align: left;` (canonical class `.stock-home` on `StockHomePage`).",
+        "Root: `width: var(--phone-column-width); height: 100vh; display: flex; flex-direction: column; background: var(--surface-level-4); overflow: hidden; text-align: left;` (canonical class `.stock-home` in historical Stock Home CSS).",
         "Scroll region: child with `flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-bottom: var(--spacing-16)` (`.sh-content`). Only this region scrolls vertically; the root stays `overflow: hidden`.",
         "On Stock Home, `Header` lives inside `.sh-content` and scrolls with content; `width: 100%; flex-shrink: 0` on `.stock-home__header`. If a screen needs a fixed header above scroll (e.g. bill pay), document that deviation explicitly — it is not the Stock Home default.",
         "Bottom nav: sibling of `.sh-content` under the root, wrapped in `.sh-bottom-nav` — `flex-shrink: 0`, optional `z-index` for stacking; must not be inside the scrolling div.",
@@ -1795,13 +1758,13 @@
         "Horizontal carousels: follow established overflow-x patterns (e.g. `.sh-hscroll` / widget CSS); do not break the column width or add gutters that conflict with `--spacing-16` rhythm."
       ],
       "responsiveRules": [
-        "`StockHome.css` defines no media queries: the column stays `var(--phone-column-width)`; the shell does not reflow to tablet or desktop grids.",
-        "Wider viewports (e.g. inside `AppShell`) show the column as-is, centered by the preview harness — not by this shell.",
+        "The canonical shell CSS defines no media queries: the column stays `var(--phone-column-width)`; the shell does not reflow to tablet or desktop grids.",
+        "Wider viewports show the column as-is, centered by the host layout (e.g. Storybook canvas or a custom wrapper) — not by this pattern alone.",
         "No `env(safe-area-inset-*)` in the canonical CSS; status bar is handled via `Header` props, not this layout file alone."
       ],
       "notes": [
-        "Pattern-based today: there is no `layout/PhoneColumnScrollShell.tsx` export. Reference implementation is `PML App/StockHome` + `StockHome.css`; Discover (`Discover.css`) duplicates the same geometry with different class names.",
-        "`importPath` points at the canonical page module for discovery and parity with the registry — implement by copying the documented class structure into new pages until a shared shell component (e.g. `PhoneScrollShell`) is extracted.",
+        "Pattern-based today: there is no `layout/PhoneColumnScrollShell.tsx` export. The bundled Stock Home / Discover reference pages were removed — use **`layout-candidates.md`**, **`docs/LEARNINGS.md`**, and Storybook compositions when rebuilding.",
+        "`importPath` is intentionally non-module: implement by copying the documented class structure into new pages until a shared shell component (e.g. `PhoneScrollShell`) is extracted.",
         "Login and similar screens use the column + scroll stack without `BottomNav`; some bill-pay style screens use header outside the scroll region — valid variants, not the default Stock Home header-in-scroll model."
       ]
     }

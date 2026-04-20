@@ -17,7 +17,7 @@ This rule has **`alwaysApply: true`**. Together with the repo paths below, treat
 | PRD / Figma / images / PDF / wireframe → DS mapping | **`.cursor/rules/pml-reference-inputs.mdc`** | User attaches or links **PRD**, **Figma**, **PNG** (or other image), **PDF**, **wireframe**, or design reference URLs for screen or flow work |
 | Screen / component checklist (this file) | **`.cursor/rules/pml-screen-patterns.mdc`** | Any request in the enforcement paragraph below |
 
-**Workspace:** **`StoryBook PML`** — prefer existing **`src/PML App/`** pages and **`src/components/`** patterns over ad hoc shells.
+**Workspace:** **`StoryBook PML`** — prefer **`src/components/`** patterns and Storybook compositions over ad hoc shells; there is **no** bundled **`src/PML App/`** product folder.
 
 Where **`DESIGN.md`**, the **schema** docs, and **this rule** overlap, **follow all**; if they conflict, follow the **user’s explicit instruction**, then update the doc or rule that should become standard.
 
@@ -30,7 +30,7 @@ For **any** request to **make**, **create**, **build**, **add**, **implement**, 
 - **Read `design-system-schema/layout-candidates.md`** when implementing or choosing **page shell / scroll / section layout** for PML app screens—**even if the user does not mention the file.**
 - **Only bypass** these conventions when the user **explicitly** opts out in writing (e.g. prototype-only, external stack).
 
-When adding or refactoring **in-app screens**, **multi-step flows**, or **new UI** (e.g. `src/PML App/`, other feature folders under `src/`, Storybook stories), you **must** follow the pipeline below. Do **not** ship screens built only from ad hoc utility CSS (e.g. raw Tailwind palette names) and one-off markup while ignoring the design system—unless the user **explicitly** opts out in writing.
+When adding or refactoring **in-app screens**, **multi-step flows**, or **new UI** (e.g. feature folders under `src/`, Storybook stories), you **must** follow the pipeline below. Do **not** ship screens built only from ad hoc utility CSS (e.g. raw Tailwind palette names) and one-off markup while ignoring the design system—unless the user **explicitly** opts out in writing.
 
 **Default agent behavior:** For any brief (PRD excerpt, Figma link, screenshot, or chat instruction), **analyze the requirement first**, then **map it to existing components and tokens**, then **implement**. The deliverable is **our** layout language (this repo’s components + CSS variables), not a generic HTML/CSS sketch.
 
@@ -60,13 +60,13 @@ If any step conflicts with a **direct user instruction**, follow the user and th
 
 ---
 
-When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storybook previews), treat **`StockHomePage`** + **`StockHome.css`** as the reference implementation. Match its **structure, spacing, tokens, and component choices** unless the user explicitly asks for something different.
+When adding or refactoring **in-app screens** (e.g. in a feature folder or Storybook full-page stories), treat the **phone column + `.sh-content` scroll** pattern in **`layout-candidates.md`** / **`docs/LEARNINGS.md`** as the reference (historical **`StockHomePage` + `StockHome.css`**). Match its **structure, spacing, tokens, and component choices** unless the user explicitly asks for something different.
 
 ## Frame and shell
 
 - **Phone column:** `376px` wide (e.g. `.stock-home`), `100vh`, `display: flex; flex-direction: column`, `background: var(--surface-level-4)`, `overflow: hidden`, `text-align: left` (reset root centering).
 - **Scroll:** Main body scrolls inside **`.sh-content`** (`flex: 1`, `overflow-y: auto`, `overflow-x: hidden`, bottom padding e.g. `--spacing-16`).
-- **App shell** (`AppShell`): preview is centered in `app-shell__main`; do not change shell layout for screen work unless requested.
+- **Preview host:** This repo has **no** `AppShell` — center phone-width frames in **Storybook** (or your own wrapper); do not assume a global dev aside/nav harness.
 
 ## Tokens (no one-off magic numbers)
 
@@ -109,7 +109,7 @@ When adding or refactoring **in-app screens** (e.g. under `src/PML App/`, Storyb
 - **Header / tabs / chips in header:** `Header` from design system.
 - **`Icon`:** Prefer **`Icon`** from **`src/components/`**; scope colour on a wrapper class (default **`--icon-neutral-strong`** per **Tokens → Icons**).
 - **Section titles:** `SectionHeader` — default **`size="extra-large"`**; chevron + **`trailing="none"`** for list-style sections (see **`SectionHeader` — size, chevron** above).
-- **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. The same **no outer border by default** rule applies to **custom card-shaped blocks** in feature CSS (`*Page.css`, `*.css` under `src/PML App/`, etc.): prefer **`background` + `border-radius`** without a wrapping border token unless the spec requires outline. **Multi-row stacks** that read as one card (lists of rows inside a rounded surface) follow **Tokens → Card-like stacked list surfaces** (`--radius-24`, **row dividers** per the **two models** there — **wrapper + `::before`** vs **`Card` + `ListItem`**, **first/last row** **`--card-padding-block`**, optional section wrapper vertical pad — **not** both). **Chip** default for dense filters/time ranges (e.g. portfolio time row) is often **`extra-small`** (see `Chip.css` / Stock Home); **PRD, Figma, or explicit user instruction** may specify **`small` / `medium` / `large`** for filter strips—follow that over this default when documented.
+- **Surfaces:** `Card` for card UI — **default is no outer border** (`stroke` off); use `stroke` only when the design specifies an outlined card. The same **no outer border by default** rule applies to **custom card-shaped blocks** in feature CSS (`*Page.css`, page-scoped `*.css`, etc.): prefer **`background` + `border-radius`** without a wrapping border token unless the spec requires outline. **Multi-row stacks** that read as one card (lists of rows inside a rounded surface) follow **Tokens → Card-like stacked list surfaces** (`--radius-24`, **row dividers** per the **two models** there — **wrapper + `::before`** vs **`Card` + `ListItem`**, **first/last row** **`--card-padding-block`**, optional section wrapper vertical pad — **not** both). **Chip** default for dense filters/time ranges (e.g. portfolio time row) is often **`extra-small`** (see `Chip.css` / Stock Home); **PRD, Figma, or explicit user instruction** may specify **`small` / `medium` / `large`** for filter strips—follow that over this default when documented.
 - **Rows:** **`ListItem`** for standard list rows inside **`Card`** or lists that map to the registry. **Custom** stacked rows in a **card-like list surface** (feature CSS) must still honor **Tokens → Card-like stacked list surfaces** for **horizontal** inset (**`--card-padding-inline`**), **first/last** **`--card-padding-block`**, and **row dividers** per the **two models** there (**wrapper + `::before`** vs **`Card` + `ListItem`** with scoped separator overrides) — do not invent a parallel list row system.
 - **Bottom bar:** `BottomNav` + `HomeIndicator` — default solid **`--surface-level-1`** (no frosted/blur unless specified).
 - **Reminders:** `ReminderWidget` — **carousel** horizontal inset uses **flex `::before` / `::after` spacers** + `scroll-padding-inline` (not padding-only on `overflow-x: auto`). Do not “fix” carousel edge stickiness by removing that pattern.
@@ -124,7 +124,7 @@ Use **`PortfolioWidget`** (`.pw__chips`, `.pw__values`) on Stock Home; do not du
 
 ## File placement
 
-- New screen components: **`src/PML App/`** (or parallel feature folder), styles alongside **`*Page.css`** or **`StockHome.css`**-style prefixed classes (`sh-*` or a consistent new prefix per screen).
+- New screen components: a **feature folder** under `src/` (not `src/components/`), styles alongside **`*Page.css`** or **`StockHome.css`**-style prefixed classes (`sh-*` or a consistent new prefix per screen).
 - Shared UI: **`src/components/`** — extend existing components and tokens before adding parallel implementations.
 
 ## Shared components — platform density (guardrails)

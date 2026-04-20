@@ -2,13 +2,13 @@
 
 Short index of **decisions and gotchas** from building PML app previews. **Canonical specs** stay in **`DESIGN.md`**, **`.cursor/rules/pml-screen-patterns.mdc`**, **`design-system-schema/screen-generation-rules.md`**, and **`design-system-schema/layout-candidates.md`**.
 
-**Note:** Eight demo screens (**Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**) were **removed from `src/PML App/`** to reduce maintenance. **This file keeps their patterns** so new work does not rediscover the same issues.
+**Note:** Eight demo screens (**Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**) used to live under **`src/PML App/`** and were removed earlier; the **`src/PML App/`** folder itself is now gone. **This file keeps their patterns** so new work does not rediscover the same issues.
 
 ---
 
 ## App shell inventory (current)
 
-Screens wired in **`AppShell`** (see **`src/layout/AppShell.tsx`**): **Stock home**, **Discover**, **Log in**, **Sign up**.
+There is **no** in-app screen shell: **`AppShell`** was removed. The Vite **`App`** renders **nothing** (`null`). The **`src/PML App/`** directory (product previews) has been removed. Use **`npm run storybook`** for UI.
 
 ---
 
@@ -33,7 +33,7 @@ Screens wired in **`AppShell`** (see **`src/layout/AppShell.tsx`**): **Stock hom
 ### `TextField` inside `Card`
 
 - **`TextField`** root defaults to **~344px** width; **`Card`** max width **includes** padding, so the **inner** track is narrower — fields can **visually overflow** the card.
-- **Fix:** scope on the form/wrapper — **`.my-page__form .textfield { width: 100%; max-width: 100%; min-width: 0; }`**, with **`form`** **`min-width: 0`** when the parent is flex. **Live references:** **`LoginPage.css`**, **`SignUpPage.css`**. **Historical:** order-entry screens scoped **`.op-limit-field .textfield`** (and inner **`.textfield__box`**) so limit fields stayed inside the card.
+- **Fix:** scope on the form/wrapper — **`.my-page__form .textfield { width: 100%; max-width: 100%; min-width: 0; }`**, with **`form`** **`min-width: 0`** when the parent is flex. **Historical:** auth previews (**`LoginPage.css`**, **`SignUpPage.css`**) and order-entry screens scoped **`.op-limit-field .textfield`** (and inner **`.textfield__box`**) so limit fields stayed inside the card.
 
 ### Stacked inputs in auth / card forms
 
@@ -42,7 +42,7 @@ Screens wired in **`AppShell`** (see **`src/layout/AppShell.tsx`**): **Stock hom
 ### Horizontal strips & carousels
 
 - Prefer **`::before` / `::after`** flex **spacers** + **`scroll-padding-inline`** (and hidden scrollbars where needed) so first/last items **do not stick flush** to the viewport edge — same idea as **`ReminderWidget`** and **Stock Home**; removed demos (**Doctor schedule** day/doctor strips, **Rewards** check-in week / milestones) followed this.
-- **Discover** carousels follow the same token rhythm; **StocksTilesWidget** horizontal scroll is scoped from **Discover** via **`.dv-strategies-stw`** when strategy tiles need different density/colour.
+- **Discover** (removed) carousels followed the same token rhythm; **StocksTilesWidget** horizontal scroll was scoped via **`.dv-strategies-stw`** when strategy tiles needed different density/colour.
 
 ### Bottom chrome
 
@@ -69,7 +69,7 @@ Do **not** assume only the first model when **`ListItem`** lives inside a padded
 ### States & compliance
 
 - **Holdings / portfolio previews:** keep **loading**, **empty**, and **partial failure** paths explicit (dismissible **`Alert`**, skeleton **`Loading`**) — a removed **portfolio details** demo wired this via a **`previewState`**-style prop for Storybook.
-- **Discover** includes **informational / delayed data** placeholder copy — replace with real compliance text before ship (**`DESIGN.md`**).
+- **Discover** (removed) included **informational / delayed data** placeholder copy — replace with real compliance text before ship when rebuilding (**`DESIGN.md`**).
 
 ### Theme & header
 
@@ -83,11 +83,7 @@ Do **not** assume only the first model when **`ListItem`** lives inside a padded
 
 ## Active screens (repo paths)
 
-| Screen | Key files | Learnings |
-|--------|-----------|-----------|
-| **Stock home** | `StockHome.tsx`, `StockHome.css` | Reference **376px** shell, **`.sh-content`**, **`SectionHeader`**, **`BottomNav`**, **`PortfolioWidget`** — baseline for stocks flows. |
-| **Discover** | `Discover.tsx`, `Discover.css`, `discoverMockData.ts` | **`Header`** + tabs, **`HeatmapWidget`**, **`Chip`** filters, horizontal carousels, **`NewsWidget`**, **`BottomNav`**. Compliance placeholders. **`StocksTilesWidget`** strategy row scoped via **`.dv-strategies-stw`**. |
-| **Log in / Sign up** | `LoginPage.tsx`, `SignUpPage.tsx`, matching **`.css`** | Auth shell: phone column + scroll; **`Card`** **`width: 100%; max-width: var(--card-width); box-sizing: border-box`**; **form `gap: --spacing-24`**; **scoped `TextField` width**. |
+None — there is **no** **`src/PML App/`** tree. Add product screens under a feature folder when needed and compose them in **`App.tsx`** or Storybook only.
 
 ---
 
@@ -119,4 +115,4 @@ Do **not** assume only the first model when **`ListItem`** lives inside a padded
 
 ---
 
-*Last updated: active **AppShell** screens are Stock home, Discover, Log in, Sign up; learnings for removed demos preserved in this file.*
+*Last updated: **AppShell** removed; learnings for removed demos and archived previews preserved in this file.*

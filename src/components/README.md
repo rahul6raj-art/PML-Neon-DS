@@ -6,7 +6,7 @@ Reusable UI for Storybook and app shells. **Platform density** (Mobile / Tablet 
 
 - Use **`src/tokens/`** semantics: `--spacing-*`, `--radius-*`, `--font-size-*`, `--line-height-*`, widths like `--card-width`, colors `--surface-*` / `--text-*`, etc.
 - Do **not** encode platform selection inside a component; use centralized **`platformTokenSets`** / theme injection (see repo **`CONTRIBUTING.md`**).
-- **Product screens** under `src/PML App/` (and similar) may keep fixed layout values where appropriate; this folder should stay **token-friendly** by default.
+- **Product screens** in feature folders under `src/` (outside this package) may keep fixed layout values where appropriate; this folder should stay **token-friendly** by default.
 
 ## Optional header for new `*.css` files
 

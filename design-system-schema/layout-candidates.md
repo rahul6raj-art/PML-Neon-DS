@@ -2,9 +2,7 @@
 
 **Agent note:** Cursor **`.cursor/rules/pml-screen-patterns.mdc`** (`alwaysApply: true`) requires reading this file (with **`DESIGN.md`** and **`design-system-schema/screen-generation-rules.md`**) when choosing or implementing the phone shell, scroll region, and section rhythm—the user does **not** need to attach it.
 
-**Stock Home screen shell** — `StockHomePage` with co-located **`StockHome.css`**, using the **`.stock-home`** root, **`.sh-content`** scroll region, **`.sh-section` / `.sh-section__content`** section rhythm, and **`.sh-bottom-nav`** for the bottom bar wrapper.
-
-This is the implementation the repo treats as the reference product frame (phone column, full height, scrollable body, optional sticky bottom nav), not the dev-only `AppShell`.
+**Phone column + scroll shell (Stock Home pattern)** — class-driven layout using the **`.stock-home`** root, **`.sh-content`** scroll region, **`.sh-section` / `.sh-section__content`** section rhythm, and **`.sh-bottom-nav`** for optional bottom bar wrapper. The historical **`StockHomePage` + `StockHome.css`** implementation is no longer in the repo; this doc and **`docs/LEARNINGS.md`** keep the pattern as the reference spec. The Vite **`App`** entry renders nothing (`null`); use Storybook for previews (no app shell).
 
 # Why It Fits
 
@@ -16,10 +14,8 @@ This is the implementation the repo treats as the reference product frame (phone
 
 # Import Path
 
-- **Page (recommended):** `PML App/StockHome` — `StockHomePage`, `StockHomePageProps`, and import `./StockHome.css` from the same folder (or follow existing pages that duplicate the CSS pattern).
-- **Barrel:** `PML App` also re-exports `StockHomePage` / `StockHomePageProps`.
-
-There is **no** separate `layout/PhoneShell` module today; the shell is **this page + its CSS**.
+- **Today:** There is **no** **`src/PML App/`** folder — recreate the pattern in a feature folder (TSX + co-located CSS) using the class names and rules below.
+- There is **no** separate `layout/PhoneShell` module; the shell remains **page-level CSS** until a shared primitive is extracted.
 
 # Key Props
 
@@ -39,15 +35,13 @@ Layout structure itself is **class-driven** (`.stock-home`, `.sh-content`, …),
 
 | Screen / file | Relationship |
 |---------------|----------------|
-| **`src/PML App/StockHome.tsx`** + **`StockHome.css`** | **Canonical** — defines `.stock-home`, `.sh-content`, `.sh-section*`, `.sh-bottom-nav`. |
-| **`src/PML App/Discover.tsx`** + **`Discover.css`** | Same **geometry** (`.discover`, `.dv-content`, `.dv-section*`, bottom nav); comments describe **Stock Home rhythm**. |
-| **`src/PML App/LoginPage.tsx`** + **`LoginPage.css`** | Same **outer column** + scrollable content stack; **no** `BottomNav`; header/body structure tuned for auth. |
+| *(none in repo)* | **`src/PML App/`** was removed; add product screens under a feature folder (e.g. `src/features/...`) when needed. |
 
 # If Missing
 
 A **dedicated reusable layout component** (e.g. `PhoneScrollShell`) **does not exist** yet — only this **page-level pattern**. For AI/registry work, either:
 
-- **Treat `StockHomePage` + `StockHome.css` as the spec** and **copy the class structure** into new screens (with a page-specific BEM prefix if needed, as Discover does with `dv-`), or  
+- **Treat this document + historical notes in `docs/LEARNINGS.md` as the spec** and **copy the class structure** into new screens (with a page-specific BEM prefix if needed, e.g. `dv-` for Discover-style pages), or  
 - **Later extract** a shared layout component that implements `.stock-home` / `.sh-content` / optional bottom slot, then register it under `layouts` in the design-system schema.
 
 Until extraction, “registering” the shell means **documenting and reusing this pattern**, not importing a separate layout primitive.

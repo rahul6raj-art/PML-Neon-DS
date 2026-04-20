@@ -50,7 +50,7 @@
 
 # Layouts
 
-- `AppShell` (`src/layout/AppShell.tsx`)
+- **Phone column + scroll** — documented pattern only (`layout-candidates.md`); no `AppShell` in this repo.
 
 # Tokens
 
@@ -62,7 +62,7 @@
 
 # Ambiguous Items
 
-- **Screen-level compositions** (not exported from `src/components/` as a single primitive): `StockHomePage`, `DiscoverPage`, `LoginPage`, `SignUpPage`, etc. — each pairs TSX with page-scoped CSS (`StockHome.css`, `Discover.css`, etc.). Removed demos (Cards, Goals, …) are summarized in **`docs/LEARNINGS.md`** only.
-- **Page layout as CSS convention** — shared patterns like `.stock-home`, `.sh-content`, `.sh-section` live in page stylesheets rather than a dedicated `Stack` / `Section` / `Container` layout component library
+- **Screen-level compositions** — there is **no** **`src/PML App/`** folder; rebuild product screens as TSX + page-scoped CSS in a feature folder when needed. Removed demos (Cards, Goals, …) and archived patterns are summarized in **`docs/LEARNINGS.md`**.
+- **Page layout as CSS convention** — shared patterns like `.stock-home`, `.sh-content`, `.sh-section` are documented in **`layout-candidates.md`** / **`docs/LEARNINGS.md`** rather than a dedicated `Stack` / `Section` / `Container` layout component library
 - **No dedicated token files** in `src/tokens/` for z-index scales or breakpoint tokens (responsive rules appear ad hoc in CSS / Storybook)
 - **Storybook** — `Introduction.stories.tsx` (meta/docs) and component stories — documentation/preview, not UI building blocks

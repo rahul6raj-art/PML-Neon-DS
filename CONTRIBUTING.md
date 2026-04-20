@@ -9,7 +9,7 @@ Storybook can preview **Mobile**, **Tablet**, and **Web** density via scoped tok
 | Area | Expectation |
 |------|-------------|
 | **`src/components/**`** (design-system primitives and reusable widgets) | Prefer **tokens** (`--spacing-*`, `--radius-*`, `--font-size-*`, `--line-height-*`, `--card-width`, token-driven icon sizes, etc.). Avoid introducing new hardcoded **`px`** when a token exists. |
-| **`src/PML App/**`, other feature folders under `src/`, one-off marketing or product layouts | May use fixed **`px`** where the design is product-specific; still prefer tokens when the same pattern exists in the system. |
+| **Feature folders under `src/`** (product / marketing layouts outside `src/components/`) | May use fixed **`px`** where the design is product-specific; still prefer tokens when the same pattern exists in the system. |
 | **Artwork, logos, illustrations, pixel-perfect assets** | Fixed sizes are normal; document if they intentionally ignore platform scale. |
 
 ### Authoring rules (shared DS)

@@ -122,15 +122,9 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 ## Archived demo screens (removed from repo)
 
-The following flows used to ship as **`src/PML App/`** previews and were **removed** to shrink the maintenance surface: **Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**. **Patterns and gotchas** from building them (dividers, **`BottomNav`**, **`TextField` in `Card`**, scroll + sticky footer, INR, etc.) are kept in **`docs/LEARNINGS.md`** — use that file when re-implementing similar surfaces.
+The following flows used to ship as in-app previews (historically under **`src/PML App/`**, now deleted) and were **removed** to shrink the maintenance surface: **Stock home**, **Discover**, **Log in**, **Sign up**, plus earlier demos (**Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**). **Patterns and gotchas** from building them (dividers, **`BottomNav`**, **`TextField` in `Card`**, scroll + sticky footer, INR, etc.) are kept in **`docs/LEARNINGS.md`** — use that file when re-implementing similar surfaces.
 
----
-
-## Stocks Discover (product PRD)
-
-**Code:** `Discover.tsx`, `Discover.css`, `discoverMockData.ts` — same **376px column**, **`Header`** (homepage + primary tabs), **`HeatmapWidget`** (wheel **Index / Stocks / F&O**, default **Stocks**), **`Chip` `extra-small`** mover filters, horizontal carousels with token spacing, **`NewsWidget`**, **`BottomNav`** (five tabs, **Stocks** selected). Data is **mock** until backend contracts (indices, movers, strategies, recommendations, news, screeners) are wired.
-
-**Compliance copy:** Expert block includes an **informational-only** disclaimer; index row includes a **delayed / entitlement** placeholder line. Replace with real entitlements and legal review before ship.
+**Discover (PRD) — archived:** The live Discover implementation (`Discover.tsx`, `Discover.css`, mock data) is no longer in the repo. PRD notes: **376px column**, **`Header`** (homepage + primary tabs), **`HeatmapWidget`**, **`Chip` `extra-small`** mover filters, carousels, **`NewsWidget`**, **`BottomNav`**. Compliance placeholders (informational disclaimer, delayed-data line) belonged in that screen before ship.
 
 ---
 
@@ -138,7 +132,7 @@ The following flows used to ship as **`src/PML App/`** previews and were **remov
 
 **Source:** [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1614-5966), frame **Stocks Tiles** (`1614:5966`).
 
-**Code:** `StocksTilesWidget.tsx`, `StocksTilesWidget.css` — optional **`SectionHeader`** (chevron **off** by default) + horizontal scroll of **tiles** (`--unit-max` width, **`--surface-level-1`**, **no outer border**): optional **top** **`Icon`** / **`Logo`** row (toggle **`showTopMedia`**), optional **status** **`Badge`** between media and title, one primary **`title`** line (full **company** name, e.g. **Reliance Ind.**), **`price`**, and move as muted **Badge** or **subtext**. Empty **`changeLabel`** hides the move row (e.g. **Discover → Curated strategies** shortcut copy in **`price`**). **Discover** scopes strategy spacing / descriptor colour on **`.dv-strategies-stw`** in **`Discover.css`**. For strategy-style tiles in isolation, **`Tile`** **`variant="strategy"`** (`Tile.tsx` / **Components/Tile** in Storybook) uses the same rhythm; optional **`strategyItems`** renders a horizontal strip of multiple cards inside one **`Tile`**. **`changeSentiment`** drives sign normalization (same idea as **ListItem** stock rows). **INR:** no space after **`₹`** in demo copy.
+**Code:** `StocksTilesWidget.tsx`, `StocksTilesWidget.css` — optional **`SectionHeader`** (chevron **off** by default) + horizontal scroll of **tiles** (`--unit-max` width, **`--surface-level-1`**, **no outer border**): optional **top** **`Icon`** / **`Logo`** row (toggle **`showTopMedia`**), optional **status** **`Badge`** between media and title, one primary **`title`** line (full **company** name, e.g. **Reliance Ind.**), **`price`**, and move as muted **Badge** or **subtext**. Empty **`changeLabel`** hides the move row (e.g. **Discover → Curated strategies** shortcut copy in **`price`**). Historical Discover scoped strategy spacing / descriptor colour on **`.dv-strategies-stw`**. For strategy-style tiles in isolation, **`Tile`** **`variant="strategy"`** (`Tile.tsx` / **Components/Tile** in Storybook) uses the same rhythm; optional **`strategyItems`** renders a horizontal strip of multiple cards inside one **`Tile`**. **`changeSentiment`** drives sign normalization (same idea as **ListItem** stock rows). **INR:** no space after **`₹`** in demo copy.
 
 ---
 

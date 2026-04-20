@@ -7,7 +7,7 @@
 
 # Gaps
 
-- **Layouts** — The registry lists **one** layout (`AppShell`), and it is a **dev/preview harness**, not a product screen shell. Complex screens still rely on undocumented class patterns (e.g. phone column + inner scroll), so “prefer layouts from the registry” offers almost no structural choice for real app UI.
+- **Layouts** — The registry lists **only** the **PhoneColumnScrollShell** pattern (no bundled module). There is **no** dev `AppShell` anymore; complex screens still rely on class patterns (e.g. phone column + inner scroll) documented outside strict registry imports.
 - **Responsiveness** — `tokens.breakpoints` is **empty**; layout entries do not encode product breakpoints. Rules defer to “existing screen references,” which are **outside** the registry, weakening machine-readable consistency.
 - **Stacking / layering** — `tokens.zIndex` is **empty**; no tokenized stacking for overlays, sheets, and sticky headers—models tend to be per-component CSS, not plan-friendly.
 - **Screen plan** — `sections[].states` is an unbounded string list with **no** link to props, data fetching, or global error handling. There is no place for navigation targets, primary actions, or copy constraints (e.g. INR) unless squeezed into free text.
