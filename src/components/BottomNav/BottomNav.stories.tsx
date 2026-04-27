@@ -165,6 +165,6 @@ export const ThreeTabs: Story = {
     item2ActiveIcon: '',
     item3Label: 'Profile',
     item3Icon: 'person_outline',
-    item3ActiveIcon: 'person_filled',
+    item3ActiveIcon: '',
   },
 };

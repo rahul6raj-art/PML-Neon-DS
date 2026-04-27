@@ -48,7 +48,10 @@ export interface StocksTilesWidgetProps {
   title?: string;
   showSectionHeader?: boolean;
   sectionHeaderSize?: SectionHeaderSize;
-  /** Section title chevron — default **off** (no trailing chevron on the widget header). */
+  /**
+   * Passed to **`SectionHeader`**. **Omit** for component default (**extra-large** shows chevron).
+   * **`false`** hides chevron even at **extra-large** (static title).
+   */
   showChevron?: boolean;
   items: StocksTilesItem[];
   /**

@@ -1,0 +1,1 @@
+export { SmartHomeScrollContent } from './SmartHomePage';

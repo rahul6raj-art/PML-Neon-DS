@@ -1,10 +1,10 @@
 /**
  * PML convention (see `.cursor/rules/pml-screen-patterns.mdc`):
- * - **Default size on new app screens: extra-large** (mandatory unless PRD/Figma density or the
- *   documented static-heading exception: **large** + **showChevron={false}** when chevron must not appear).
+ * - **Default size on new app screens: extra-large** (mandatory unless PRD/Figma density).
+ * - **Chevron:** at **extra-large**, chevron is shown by default; pass **`showChevron={false}`** for a
+ *   static title that must keep **XL typography** without implying drill-in.
  * - List / drill-in sections: **trailing="none"** — not **trailing="link"** for “See more” /
- *   “View all” / “View more” (refs map to chevron; at **extra-large** chevron is always shown).
- *   Use **trailing** variants only when PRD/Figma calls for a distinct trailing control.
+ *   “View all” / “View more”. Use **trailing** variants only when PRD/Figma calls for a distinct trailing control.
  */
 import { useState, type ReactNode } from 'react';
 import { Icon } from '../Icon';
@@ -26,7 +26,11 @@ export interface SectionHeaderProps {
   showSubtext?: boolean;
   /** Subtext below title (string or rich content, e.g. badge + meta) */
   subtext?: ReactNode;
-  /** Show chevron icon next to title (always shown for extra-large) */
+  /**
+   * Chevron next to title. **`undefined`**: extra-large shows chevron; other sizes omit unless implied.
+   * **`false`**: never show (including extra-large — static XL titles).
+   * **`true`**: always show.
+   */
   showChevron?: boolean;
   /** Trailing label when trailing = 'text' */
   trailingText?: string;
@@ -69,7 +73,7 @@ export const SectionHeader = ({
   title = 'Title Text',
   showSubtext = true,
   subtext = '2-line subtext',
-  showChevron = false,
+  showChevron,
   trailingText = 'Text',
   linkText = 'Link',
   onLinkPress,
@@ -96,7 +100,8 @@ export const SectionHeader = ({
   };
 
   const isXL = size === 'extra-large';
-  const displayChevron = isXL || showChevron;
+  const displayChevron =
+    showChevron === false ? false : showChevron === true ? true : isXL;
   const chevronSize = CHEVRON_SIZES[size];
 
   const wrapperCls = [

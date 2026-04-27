@@ -4,9 +4,9 @@ import { HomeIndicator } from '../HomeIndicator';
 import './BottomNav.css';
 
 export interface BottomNavItem {
-  /** Icon name (inactive state) */
+  /** Icon name (inactive state). Prefer `*_outline` or single-variant glyphs; see `.cursor/rules/pml-screen-patterns.mdc` (Bottom bar / BottomNav). */
   icon: string;
-  /** Icon name when active (falls back to `icon` if omitted) */
+  /** Optional active icon; prefer omitting so the same glyph stays outline — active state uses `.bn__item--active` colour and optional glow, not filled icon swaps. */
   activeIcon?: string;
   /** Tab label */
   label: string;

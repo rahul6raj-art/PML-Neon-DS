@@ -1,0 +1,91 @@
+/* Exchange feature — prefix `ex-`. Horizontal gutters: `.smh-stock-home .sh-section__content` (SmartHomePage.css).
+   Section title → card: same as SmartWallet — `flex` + `gap` on the section (pml-screen-patterns: SectionHeader + `.sh-section__content` rhythm; avoids flush header / card). */
+
+.smh-stock-home .sh-section.ex-section-swap,
+.smh-stock-home .sh-section.ex-section-pairs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+/* First block after page `Header`: override `.smh-stock-home .sh-section { margin-top: 56 }` (meant for sections below Smart Home hero). */
+.smh-stock-home .sh-section.ex-section-swap {
+  margin-top: var(--spacing-16);
+}
+
+/* Space before second section — matches global `sh-section` rhythm vs previous section. */
+.smh-stock-home .sh-section.ex-section-pairs {
+  margin-top: var(--spacing-56);
+}
+
+.ex-swap-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  max-width: var(--card-width);
+  box-sizing: border-box;
+}
+
+.ex-swap-card__eyebrow {
+  margin: 0;
+  color: var(--text-neutral-medium);
+}
+
+.ex-swap-card__currency-label {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.ex-swap-card__amt {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.ex-swap-card__flip {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-4) 0;
+  color: var(--icon-neutral-strong);
+}
+
+.ex-swap-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.ex-swap-card__receive {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.ex-swap-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
+  min-width: 0;
+  margin-top: var(--spacing-8);
+}
+
+.ex-swap-card__form .textfield {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ex-swap-card__cta {
+  width: 100%;
+}
+
+.ex-pairs-card {
+  width: 100%;
+  max-width: var(--card-width);
+  box-sizing: border-box;
+}
+
+.ex-pairs-card .ex-pairs-card__li.li-item {
+  width: 100%;
+  box-sizing: border-box;
+}

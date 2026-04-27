@@ -1,0 +1,53 @@
+---
+description: Phased workflow for screen/UI work — mapping plan before edits, implement, then self-review (not Cursor Plan mode)
+alwaysApply: true
+---
+
+# PML phased screen workflow (always on)
+
+This rule **extends** **`.cursor/rules/pml-screen-patterns.mdc`**. It does **not** refer to Cursor **Plan mode**. **“Plan”** here means a written **mapping / blueprint** produced **before** substantive code changes. For shells, tokens, components, and checklist detail, follow **`pml-screen-patterns.mdc`** and **`pml-reference-inputs.mdc`** when references apply. If anything conflicts with a **direct user instruction**, follow the user.
+
+## When this rule applies
+
+Whenever the user asks to **make**, **create**, **build**, **add**, **implement**, **design**, or **refactor** **in-app screens**, **widgets**, **flows**, or **substantial new UI** (feature folders under `src/`, Storybook full-page stories, new screen CSS), apply the phases below — **unless** the user **explicitly** opts out in writing (e.g. prototype-only, external stack, “skip planning”, “tiny change only”).
+
+## Opt-outs (Phase 1 shortened or skipped)
+
+- **Trivial edits:** A single obvious line, one prop, typo, or isolated lint fix with **no** layout, token, or design-system surface change — implement directly; **Phase 3** can be one sentence (“no DS checklist impact”).
+- **Approved mapping already in thread:** User pasted or confirmed output from **pml-reference-mapper** (or an equivalent table) — go to **Phase 2** using that artifact; still run **Phase 3** after your edits.
+
+## Pattern drills (learning-only UI)
+
+When the user is building **throwaway** or **teaching** screens **only** to lock in **layout, spacing, and shell behaviour** (not committed product), still run **Phase 1 → 2 → 3** on the **patterns** — then **persist conclusions** in **`docs/LEARNINGS.md`** and/or **`.cursor/rules/pml-screen-patterns.mdc`** (and **`layout-candidates.md`** / **`screen-generation-rules.md`** when relevant). **Do not** rely on keeping the drill **`src/features/*`** files in the repo as the long-term spec; the **written rules** are what survive deletion. See **`docs/LEARNINGS.md` → Pattern drills vs shipped product**.
+
+## Phase 1 — Plan / mapping (before substantive edits)
+
+**Before** tool-driven edits that add or restructure UI (new files, new sections, layout/CSS tied to screens, registry-facing changes), output a **compact mapping** you will follow:
+
+- **Regions / sections** and hierarchy; **scroll vs sticky** (`.sh-content`, header chrome).
+- **Targets:** `src/components/` primitives, registry widgets/layouts (`design-system-schema/design-system.registry.json`), or documented compositions — **imports or registry ids** where useful.
+- **Tokens:** semantic variables from `src/tokens/`, not ad hoc hex for chrome.
+- **States:** loading / empty / error when in scope.
+- **`MISSING_*`:** per `design-system-schema/screen-generation-rules.md` when the design system cannot match the reference.
+
+Keep Phase 1 **proportionate** to scope. If the brief is insufficient to map safely, ask **minimal** questions in Phase 1 before editing.
+
+**Optional:** Use the **pml-reference-mapper** agent for a full readonly mapping handoff before **pml-screen-build**.
+
+## Phase 2 — Execute
+
+Implement per **`pml-screen-patterns.mdc`**, **`pml-reference-inputs.mdc`** when PRD/Figma/images apply, and the mandatory specs table (`DESIGN.md`, `screen-generation-rules.md`, `layout-candidates.md`). **pml-screen-build** agent is the dedicated implementation pass when splitting chats.
+
+## Phase 3 — Review (after edits)
+
+In the **same thread** after implementation, add a **brief self-review**:
+
+1. **Summary** — what changed and **key paths**.
+2. **Checklist spot-check** — pass / fail / n/a against the **“Checklist before shipping a new screen”** section in **`pml-screen-patterns.mdc`** (shell, sections, cards/lists, TextField-in-Card, icons, INR, Storybook when in scope, `DESIGN.md` when Figma/product-owned).
+3. **Issues** — **must-fix** you still see; optional **should-fix / nits**.
+
+For a **stricter read-only audit**, invoke **pml-ds-reviewer** on the touched files or PR scope.
+
+## One chat vs multiple chats
+
+Phases may run **in one Agent turn** (mapping block → edits → review block) or across **separate conversations** (mapper → build → reviewer). Same substance either way.

@@ -18,7 +18,8 @@ interface SectionHeaderStoryArgs {
   title: string;
   showSubtext: boolean;
   subtext: string;
-  showChevron: boolean;
+  /** Omit for component default (XL → chevron on). */
+  showChevron?: boolean;
   trailingText: string;
   linkText: string;
   buttonLabel: string;
@@ -38,7 +39,7 @@ function PlaygroundRender(args: SectionHeaderStoryArgs) {
       title={args.title}
       showSubtext={args.showSubtext}
       subtext={args.subtext}
-      showChevron={args.showChevron}
+      {...(args.showChevron !== undefined ? { showChevron: args.showChevron } : {})}
       trailingText={args.trailingText}
       linkText={args.linkText}
       buttonLabel={args.buttonLabel}
@@ -94,8 +95,9 @@ const meta: Meta<SectionHeaderStoryArgs> = {
     },
     showChevron: {
       control: 'boolean',
-      description: 'Show chevron next to title (always shown for extra-large)',
-      table: { defaultValue: { summary: 'false' }, category: 'Appearance' },
+      description:
+        'Omit = default (**extra-large** shows chevron). **`false`** = hide even at **extra-large** (static XL title). **`true`** = force show.',
+      table: { defaultValue: { summary: '(omit)' }, category: 'Appearance' },
     },
 
     /* ── Trailing: Text ───────────────────────────── */
@@ -157,7 +159,6 @@ const meta: Meta<SectionHeaderStoryArgs> = {
     title: 'Title Text',
     showSubtext: true,
     subtext: '2-line subtext',
-    showChevron: false,
     trailingText: 'Text',
     linkText: 'Link',
     buttonLabel: 'Button',

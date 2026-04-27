@@ -4,11 +4,36 @@ Short index of **decisions and gotchas** from building PML app previews. **Canon
 
 **Note:** Eight demo screens (**Goals**, **Rewards**, **Doctor schedule**, **Order pad**, **Fintech wallet home**, **Cards**, **Portfolio details**, **MTF home**) used to live under **`src/PML App/`** and were removed earlier; the **`src/PML App/`** folder itself is now gone. **This file keeps their patterns** so new work does not rediscover the same issues.
 
+### Pattern drills vs shipped product
+
+Some **`src/features/*`** pages and **`App.tsx`** wiring may exist **only** to practice **shell geometry**, **`.sh-section` / `.sh-section__content` rhythm**, **`SectionHeader` → `Card` spacing**, **shared shell CSS inheritance**, and **bottom tab chrome** — **not** as final product UX. **What must survive if those files are deleted** is already captured here and in **`.cursor/rules/pml-screen-patterns.mdc`**, **`design-system-schema/layout-candidates.md`**, and **`design-system-schema/screen-generation-rules.md`** (plus **`DESIGN.md`** when flows are product-owned). **Skills = those written patterns + Storybook component catalog**, not retention of any one drill screen. When building a drill: still **diff the reference screen** in the same shell (**Sections & headers → Reuse shell CSS → treat the prior screen as spec**); then **promote** any new rule into **`pml-screen-patterns.mdc`** / **this file** so it survives removal of the example code.
+
 ---
 
 ## App shell inventory (current)
 
-There is **no** in-app screen shell: **`AppShell`** was removed. The Vite **`App`** renders **nothing** (`null`). The **`src/PML App/`** directory (product previews) has been removed. Use **`npm run storybook`** for UI.
+**`AppShell`** was removed. **`src/PML App/`** is gone — use **`npm run storybook`** for the component catalog. The Vite **`App`** entry may host **temporary teaching previews** (e.g. tabbed shell + feature scroll bodies); that markup is **optional** and may be replaced or deleted without losing layout rules, as long as **this file** and **`pml-screen-patterns.mdc`** stay updated when new patterns are discovered.
+
+---
+
+## Consolidated — App drill screens (layout & spacing)
+
+Single checklist distilled from **`App.tsx`** + **`SmartHomeScrollContent`** / **`SmartHomePage.css`**, **`ExchangePage`**, and **`GoalsDetailPage`** / **`GoalsDetailPage.css`**. **Deleting those feature files does not remove this guidance** — it lives here and in **`pml-screen-patterns.mdc`** / **`layout-candidates.md`**.
+
+| Topic | Rule |
+|--------|------|
+| **Phone column** | **`width: var(--phone-column-width)`** (**376px**), **`min-height: 100vh`**, column **`flex`**, **`overflow: hidden`**, **`text-align: left`**, page backdrop **`--surface-level-4`** (or outer host **`--surface-level-3`** when centering the column). |
+| **Scroll** | Main body in **`.smh-sh-content`** (or **`gdp-sh-content`**): **`flex: 1`**, **`min-height: 0`**, **`overflow-y: auto`**, bottom **`padding-bottom: var(--spacing-16)`** where used. |
+| **Bottom nav** | Sibling **below** scroll (**`.smh-sh-bottom-nav`**): **`flex-shrink: 0`**, **`BottomNav`** + optional **`HomeIndicator`**, **`activeIndex` / `onChange`** for tabs. Outline icons; omit **`activeIcon`** unless spec wants filled-on-active. |
+| **Tab shell** | **`App.tsx`**: one **`smh-stock-home`** root; swap **`SmartHomeScrollContent`** / **`ExchangePage`** / placeholders by tab index — pattern for **shared chrome + distinct scroll bodies**. |
+| **Section vertical gap** | **`.smh-stock-home .sh-section { margin-top: var(--spacing-56) }`** = space **between major blocks** (e.g. after hero). **Not** for first **`sh-section`** immediately after **`Header`** only — override with **`margin-top: var(--spacing-16)`** via a **more specific** selector (e.g. **`.smh-stock-home .sh-section.ex-section-swap`**). |
+| **Title → first card** | When **`.sh-section__content`** uses **`padding-block: 0`**, add **`display: flex; flex-direction: column; gap: var(--spacing-16)`** on **`.sh-section`** so **`SectionHeader`** and the first **`Card`** are not flush. **Refs:** **`.smh-section-wallet`**, **`.ex-section-swap`**, **`.ex-section-pairs`**. |
+| **`sh-section__content` + layout** | Keep **`sh-section__content`** + second class (**`smh-wallet-grid`**, **`smh-promo-row`**, **`ex-swap-wrap`**) for gutters + grid/row **`display`** / **`gap`**. |
+| **`SectionHeader` + icons** | Do **not** patch **`SectionHeader.css`** for one screen — use **`className`** + feature CSS (e.g. **`.smh-wallet-section-header .sh__title-row`**). |
+| **`SectionHeader` XL, no chevron** | **`size="extra-large"`** + **`showChevron={false}`** for static XL titles. **Omit **`showChevron`** to get default (XL → chevron on). **`showChevron={true}`** forces chevron. Widgets that wrap **`SectionHeader`** must **not** pass **`showChevron={false}`** unless they mean it — **omit** the prop to inherit defaults (see **`StocksTilesWidget`**). |
+| **Forms in cards** | **`TextField`**: **`width: 100%; max-width: 100%; min-width: 0`** scoped on the card/form; stacked fields **`gap: var(--spacing-24)`**. |
+| **INR** | No space between **`₹`** and digits (**`fmtInr`** / **`en-IN`**). |
+| **Goals detail shell** | Parallel Stock Home pattern: **`.gdp-stock-home`** + **`.gdp-sh-content`** + **`GoalsDetailPage.css`**; **`ActivityTimeline`** in **`Card`**; **`ListItem`** in **`Card`** with **`.gdp-tx-card`** separator overrides per **`pml-screen-patterns.mdc`**. |
 
 ---
 
@@ -22,8 +47,13 @@ There is **no** in-app screen shell: **`AppShell`** was removed. The Vite **`App
 
 ### Sections & headers
 
+- **Reuse shell CSS → treat the prior screen as spec:** When a new tab or screen shares another feature’s **root / layout classes** (e.g. **`.smh-stock-home`** + rules in **`SmartHomePage.css`**), **open that reference screen’s TSX and CSS** and compare **order of children** after **`Header`** (hero vs first **`sh-section`**). **`grep`** the shared stylesheet for **`sh-section`**, **`sh-section__content`**, **`margin-top`**, **`gap`** — anything that keys off a class your new markup also uses inherits those values. **Smart Home** (**`SmartHomeScrollContent`**) is the reference for anything still mounted under **`App.tsx`**’s **`smh-stock-home`** shell; diff against it **before** assuming **16px** / **56px** rhythm “by default.”
 - **`SectionHeader`:** default **`size="extra-large"`** for new product sections; list-style headers use **`trailing="none"`** + chevron — **not** a **“See all” / “View all”** text link beside the title unless PRD/Figma explicitly requires it.
+- **Screen-specific `SectionHeader` layout (flex / alignment):** Do **not** edit **`src/components/SectionHeader/SectionHeader.css`** to match one screen’s browser preview (e.g. **`justify-content`** or **`align-items`** on **`.sh__title-row`** / **`.sh__title-line`**) — those classes are **shared** and the change applies app-wide. Instead: pass **`className`** on **`SectionHeader`** for that screen (e.g. **`smh-wallet-section-header`**) and put the overrides in the **feature** stylesheet (**`SmartHomePage.css`**), scoped under that class. **Reference:** SmartWallet block on **Smart Home** — **`.smh-wallet-section-header .sh__title-row`** (**`align-items: center`**, **`justify-content: center`**) and **`.smh-wallet-section-header .sh__title-line`** (**`justify-content: flex-start`**).
 - **Vertical rhythm between major blocks:** typically **`margin-top: var(--spacing-56)`** on **`.sh-section`**-style blocks (or documented exception); section content often **`padding: var(--spacing-16)`** on **`.sh-section__content`**.
+- **`sh-section__content` + feature layout class:** Keep the **Stock Home–style** content wrapper class **`sh-section__content`** so page-level rules (e.g. **`.smh-stock-home .sh-section__content`** — **16px** gutters, vertical pad policy) apply consistently. Add a **second** class for **layout only** on that node — e.g. **`sh-section__content smh-wallet-grid`** (two-column **`Card`** tiles under SmartWallet) and **`sh-section__content smh-promo-row`** (horizontal shortcut **`Card`**s). Scope grid/row **`display`**, **`gap`**, and **`margin-top`** in the **feature** CSS on the **combined** selector or the **`smh-*`** class. When the block has a **`SectionHeader`**, wrap in **`<section class="sh-section …">`**; blocks **without** a section title may still use **`sh-section__content`** + **`aria-label`** on the content wrapper for the same gutter rhythm (**Smart Home** promos).
+- **`SectionHeader` → card when `padding-block: 0` on content:** If **`sh-section__content`** has **`padding-block: 0`** (shared page rule), use **`display: flex; flex-direction: column; gap: var(--spacing-16)`** on the parent **`.sh-section`** so there is still **16px** between the header and the first **`Card`**. Same pattern as **`.smh-section-wallet`** / **Exchange** **`.ex-section-swap`**. See **`.cursor/rules/pml-screen-patterns.mdc`** → **Section pattern** → **`SectionHeader` → first card (vertical)**.
+- **First `.sh-section` after `Header` (no hero):** **`.smh-stock-home .sh-section { margin-top: var(--spacing-56) }`** is for blocks **below** the Smart Home hero. If another tab/screen starts with **`Header` → `sh-section`** with no hero, override the first section with **`margin-top: var(--spacing-16)`** (higher-specificity selector, e.g. **`.smh-stock-home .sh-section.ex-section-swap`**) so the gap under the app header is not **56px**.
 
 ### INR & numbers
 
@@ -83,7 +113,7 @@ Do **not** assume only the first model when **`ListItem`** lives inside a padded
 
 ## Active screens (repo paths)
 
-None — there is **no** **`src/PML App/`** tree. Add product screens under a feature folder when needed and compose them in **`App.tsx`** or Storybook only.
+There is **no** canonical **`src/PML App/`** tree. **`src/features/*`** + **`App.tsx`** may hold **pattern drills** or product previews — see **Pattern drills vs shipped product** above. Prefer **Storybook** for stable component review; promote any rhythm learned from throwaway screens into **written specs** before deleting drill code.
 
 ---
 
@@ -115,4 +145,4 @@ None — there is **no** **`src/PML App/`** tree. Add product screens under a fe
 
 ---
 
-*Last updated: **AppShell** removed; learnings for removed demos and archived previews preserved in this file.*
+*Last updated: **Consolidated — App drill screens** checklist; **`StocksTilesWidget`** **`showChevron`** omit-by-default; **pattern drills**; **Sections & headers**.*

@@ -99,7 +99,7 @@ export const StocksTilesWidget = ({
   title = 'Stocks tiles',
   showSectionHeader = true,
   sectionHeaderSize = 'extra-large',
-  showChevron = false,
+  showChevron,
   items,
   changeAsBadge = true,
   showStatusBadges = true,
@@ -115,7 +115,7 @@ export const StocksTilesWidget = ({
         <SectionHeader
           size={sectionHeaderSize}
           title={title}
-          showChevron={showChevron}
+          {...(showChevron !== undefined ? { showChevron } : {})}
           trailing="none"
           showSubtext={false}
         />
