@@ -10,11 +10,14 @@ function isThemeMode(v: unknown): v is ThemeMode {
  * When the toolbar / globals.theme changes, push that value into story args (theme,
  * brandLogoTheme, mode) so Controls stay in sync. Keyboard uses `mode` for kb--light/kb--dark.
  *
+ * **Do not call this from the root `.storybook/preview` decorator** — Storybook preview hooks
+ * must run only in the decorator closure or in a story, and mixing them with React’s `useEffect`
+ * there can **blank the entire preview**. Global theme still applies via `context.globals.theme`
+ * in **`PmlStorybookDecorator`**. Opt in from an individual story’s **`render`** if you need
+ * args sync for that story only.
+ *
  * We do **not** sync args → globals: in the same render cycle, args can still be stale while
  * globals already updated, so updateGlobals would revert the toolbar and cause a flicker loop.
- *
- * The preview **decorator** uses `context.globals.theme` for `data-theme` so the canvas matches
- * the toolbar immediately; this hook keeps story **args** (Controls) aligned with that.
  */
 export function useThemeSync(): void {
   const [globals] = useGlobals();

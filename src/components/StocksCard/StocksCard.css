@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   Stocks Card — Card chrome only (row = ListItem stocks-card)
+   Stocks Card — Card chrome + holdings row (StocksCardRow)
    Matches review frame: 376px column with 16px gutters → 344px card (--card-width);
    padding uses --card-padding-* (24×16); inner row width 312px.
    ═══════════════════════════════════════════════════ */
@@ -8,4 +8,317 @@
   min-height: 0;
   width: 100%;
   max-width: var(--card-width);
+}
+
+/* ── Holdings row (formerly ListItem stocks variants) ── */
+
+.sc-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  align-items: stretch;
+}
+
+.sc-row[role='button'] {
+  cursor: pointer;
+}
+
+.sc-row:focus-visible {
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: calc(-1 * var(--unit-1));
+  border-radius: var(--radius-8);
+}
+
+.sc-row__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sc-row__tags {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sc-row__body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sc-row__body .sc-row__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.sc-row__leading {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 0;
+}
+
+.sc-row__main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.sc-row__lhs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.sc-row__title {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.sc-row__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.sc-row__qty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__qty-icon svg {
+  width: var(--font-size-subtext);
+  height: var(--font-size-subtext);
+  flex-shrink: 0;
+  display: block;
+}
+
+.sc-row__qty-value {
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__dot {
+  color: var(--text-neutral-weak);
+  user-select: none;
+}
+
+.sc-row__avg {
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__rhs-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  flex-shrink: 0;
+}
+
+.sc-row__rhs-group .sc-row__trailing {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.sc-row__rhs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 0;
+}
+
+.sc-row__price {
+  margin: 0;
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__change {
+  margin: 0;
+}
+
+.sc-row__change--positive {
+  color: var(--text-positive-strong);
+}
+
+.sc-row__change--negative {
+  color: var(--text-negative-strong);
+}
+
+.sc-row__change--neutral {
+  color: var(--text-neutral-moderate);
+}
+
+.sc-row--mtf .sc-row__inner {
+  gap: var(--spacing-12);
+}
+
+.sc-row__margin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-pill-40);
+  background: var(--surface-level-3);
+}
+
+.sc-row__margin-footer-lead {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+  flex: 1;
+}
+
+.sc-row__margin-footer-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__margin-footer-icon svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex-shrink: 0;
+  display: block;
+}
+
+.sc-row__margin-footer-label {
+  color: var(--text-neutral-strong);
+}
+
+.sc-row__margin-footer-value {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0;
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 0;
+}
+
+.sc-row__margin-footer-pct {
+  margin: 0;
+}
+
+.sc-row__margin-footer-pct--positive {
+  color: var(--text-positive-strong);
+}
+
+.sc-row__margin-footer-pct--negative {
+  color: var(--text-negative-strong);
+}
+
+.sc-row__margin-footer-pct--neutral {
+  color: var(--text-neutral-moderate);
+}
+
+.sc-row__margin-footer-mult {
+  margin: 0;
+  margin-left: var(--spacing-4);
+  color: var(--text-primary-strong);
+}
+
+/* Trailing slot (text / link / button — no chevron on holdings row) */
+.sc-row__trailing {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  color: var(--text-neutral-moderate);
+}
+
+.sc-row__trailing--stack {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+}
+
+.sc-row__trailing-label {
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  line-height: var(--line-height-body);
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+}
+
+.sc-row__trailing-label--positive {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-positive-strong);
+}
+
+.sc-row__trailing-label--negative {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-negative-strong);
+}
+
+.sc-row__trailing-sub {
+  color: var(--text-neutral-medium);
+  white-space: nowrap;
+}
+
+.sc-row__trailing-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  line-height: var(--line-height-body);
+  color: var(--text-interactive-default);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sc-row__trailing-link:hover {
+  text-decoration: underline;
+}
+
+.sc-row__trailing-link:focus-visible {
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
+  border-radius: var(--radius-4);
+}
+
+.sc-row__trailing--button {
+  align-items: center;
+}
+
+.sc-row__separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--border-width-hairline);
+  background: var(--border-neutral-weak);
 }

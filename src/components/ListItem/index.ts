@@ -4,9 +4,5 @@ export type {
   ListItemEmphasis,
   ListItemTrailing,
   ListItemValueType,
-  ListItemVariant,
-  ListItemStocksChangeSentiment,
-  ListItemStocksStatusBadgeTone,
   ListItemTrailingTextTone,
 } from './ListItem';
-

@@ -320,9 +320,8 @@
     {
       "name": "ListItem",
       "importPath": "components/ListItem",
-      "description": "Rich list row: default layout or stocks-card / stocks-card-mtf (holdings + optional MTF footer).",
+      "description": "Rich list row: avatar, primary/subtext, optional value chip, trailing icon/text/link/button.",
       "props": {
-        "variant": "default | stocks-card | stocks-card-mtf",
         "emphasis": "high | low",
         "showLeading": "boolean",
         "avatarType": "profile | initials | logo | icon",
@@ -333,23 +332,13 @@
         "trailingButtonLabel": "string",
         "onTrailingLinkPress": "() => void",
         "onTrailingButtonPress": "() => void",
-        "stocksTitle": "string",
-        "stocksPrice": "string",
-        "stocksChangeLabel": "string",
-        "stocksChangeSentiment": "positive | negative | neutral",
-        "stocksStatusLabel": "string",
-        "stocksQuantity": "string",
-        "stocksAvgPriceLabel": "string",
-        "stocksMarginFooterLabel": "string",
-        "stocksMarginReturnLabel": "string",
-        "stocksMarginMultiplierLabel": "string",
         "onClick": "() => void",
         "className": "string"
       },
-      "allowedVariants": ["default", "stocks-card", "stocks-card-mtf"],
+      "allowedVariants": ["default"],
       "states": [],
       "notes": [
-        "For `stocks-card*` variants, trailing chevron is off unless you set `showTrailing` and a non-icon trailing.",
+        "Holdings / MTF equity rows use **StocksCard** (not ListItem variants).",
         "Many more optional props exist for avatars, badges, tertiary lines — see ListItem.tsx for full API."
       ]
     },

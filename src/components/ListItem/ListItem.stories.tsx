@@ -2,17 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ListItem } from './ListItem';
 import type {
   ListItemEmphasis,
-  ListItemProps,
-  ListItemStocksChangeSentiment,
-  ListItemStocksStatusBadgeTone,
   ListItemTrailing,
   ListItemValueType,
 } from './ListItem';
-import {
-  STOCKS_CARD_DEFAULT_PROPS,
-  STOCKS_CARD_MTF_DEFAULT_PROPS,
-} from '../StocksCard/StocksCard.data';
-import { StocksCard } from '../StocksCard';
 import type { AvatarType, AvatarSize, AvatarIcon } from '../Avatar';
 import type { ButtonType, ButtonSize } from '../Button';
 import { iconNames } from '../Icon';
@@ -23,6 +15,8 @@ import {
   STOCK_NAMES,
   INDEX_NAMES,
 } from '../Logo/logoNames';
+import { STOCKS_CARD_DEFAULT_PROPS } from '../StocksCard/StocksCard.data';
+import { StocksCard } from '../StocksCard';
 
 const ICON_OPTIONS = iconNames.reduce<Record<string, string>>(
   (acc, name) => {
@@ -60,7 +54,7 @@ const meta: Meta<typeof ListItem> = {
       control: 'select',
       options: ['high', 'low'] as ListItemEmphasis[],
       description:
-        'Root modifier `li-item--high` / `li-item--low`. Primary copy uses **body-medium** (same as stocks card title).',
+        'Root modifier `li-item--high` / `li-item--low`. Primary copy uses **body-medium** (same ramp as **StocksCard** title).',
       table: { defaultValue: { summary: 'high' }, category: 'Variant' },
     },
 
@@ -369,383 +363,34 @@ type Story = StoryObj<typeof ListItem>;
 
 export const Playground: Story = {};
 
-/** Story-only: toggles `stocksStatusLabel` visibility (same pattern as Stocks Card Playground). */
-type ListItemStocksStoryArgs = ListItemProps & {
-  showStocksStatusBadge?: boolean;
-};
-
 /**
- * Holdings card uses the same **`StocksCard`** widget as **Widgets/Stocks Card** (`Card` + `ListItem` stocks variants).
- * Switch **variant** to **default** to preview a standard list row.
+ * Keeps **`components-list-item--stocks-card-row`** working for saved URLs and deep links.
+ * Canonical demos live under **Widgets → Stocks Card**.
  */
-export const StocksCardRow: StoryObj<ListItemStocksStoryArgs> = {
+export const StocksCardRow: Story = {
   name: 'Stocks card row',
-  args: {
-    variant: 'stocks-card',
-    showStocksStatusBadge: true,
-    showSeparator: false,
-    stocksStatusLabel: STOCKS_CARD_DEFAULT_PROPS.statusLabel,
-    stocksTitle: STOCKS_CARD_DEFAULT_PROPS.title,
-    stocksQuantity: STOCKS_CARD_DEFAULT_PROPS.quantity,
-    stocksAvgPriceLabel: STOCKS_CARD_DEFAULT_PROPS.avgPriceLabel,
-    stocksPrice: STOCKS_CARD_DEFAULT_PROPS.price,
-    stocksChangeLabel: STOCKS_CARD_DEFAULT_PROPS.changeLabel,
-    stocksChangeSentiment: STOCKS_CARD_DEFAULT_PROPS.changeSentiment,
-    stocksQuantityIconName: 'handbag_outline',
-    stocksStatusBadgeTone: undefined,
-    stocksMarginFooterLabel: STOCKS_CARD_MTF_DEFAULT_PROPS.marginFooterLabel,
-    stocksMarginReturnLabel: STOCKS_CARD_MTF_DEFAULT_PROPS.marginReturnLabel,
-    stocksMarginMultiplierLabel: STOCKS_CARD_MTF_DEFAULT_PROPS.marginMultiplierLabel,
-    stocksMarginFooterIconName: STOCKS_CARD_MTF_DEFAULT_PROPS.marginFooterIconName,
-    stocksMarginReturnSentiment: undefined,
-    showLeading: false,
-    showTrailing: false,
-    trailing: 'icon',
-    trailingIcon: 'caret_small_right_main',
-    trailingButtonLabel: 'Button',
-    trailingButtonVariant: 'stroke',
-    trailingButtonSize: 'small',
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['default', 'stocks-card', 'stocks-card-mtf'],
-      description:
-        '**stocks-card-mtf** adds the return-on-margin footer.',
-      table: { category: 'Layout' },
-    },
-    stocksStatusBadgeTone: {
-      control: 'inline-radio',
-      options: ['(default)', 'notice', 'primary'],
-      mapping: {
-        '(default)': undefined,
-        notice: 'notice' as ListItemStocksStatusBadgeTone,
-        primary: 'primary' as ListItemStocksStatusBadgeTone,
-      },
-      description: 'Badge tone (defaults: stocks-card → notice, MTF → primary).',
-      table: { category: 'Layout' },
-      if: { arg: 'variant', neq: 'default' },
-    },
-    showStocksStatusBadge: {
-      name: 'Show status badge',
-      description:
-        'Turn the top **notice** status **Badge** (e.g. Pledge) on or off. When on, **stocksStatusLabel** sets the pill text.',
-      control: 'boolean',
-      table: { category: 'Playground' },
-    },
-    stocksStatusLabel: {
-      control: 'text',
-      description: 'Badge copy when **Show status badge** is on.',
-      table: { category: 'Content' },
-      if: { arg: 'showStocksStatusBadge', truthy: true },
-    },
-    stocksTitle: { control: 'text', table: { category: 'Content' } },
-    stocksQuantity: { control: 'text', table: { category: 'Content' } },
-    stocksAvgPriceLabel: { control: 'text', table: { category: 'Content' } },
-    stocksPrice: { control: 'text', table: { category: 'Content' } },
-    stocksChangeLabel: { control: 'text', table: { category: 'Content' } },
-    stocksChangeSentiment: {
-      control: 'inline-radio',
-      options: ['positive', 'negative', 'neutral'] as ListItemStocksChangeSentiment[],
-      table: { category: 'Content' },
-    },
-    stocksQuantityIconName: {
-      control: 'select',
-      options: Object.keys(ICON_OPTIONS),
-      mapping: ICON_OPTIONS,
-      table: { category: 'Content' },
-    },
-    stocksMarginFooterLabel: {
-      control: 'text',
-      table: { category: 'MTF footer' },
-      if: { arg: 'variant', eq: 'stocks-card-mtf' },
-    },
-    stocksMarginReturnLabel: {
-      control: 'text',
-      table: { category: 'MTF footer' },
-      if: { arg: 'variant', eq: 'stocks-card-mtf' },
-    },
-    stocksMarginMultiplierLabel: {
-      control: 'text',
-      table: { category: 'MTF footer' },
-      if: { arg: 'variant', eq: 'stocks-card-mtf' },
-    },
-    stocksMarginFooterIconName: {
-      control: 'select',
-      options: Object.keys(ICON_OPTIONS),
-      mapping: ICON_OPTIONS,
-      table: { category: 'MTF footer' },
-      if: { arg: 'variant', eq: 'stocks-card-mtf' },
-    },
-    stocksMarginReturnSentiment: {
-      control: 'inline-radio',
-      options: ['(match change)', 'positive', 'negative', 'neutral'],
-      mapping: {
-        '(match change)': undefined,
-        positive: 'positive' as ListItemStocksChangeSentiment,
-        negative: 'negative' as ListItemStocksChangeSentiment,
-        neutral: 'neutral' as ListItemStocksChangeSentiment,
-      },
-      description: 'Footer return % colour (default: same as **stocksChangeSentiment**).',
-      table: { category: 'MTF footer' },
-      if: { arg: 'variant', eq: 'stocks-card-mtf' },
-    },
-    showLeading: {
-      control: 'boolean',
-      description:
-        'Stocks variants default to **off**; turn on for leading **Avatar** (same as default **List Item**).',
-      table: { category: 'Leading (Avatar)' },
-      if: { arg: 'variant', neq: 'default' },
-    },
-    avatarType: {
-      control: 'inline-radio',
-      options: ['profile', 'initials', 'logo', 'icon'] as AvatarType[],
-      table: { defaultValue: { summary: 'initials' }, category: 'Leading (Avatar)' },
-      if: { arg: 'showLeading', truthy: true },
-    },
-    avatarSize: {
-      control: 'inline-radio',
-      options: ['small', 'regular', 'large', 'extraLarge'] as AvatarSize[],
-      table: { defaultValue: { summary: 'regular' }, category: 'Leading (Avatar)' },
-      if: { arg: 'showLeading', truthy: true },
-    },
-    avatarBadgeType: {
-      control: 'inline-radio',
-      options: ['none', 'status', 'action'] as AvatarIcon[],
-      table: { defaultValue: { summary: 'none' }, category: 'Leading (Avatar)' },
-      if: { arg: 'showLeading', truthy: true },
-    },
-    avatarSelected: {
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' }, category: 'Leading (Avatar)' },
-      if: { arg: 'showLeading', truthy: true },
-    },
-    avatarInitials: {
-      control: 'text',
-      table: { category: 'Leading (Avatar)' },
-      if: { arg: 'avatarType', eq: 'initials' },
-    },
-    avatarSrc: {
-      control: 'text',
-      table: { category: 'Leading (Avatar)' },
-      if: { arg: 'avatarType', eq: 'profile' },
-    },
-    avatarIconName: {
-      control: 'select',
-      options: Object.keys(ICON_OPTIONS),
-      mapping: ICON_OPTIONS,
-      table: { category: 'Leading (Avatar)' },
-      if: { arg: 'avatarType', eq: 'icon' },
-    },
-    avatarLogoName: {
-      control: 'select',
-      options: ALL_LOGO_NAMES,
-      table: { defaultValue: { summary: 'HDFC' }, category: 'Leading (Avatar)' },
-      if: { arg: 'avatarType', eq: 'logo' },
-    },
-    avatarLogoCategory: {
-      control: 'select',
-      options: ['mutualFunds', 'payments', 'banks', 'stocks', 'indices'],
-      table: { defaultValue: { summary: 'mutualFunds' }, category: 'Leading (Avatar)' },
-      if: { arg: 'avatarType', eq: 'logo' },
-    },
-    avatarBadgeIcon: {
-      control: 'select',
-      options: Object.keys(ICON_OPTIONS),
-      mapping: ICON_OPTIONS,
-      table: { category: 'Leading (Avatar)' },
-      if: { arg: 'showLeading', truthy: true },
-    },
-    showTrailing: {
-      control: 'boolean',
-      description:
-        'Stocks variants default to **off**; turn on for chevron / text / link / button (same as default **List Item**).',
-      table: { category: 'Trailing' },
-      if: { arg: 'variant', neq: 'default' },
-    },
-    trailing: {
-      control: 'inline-radio',
-      options: ['none', 'icon', 'text', 'link', 'button'] as ListItemTrailing[],
-      description:
-        '**icon** (chevron) is not shown on stocks rows — use **text**, **link**, or **button** for a trailing action.',
-      table: { category: 'Trailing' },
-      if: { arg: 'showTrailing', truthy: true },
-    },
-    trailingIcon: {
-      control: 'select',
-      options: Object.keys(ICON_OPTIONS),
-      mapping: ICON_OPTIONS,
-      description: 'Only applies to **default** list rows (stocks rows do not render trailing **icon**).',
-      table: { category: 'Trailing' },
-      if: { arg: 'trailing', eq: 'icon' },
-    },
-    trailingText: {
-      control: 'text',
-      table: { category: 'Trailing' },
-      if: { arg: 'trailing', eq: 'text' },
-    },
-    trailingLinkText: {
-      control: 'text',
-      table: { category: 'Trailing' },
-      if: { arg: 'trailing', eq: 'link' },
-    },
-    trailingButtonLabel: {
-      control: 'text',
-      table: { category: 'Trailing (Button)' },
-      if: { arg: 'trailing', eq: 'button' },
-    },
-    trailingButtonVariant: {
-      control: 'select',
-      options: ['filled', 'stroke', 'tonal', 'link'] as ButtonType[],
-      table: { category: 'Trailing (Button)' },
-      if: { arg: 'trailing', eq: 'button' },
-    },
-    trailingButtonSize: {
-      control: 'select',
-      options: ['large', 'medium', 'small', 'extra-small'] as ButtonSize[],
-      table: { category: 'Trailing (Button)' },
-      if: { arg: 'trailing', eq: 'button' },
-    },
-    showSeparator: {
-      control: 'boolean',
-      description:
-        'Bottom separator on the row. **Default list rows:** divider is **edge-to-edge** unless **`separatorInset`** is on. Usually off when the row sits inside **Card**.',
-      table: { category: 'Layout' },
-    },
-    separatorInset: {
-      control: 'boolean',
-      description:
-        '**Default** variant only: with leading avatar, use legacy hairline inset after the avatar.',
-      table: { category: 'Layout' },
-      if: { arg: 'variant', eq: 'default' },
-    },
-    onClick: { action: 'clicked', table: { category: 'Events' } },
-    className: { table: { disable: true } },
-  },
+  render: () => (
+    <div
+      style={{
+        width: 'min(var(--phone-column-width), 100%)',
+        maxWidth: '100%',
+        margin: '0 auto',
+        padding: 'var(--spacing-24) var(--spacing-16)',
+        background: 'var(--surface-level-4)',
+        boxSizing: 'border-box',
+      }}
+    >
+      <StocksCard {...STOCKS_CARD_DEFAULT_PROPS} />
+    </div>
+  ),
   parameters: {
-    controls: {
-      include: [
-        'variant',
-        'stocksStatusBadgeTone',
-        'showStocksStatusBadge',
-        'stocksStatusLabel',
-        'stocksTitle',
-        'stocksQuantity',
-        'stocksAvgPriceLabel',
-        'stocksPrice',
-        'stocksChangeLabel',
-        'stocksChangeSentiment',
-        'stocksQuantityIconName',
-        'stocksMarginFooterLabel',
-        'stocksMarginReturnLabel',
-        'stocksMarginMultiplierLabel',
-        'stocksMarginFooterIconName',
-        'stocksMarginReturnSentiment',
-        'showLeading',
-        'avatarType',
-        'avatarSize',
-        'avatarBadgeType',
-        'avatarSelected',
-        'avatarInitials',
-        'avatarSrc',
-        'avatarIconName',
-        'avatarLogoName',
-        'avatarLogoCategory',
-        'avatarBadgeIcon',
-        'showTrailing',
-        'trailing',
-        'trailingIcon',
-        'trailingText',
-        'trailingLinkText',
-        'trailingButtonLabel',
-        'trailingButtonVariant',
-        'trailingButtonSize',
-        'showSeparator',
-        'separatorInset',
-        'onClick',
-      ],
-    },
+    controls: { disable: true },
     docs: {
       description: {
         story:
-          'Same **`StocksCard`** as **Widgets/Stocks Card**: **`stocks-card`** or **`stocks-card-mtf`** (MTF adds return-on-margin footer). Use **Show status badge** to toggle the pill.',
+          'Bookmark compatibility only. Use **Widgets / Stocks Card** for the full playground and MTF layout.',
       },
     },
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: 'var(--phone-column-width)',
-          padding: 'var(--spacing-24) var(--spacing-16)',
-          background: 'var(--surface-level-4)',
-          boxSizing: 'border-box',
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
-  render: (args) => {
-    const { showStocksStatusBadge, stocksStatusLabel, variant, ...rest } = args;
-    const isStocks = variant === 'stocks-card' || variant === 'stocks-card-mtf';
-
-    if (isStocks) {
-      return (
-        <StocksCard
-          layout={variant === 'stocks-card-mtf' ? 'mtf' : 'standard'}
-          statusLabel={showStocksStatusBadge ? stocksStatusLabel : undefined}
-          statusBadgeTone={rest.stocksStatusBadgeTone}
-          title={rest.stocksTitle ?? ''}
-          quantity={rest.stocksQuantity ?? ''}
-          avgPriceLabel={rest.stocksAvgPriceLabel ?? ''}
-          price={rest.stocksPrice ?? ''}
-          changeLabel={rest.stocksChangeLabel ?? ''}
-          changeSentiment={rest.stocksChangeSentiment}
-          quantityIconName={rest.stocksQuantityIconName}
-          marginFooterLabel={rest.stocksMarginFooterLabel}
-          marginReturnLabel={rest.stocksMarginReturnLabel}
-          marginMultiplierLabel={rest.stocksMarginMultiplierLabel}
-          marginFooterIconName={rest.stocksMarginFooterIconName}
-          marginReturnSentiment={rest.stocksMarginReturnSentiment}
-          showLeading={rest.showLeading}
-          avatarType={rest.avatarType}
-          avatarSize={rest.avatarSize}
-          avatarBadgeType={rest.avatarBadgeType}
-          avatarSelected={rest.avatarSelected}
-          avatarInitials={rest.avatarInitials}
-          avatarSrc={rest.avatarSrc}
-          avatarIconName={rest.avatarIconName}
-          avatarLogoName={rest.avatarLogoName}
-          avatarLogoCategory={rest.avatarLogoCategory}
-          avatarBadgeIcon={rest.avatarBadgeIcon}
-          showTrailing={rest.showTrailing}
-          trailing={rest.trailing}
-          trailingIcon={rest.trailingIcon}
-          trailingText={rest.trailingText}
-          trailingLinkText={rest.trailingLinkText}
-          onTrailingLinkPress={rest.onTrailingLinkPress}
-          trailingButtonLabel={rest.trailingButtonLabel}
-          trailingButtonVariant={rest.trailingButtonVariant}
-          trailingButtonSize={rest.trailingButtonSize}
-          onTrailingButtonPress={rest.onTrailingButtonPress}
-          onClick={rest.onClick}
-        />
-      );
-    }
-
-    return (
-      <div
-        style={{
-          width: 344,
-          padding: 'var(--spacing-16)',
-          background: 'var(--surface-level-4)',
-          boxSizing: 'border-box',
-        }}
-      >
-        <ListItem {...rest} variant={variant} />
-      </div>
-    );
   },
 };
 

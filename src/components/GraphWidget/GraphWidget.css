@@ -12,9 +12,9 @@
 
 /* Line + glow stops — primitives + semantic tokens (theme-aware where noted) */
 .gw--positive {
-  --gw-line-1: var(--background-primary-strong);
-  /* Mid gradient: semantic mint (theme-aware), not primitive mint-dark */
-  --gw-line-2: var(--colour-mint);
+  /* Teal → cyan → gain green (chromatic; avoid near-white mint on dark + blur). */
+  --gw-line-1: var(--text-primary-strong);
+  --gw-line-2: var(--colour-teal);
   --gw-line-3: var(--background-positive-strong);
   --gw-glow-1: var(--primitive-action-offset-primary-shade);
   --gw-glow-2: var(--primitive-blue-offset-850);
@@ -44,6 +44,10 @@
   width: 100%;
   /* height comes from the SVG element attribute (matches viewBox aspect) */
   overflow: visible;
+}
+
+.gw__area-fill {
+  pointer-events: none;
 }
 
 /* Slight GPU hint for blurred paths */

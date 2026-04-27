@@ -91,7 +91,7 @@
   min-width: 0;
 }
 
-/* Same type ramp as **StocksCard** / **ListItem** `stocksTitle` — `body-medium` from typography.css */
+/* Same type ramp as **StocksCard** title — `body-medium` from typography.css */
 .stw__title {
   margin: 0;
   color: var(--text-neutral-strong);

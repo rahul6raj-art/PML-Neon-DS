@@ -1,16 +1,13 @@
 import { Card } from '../Card';
-import { ListItem } from '../ListItem';
-import type {
-  ListItemStocksChangeSentiment,
-  ListItemStocksStatusBadgeTone,
-  ListItemTrailing,
-} from '../ListItem';
 import type { AvatarType, AvatarSize, AvatarIcon } from '../Avatar';
 import type { ButtonType, ButtonSize } from '../Button';
+import type { ListItemTrailing, ListItemTrailingTextTone } from '../ListItem';
 import type { LogoCategory } from '../Logo';
+import { StocksCardRow } from './StocksCardRow';
+import type { StocksCardChangeSentiment, StocksCardStatusBadgeTone } from './StocksCardRow';
 import './StocksCard.css';
 
-export type StocksCardChangeSentiment = ListItemStocksChangeSentiment;
+export type { StocksCardChangeSentiment, StocksCardStatusBadgeTone } from './StocksCardRow';
 export type StocksCardLayout = 'standard' | 'mtf';
 
 export interface StocksCardProps {
@@ -19,7 +16,7 @@ export interface StocksCardProps {
   /** Top status pill (e.g. Pledge, MTF). Omit to hide the tag row. */
   statusLabel?: string;
   /** **notice** (Pledge) vs **primary** (MTF). Defaults by **layout**. */
-  statusBadgeTone?: ListItemStocksStatusBadgeTone;
+  statusBadgeTone?: StocksCardStatusBadgeTone;
   /** Company / stock name */
   title: string;
   /** Quantity shown next to the holdings icon */
@@ -44,7 +41,7 @@ export interface StocksCardProps {
   marginFooterIconName?: string;
   /** Colours the MTF return % line */
   marginReturnSentiment?: StocksCardChangeSentiment;
-  /** Same leading avatar as **ListItem**. Off by default on cards. */
+  /** Leading avatar. Off by default on cards. */
   showLeading?: boolean;
   avatarType?: AvatarType;
   avatarSize?: AvatarSize;
@@ -56,11 +53,13 @@ export interface StocksCardProps {
   avatarLogoName?: string;
   avatarLogoCategory?: LogoCategory;
   avatarBadgeIcon?: string;
-  /** Same trailing slot as **ListItem** (text, link, button). Chevron **icon** is not used on holdings cards. Off by default. */
+  /** Trailing slot (text, link, button). Chevron **icon** is not used on holdings cards. Off by default. */
   showTrailing?: boolean;
   trailing?: ListItemTrailing;
   trailingIcon?: string;
   trailingText?: string;
+  trailingSubtext?: string;
+  trailingTextTone?: ListItemTrailingTextTone;
   trailingLinkText?: string;
   onTrailingLinkPress?: () => void;
   trailingButtonLabel?: string;
@@ -73,7 +72,7 @@ export interface StocksCardProps {
 
 /**
  * Single-holding card: status tag, name, qty + avg, price + change.
- * **MTF** layout adds the margin footer strip. Row layout is **`ListItem`** (`stocks-card` / `stocks-card-mtf`) inside **`Card`**.
+ * **MTF** layout adds the margin footer strip. Row markup lives in **StocksCardRow** inside **Card**.
  */
 export const StocksCard = ({
   layout = 'standard',
@@ -104,8 +103,10 @@ export const StocksCard = ({
   avatarBadgeIcon,
   showTrailing = false,
   trailing,
-  trailingIcon,
+  trailingIcon: _trailingIcon,
   trailingText,
+  trailingSubtext,
+  trailingTextTone,
   trailingLinkText,
   onTrailingLinkPress,
   trailingButtonLabel,
@@ -118,29 +119,27 @@ export const StocksCard = ({
   const root = ['stocks-card', className].filter(Boolean).join(' ');
   const isMtf = layout === 'mtf';
 
-  const listVariant = isMtf ? 'stocks-card-mtf' : 'stocks-card';
-  const resolvedBadgeTone =
-    statusBadgeTone ?? (isMtf ? 'primary' : undefined);
+  const resolvedBadgeTone = statusBadgeTone ?? (isMtf ? 'primary' : undefined);
 
   return (
     <Card stroke={false} onClick={onClick} className={root}>
-      <ListItem
-        variant={listVariant}
+      <StocksCardRow
+        isMtf={isMtf}
         showSeparator={false}
-        stocksStatusBadgeTone={resolvedBadgeTone}
-        stocksStatusLabel={statusLabel}
-        stocksTitle={title}
-        stocksQuantity={quantity}
-        stocksAvgPriceLabel={avgPriceLabel}
-        stocksPrice={price}
-        stocksChangeLabel={changeLabel}
-        stocksChangeSentiment={changeSentiment}
-        stocksQuantityIconName={quantityIconName}
-        stocksMarginFooterLabel={isMtf ? marginFooterLabel : undefined}
-        stocksMarginReturnLabel={isMtf ? marginReturnLabel : undefined}
-        stocksMarginMultiplierLabel={isMtf ? marginMultiplierLabel : undefined}
-        stocksMarginFooterIconName={isMtf ? marginFooterIconName : undefined}
-        stocksMarginReturnSentiment={isMtf ? marginReturnSentiment : undefined}
+        statusBadgeTone={resolvedBadgeTone}
+        statusLabel={statusLabel}
+        title={title}
+        quantity={quantity}
+        avgPriceLabel={avgPriceLabel}
+        price={price}
+        changeLabel={changeLabel}
+        changeSentiment={changeSentiment}
+        quantityIconName={quantityIconName}
+        marginFooterLabel={isMtf ? marginFooterLabel : undefined}
+        marginReturnLabel={isMtf ? marginReturnLabel : undefined}
+        marginMultiplierLabel={isMtf ? marginMultiplierLabel : undefined}
+        marginFooterIconName={isMtf ? marginFooterIconName : undefined}
+        marginReturnSentiment={isMtf ? marginReturnSentiment : undefined}
         showLeading={showLeading}
         avatarType={avatarType}
         avatarSize={avatarSize}
@@ -154,8 +153,9 @@ export const StocksCard = ({
         avatarBadgeIcon={avatarBadgeIcon}
         showTrailing={showTrailing}
         trailing={trailing}
-        trailingIcon={trailingIcon}
         trailingText={trailingText}
+        trailingSubtext={trailingSubtext}
+        trailingTextTone={trailingTextTone}
         trailingLinkText={trailingLinkText}
         onTrailingLinkPress={onTrailingLinkPress}
         trailingButtonLabel={trailingButtonLabel}

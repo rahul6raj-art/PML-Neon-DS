@@ -25,8 +25,8 @@
     {
       "name": "AllocationBreakdownWidget",
       "importPath": "components/AllocationBreakdownWidget",
-      "description": "Implemented widget: section title (optional SectionHeader) plus rows of label, formatted value, percent, and a token-styled bar; supports loading and empty copy.",
-      "composedFrom": ["SectionHeader", "Card", "ListItem", "Loading"],
+      "description": "Implemented widget: optional SectionHeader, Card, Figma allocation bar (1649:7514 if row count ≠ 4; 1661:7516 composite frame if 4 rows) + optional `proportional-css` approximation + legend rows; supports loading and empty copy.",
+      "composedFrom": ["SectionHeader", "Card", "Loading"],
       "props": {
         "title": "string",
         "showSectionHeader": "boolean",
@@ -37,11 +37,14 @@
         "onLinkPress": "() => void",
         "buttonLabel": "string",
         "onButtonPress": "() => void",
-        "rows": "AllocationBreakdownRow[] — each { label: string, valueLabel: string, percent: number (0–100), optional trend?: positive | negative | neutral }",
-        "showRowTrend": "boolean",
+        "rows": "AllocationBreakdownRow[] — each { label, valueLabel, percent; optional changeLabel, changeSentiment, swatchFill, trend }",
+        "showRowTrend": "boolean — when false, hides change lines",
         "emptyMessage": "string",
         "loading": "boolean",
         "onRowClick": "(row: AllocationBreakdownRow, index: number) => void",
+        "allocationBarVisual": "figma-asset | proportional-css",
+        "allocationBarAssetSrc": "string",
+        "normalizeBarPercents": "boolean",
         "className": "string"
       },
       "slots": ["sectionHeader", "card", "rows"],
@@ -49,13 +52,14 @@
       "usage": [
         "Use on portfolio drill-downs, MF holdings, goal or risk summaries whenever the spec shows class/category mix with amount and share.",
         "Use inside `.sh-section` + `.sh-section__content` (or equivalent) after performance or holdings blocks.",
-        "Use when bars are proportional to percent; for two or three KPIs only, consider DataPoints instead."
+        "Use when the spec shows category mix with amount and share (`percent` drives legend % when normalized); for two or three KPIs only, consider DataPoints instead."
       ],
       "notes": [
         "Source: `src/components/AllocationBreakdownWidget/` — export `AllocationBreakdownWidget`, types `AllocationBreakdownRow`, `AllocationBreakdownWidgetProps`.",
-        "Prefer this widget over reassembling SectionHeader + Card + ListItem + bar markup so spacing, separators, and tokens stay consistent for generated screens.",
-        "Bar fill width is `percent` clamped to 0–100; format `valueLabel` with INR rules (no space after ₹).",
-        "`showRowTrend` and `row.trend` exist on the API but are not rendered yet—do not rely on visible sentiment until implemented."
+        "Prefer this widget over reassembling SectionHeader + Card + ad hoc row + bar markup so spacing and tokens stay consistent for generated screens.",
+        "Bar partitions use row `percent` as weights; format `valueLabel` with INR rules (no space after ₹).",
+        "`changeLabel` + `changeSentiment` or `trend` render the second amount line; `showRowTrend` false suppresses that line.",
+        "Default `figma-asset`: 4 rows → `AllocationBreakdownFigmaBar16617516` (Figma 1661:7516 composite SVG); else `AllocationBreakdownFigmaBar16497514` (1649:7514, slice widths from legend %). `allocationBarAssetSrc` overrides (static img). `proportional-css` = `AllocationBreakdownDynamicBarSvg` (approximate)."
       ]
     },
     {
@@ -367,7 +371,7 @@
       ],
       "notes": [
         "`fundName` is required; visibility of sub-blocks depends on `cardType`.",
-        "Do not use for equity holdings rows—use StocksCard or ListItem stocks variants.",
+        "Do not use for equity holdings rows—use **StocksCard**.",
         "AMC mark uses Avatar `type=logo`."
       ]
     },
@@ -501,8 +505,8 @@
     {
       "name": "PortfolioWidget",
       "importPath": "components/PortfolioWidget",
-      "description": "Portfolio hero: total value, privacy toggle, returns, chart, time-range chips, KPIs, optional buying power.",
-      "composedFrom": ["Chip", "Icon", "GraphWidget"],
+      "description": "Portfolio hero: total value, privacy toggle, returns, chart, time-range chips, KPIs, optional allocation breakdown, optional buying power.",
+      "composedFrom": ["AllocationBreakdownWidget", "Chip", "Icon", "GraphWidget"],
       "props": {
         "headerTitle": "string",
         "totalValue": "string",
@@ -513,6 +517,7 @@
         "timeRanges": "readonly string[]",
         "activeRangeIndex": "number",
         "onRangeChange": "(index: number) => void",
+        "rangeByPeriod": "PortfolioWidgetRangeSnapshot[] | undefined",
         "svgPath": "string",
         "chartPositive": "boolean",
         "chartIndicatorY": "number",
@@ -522,9 +527,14 @@
         "showBuyingPower": "boolean",
         "buyingPowerAmount": "string",
         "onAddFundsPress": "() => void",
+        "showAllocation": "boolean",
+        "allocationRows": "AllocationBreakdownRow[] | undefined",
+        "allocationTitle": "string",
+        "allocationBarVisual": "figma-asset | proportional-css",
+        "allocationBarAssetSrc": "string",
         "className": "string"
       },
-      "slots": ["title", "valueRow", "returns", "chart", "rangeChips", "investedReturns", "buyingPower"],
+      "slots": ["title", "valueRow", "returns", "chart", "rangeChips", "investedReturns", "allocation", "buyingPower"],
       "states": ["valuesMasked", "selectedRange"],
       "usage": [
         "Use as the first major block on Stock Home after Header/Ticker.",
@@ -534,7 +544,9 @@
         "Do not wrap in Card—widget is already a full-width hero; use section spacing (`--spacing-56`) outside.",
         "Time-range chips use `Chip` extra-small and space-between row per screen patterns.",
         "Export `maskPortfolioDigits` for consistent masking with the eye toggle.",
-        "Do not duplicate GraphWidget below this block for the same series unless the spec shows two charts."
+        "Do not duplicate GraphWidget below this block for the same series unless the spec shows two charts.",
+        "`showAllocation` (default true) and non-empty `allocationRows` render AllocationBreakdownWidget; set `showAllocation` false to hide without clearing rows. Amounts mask with the same eye toggle as other amounts.",
+        "`rangeByPeriod` (optional, aligned with `timeRanges`) drives returns line + GraphWidget per selected chip; omit and update `svgPath`/`returnsValue` from parent on `onRangeChange` for API-backed data."
       ]
     },
     {
@@ -628,7 +640,7 @@
       "name": "StocksCard",
       "importPath": "components/StocksCard",
       "description": "One holding row inside a Card (standard or MTF margin footer).",
-      "composedFrom": ["Card", "ListItem"],
+      "composedFrom": ["Card", "Badge", "Avatar", "Icon", "Button"],
       "props": {
         "layout": "standard | mtf",
         "title": "string",
@@ -649,7 +661,7 @@
         "Use `layout=mtf` when the design shows margin return footer under the row."
       ],
       "notes": [
-        "Composes ListItem `stocks-card` / `stocks-card-mtf`—prefer this over raw ListItem for holdings cards.",
+        "Uses **StocksCardRow** inside **Card**; use this widget for holdings / MTF cards.",
         "Default layout omits trailing chevron icon; use text/link/button trailing if needed.",
         "INR: no space after ₹ in formatted strings."
       ]

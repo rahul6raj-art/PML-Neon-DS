@@ -1,6 +1,6 @@
 # Candidate Widgets
 
-1. **Asset allocation breakdown block** — `SectionHeader` + `Card` wrapping repeated rows of `ListItem` plus a token-styled progress track/fill (`pd-allocation__*` CSS). No registry widget today expresses “label + value + percent + bar.”
+1. **Asset allocation breakdown block** — `SectionHeader` + `Card` wrapping compact rows (label/value left, percent right, token track/fill). Prefer **`AllocationBreakdownWidget`** over one-off `pd-allocation__*`-style page CSS.
 2. **Top holdings section with empty state** — `SectionHeader` + vertical stack of `StocksCard` **or** `Card` + body copy + primary `Button`. `StocksCard` is already a widget, but the **section shell** (title rhythm, inter-card gap, empty CTA pattern) is hand-assembled per screen.
 3. **Screen-level loading well (optional)** — Centered `Loading` inside a padded, token-typed region (`pd-loading`). Lower uniqueness than the two above; included only if we want consistent “hero area loading” across drill-downs.
 
@@ -24,7 +24,7 @@ Names are domain-neutral (not “PortfolioDetails*”) so MF, credit, and insura
 
 # Likely Composed From
 
-- **`AllocationBreakdownWidget`** — `SectionHeader`, `Card`, `ListItem` (default row, no leading, trailing percent text), optional token-based track/fill (internal layout, no new primitives). Optionally accept `items: { label, valueLabel, percent }[]`.
+- **`AllocationBreakdownWidget`** — `SectionHeader`, `Card`, scoped row + bar layout (label + value / percent / track; internal markup, no new primitives). Optionally accept `items: { label, valueLabel, percent }[]`.
 - **`HoldingsSectionWidget`** — `SectionHeader`, `StocksCard` (map over holdings props), `Card` + `Button` for empty state; spacing/gap rules co-located in widget CSS (`--spacing-16` stack).
 - **`ScreenSectionLoadingWidget` (optional)** — `Loading` only; wrapper uses `--spacing-*` and `--text-secondary` for label styling.
 

@@ -8,9 +8,11 @@ const DEFAULT_INDICATOR_X = 308;
 
 export interface GraphWidgetProps {
   /**
-   * SVG `d` for the chart polyline / curve (viewBox 0 0 346 116 unless overridden).
-   * The path should **end at the ripple** — last point at
-   * `(indicatorXRatio × viewBoxWidth, indicatorY)` so the stroke meets the endpoint indicator.
+   * SVG path `d` for the chart line (viewBox 0 0 346 116 unless overridden).
+   * Typical portfolio paths: legacy PortfolioHome cubics (M + C segments), smoothPathFromPoints,
+   * closeAreaUnderOpenChartPath / legacyPortfolioHomeChartAreaFill, or tradingVolatileLinePoints for dense demos.
+   * The path should end at the ripple: last point at (indicatorXRatio * viewBoxWidth, indicatorY)
+   * so the stroke meets the endpoint indicator.
    */
   svgPath: string;
   /** Green / teal gradients vs orange–red. */
@@ -36,11 +38,22 @@ export interface GraphWidgetProps {
   showRipple?: boolean;
   /** Inner ring + center dot at the endpoint. Default true. */
   showDot?: boolean;
+  /**
+   * Closed SVG path d (ends with Z) under the line for a soft area fill (TradingView-style).
+   * Build with closeAreaUnderPolyline (M+L paths), closeAreaUnderSmoothCurve (smoothPathFromPoints),
+   * or closeAreaUnderOpenChartPath / legacyPortfolioHomeChartAreaFill for open cubics at endpoint X.
+   */
+  areaFillPath?: string;
+  /**
+   * Whether to paint areaFillPath with the vertical gradient. Default false when isPositive
+   * (blur + line only, like legacy PortfolioHome); default true when loss. Set true on gains for the soft fill.
+   */
+  showAreaFill?: boolean;
 }
 
 /**
  * Portfolio-style line chart: multi-layer blurred glow + gradient stroke + HTML endpoint marker.
- * Pass `svgPath` in the same coordinate space as `viewBoxWidth` × `viewBoxHeight`.
+ * Pass svgPath in the same coordinate space as viewBoxWidth by viewBoxHeight.
  */
 export const GraphWidget = ({
   svgPath,
@@ -56,17 +69,22 @@ export const GraphWidget = ({
   showGradient = true,
   showRipple = true,
   showDot = true,
+  areaFillPath,
+  showAreaFill,
 }: GraphWidgetProps) => {
   const uid = useId().replace(/:/g, '');
   const lineGradPos = `gw-line-pos-${uid}`;
   const lineGradNeg = `gw-line-neg-${uid}`;
   const glowGradPos = `gw-glow-pos-${uid}`;
   const glowGradNeg = `gw-glow-neg-${uid}`;
+  const areaFillGrad = `gw-area-fill-${uid}`;
   const filterWide = `gw-glow-wide-${uid}`;
   const filterMedium = `gw-glow-medium-${uid}`;
   const filterSharp = `gw-glow-sharp-${uid}`;
 
   const pos = isPositive;
+  const renderAreaFill =
+    Boolean(areaFillPath) && (showAreaFill ?? !pos);
   const lineStroke = showGradient
     ? pos
       ? `url(#${lineGradPos})`
@@ -121,6 +139,30 @@ export const GraphWidget = ({
                 </linearGradient>
               </>
             ))}
+          {renderAreaFill && (
+            <linearGradient
+              id={areaFillGrad}
+              x1="0"
+              y1="0"
+              x2="0"
+              y2={viewBoxHeight}
+              gradientUnits="userSpaceOnUse"
+            >
+              {pos ? (
+                <>
+                  <stop offset="0%" stopColor="var(--gw-line-2)" stopOpacity={0.38} />
+                  <stop offset="45%" stopColor="var(--gw-line-3)" stopOpacity={0.14} />
+                  <stop offset="100%" stopColor="var(--gw-line-3)" stopOpacity={0} />
+                </>
+              ) : (
+                <>
+                  <stop offset="0%" stopColor="var(--gw-line-2)" stopOpacity={0.34} />
+                  <stop offset="50%" stopColor="var(--gw-line-3)" stopOpacity={0.12} />
+                  <stop offset="100%" stopColor="var(--gw-line-3)" stopOpacity={0} />
+                </>
+              )}
+            </linearGradient>
+          )}
           {showGradient && (
             <>
               <filter id={filterWide} x="-150%" y="-500%" width="400%" height="1100%">
@@ -138,6 +180,15 @@ export const GraphWidget = ({
 
         {showGradient ? (
           <>
+            {renderAreaFill && areaFillPath ? (
+              <path
+                d={areaFillPath}
+                fill={`url(#${areaFillGrad})`}
+                stroke="none"
+                className="gw__area-fill"
+              />
+            ) : null}
+
             <path
               d={svgPath}
               stroke={glowStroke}
@@ -183,15 +234,25 @@ export const GraphWidget = ({
             />
           </>
         ) : (
-          <path
-            d={svgPath}
-            stroke={lineStroke}
-            strokeWidth="1.5"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="gw__line"
-          />
+          <>
+            {renderAreaFill && areaFillPath ? (
+              <path
+                d={areaFillPath}
+                fill={`url(#${areaFillGrad})`}
+                stroke="none"
+                className="gw__area-fill"
+              />
+            ) : null}
+            <path
+              d={svgPath}
+              stroke={lineStroke}
+              strokeWidth="1.5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="gw__line"
+            />
+          </>
         )}
       </svg>
 

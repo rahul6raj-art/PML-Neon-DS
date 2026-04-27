@@ -1,0 +1,11 @@
+/**
+ * Storybook preview chrome — matches app shell (`--surface-level-4` in light mode).
+ * `data-theme="dark"` is set on this wrapper from the toolbar so `--surface-*` resolves correctly.
+ */
+.sb-pml-preview-canvas {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--surface-level-4);
+}

@@ -1,0 +1,256 @@
+/* ═══════════════════════════════════════════════════
+   Goals Widget — goal card + progress (Figma 1670:7540)
+   ═══════════════════════════════════════════════════ */
+
+.glw {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+  max-width: var(--phone-column-width);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  /* Progress fill: same chromatic axis as **GraphWidget** positive line (Figma 1670:7540 bar). */
+  --glw-fill-1: var(--text-primary-strong);
+  --glw-fill-2: var(--colour-teal);
+  --glw-fill-3: var(--background-positive-strong);
+}
+
+.glw--bar-notice,
+.glw--bar-negative {
+  --glw-fill-1: var(--background-notice-strong);
+  --glw-fill-2: var(--primitive-colour-red-strong);
+  --glw-fill-3: var(--background-negative-strong);
+}
+
+.glw__wrap {
+  padding: 0 var(--spacing-16);
+  box-sizing: border-box;
+}
+
+.glw__card {
+  width: 100%;
+  max-width: var(--card-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: var(--surface-level-1);
+  border-radius: var(--radius-24);
+  padding: var(--card-padding-block) var(--card-padding-inline);
+}
+
+.glw__card--pressable {
+  cursor: pointer;
+}
+
+.glw__card--pressable:focus-visible {
+  outline: var(--unit-1) solid var(--border-primary-strong);
+  outline-offset: var(--unit-1);
+}
+
+.glw__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+.glw__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+/* Figma **1670:7548** — **Body** medium **14/20**. */
+.glw__title {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-neutral-strong);
+}
+
+/* Figma **1670:7549** — **Subtext** regular **12/16**. */
+.glw__status {
+  font-size: var(--font-size-subtext);
+  line-height: var(--line-height-subtext);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-strong);
+}
+
+.glw__status--notice {
+  color: var(--text-notice-strong);
+}
+
+.glw__status--negative {
+  color: var(--text-negative-strong);
+}
+
+.glw__status--neutral {
+  color: var(--text-neutral-moderate);
+}
+
+/* Figma **1670:7555** — **background-positive-weak**, **radius-12**, pad **12×8**; **1670:7556** — **Title 4** medium. */
+.glw__badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-12);
+  background: var(--background-positive-weak);
+  box-sizing: border-box;
+}
+
+.glw--bar-notice .glw__badge {
+  background: var(--background-notice-weak);
+}
+
+.glw--bar-negative .glw__badge {
+  background: var(--background-negative-weak);
+}
+
+.glw__badge-text {
+  font-family: var(--font-family);
+  font-size: var(--font-size-title-4);
+  line-height: var(--line-height-title-4);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  color: var(--text-positive-strong);
+}
+
+.glw--bar-notice .glw__badge-text {
+  color: var(--text-notice-strong);
+}
+
+.glw--bar-negative .glw__badge-text {
+  color: var(--text-negative-strong);
+}
+
+.glw--status-neutral .glw__badge-text {
+  color: var(--text-neutral-strong);
+}
+
+.glw__bar-block {
+  /* Figma **1670:7560** — **21px** top step (token sum). */
+  margin-top: calc(var(--spacing-16) + var(--spacing-4) + var(--unit-1));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+/* Room for Figma handle sitting slightly above the **2px** bar. */
+.glw__track-shell {
+  position: relative;
+  width: 100%;
+  height: var(--spacing-24);
+  overflow: visible;
+}
+
+/* Figma **1670:7565–7566** — bar height **2px** (vector), not **8px**. */
+.glw__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: var(--spacing-2);
+  border-radius: var(--radius-full);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Inset channel — **ActivityTimeline**-aligned neutral weak track. */
+.glw__track-rail {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: var(--background-neutral-weak);
+}
+
+.glw__track-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  border-radius: var(--radius-full);
+  max-width: 100%;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    var(--glw-fill-1) 0%,
+    var(--glw-fill-2) 48%,
+    var(--glw-fill-3) 100%
+  );
+}
+
+/* Figma **1670:7562** — rounded square + soft glow (asset-free approximation). */
+.glw__thumb {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  margin-left: calc(var(--spacing-12) / -2);
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-4);
+  background: var(--background-positive-strong);
+  box-shadow:
+    0 0 0 var(--border-width-hairline) var(--surface-level-1),
+    0 0 var(--spacing-8) var(--spacing-4) var(--glow-positive-medium),
+    0 0 var(--spacing-16) var(--spacing-8) var(--glow-positive-strong);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.glw--bar-notice .glw__thumb,
+.glw--bar-negative .glw__thumb {
+  background: var(--background-negative-strong);
+  box-shadow:
+    0 0 0 var(--border-width-hairline) var(--surface-level-1),
+    0 0 var(--spacing-8) var(--spacing-4) var(--background-negative-weak),
+    0 0 var(--spacing-16) var(--spacing-8) var(--border-negative-weak);
+}
+
+.glw__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+}
+
+/* Figma **1670:7567** — **Body** regular **14/20**, **text-neutral-moderate**; **2px** gap label/value. */
+.glw__foot-line {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-neutral-moderate);
+}
+
+/* Amounts: **Body** medium **14/20** (labels stay regular on **`.glw__foot-line`**). */
+.glw__foot-num {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-neutral-strong);
+}
+
+/* Figma **1671:7606** — **12px** gap, **medium** buttons, equal width row. */
+.glw__cta {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-16);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.glw__cta-btn {
+  flex: 1 1 0;
+  min-width: 0;
+}

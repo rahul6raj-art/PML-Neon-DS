@@ -113,7 +113,6 @@ export function TriplePlatformPreview({ Story, isDark, storyKey }: TriplePlatfor
       ref={scrollRef}
       className="sb-pml-triple-scrollport"
       style={{
-        background: 'var(--surface-level-4)',
         color: 'var(--text-neutral-strong)',
       }}
     >

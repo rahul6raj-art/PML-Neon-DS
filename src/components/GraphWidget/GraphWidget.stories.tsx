@@ -1,13 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { GraphWidget, type GraphWidgetProps } from './GraphWidget';
+import {
+  LEGACY_PORTFOLIO_HOME_CHART_PATH_1D,
+  LEGACY_PORTFOLIO_HOME_CHART_PATH_6M,
+  legacyPortfolioHomeChartAreaFill,
+} from './legacyPortfolioHomeChartPaths';
 
-/** Sample paths — not exported: Storybook treats named exports in *.stories.tsx as stories. */
-/** Ends at (308, 32) — same as default indicator (ripple); no segment past the ripple. */
-const DEMO_PATH_POSITIVE =
-  'M 0 92 L 48 86 L 96 78 L 144 62 L 192 48 L 240 38 L 288 34 L 308 32';
-/** Ends at (308, 94) — matches Negative story indicatorY. */
-const DEMO_PATH_NEGATIVE =
-  'M 0 28 L 48 34 L 96 44 L 144 58 L 192 72 L 240 82 L 288 90 L 308 94';
+const DEMO_PATH_POSITIVE = LEGACY_PORTFOLIO_HOME_CHART_PATH_1D;
+const DEMO_AREA_POSITIVE = legacyPortfolioHomeChartAreaFill(DEMO_PATH_POSITIVE);
+
+const DEMO_PATH_NEGATIVE = LEGACY_PORTFOLIO_HOME_CHART_PATH_6M;
+const DEMO_AREA_NEGATIVE = legacyPortfolioHomeChartAreaFill(DEMO_PATH_NEGATIVE);
 
 const meta: Meta<typeof GraphWidget> = {
   title: 'Widgets/Graph',
@@ -16,7 +19,7 @@ const meta: Meta<typeof GraphWidget> = {
     docs: {
       description: {
         component:
-          'Portfolio-style **performance chart**: optional gradient + glow line, ripple pulse, and inner dot — all **PML tokens**. **Playground** exposes **Positive return** plus **Appearance** toggles (gradient, ripple, dot). See **GraphWidget.mdx**.',
+          'Portfolio-style **performance chart**: optional gradient + glow line, ripple pulse, and inner dot — **PML tokens**. Demos use the same **cubic** paths as legacy **PortfolioHome** (**Playground** / **Positive return** + **Appearance**). See **GraphWidget.mdx**.',
       },
     },
   },
@@ -29,8 +32,21 @@ const meta: Meta<typeof GraphWidget> = {
   ],
   argTypes: {
     svgPath: {
-      description: 'SVG `d` in viewBox space; must end at the ripple coordinates.',
+      description:
+        'SVG path d for the stroke (demos: legacy PortfolioHome cubics, M+C); must end at the ripple coordinates.',
       control: 'text',
+    },
+    areaFillPath: {
+      description:
+        'Optional closed path d under the line (demos: legacyPortfolioHomeChartAreaFill / closeAreaUnderOpenChartPath). Shown only when **showAreaFill** is true or chart is **loss** (default).',
+      control: false,
+      table: { disable: true },
+    },
+    showAreaFill: {
+      description:
+        'Paint **areaFillPath**. Default **off** for gains (blur + line only), **on** for losses. Set **true** to show the soft fill on a gain chart.',
+      control: 'boolean',
+      table: { category: 'Appearance' },
     },
     isPositive: {
       name: 'Positive return',
@@ -73,6 +89,7 @@ export const Playground: Story = {
   args: {
     isPositive: true,
     svgPath: DEMO_PATH_POSITIVE,
+    areaFillPath: DEMO_AREA_POSITIVE,
     indicatorY: 32,
     showGradient: true,
     showRipple: true,
@@ -80,13 +97,15 @@ export const Playground: Story = {
   } satisfies GraphWidgetProps,
   argTypes: {
     svgPath: { control: false, table: { disable: true } },
+    areaFillPath: { control: false, table: { disable: true } },
     indicatorY: { control: false, table: { disable: true } },
   },
   render: (args) => (
     <GraphWidget
       {...args}
       svgPath={args.isPositive ? DEMO_PATH_POSITIVE : DEMO_PATH_NEGATIVE}
-      indicatorY={args.isPositive ? 32 : 94}
+      areaFillPath={args.isPositive ? DEMO_AREA_POSITIVE : DEMO_AREA_NEGATIVE}
+      indicatorY={args.isPositive ? 32 : 80}
       isPositive={args.isPositive}
     />
   ),
@@ -101,6 +120,7 @@ export const GraphDemoPathPositive: Story = {
   name: 'Positive',
   args: {
     svgPath: DEMO_PATH_POSITIVE,
+    areaFillPath: DEMO_AREA_POSITIVE,
     isPositive: true,
     indicatorY: 32,
   } satisfies GraphWidgetProps,
@@ -109,7 +129,8 @@ export const GraphDemoPathPositive: Story = {
 export const Negative: Story = {
   args: {
     svgPath: DEMO_PATH_NEGATIVE,
+    areaFillPath: DEMO_AREA_NEGATIVE,
     isPositive: false,
-    indicatorY: 94,
+    indicatorY: 80,
   } satisfies GraphWidgetProps,
 };

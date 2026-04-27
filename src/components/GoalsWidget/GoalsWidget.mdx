@@ -1,0 +1,54 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Title,
+  Description,
+} from '@storybook/addon-docs/blocks';
+import * as GoalsWidgetStories from './GoalsWidget.stories.tsx';
+
+<Meta of={GoalsWidgetStories} />
+
+<Title>Goals</Title>
+
+<Description of={GoalsWidgetStories} />
+
+## Behaviour
+
+- **Typography** — Goal title **Body** medium **14/20**; status **Subtext** **12/16**; **%** chip **Title 4** medium on **positive-weak** / **notice-weak** / **negative-weak** by tone; footer labels **Body** regular, amounts **Body** medium (**`--text-neutral-strong`**).
+- **Progress** — **2px** track (**`--background-neutral-weak`**), gradient fill + thumb; **`progressPercent`** clamped **0–100**.
+- **CTAs** — Optional **`primaryCtaLabel`** / **`secondaryCtaLabel`**; **`on*Press`** optional in product; clicks **`stopPropagation`** when the card is also pressable.
+
+**Figma:** [Goals card **1670:7540**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1670-7540&t=A2RU4TiZE7uPzzJc-4), [CTA row **1671:7584**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1671-7584&t=A2RU4TiZE7uPzzJc-4).
+
+## Playground
+
+Use the **Controls** table below to tune copy, **statusTone** (bar + % chip + status colour), **progressPercent**, section chrome, and optional **CTA** labels. Primary CTA uses **`Button`** **`filled`**; secondary uses **`tonal`**. Clear a CTA **label** to hide that button. Handlers are wired for demo taps when a label is set.
+
+<Canvas of={GoalsWidgetStories.Playground} />
+
+<Controls of={GoalsWidgetStories.Playground} />
+
+## Fixed demos
+
+These stories lock data for quick visual checks (no controls table).
+
+### Default
+
+<Canvas of={GoalsWidgetStories.Default} />
+
+### Behind schedule
+
+<Canvas of={GoalsWidgetStories.Behind} />
+
+### No section header
+
+<Canvas of={GoalsWidgetStories.NoSectionHeader} />
+
+### Pressable card
+
+<Canvas of={GoalsWidgetStories.PressableCard} />
+
+### With CTAs
+
+<Canvas of={GoalsWidgetStories.WithCtas} />

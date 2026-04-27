@@ -3,5 +3,6 @@ export {
   StocksCard,
   type StocksCardProps,
   type StocksCardChangeSentiment,
+  type StocksCardStatusBadgeTone,
   type StocksCardLayout,
 } from './StocksCard';

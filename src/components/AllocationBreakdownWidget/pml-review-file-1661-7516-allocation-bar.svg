@@ -1,0 +1,26 @@
+<!-- Figma 1661:7516 — exportAsync SVG (same as AllocationBreakdownFigmaBar16617516.tsx). -->
+<svg width="331" height="40" viewBox="0 0 331 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M321 0.117188C325.743 1.19737 331 9.68643 331 20C331 30.3134 325.743 38.8014 321 39.8818V40H277V0H321V0.117188Z" fill="url(#paint0_linear_1661_7516)"/>
+<path d="M281 0.117188C285.743 1.19737 291 9.68643 291 20C291 30.3134 285.743 38.8014 281 39.8818V40H237V0H281V0.117188Z" fill="url(#paint1_linear_1661_7516)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M238 0C242.971 0 247 8.9543 247 20C247 31.0457 242.971 40 238 40H129V0H238Z" fill="url(#paint2_linear_1661_7516)"/>
+<path d="M134 0C138.971 0 143 8.9543 143 20C143 31.0457 138.971 40 134 40H13V0H134Z" fill="url(#paint3_linear_1661_7516)"/>
+<ellipse cx="13" cy="20" rx="13" ry="20" fill="#ECFFB7"/>
+<defs>
+<linearGradient id="paint0_linear_1661_7516" x1="279.136" y1="20" x2="331" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#85C894"/>
+<stop offset="1" stop-color="#00C0E8"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1661_7516" x1="239.136" y1="20" x2="291" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFF371"/>
+<stop offset="1" stop-color="#FFEB12"/>
+</linearGradient>
+<linearGradient id="paint2_linear_1661_7516" x1="287" y1="20" x2="195.5" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E85168"/>
+<stop offset="1" stop-color="#F197A4"/>
+</linearGradient>
+<linearGradient id="paint3_linear_1661_7516" x1="11" y1="20" x2="179" y2="20" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CDF197"/>
+<stop offset="1" stop-color="#ACE851"/>
+</linearGradient>
+</defs>
+</svg>

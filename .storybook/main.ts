@@ -7,7 +7,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
   stories: [
     '../src/Introduction.stories.tsx',
-    /* CSF before MDX: doc pages use `<Meta of={…Stories} />`; loading `.mdx` first can leave that import empty at runtime. */
+    /* CSF before MDX: doc pages use `<Meta of={…Stories} />`; loading `.mdx` first can leave that import empty at runtime. In colocated `*.mdx`, import CSF as `./Foo.stories.tsx` (explicit extension) so the Storybook indexer resolves `of={}` to the CSF file. */
     '../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../src/**/*.mdx',

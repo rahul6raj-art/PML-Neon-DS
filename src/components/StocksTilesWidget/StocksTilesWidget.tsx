@@ -11,7 +11,7 @@ import type {
 } from './types';
 import './StocksTilesWidget.css';
 
-/** Same sign rules as **ListItem** stock rows — leading +/- matches **sentiment**. */
+/** Same sign rules as **StocksCard** — leading +/- matches **sentiment**. */
 function formatChangeLabelForSentiment(
   label: string,
   sentiment: StocksTilesChangeSentiment,

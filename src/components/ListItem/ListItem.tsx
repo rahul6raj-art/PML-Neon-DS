@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Badge } from '../Badge';
 import { Icon } from '../Icon';
 import { Avatar } from '../Avatar';
 import type { AvatarType, AvatarSize, AvatarIcon } from '../Avatar';
@@ -11,79 +10,13 @@ import './ListItem.css';
 export type ListItemEmphasis = 'high' | 'low';
 export type ListItemTrailing = 'none' | 'icon' | 'text' | 'link' | 'button';
 export type ListItemValueType = 'positive' | 'negative';
-export type ListItemVariant = 'default' | 'stocks-card' | 'stocks-card-mtf';
-export type ListItemStocksChangeSentiment = 'positive' | 'negative' | 'neutral';
 export type ListItemTrailingTextTone = 'default' | 'positive' | 'negative';
 
-/** Leading +/- on the change line matches **sentiment** (negative → minus, positive → plus). */
-function formatStocksChangeLabelForSentiment(
-  label: string,
-  sentiment: ListItemStocksChangeSentiment,
-): string {
-  const t = label.trim();
-  if (sentiment === 'neutral') {
-    return t;
-  }
-  if (sentiment === 'negative') {
-    if (t.startsWith('+')) {
-      return `-${t.slice(1)}`;
-    }
-    if (t.startsWith('-')) {
-      return t;
-    }
-    return `-${t}`;
-  }
-  if (t.startsWith('-')) {
-    return `+${t.slice(1)}`;
-  }
-  if (t.startsWith('+')) {
-    return t;
-  }
-  return `+${t}`;
-}
-
-export type ListItemStocksStatusBadgeTone = 'notice' | 'primary';
-
 export interface ListItemProps {
-  /** Row layout. `stocks-card` / `stocks-card-mtf` match **Stocks Card** (MTF adds margin footer). */
-  variant?: ListItemVariant;
-  /** Root class `li-item--high` | `li-item--low`. Primary line is always **body-medium** (same as stocks card title). */
+  /** Root class `li-item--high` | `li-item--low`. Primary line uses **body-medium**. */
   emphasis?: ListItemEmphasis;
 
-  /* ── Stocks card row (when variant === 'stocks-card' | 'stocks-card-mtf') ── */
-  /** Company / stock name */
-  stocksTitle?: string;
-  /** Top status pill (e.g. Pledge, MTF). Omit to hide the tag row. */
-  stocksStatusLabel?: string;
-  /** Badge colour: **notice** (e.g. Pledge) vs **primary** (e.g. MTF). Defaults by variant. */
-  stocksStatusBadgeTone?: ListItemStocksStatusBadgeTone;
-  /** Quantity shown next to the holdings icon */
-  stocksQuantity?: string;
-  /** Second line left segment, e.g. `Avg: ₹330` */
-  stocksAvgPriceLabel?: string;
-  /** Primary price, e.g. `₹340.40` */
-  stocksPrice?: string;
-  /** Move + %, e.g. `+2.20 (0.65%)`. Leading sign is normalized from **stocksChangeSentiment**. */
-  stocksChangeLabel?: string;
-  /** Colours the change line */
-  stocksChangeSentiment?: ListItemStocksChangeSentiment;
-  /** Icon for quantity (defaults to handbag per design) */
-  stocksQuantityIconName?: string;
-
-  /* ── MTF margin footer (variant === 'stocks-card-mtf' only) ── */
-  /** Left label in the footer strip */
-  stocksMarginFooterLabel?: string;
-  /** Return % segment; sign follows **stocksMarginReturnSentiment** (fallback: stocksChangeSentiment). */
-  stocksMarginReturnLabel?: string;
-  /** Multiplier in primary blue, e.g. `(4x)` */
-  stocksMarginMultiplierLabel?: string;
-  /** Leading icon in the footer (24px) */
-  stocksMarginFooterIconName?: string;
-  /** Colours the return % line (defaults to **stocksChangeSentiment**) */
-  stocksMarginReturnSentiment?: ListItemStocksChangeSentiment;
-
   /* ── Leading (Avatar) ────────────────────────── */
-  /** Stocks-card variants: leading is **off** unless **`true`** (explicit). Default list row defaults to **true**. */
   showLeading?: boolean;
   avatarType?: AvatarType;
   avatarSize?: AvatarSize;
@@ -127,9 +60,7 @@ export interface ListItemProps {
   tertiaryIcon2?: string;
 
   /* ── Trailing ────────────────────────────────── */
-  /** Stocks-card variants: trailing is **off** unless **`true`** (explicit). Default list row defaults to **true**. */
   showTrailing?: boolean;
-  /** For **stocks-card** / **stocks-card-mtf**, **`icon`** (chevron) is not rendered — use text / link / button if you need a trailing action. */
   trailing?: ListItemTrailing;
   trailingIcon?: string;
   trailingText?: string;
@@ -156,26 +87,9 @@ export interface ListItemProps {
 }
 
 export const ListItem = ({
-  variant = 'default',
   emphasis = 'high',
 
-  stocksTitle = 'Reliance Industries Ltd.',
-  stocksStatusLabel,
-  stocksQuantity = '12',
-  stocksAvgPriceLabel = 'Avg: ₹330',
-  stocksPrice = '₹340.40',
-  stocksChangeLabel = '+2.20 (0.65%)',
-  stocksChangeSentiment = 'positive',
-  stocksQuantityIconName = 'handbag_outline',
-
-  stocksStatusBadgeTone,
-  stocksMarginFooterLabel = 'Return on margin',
-  stocksMarginReturnLabel = '+296.4%',
-  stocksMarginMultiplierLabel = '(4x)',
-  stocksMarginFooterIconName = 'chart',
-  stocksMarginReturnSentiment,
-
-  showLeading,
+  showLeading = true,
   avatarType = 'initials',
   avatarSize = 'regular',
   avatarBadgeType = 'none',
@@ -212,7 +126,7 @@ export const ListItem = ({
   showTertiaryIcon2 = false,
   tertiaryIcon2 = 'info_circle_outline',
 
-  showTrailing,
+  showTrailing = true,
   trailing = 'icon',
   trailingIcon = 'caret_small_right_main',
   trailingText = 'Text',
@@ -230,19 +144,6 @@ export const ListItem = ({
   onClick,
   className,
 }: ListItemProps) => {
-  const isStocksVariant = variant === 'stocks-card' || variant === 'stocks-card-mtf';
-  const isMtfStocksVariant = variant === 'stocks-card-mtf';
-
-  /** Default list rows show leading avatar; stocks-card rows hide leading unless **showLeading={true}**. */
-  const resolvedShowLeading = isStocksVariant
-    ? showLeading === true
-    : showLeading ?? true;
-
-  /** Default list rows show trailing; stocks-card rows hide trailing unless **showTrailing={true}**. */
-  const resolvedShowTrailing = isStocksVariant
-    ? showTrailing === true
-    : showTrailing ?? true;
-
   const renderLeadingAvatar = () => (
     <div className="li-item__leading">
       <Avatar
@@ -261,11 +162,10 @@ export const ListItem = ({
   );
 
   const renderTrailingBlock = () => {
-    if (!resolvedShowTrailing) return null;
+    if (!showTrailing) return null;
 
     switch (trailing) {
       case 'icon':
-        if (isStocksVariant) return null;
         return (
           <div className="li-item__trailing li-item__trailing--icon">
             <Icon name={trailingIcon} size={24} />
@@ -325,134 +225,10 @@ export const ListItem = ({
     }
   };
 
-  if (isStocksVariant) {
-    const badgeTone =
-      stocksStatusBadgeTone ?? (isMtfStocksVariant ? 'primary' : 'notice');
-    const marginReturnSentiment =
-      stocksMarginReturnSentiment ?? stocksChangeSentiment;
-
-    const stocksRoot = [
-      'li-item',
-      'li-item--stocks-card',
-      isMtfStocksVariant && 'li-item--stocks-card-mtf',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    const renderStocksMainRow = () => (
-      <div className="li-item__stocks-row">
-        <div className="li-item__stocks-lhs">
-          <p className="li-item__stocks-title body-medium">{stocksTitle}</p>
-          <div className="li-item__stocks-meta">
-            <span className="li-item__stocks-qty">
-              <span className="li-item__stocks-qty-icon" aria-hidden>
-                <Icon name={stocksQuantityIconName} size={12} />
-              </span>
-              <span className="li-item__stocks-qty-value subtext-regular">{stocksQuantity}</span>
-            </span>
-            <span className="li-item__stocks-dot subtext-regular" aria-hidden>
-              •
-            </span>
-            <span className="li-item__stocks-avg subtext-regular">{stocksAvgPriceLabel}</span>
-          </div>
-        </div>
-
-        {resolvedShowTrailing ? (
-          <div className="li-item__stocks-rhs-group">
-            <div className="li-item__stocks-rhs">
-              <p className="li-item__stocks-price body-regular">{stocksPrice}</p>
-              <p
-                className={`li-item__stocks-change subtext-regular li-item__stocks-change--${stocksChangeSentiment}`}
-              >
-                {formatStocksChangeLabelForSentiment(
-                  stocksChangeLabel,
-                  stocksChangeSentiment,
-                )}
-              </p>
-            </div>
-            {renderTrailingBlock()}
-          </div>
-        ) : (
-          <div className="li-item__stocks-rhs">
-            <p className="li-item__stocks-price body-regular">{stocksPrice}</p>
-            <p
-              className={`li-item__stocks-change subtext-regular li-item__stocks-change--${stocksChangeSentiment}`}
-            >
-              {formatStocksChangeLabelForSentiment(
-                stocksChangeLabel,
-                stocksChangeSentiment,
-              )}
-            </p>
-          </div>
-        )}
-      </div>
-    );
-
-    return (
-      <div
-        className={stocksRoot}
-        onClick={onClick}
-        role={onClick ? 'button' : undefined}
-        tabIndex={onClick ? 0 : undefined}
-      >
-        <div className="li-item__stocks-inner">
-          {stocksStatusLabel ? (
-            <div className="li-item__stocks-tags">
-              <Badge
-                type="text"
-                context={badgeTone === 'primary' ? 'primary' : 'notice'}
-                muted
-                label={stocksStatusLabel}
-              />
-            </div>
-          ) : null}
-
-          {resolvedShowLeading ? (
-            <div className="li-item__stocks-body">
-              {renderLeadingAvatar()}
-              {renderStocksMainRow()}
-            </div>
-          ) : (
-            renderStocksMainRow()
-          )}
-
-          {isMtfStocksVariant ? (
-            <div className="li-item__stocks-margin-footer">
-              <div className="li-item__stocks-margin-footer-lead">
-                <span className="li-item__stocks-margin-footer-icon" aria-hidden>
-                  <Icon name={stocksMarginFooterIconName} size={24} />
-                </span>
-                <span className="li-item__stocks-margin-footer-label subtext-medium">
-                  {stocksMarginFooterLabel}
-                </span>
-              </div>
-              <div className="li-item__stocks-margin-footer-value">
-                <span
-                  className={`li-item__stocks-margin-footer-pct subtext-medium li-item__stocks-margin-footer-pct--${marginReturnSentiment}`}
-                >
-                  {formatStocksChangeLabelForSentiment(
-                    stocksMarginReturnLabel,
-                    marginReturnSentiment,
-                  )}
-                </span>
-                <span className="li-item__stocks-margin-footer-mult subtext-medium">
-                  {stocksMarginMultiplierLabel}
-                </span>
-              </div>
-            </div>
-          ) : null}
-        </div>
-
-        {showSeparator && <div className="li-item__separator" />}
-      </div>
-    );
-  }
-
   const wrapperCls = [
     'li-item',
     `li-item--${emphasis}`,
-    resolvedShowLeading && 'li-item--with-leading',
+    showLeading && 'li-item--with-leading',
     showPrimaryIcon && 'li-item--with-primary-icon',
     className,
   ].filter(Boolean).join(' ');
@@ -474,10 +250,8 @@ export const ListItem = ({
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      {/* Leading avatar */}
-      {resolvedShowLeading && renderLeadingAvatar()}
+      {showLeading && renderLeadingAvatar()}
 
-      {/* Content area */}
       <div className="li-item__content">
         <div className="li-item__main">
           <div className="li-item__text-block">
@@ -497,9 +271,7 @@ export const ListItem = ({
 
             {showSubtext && (
               <div className="li-item__secondary-row">
-                {showBadge && (
-                  <span className="li-item__badge">{badgeLabel}</span>
-                )}
+                {showBadge && <span className="li-item__badge">{badgeLabel}</span>}
                 {showSubtextIcon && (
                   <span className="li-item__subtext-icon">
                     <Icon name={subtextIcon} size={16} />
@@ -541,7 +313,7 @@ export const ListItem = ({
         <div
           className={[
             'li-item__separator',
-            separatorInset && resolvedShowLeading ? 'li-item__separator--inset' : '',
+            separatorInset && showLeading ? 'li-item__separator--inset' : '',
           ]
             .filter(Boolean)
             .join(' ')}

@@ -54,6 +54,37 @@
   justify-content: center;
   cursor: pointer;
   color: var(--icon-neutral-strong);
+  transform-origin: center center;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.45, 0.64, 1),
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pw__eye-btn:active {
+    transform: scale(0.92);
+    transition:
+      transform 0.08s ease-out,
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .pw__eye-btn.pw__eye-btn--zoom {
+    animation: pw__eye-btn-zoom 0.36s cubic-bezier(0.34, 1.45, 0.64, 1) both;
+  }
+}
+
+@keyframes pw__eye-btn-zoom {
+  0% {
+    transform: scale(0.88);
+  }
+  55% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .pw__returns {
@@ -74,6 +105,10 @@
 .pw__returns-value {
   color: var(--text-positive-strong);
   font-weight: var(--font-weight-regular);
+}
+
+.pw__returns-value--negative {
+  color: var(--text-negative-strong);
 }
 
 .pw__chart {
@@ -100,6 +135,42 @@
 
 .pw__chips .chip {
   flex-shrink: 0;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.45, 0.64, 1),
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Subtle horizontal elastic on select (small travel, no scale). */
+@media (prefers-reduced-motion: no-preference) {
+  .pw__chips .chip.chip--selected {
+    animation: pw__micro-elastic-x 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .pw__chips .chip:active:not(.chip--disabled) {
+    transform: translate3d(calc(var(--unit-1) / 2), 0, 0);
+    transition:
+      transform 0.08s ease-out,
+      background 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+}
+
+@keyframes pw__micro-elastic-x {
+  0% {
+    transform: translate3d(var(--spacing-2), 0, 0);
+  }
+  45% {
+    transform: translate3d(calc(-1 * var(--spacing-2)), 0, 0);
+  }
+  78% {
+    transform: translate3d(calc(var(--unit-1) / 2), 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .pw__values {
@@ -131,6 +202,12 @@
 .pw__values-positive {
   color: var(--text-positive-strong);
   font-weight: var(--font-weight-regular);
+}
+
+.pw__allocation {
+  margin-top: var(--spacing-56);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .pw__buying {

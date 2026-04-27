@@ -77,7 +77,7 @@ Dense, finance-first mobile screen on a **fixed 376px-wide** canvas: vertical st
 
 - **Surfaces:** Layered **dark grays** (`Surface/Level 1`–`4`, `#101010` base) rather than heavy shadow.
 - **Glass:** Tokens exist (`Glass/*`) for tinted bars — use only where instances reference them (e.g. optional button chrome).
-- **Chart:** Line work + glow-style marker — treat as **illustration layer**, not a separate elevation system.
+- **Chart:** Line work + glow-style marker — treat as **illustration layer**, not a separate elevation system. **Default demos:** legacy **PortfolioHome** cubics (**`M`+`C`**, **`LEGACY_PORTFOLIO_HOME_CHART_PATH_*`**). **Gain** charts: **blur + stroke only** (no under-line gradient in **`GraphWidget`** by default). **Loss** charts: optional soft fill from **`legacyPortfolioHomeChartAreaFill`** / **`closeAreaUnderOpenChartPath`**. **Alternatives:** **`smoothPathFromPoints`** + **`closeAreaUnderSmoothCurve`** (marketing-style, e.g. [Review File **`1404:4431`**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1404-4431&t=A2RU4TiZE7uPzzJc-4)) or **`linearPathFromPoints`(`zigZagLinePoints`…)** + **`closeAreaUnderPolyline`** when a polyline is intentional.
 
 ## Responsive behavior
 
@@ -128,11 +128,27 @@ The following flows used to ship as in-app previews (historically under **`src/P
 
 ---
 
+## Allocation breakdown widget
+
+**Source:** [PML — Review File — Allocation block](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1644-6023), node **`1644:6023`** (layout + list). **Segmented bar (default = Figma file):** [Figma **`1649:7514`**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1649-7514&t=A2RU4TiZE7uPzzJc-4) when the list is **not** exactly four rows (`AllocationBreakdownFigmaBar16497514` / bundled SVG); [Figma **`1661:7516`**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1661-7516&t=A2RU4TiZE7uPzzJc-4) when there are **exactly four** rows (`AllocationBreakdownFigmaBar16617516` / bundled SVG — **one** composite `exportAsync` frame: overlapping paths + gradients as in the file). Legend **`%`** follows row weights; the bar keeps **fixed** Figma proportions (no flex-assembled segments). **`proportional-css`** is **not** that vector: **`AllocationBreakdownDynamicBarSvg`** only when product accepts drift. **`normalizeBarPercents`** (default true) aligns legend **`%`**.
+
+**Code:** `AllocationBreakdownWidget.tsx` / `AllocationBreakdownWidget.css` — optional **`SectionHeader`**, **`Card`**, **40px** pill **bar** + **`--spacing-24`** gap + **legend rows**: **16px** swatch, **label** + **percent**, **INR amount** + optional **change** line, **16px** padding each side of hairline **row dividers** (list block ↔ divider). **`PortfolioWidget`**: **`allocationRows`**. Match [Figma `1644:6023`](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1644-6023&t=A2RU4TiZE7uPzzJc-4) + bars [`1649:7514`](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1649-7514&t=A2RU4TiZE7uPzzJc-4) / [`1661:7516`](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1661-7516&t=A2RU4TiZE7uPzzJc-4) in Storybook **Widgets/Allocation breakdown** / **Widgets/Portfolio**.
+
+---
+
 ## Stocks Tiles widget
 
 **Source:** [PML — Review File](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1614-5966), frame **Stocks Tiles** (`1614:5966`).
 
 **Code:** `StocksTilesWidget.tsx`, `StocksTilesWidget.css` — optional **`SectionHeader`** (chevron **off** by default) + horizontal scroll of **tiles** (`--unit-max` width, **`--surface-level-1`**, **no outer border**): optional **top** **`Icon`** / **`Logo`** row (toggle **`showTopMedia`**), optional **status** **`Badge`** between media and title, one primary **`title`** line (full **company** name, e.g. **Reliance Ind.**), **`price`**, and move as muted **Badge** or **subtext**. Empty **`changeLabel`** hides the move row (e.g. **Discover → Curated strategies** shortcut copy in **`price`**). Historical Discover scoped strategy spacing / descriptor colour on **`.dv-strategies-stw`**. For strategy-style tiles in isolation, **`Tile`** **`variant="strategy"`** (`Tile.tsx` / **Components/Tile** in Storybook) uses the same rhythm; optional **`strategyItems`** renders a horizontal strip of multiple cards inside one **`Tile`**. **`changeSentiment`** drives sign normalization (same idea as **ListItem** stock rows). **INR:** no space after **`₹`** in demo copy.
+
+---
+
+## Goals widget
+
+**Source:** [Goals card **1670:7540**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1670-7540&t=A2RU4TiZE7uPzzJc-4); optional **CTA row** [**1671:7584**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1671-7584&t=A2RU4TiZE7uPzzJc-4) (**Add Money** **filled** + **View Goals** **tonal**, **medium**, **12px** gap, equal flex width).
+
+**Code:** `GoalsWidget.tsx` / `GoalsWidget.css` — optional **`SectionHeader`** (**`extra-large`**, **`trailing="none"`**) + **16px**-inset card (**`--surface-level-1`**, **`--radius-24`**, **`--card-padding-*`**) per [Figma **1670:7540**](https://www.figma.com/design/rwkx4gcYijqguNZUK361jv/PML---Review-File?node-id=1670-7540&t=A2RU4TiZE7uPzzJc-4): **goal** line **`Body` medium** **14/20** (**1670:7548**); **status** **`Subtext` regular** **12/16** (**1670:7549**); optional **%** chip (**`--radius-12`**, pad **`12×8`**, **`Title 4` medium** **16/22**): fill **`--background-positive-weak`** + text **`--text-positive-strong`** by default; with **`statusTone` `notice` / `negative`** use **`--background-notice-weak`** / **`--background-negative-weak`** and matching strong text (**1670:7555–7556** pattern). **Bar:** **2px**-tall track (**`--spacing-2`**) on **`--background-neutral-weak`**, **`.glw__track-shell`** **`24px`** tall for handle clearance; **fill** = same **horizontal gradient** axis as **GraphWidget** positive line (notice/negative → loss gradient); **thumb** ≈ **12px** rounded square + token **glow** rings (**1670:7562** asset approximated in CSS). **Footer** — labels **`Body` regular** **14/20** **`--text-neutral-moderate`**; amounts **`Body` medium** **14/20** **`--text-neutral-strong`**; **2px** gap label ↔ value (**1670:7567** + amount emphasis). **`progressPercent`** clamped **0–100**. Parent formats **INR** strings for saved/target. **CTAs:** pass **`primaryCtaLabel`** / **`secondaryCtaLabel`** (non-empty shows **`Button`**); handlers **`onPrimaryCtaPress`** / **`onSecondaryCtaPress`**; clicks **`stopPropagation`** so a pressable card does not absorb taps.
 
 ---
 

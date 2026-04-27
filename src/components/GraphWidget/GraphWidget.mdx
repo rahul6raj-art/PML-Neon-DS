@@ -13,6 +13,12 @@ import * as GraphWidgetStories from './GraphWidget.stories.tsx';
 
 <Description of={GraphWidgetStories} />
 
+## Behaviour
+
+- **SVG line** — Multi-layer blurred glow plus a 1.5px stroke; gradients use design tokens and respect light/dark theme. Optional toggles turn off glow, ripple, or dot for minimal variants.
+- **svgPath** — Demos use legacy PortfolioHome cubics (M and C commands). The areaFillPath prop is optional for data symmetry. Gain charts default to no under-line gradient (blur and stroke only). Loss charts default to the soft vertical fill; override with showAreaFill. The path must end at the ripple so the line meets the pulse/dot (last point uses indicatorXRatio times viewBoxWidth for X and indicatorY for Y).
+- **Endpoint** — Rendered in HTML so it does not stretch when the SVG uses preserveAspectRatio with value none.
+
 ## Playground
 
 Use **Positive return** to switch between gain (teal / green gradients) and loss (orange / red) styling. Demo paths and indicator position update automatically.
@@ -27,12 +33,14 @@ Use **Positive return** to switch between gain (teal / green gradients) and loss
 
 <Controls of={GraphWidgetStories.Playground} />
 
-## Behaviour
-
-- **SVG line** — Multi-layer blurred glow plus a 1.5px stroke; gradients and endpoint colors use **design tokens** (`colors.css`) and respect light/dark theme. Optional toggles turn off glow, ripple, or dot for minimal variants.
-- **`svgPath`** — Must end at the ripple: last point at `(indicatorXRatio × viewBoxWidth, indicatorY)` so the line meets the pulse/dot.
-- **Endpoint** — Rendered in HTML so it does not stretch when the SVG uses `preserveAspectRatio="none"`.
-
 ## Fixed demos
 
 **Positive** and **Negative** stories use fixed paths for visual comparison (same geometry as the playground demos).
+
+### Positive
+
+<Canvas of={GraphWidgetStories.GraphDemoPathPositive} />
+
+### Negative
+
+<Canvas of={GraphWidgetStories.Negative} />
